@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<execution name="fenix_login">
+    <actions>
+        <!--action name="validar-login">
+            <url>http://fenix.car.int/fenix/validarLoginAction.dojo</url>
+            <httpMethod>POST</httpMethod>
+            <headers>
+                <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"/>
+                <header name="Accept-Encoding" value="gzip, deflate8"/>
+                <header name="Accept-Language" value="es-ES,es;q=0.8,en-US;q=0.5,en;q=0.38"/>
+                <header name="Connection" value="keep-alive8"/>
+                <header name="Cookie" value="JSESSIONID=F799D34EA482C8A7147AAF44DB320257; TIMEZONE=21; LOGIN_LAST_USER=dminanos8"/>
+                <header name="Host" value="fenix.car.int8"/>
+                <header name="Referer" value="http://fenix.car.int/fenix/main/Login.jsp?timestamp=${timeStamp}"/>
+                <header name="Upgrade-Insecure-Requests" value="18"/>
+                <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0"/>
+            </headers>
+
+        </action-->
+        <action name="login">
+            <!--url>http://fenix.car.int/fenix/action/loginAction.dojo?timestamp=${timeStamp}</url-->
+            <url>http://fenix.everis.int/fenix/validarLoginAction.dojo?timestamp=${everis.fenix.timestamp}</url>
+            <httpMethod>POST</httpMethod>
+            <headers>
+                <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
+            </headers>
+            <parameters>
+                <parameter>
+                    <name>target</name>
+                    <value>ctrl</value>
+                </parameter>
+                <parameter>
+                    <name>timeZone</name>
+                    <value>1</value>
+                </parameter>
+                <parameter>
+                    <name>j_username</name>
+                    <value>dminanos</value>
+                </parameter>
+                <parameter>
+                    <name>j_password</name>
+                    <value>Dm31082017</value>
+                </parameter>
+                <parameter>
+                    <name>timeZoneOID</name>
+                    <value>21</value>
+                </parameter>
+            </parameters>
+        </action>
+    </actions>
+</execution>

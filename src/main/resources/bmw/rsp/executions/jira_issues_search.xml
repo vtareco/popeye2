@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<execution name="jira_issues_search">
+    <proxy scheme="http" host="10.114.8.100" port="8080"/>
+    <actions>
+        <action name="login">
+            <url>https://jira64.nttdata-emea.com/jira/login.jsp</url>
+            <httpMethod>POST</httpMethod>
+            <headers>
+
+            </headers>
+            <parameters>
+                <parameter>
+                    <name>os_username</name>
+                    <value>diego.minano.sanchez</value>
+                </parameter>
+                <parameter>
+                    <name>os_password</name>
+                    <value>Dm18042016</value>
+                </parameter>
+            </parameters>
+        </action>
+        <action name="retrieve-issues">
+            <url>https://jira64.nttdata-emea.com/jira/rest/api/2/search?jql=${everis.jira.jql}</url>
+            <!--url>https://jira64.nttdata-emea.com/jira/rest/api/2/search?jql=assignee=diego.minano.sanchez</url-->
+            <httpMethod>GET</httpMethod>
+            <headers>
+                <header name="Content-Type" value="application/json"/>
+                <header name="Cookie" value="${response.header.Set-Cookie}"/>
+            </headers>
+            <!--parameters>
+                <parameter>
+                    <name>jql</name>
+                    <value>assignee in ("Mariano Caballero", diego.minano.sanchez, "Juan Amezcua") AND resolution = Unresolved ORDER BY priority DESC, updated DESC</value>
+                </parameter>
+            </parameters-->
+        </action>
+
+    </actions>
+
+</execution>

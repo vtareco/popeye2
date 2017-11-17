@@ -3,6 +3,7 @@ package net.dms.popeye.handlers.jfsynchronizer.swing;
 import net.dms.popeye.handlers.jfsynchronizer.bussiness.FenixService;
 import net.dms.popeye.handlers.jfsynchronizer.bussiness.JiraService;
 import net.dms.popeye.handlers.jfsynchronizer.control.EverisConfig;
+import net.dms.popeye.handlers.jfsynchronizer.control.EverisPropertiesType;
 import net.dms.popeye.handlers.jfsynchronizer.control.FenixAccMapper;
 
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
@@ -56,6 +57,7 @@ public class EverisManager {
     private JComboBox otCmb;
     private MyJTable<IncidenciaTableModel, FenixIncidencia> incidenciasTable;
     private JButton saveIncidencias;
+    private JTextField txtJiraTask;
 
 
     JiraService jiraService = new JiraService();
@@ -144,11 +146,14 @@ public class EverisManager {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+
                     if (getPeticionSelected(peticionesDisponiblesCmb) != null) {
 
                         SwingUtilities.invokeLater(new Runnable(){
                             public void run(){
+                                ((AccTableModel) accTable.getModel()).clear();
                                 ((AccTableModel) accTable.getModel()).load(fenixService.searchAccByPeticionId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
+                                refreshTotales();
                             }
                         });
                         refreshTotales();
@@ -163,9 +168,17 @@ public class EverisManager {
         jiraFiltersCmb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                refreshJira();
+                if (isSelectedFilterById()){
+                    txtJiraTask.setVisible(true);
+                }else {
+                    txtJiraTask.setVisible(false);
+                    refreshJira();
+                }
             }
         });
+
+
+
         addAcc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -199,7 +212,7 @@ public class EverisManager {
 
     private void refreshTotales() {
         //TODO FIXME
-/*
+
         List<FenixAcc> accs = ((AccTableModel) accTable.getModel()).getList();
         double totalEstimado = 0;
         double totalIncurrido = 0;
@@ -211,18 +224,28 @@ public class EverisManager {
             }
             if (acc.getEsfuerzo() != null && acc.getIncurrido() != null && acc.getIncurrido().doubleValue() != 0
                     || !acc.getEstado().equals(AccStatus.DESESTIMADA.getDescription())) {
-                totalEstimado = totalEstimado + new Double(acc.getEsfuerzo());
+                totalEstimado = totalEstimado + acc.getTotalEsfuerzo();
             }
 
         }
                        totalEstimatedText.setText(Double.toString(totalEstimado));
                        totalIncurridoText.setText(Double.toString(totalIncurrido));
 
-                       */
+
     }
+
+    private boolean isSelectedFilterById() {
+        return EverisPropertiesType.JIRA_FILTRO_BY_ID.getProperty().equals(jiraFiltersCmb.getSelectedItem());
+    }
+
     private void refreshJira(){
         try{
-            String filter = getJiraFilterSelected();
+            String filter;
+            if (isSelectedFilterById()){
+                filter = String.format(getJiraFilterSelected(), txtJiraTask.getText());
+            }else {
+                filter = getJiraFilterSelected();
+            }
             if (filter != null) {
 
                 SwingUtilities.invokeLater(new Runnable(){
@@ -279,6 +302,7 @@ public class EverisManager {
         SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
 
         SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
+       // txtJiraTask.setVisible(false);
 
 
         JComboBox accStatusEditor = new JComboBox();

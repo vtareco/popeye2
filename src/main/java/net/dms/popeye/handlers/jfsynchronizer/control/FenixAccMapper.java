@@ -117,7 +117,7 @@ public class FenixAccMapper {
         fenixAcc.setEsfuerzoCliente(fenixAcc.getEsfuerzo());
         fenixAcc.setFechaCreacion(new Date());
         fenixAcc.setFechaSolicitudCliente(fenixAcc.getFechaCreacion());
-        fenixAcc.setResponsable(config.searchEverisEmployIdByJiraId(issue.getFields().getAssignee().getKey()));
+        fenixAcc.setResponsable(issue.getFields().getAssignee() != null ? config.searchEverisEmployIdByJiraId(issue.getFields().getAssignee().getKey()) : null);
         return fenixAcc;
     }
 

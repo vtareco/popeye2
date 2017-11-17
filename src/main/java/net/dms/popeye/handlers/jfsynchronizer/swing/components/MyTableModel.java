@@ -67,6 +67,11 @@ public class MyTableModel<R,C extends Enum> extends AbstractTableModel {
 
     }
 
+    public void clear(){
+        this.rows.clear();
+        this.fireTableDataChanged();
+    }
+
     public List<R> getList(){
         return rows;
     }

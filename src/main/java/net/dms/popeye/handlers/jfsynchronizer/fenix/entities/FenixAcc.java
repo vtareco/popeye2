@@ -137,6 +137,16 @@ public class FenixAcc {
         return esfuerzo;
     }
 
+    public double getTotalEsfuerzo() {
+        double totalEsfuerzo = 0;
+        String[] esfuerzos = esfuerzo != null ? esfuerzo.split("-") : new String[0];
+        for (String es : esfuerzos){
+            totalEsfuerzo = totalEsfuerzo + Double.parseDouble(es);
+        }
+
+        return totalEsfuerzo;
+    }
+
     public void setEsfuerzo(String esfuerzo) {
         this.esfuerzo = esfuerzo;
     }
@@ -289,6 +299,6 @@ public class FenixAcc {
 
     @Override
     public String toString(){
-        return String.format("%d - %s - %s", idAcc, responsable, nombre);
+        return String.format("%d - %s - %s - %s", idAcc, responsable, nombre, incurrido);
     }
 }

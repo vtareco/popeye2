@@ -18,7 +18,7 @@ import java.util.List;
 public class JiraTableModel extends MyTableModel<JiraIssue, JiraTableModel.Columns> {
     public enum Columns implements TableColumnEnumType{
 
-        KEY(false), SUMMARY(false), ASSIGNEE(false);
+        KEY(false), SUMMARY(false), ASSIGNEE(false), STATUS(false);
 
         private boolean editable;
 
@@ -51,7 +51,9 @@ public class JiraTableModel extends MyTableModel<JiraIssue, JiraTableModel.Colum
 
                 return rows.get(rowIndex).getFields().getSummary();
             case ASSIGNEE:
-                return rows.get(rowIndex).getFields().getAssignee().getName();
+                return rows.get(rowIndex).getFields().getAssignee() != null ? rows.get(rowIndex).getFields().getAssignee().getName() : null;
+            case STATUS:
+                return rows.get(rowIndex).getFields().getStatus() != null ? rows.get(rowIndex).getFields().getStatus().getName() : null;
             default:
                 return "no defined";
         }

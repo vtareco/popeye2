@@ -7,10 +7,7 @@ import net.dms.popeye.handlers.entities.exceptions.AppException;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.control.handlers.GetIncidenciaMetaDataAction;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixIncidencia;
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.AccIncurridoRowType;
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.AccRowType;
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.IncidenciaRowType;
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.IncidenciasMetaDataType;
+import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -28,6 +25,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by dminanos on 14/04/2017.
@@ -95,7 +93,7 @@ public class FenixRepository {
             fis.close();
             Sheet sheet = wb.getSheet("Actuaciones");
 
-            for (int i = 2; i < sheet.getLastRowNum(); i++){
+            for (int i = 2; i <= sheet.getLastRowNum(); i++){
                 System.out.println("cell: " + sheet.getRow(i).getCell(0));
                 if (sheet.getRow(i).getCell(AccIncurridoRowType.ID_ACC.getColPosition()) == null){
                     break;
@@ -141,6 +139,8 @@ public class FenixRepository {
 
             List<FenixAcc> accsIncurridos = searchACCsIncurridos(idOt, forceDownload);
             int iAcc;
+
+            fenixAccs = fenixAccs.stream().filter(acc -> !AccStatus.DESESTIMADA.getDescription().equals(acc.getEstado())).collect(Collectors.toList());
             for (FenixAcc accInc : fenixAccs){
                 iAcc = accsIncurridos.indexOf(accInc);
                 if (iAcc >= 0){

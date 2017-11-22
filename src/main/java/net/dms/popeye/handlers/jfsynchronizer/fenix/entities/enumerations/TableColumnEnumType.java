@@ -11,5 +11,7 @@ public interface TableColumnEnumType {
 
     boolean isEditable();
 
+    int getWidth();
+
 
 }

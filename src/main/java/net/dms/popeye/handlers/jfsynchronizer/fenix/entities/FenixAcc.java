@@ -28,7 +28,8 @@ public class FenixAcc {
     private String esfuerzoCliente;
     private Date fechaCreacion;
     private Date fechaSolicitudCliente;
-    private String fechaPrevistaProyecto;
+    private Date fechaPrevistaProyecto;
+    private String jiraStatus;
 
     private Date fechaEntrega;
     private String fechaCierre;
@@ -39,6 +40,40 @@ public class FenixAcc {
     private String historiaUsuario;
     private String epica;
     private Double incurrido;
+    private Double etc;
+
+
+    public String getJiraStatus() {
+        return jiraStatus;
+    }
+
+    public void setJiraStatus(String jiraStatus) {
+        this.jiraStatus = jiraStatus;
+    }
+
+    public Double getPorcentajeCompletado() {
+        Double dEsfuerzo = null;
+
+        if (this.esfuerzo != null){
+            dEsfuerzo = Double.parseDouble(esfuerzo);
+        }
+
+        if (incurrido == null || incurrido.doubleValue() == 0){
+            return  0.0;
+        }else{
+            return incurrido * 100 / dEsfuerzo;
+        }
+
+    }
+
+
+    public Double getEtc() {
+        return etc;
+    }
+
+    public void setEtc(Double etc) {
+        this.etc = etc;
+    }
 
     public FenixAcc(){
         setIdInterno(-1 * System.currentTimeMillis());
@@ -175,11 +210,11 @@ public class FenixAcc {
         this.fechaSolicitudCliente = fechaSolicitudCliente;
     }
 
-    public String getFechaPrevistaProyecto() {
+    public Date getFechaPrevistaProyecto() {
         return fechaPrevistaProyecto;
     }
 
-    public void setFechaPrevistaProyecto(String fechaPrevistaProyecto) {
+    public void setFechaPrevistaProyecto(Date fechaPrevistaProyecto) {
         this.fechaPrevistaProyecto = fechaPrevistaProyecto;
     }
 
@@ -281,6 +316,14 @@ public class FenixAcc {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public Double getDesvioEtc(){
+        if (etc != null){
+          return getTotalEsfuerzo() - getIncurrido() + etc;
+        }else{
+            return null;
         }
     }
 

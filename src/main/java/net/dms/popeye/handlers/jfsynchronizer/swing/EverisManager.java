@@ -12,20 +12,14 @@ import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraIssue;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraSearchResponse;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.*;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.*;
-import net.sourceforge.jdatepicker.DateModel;
-import net.sourceforge.jdatepicker.JDatePanel;
-import net.sourceforge.jdatepicker.JDatePicker;
-import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
-import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import net.dms.popeye.settings.business.SettingsService;
+import net.dms.popeye.settings.entities.Settings;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -55,18 +49,21 @@ public class EverisManager {
     private JTextField totalIncurridoText;
     private JButton addButton;
     private JComboBox otCmb;
-    private MyJTable<IncidenciaTableModel, FenixIncidencia> incidenciasTable;
+    private JenixTable<IncidenciaTableModel, FenixIncidencia> incidenciasTable;
     private JButton saveIncidencias;
     private JTextField txtJiraTask;
+    private JScrollPane accScrollPane;
+    private JButton checkJiraStatusBtn;
 
 
     JiraService jiraService = new JiraService();
     FenixService fenixService = new FenixService();
     FenixAccMapper accMapper = new FenixAccMapper();
     EverisConfig config = EverisConfig.getInstance();
+    Settings settings = SettingsService.getInstance().getSettings();
 
 
-    private Map<String, String> jiraFilters = config.getJiraFilters();
+    private Map<String, String> jiraFilters = settings.getJiraSettings().getFilters();
 
 
     public static void main(String[] args) {
@@ -208,6 +205,23 @@ public class EverisManager {
             }
         });
 
+        checkJiraStatusBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<FenixAcc> accs=((AccTableModel)accTable.getModel()).getList();
+                Set<String> jiraCodes = accs.stream().map(FenixAcc::getCodigoPeticionCliente).collect(Collectors.toSet());
+                String jql = String.format(settings.getJiraSettings().getFilterByIds(), String.join(",", jiraCodes));
+                JiraSearchResponse jiraSearchResponse = jiraService.search(jql);
+                List<JiraIssue>issues = jiraSearchResponse.getIssues();
+                for(FenixAcc acc : accs) {
+                    JiraIssue issue = issues.stream().filter(i -> i.getKey().equals(acc.getCodigoPeticionCliente())).findFirst().orElse(null);
+                    if (issue != null){
+                        acc.setJiraStatus(issue.getFields().getStatus().getName());
+                    }
+                }
+                accTable.updateUI();
+            }
+        });
     }
 
     private void refreshTotales() {
@@ -330,6 +344,11 @@ public class EverisManager {
         accTable.getColumnModel().getColumn(AccTableModel.Columns.RESPONSABLE.ordinal()).setCellEditor(new DefaultCellEditor(accResponsableEditor));
         accTable.getColumnModel().getColumn(AccTableModel.Columns.TIPO.ordinal()).setCellEditor(new DefaultCellEditor(accTypeEditor));
         accTable.getColumnModel().getColumn(AccTableModel.Columns.SUB_TIPO.ordinal()).setCellEditor(new DefaultCellEditor(accSubTypeEditor));
+        accTable.getColumnModel().getColumn(AccTableModel.Columns.FECHA_PREVISTA_PROYECTO.ordinal()).setCellEditor(new CalendarCellEditor());
+
+
+        TableUtil.configureColumnWidths(accTable, AccTableModel.Columns.class);
+
 
         JiraTableModel jiraTableModel = new JiraTableModel(new ArrayList<JiraIssue>());
         jiraTable.setModel(jiraTableModel);
@@ -338,6 +357,7 @@ public class EverisManager {
         jiraTable.setAutoCreateRowSorter(true);
 
         accTable.setDefaultRenderer(Object.class, new AccTableCellRenderer());
+       // accTable.setDefaultRenderer(Date.class, new DateCellRenderer());
         accTable.setFillsViewportHeight(true);
         accTable.setAutoCreateRowSorter(true);
         accTable.setOpaque(true);
@@ -452,13 +472,16 @@ public class EverisManager {
 
     private void createUIComponents() {
         IncidenciaTableModel incidenciaTableModel = new IncidenciaTableModel(new ArrayList<>());
-        incidenciasTable = new MyJTable(incidenciaTableModel);
+        incidenciasTable = new JenixTable(incidenciaTableModel);
         jiraScrollPane = new JScrollPane(incidenciasTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         incidenciasTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        accScrollPane = new JScrollPane(incidenciasTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
     }
 
 
-    class JiraTableCellRenderer extends MyTableCellRenderer {
+    class JiraTableCellRenderer extends JenixTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JiraTableModel model = (JiraTableModel) table.getModel();
@@ -473,17 +496,66 @@ public class EverisManager {
         }
     }
 
-    class AccTableCellRenderer extends MyTableCellRenderer {
+    class AccTableCellRenderer extends JenixTableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             AccTableModel model = (AccTableModel) table.getModel();
             Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (isSelected) {
-               super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            }else{
-                c.setBackground(model.getRowColour(row));
-                c.setForeground(Color.BLACK);
+            FenixAcc acc = ((AccTableModel) table.getModel()).getList().get(row);
+            AccStatus status = AccStatus.lookup(acc.getEstado());
+
+            switch (AccTableModel.Columns.lookup(column)){
+                case ETC:
+                    if (status != null
+                            && !status.isFinal()
+                            && acc != null
+                          &&  (acc.getDesvioEtc() != null && acc.getDesvioEtc() > 0)) {
+                        c.setBackground(Color.RED);
+                        break;
+                    }
+
+                case PORCENTAJE_COMPLETADO:
+
+                    Double porcentaje = acc.getPorcentajeCompletado();
+
+                    if (status != null
+                            && !status.isFinal()
+                            && porcentaje!= null
+                            && porcentaje >= 75) {
+                        c.setBackground(Color.ORANGE);
+                        break;
+                    }
+                case ESTADO:
+                    if (acc != null && acc.getJiraStatus() != null){
+                        if (status == AccStatus.ENTREGADA) {
+                            List<String> validStatus = Arrays.asList("Review", "Solved", "Implemented", "Done");
+                            if (!validStatus.stream().anyMatch(s -> s.equals(acc.getJiraStatus()))) {
+                                c.setBackground(Color.RED);
+                                break;
+                            }
+                        }else if(status == AccStatus.EN_EJECUCION){
+                                List<String> validStatusEj = Arrays.asList("In Progress", "Reopened", "To Do", "In Implementation");
+                                if (!validStatusEj.stream().anyMatch(s -> s.equals(acc.getJiraStatus()))){
+                                    c.setBackground(Color.RED);
+                                    break;
+                                }
+
+                        }
+
+                    }
+
+                default:
+                    if (isSelected) {
+
+                        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    }else{
+                        c.setBackground(model.getRowColour(row));
+                        c.setForeground(Color.BLACK);
+                    }
             }
+
+
+
             return c;
         }
     }

@@ -1,8 +1,5 @@
 package net.dms.popeye.handlers.jfsynchronizer.swing.components;
 
-import net.dms.popeye.handlers.jfsynchronizer.swing.EverisManager;
-import net.dms.popeye.handlers.jfsynchronizer.swing.IncidenciaTableModel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
@@ -12,13 +9,13 @@ import java.util.List;
 /**
  * Created by dminanos on 22/05/2017.
  */
-public class MyJTable<M extends MyTableModel, R> extends JTable{
-    public MyJTable(MyTableModel tm) {
+public class JenixTable<M extends JenixTableModel, R> extends JTable{
+    public JenixTable(JenixTableModel tm) {
         super(tm);
         configure();
     }
 
-    public MyJTable() {
+    public JenixTable() {
         super();
         configure();
     }
@@ -47,9 +44,10 @@ public class MyJTable<M extends MyTableModel, R> extends JTable{
         setSelectionBackground(Color.GREEN);
 
         setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        setDefaultRenderer(Object.class, new MyTableCellRenderer());
+        setDefaultRenderer(Object.class, new JenixTableCellRenderer());
         setDefaultRenderer(Date.class, new DateCellRenderer());
 
         SwingUtil.agregarMenu(this, new JMenuItem[]{SwingUtil.menuCopiar(this)});
+
     }
 }

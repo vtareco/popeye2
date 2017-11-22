@@ -10,7 +10,7 @@ public enum EverisPropertiesType {
     PETICIONES_FOLDER_PATTERN("everis.conf.peticiones.folder.pattern"),
     RESPONSABLE_JIRA("everis.conf.responsable.jira"),
     JIRA_FILTROS("everis.conf.jira.filtro"),
-    JIRA_FILTRO_BY_ID("everis.conf.jira.filtro.byId"),
+    JIRA_FILTRO_BY_ID("byId"),
     INCIDENCIAS_FILE_NAME("everis.conf.incidencias.file.name");
 
     private String property;

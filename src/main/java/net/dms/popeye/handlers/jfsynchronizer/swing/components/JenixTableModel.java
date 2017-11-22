@@ -23,13 +23,13 @@ import java.util.List;
 /**
  * Created by dminanos on 19/05/2017.
  */
-public class MyTableModel<R,C extends Enum> extends AbstractTableModel {
+public class JenixTableModel<R,C extends Enum> extends AbstractTableModel {
     protected String[] columnNames;
     protected List<R> rows;
     protected  Class<C> columns;
 
 
-    public MyTableModel(Class<C> columns, List<R> rows){
+    public JenixTableModel(Class<C> columns, List<R> rows){
         this.rows = rows;
        // enumConstants = enumeration.getEnumConstants();
         this.columns = columns;

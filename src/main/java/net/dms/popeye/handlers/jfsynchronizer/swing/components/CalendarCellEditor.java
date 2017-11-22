@@ -25,6 +25,7 @@ public class CalendarCellEditor extends AbstractCellEditor
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        datePicker.getModel().setValue(null);
         return (Component) datePicker;
     }
 

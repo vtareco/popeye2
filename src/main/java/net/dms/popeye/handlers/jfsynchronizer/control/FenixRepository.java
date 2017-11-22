@@ -94,7 +94,7 @@ public class FenixRepository {
             Sheet sheet = wb.getSheet("Actuaciones");
 
             for (int i = 2; i <= sheet.getLastRowNum(); i++){
-                System.out.println("cell: " + sheet.getRow(i).getCell(0));
+
                 if (sheet.getRow(i).getCell(AccIncurridoRowType.ID_ACC.getColPosition()) == null){
                     break;
                 }
@@ -145,6 +145,7 @@ public class FenixRepository {
                 iAcc = accsIncurridos.indexOf(accInc);
                 if (iAcc >= 0){
                     accInc.setIncurrido(accsIncurridos.get(iAcc).getIncurrido());
+                    accInc.setEtc(accsIncurridos.get(iAcc).getEtc());
                 }
             }
         }catch(IOException ex){

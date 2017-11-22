@@ -1,18 +1,16 @@
 package net.dms.popeye.handlers.jfsynchronizer.swing;
 
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixIncidencia;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.TableColumnEnumType;
-import net.dms.popeye.handlers.jfsynchronizer.swing.components.MyTableModel;
+import net.dms.popeye.handlers.jfsynchronizer.swing.components.JenixTableModel;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.SelectOption;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by dminanos on 22/05/2017.
  */
-public class IncidenciaTableModel extends MyTableModel<FenixIncidencia, IncidenciaTableModel.Columns> {
+public class IncidenciaTableModel extends JenixTableModel<FenixIncidencia, IncidenciaTableModel.Columns> {
 
     public enum Columns implements TableColumnEnumType {
 
@@ -44,6 +42,9 @@ public class IncidenciaTableModel extends MyTableModel<FenixIncidencia, Incidenc
             return editable;
         }
 
+        public int getWidth(){
+            return 50;
+        }
     }
 
 

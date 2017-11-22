@@ -36,7 +36,7 @@ public class FenixAccMapper {
 
        // acc.setFechaSolicitudCliente(row.getCell(AccRowType.FECHA_SOLICITUD_CLIENTE.getColPosition()).getStringCellValue());
 
-      // acc.setFechaPrevistaProyecto(row.getCell(AccRowType.FECHA_PREVISTA_PROYECTO.getColPosition()).getStringCellValue());
+       acc.setFechaPrevistaProyecto(row.getCell(AccRowType.FECHA_PREVISTA_PROYECTO.getColPosition())!= null ? row.getCell(AccRowType.FECHA_PREVISTA_PROYECTO.getColPosition()).getDateCellValue() : null);
         acc.setFechaEntrega(row.getCell(AccRowType.FECHA_ENTREGA.getColPosition()) != null ? row.getCell(AccRowType.FECHA_ENTREGA.getColPosition()).getDateCellValue() : null);
         //       acc.setFechaCierre(row.getCell(AccRowType.FECHACIERRE.getColPosition()).getStringCellValue());
         //       acc.setFechaDesestimacion(row.getCell(AccRowType.FECHA_DESESTIMACION.getColPosition()).getStringCellValue());
@@ -52,6 +52,7 @@ public class FenixAccMapper {
         FenixAcc acc = new FenixAcc();
         acc.setIdAcc(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()) != null ? new Long(new Double(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()).getStringCellValue()).longValue()) : null);
         acc.setIncurrido(row.getCell(AccIncurridoRowType.INCURRIDO.getColPosition()) != null ? new Double(row.getCell(AccIncurridoRowType.INCURRIDO.getColPosition()).getStringCellValue()) : null);
+        acc.setEtc(row.getCell(AccIncurridoRowType.ETC.getColPosition()) != null ? new Double(row.getCell(AccIncurridoRowType.ETC.getColPosition()).getStringCellValue()) : null);
 
         return acc;
     }
@@ -91,6 +92,12 @@ public class FenixAccMapper {
         if (acc.getFechaEntrega() != null) {
             cell = row.createCell(AccRowType.FECHA_ENTREGA.getColPosition());
             cell.setCellValue(acc.getFechaEntrega());
+            cell.setCellStyle(style);
+        }
+
+        if (acc.getFechaPrevistaProyecto() != null) {
+            cell = row.createCell(AccRowType.FECHA_PREVISTA_PROYECTO.getColPosition());
+            cell.setCellValue(acc.getFechaPrevistaProyecto());
             cell.setCellStyle(style);
         }
 

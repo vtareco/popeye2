@@ -4,7 +4,7 @@ import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.AccStatus;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.TableColumnEnumType;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.MyColors;
-import net.dms.popeye.handlers.jfsynchronizer.swing.components.MyTableModel;
+import net.dms.popeye.handlers.jfsynchronizer.swing.components.JenixTableModel;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -14,20 +14,41 @@ import java.util.List;
 /**
  * Created by dminanos on 19/05/2017.
  */
-public class AccTableModel extends MyTableModel<FenixAcc, AccTableModel.Columns> {
+public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Columns> {
 
     public enum Columns implements TableColumnEnumType{
 
-        ID_ACC(false), NOMBRE(true), DESCRIPCION(true), CODIGO_PETICION_CLIENTE(true), ESTADO(true), TIPO(true), SUB_TIPO(true), ESFUERZO(true), INCURRIDO(false), RESPONSABLE(true), FECHA_PREVISTA_PROYECTO(false);
+        ID_ACC(false, 70),
+        NOMBRE(true, 250),
+        CODIGO_PETICION_CLIENTE(true, 80),
+        ESTADO(true, 80),
+        JIRA_STATUS(true, 50),
+        TIPO(true, 80),
+        SUB_TIPO(true, 80),
+        ESFUERZO(true, 80),
+        INCURRIDO(false, 80),
+        ETC(true, 50),
+        PORCENTAJE_COMPLETADO(true, 30),
+        RESPONSABLE(true, 100),
+        FECHA_PREVISTA_PROYECTO(true, 80),
+        DESCRIPCION(true, 250);
 
+
+        private final static int WIDTH_M = 80;
         private boolean editable;
+        private int width;
 
-        Columns(boolean editable) {
+        Columns(boolean editable, int width) {
             this.editable = editable;
+            this.width = width;
         }
 
         public boolean isEditable() {
             return editable;
+        }
+
+        public int getWidth(){
+            return width;
         }
 
         public static Columns lookup(int iPosition){

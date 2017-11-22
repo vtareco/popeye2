@@ -11,6 +11,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 
 import java.io.InputStream;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,14 +21,16 @@ import java.util.Map;
  */
 public class JiraRepository {
     public JiraSearchResponse search(String jql) {
-        Map<String, String> variables = new HashMap<>();
-        variables.put(EverisVariables.JIRA_JQL.getVariableName(), jql);
-        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/jira_issues_search.xml", variables);
-        ActionResponse ar = ae.execute();
 
-
-        HttpResponse httpResponse = (HttpResponse)ar.getResponse();
         try {
+            jql = URLEncoder.encode(jql, "UTF-8");
+            Map<String, String> variables = new HashMap<>();
+            variables.put(EverisVariables.JIRA_JQL.getVariableName(), jql);
+            ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/jira_issues_search.xml", variables);
+            ActionResponse ar = ae.execute();
+
+
+            HttpResponse httpResponse = (HttpResponse)ar.getResponse();
             HttpEntity entity2 = httpResponse.getEntity();
             InputStream in = entity2.getContent();
             String content = IOUtils.toString(in);

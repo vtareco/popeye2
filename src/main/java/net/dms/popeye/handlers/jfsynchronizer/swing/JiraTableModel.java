@@ -4,18 +4,16 @@ import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraIssue;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.TableColumnEnumType;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.MyColors;
-import net.dms.popeye.handlers.jfsynchronizer.swing.components.MyTableModel;
+import net.dms.popeye.handlers.jfsynchronizer.swing.components.JenixTableModel;
 
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by dminanos on 22/05/2017.
  */
-public class JiraTableModel extends MyTableModel<JiraIssue, JiraTableModel.Columns> {
+public class JiraTableModel extends JenixTableModel<JiraIssue, JiraTableModel.Columns> {
     public enum Columns implements TableColumnEnumType{
 
         KEY(false), SUMMARY(false), ASSIGNEE(false), STATUS(false);
@@ -28,6 +26,10 @@ public class JiraTableModel extends MyTableModel<JiraIssue, JiraTableModel.Colum
 
         public boolean isEditable() {
             return editable;
+        }
+
+        public int getWidth(){
+            return 50;
         }
 
         public static Columns lookup(int iPosition){

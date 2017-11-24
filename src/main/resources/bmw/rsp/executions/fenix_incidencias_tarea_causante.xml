@@ -3,7 +3,7 @@
     <actions>
 
         <action name="download">
-            <url>http://fenix.car.int/fenix/requerimientos/hyperlinkAction.do?urlOrigen=peticionEjecutar&amp;urlDestino=incidenciaEjecutar&amp;idDestino=970654&amp;idOrigen=${everis.fenix.idpeticionot}&amp;tab=5</url>
+            <url>${everis.conf.jira.urlbase}/fenix/requerimientos/hyperlinkAction.do?urlOrigen=peticionEjecutar&amp;urlDestino=incidenciaEjecutar&amp;idDestino=970654&amp;idOrigen=${everis.fenix.idpeticionot}&amp;tab=5</url>
             <httpMethod>GET</httpMethod>
             <headers>
                 <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/>

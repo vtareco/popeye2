@@ -37,9 +37,8 @@ public class FenixRepository {
 
     public void downloadACCs(Long idPeticion, String pathFile) {
 
-        Map<String, String> variables = new HashMap<String, String>();
-        variables.put(EverisVariables.TIMESTAMP.getVariableName(), new Long(System.currentTimeMillis()).toString());
-        variables.put(EverisVariables.ID_PETICION_OT.getVariableName(), idPeticion.toString());
+        Map<String, String> variables = createFenixVariables(idPeticion.toString());
+
        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
        ae.execute();
 
@@ -50,9 +49,7 @@ public class FenixRepository {
     public void downloadACCsIncurridos(Long idPeticionOt, String pathFile) {
 
         //TODO FIXME, avoid login
-        Map<String, String> variables = new HashMap<String, String>();
-        variables.put(EverisVariables.TIMESTAMP.getVariableName(), new Long(System.currentTimeMillis()).toString());
-        variables.put(EverisVariables.ID_PETICION_OT.getVariableName(), idPeticionOt.toString());
+        Map<String, String> variables = createFenixVariables(idPeticionOt.toString());
         ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
         ae.execute();
 
@@ -62,8 +59,7 @@ public class FenixRepository {
 
     public void uploadACCs(Long idPeticionOt) {
 
-        Map<String, String> variables = new HashMap<String, String>();
-        variables.put(EverisVariables.TIMESTAMP.getVariableName(), new Long(System.currentTimeMillis()).toString());
+        Map<String, String> variables = createFenixVariables(idPeticionOt.toString());
         variables.put(EverisVariables.UPLOAD_FILE.getVariableName(), getACCsFile(idPeticionOt).getAbsolutePath().replaceAll("\\\\" , "/"));
 
         ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
@@ -378,9 +374,7 @@ public class FenixRepository {
 
     public Map<IncidenciasMetaDataType,Map> getIncidenciasMetaData(Long idOt) {
 
-        Map<String, String> variables = new HashMap<String, String>();
-        variables.put(EverisVariables.TIMESTAMP.getVariableName(), new Long(System.currentTimeMillis()).toString());
-        variables.put(EverisVariables.ID_PETICION_OT.getVariableName(), idOt.toString());
+        Map<String, String> variables = createFenixVariables(idOt.toString());
         ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
         ae.execute();
 
@@ -388,5 +382,15 @@ public class FenixRepository {
         getIncidencias.execute();
 
         return getIncidencias.getMetadataMaps();
+    }
+
+    private Map<String, String> createFenixVariables(String ot){
+        Map<String, String> variables = new HashMap<String, String>();
+        variables.put(EverisVariables.FENIX_TIMESTAMP.getVariableName(), new Long(System.currentTimeMillis()).toString());
+        variables.put(EverisVariables.FENIX_ID_PETICION_OT.getVariableName(), ot.toString());
+        variables.put(EverisVariables.FENIX_URL_BASE.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_URL_BASE));
+        variables.put(EverisVariables.FENIX_USER.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_USER));
+        variables.put(EverisVariables.FENIX_PASSWORD.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_PASSWORD));
+        return variables;
     }
 }

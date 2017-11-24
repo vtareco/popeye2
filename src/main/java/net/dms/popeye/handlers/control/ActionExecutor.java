@@ -5,6 +5,8 @@ import net.dms.popeye.handlers.entities.ActionResponse;
 import net.dms.popeye.handlers.entities.config.Execution;
 import net.dms.popeye.handlers.entities.enumerations.HttpMethod;
 import net.dms.popeye.handlers.entities.exceptions.AppException;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.ParseException;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
@@ -42,7 +44,10 @@ public class ActionExecutor {
             JAXBContext jaxbContext = JAXBContext.newInstance(Execution.class);
             Unmarshaller jaxbMarshaller = jaxbContext.createUnmarshaller();
 
-            Execution execution = (Execution)jaxbMarshaller.unmarshal(is);
+            String strExecution = IOUtils.toString(is, "UTF-8");
+            strExecution = processVariables(strExecution);
+
+            Execution execution = (Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
             System.out.println(execution);
 
             CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -59,6 +64,26 @@ public class ActionExecutor {
             throw new AppException(ex);
         }
         return response;
+    }
+
+
+
+    private String processVariables(String strExecution){
+        for (String key : variables.keySet()){
+            String mapValue = variables.get(key);
+            System.out.println(">key:  " + key + ", value: " + mapValue);
+            if ( strExecution != null) {
+                try {
+                    strExecution = strExecution.replaceAll("\\$\\{" + key + "\\}", mapValue);
+                }catch(ParseException ex){
+                    System.out.println("error in process value");
+                    ex.printStackTrace();
+                    throw new AppException(ex);
+                }
+            }
+        }
+        System.out.println("value: " + strExecution);
+        return strExecution;
     }
 
     public Map<String, String> getVariables() {

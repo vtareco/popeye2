@@ -3,7 +3,7 @@
     <actions>
 
         <action name="upload">
-            <url>http://fenix.everis.int/fenix/actuaciones/accCargaMasivaAction.do?perform=cargaACCs</url>
+            <url>${everis.conf.fenix.urlbase}/fenix/actuaciones/accCargaMasivaAction.do?perform=cargaACCs</url>
             <httpMethod>POST</httpMethod>
             <headers>
                 <header name="Cookie" value="ActuacionesGrid=12; gridIncTab=6; TIMEZONE=21; LOGIN_LAST_USER=dminanos; JSESSIONID=${response.header.Set-Cookie.JSESSIONID}"/>

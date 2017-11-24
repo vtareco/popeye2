@@ -11,6 +11,12 @@ public enum EverisPropertiesType {
     RESPONSABLE_JIRA("everis.conf.responsable.jira"),
     JIRA_FILTROS("everis.conf.jira.filtro"),
     JIRA_FILTRO_BY_ID("byId"),
+    FENIX_USER("everis.conf.fenix.user"),
+    FENIX_PASSWORD("everis.conf.fenix.password"),
+    FENIX_URL_BASE("everis.conf.fenix.urlbase"),
+    JIRA_USER("everis.conf.jira.user"),
+    JIRA_PASSWORD("everis.conf.jira.password"),
+    JIRA_URL_BASE("everis.conf.jira.urlbase"),
     INCIDENCIAS_FILE_NAME("everis.conf.incidencias.file.name");
 
     private String property;

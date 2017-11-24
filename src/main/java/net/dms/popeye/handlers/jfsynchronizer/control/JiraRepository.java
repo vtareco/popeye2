@@ -24,7 +24,7 @@ public class JiraRepository {
 
         try {
             jql = URLEncoder.encode(jql, "UTF-8");
-            Map<String, String> variables = new HashMap<>();
+            Map<String, String> variables = createJiraVariables();
             variables.put(EverisVariables.JIRA_JQL.getVariableName(), jql);
             ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/jira_issues_search.xml", variables);
             ActionResponse ar = ae.execute();
@@ -50,6 +50,13 @@ public class JiraRepository {
         }catch(Exception ex){
            throw new AppException(ex);
         }
+    }
 
+    private Map<String, String> createJiraVariables(){
+        Map<String, String> variables = new HashMap<String, String>();
+        variables.put(EverisVariables.JIRA_URL_BASE.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.JIRA_URL_BASE));
+        variables.put(EverisVariables.JIRA_USER.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.JIRA_USER));
+        variables.put(EverisVariables.JIRA_PASSWORD.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.JIRA_PASSWORD));
+        return variables;
     }
 }

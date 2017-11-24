@@ -151,6 +151,7 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
         return actionResponse;
     }
 
+    // TODO FIXME - REMOVE, variables are replaced in action executor
     private String processVariable(String value){
         for (String key : variables.keySet()){
             String mapValue = variables.get(key);

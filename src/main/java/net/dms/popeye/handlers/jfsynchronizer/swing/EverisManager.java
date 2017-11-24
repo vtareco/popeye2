@@ -60,10 +60,10 @@ public class EverisManager {
     FenixService fenixService = new FenixService();
     FenixAccMapper accMapper = new FenixAccMapper();
     EverisConfig config = EverisConfig.getInstance();
-    Settings settings = SettingsService.getInstance().getSettings();
+    //Settings settings = SettingsService.getInstance().getSettings();
 
 
-    private Map<String, String> jiraFilters = settings.getJiraSettings().getFilters();
+    private Map<String, String> jiraFilters = config.getJiraFilters();
 
 
     public static void main(String[] args) {
@@ -210,7 +210,11 @@ public class EverisManager {
             public void actionPerformed(ActionEvent e) {
                 List<FenixAcc> accs=((AccTableModel)accTable.getModel()).getList();
                 Set<String> jiraCodes = accs.stream().map(FenixAcc::getCodigoPeticionCliente).collect(Collectors.toSet());
-                String jql = String.format(settings.getJiraSettings().getFilterByIds(), String.join(",", jiraCodes));
+
+                // TODO FIXME, filter should be parametrized
+                //String jql = String.format(settings.getJiraSettings().getFilterByIds(), String.join(",", jiraCodes));
+                String jql = String.format("issue in (%s)", String.join(",", jiraCodes));
+
                 JiraSearchResponse jiraSearchResponse = jiraService.search(jql);
                 List<JiraIssue>issues = jiraSearchResponse.getIssues();
                 for(FenixAcc acc : accs) {

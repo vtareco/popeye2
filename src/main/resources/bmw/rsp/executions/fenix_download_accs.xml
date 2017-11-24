@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <execution name="fenix_download_accs">
     <actions>
-
         <action name="download">
-            <url>http://fenix.car.int/fenix/actuaciones/exportarActuacionesCargaMasivaPetOtAction.do?pathKey=actuaciones.template.path.key&amp;fileName=actuaciones.template.filename.key&amp;PETICION_OID=${everis.fenix.idpeticionot}</url>
+            <url>${everis.conf.fenix.urlbase}/fenix/actuaciones/exportarActuacionesCargaMasivaPetOtAction.do?pathKey=actuaciones.template.path.key&amp;fileName=actuaciones.template.filename.key&amp;PETICION_OID=${everis.fenix.idpeticionot}</url>
             <httpMethod>GET</httpMethod>
             <headers>
                 <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/>

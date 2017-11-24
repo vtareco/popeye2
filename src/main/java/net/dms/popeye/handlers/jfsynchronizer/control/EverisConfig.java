@@ -1,5 +1,7 @@
 package net.dms.popeye.handlers.jfsynchronizer.control;
 
+import net.dms.popeye.handlers.entities.exceptions.AppException;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,6 +12,7 @@ import java.util.stream.Collectors;
 public class EverisConfig {
     private static EverisConfig ourInstance = new EverisConfig();
     private Properties properties;
+    private Properties overriderProperpeties;
     private Map<String, String> mapResponsableJiraEveris = new HashMap<>();
     private Map<String, String> jiraFilters = new HashMap<>();
 
@@ -19,9 +22,16 @@ public class EverisConfig {
 
     private EverisConfig() {
         properties = new Properties();
+        overriderProperpeties = new  Properties();
         try {
 
             properties.load(Thread.class.getResourceAsStream("/bmw/rsp/everis.conf"));
+            overriderProperpeties.load(Thread.class.getResourceAsStream("/bmw/rsp/everis_overriden.conf"));
+
+            overriderProperpeties.entrySet().stream().forEach( p ->
+                properties.put(p.getKey(), p.getValue())
+            );
+
             Set<String> responseblesKeys = properties.stringPropertyNames().stream().filter(k -> k.startsWith(EverisPropertiesType.RESPONSABLE_JIRA.getProperty())).collect(Collectors.toSet());
             for(String key : responseblesKeys) {
                 mapResponsableJiraEveris.put(properties.getProperty(key), key.replace(EverisPropertiesType.RESPONSABLE_JIRA.getProperty()+ ".", ""));
@@ -33,6 +43,7 @@ public class EverisConfig {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            throw new AppException(e);
         }
     }
 

@@ -51,12 +51,13 @@ public class FenixAcc {
         this.jiraStatus = jiraStatus;
     }
 
-    public Double getPorcentajeCompletado() {
-        Double dEsfuerzo = null;
+    public Double getPorcentajeCompletado()
+    {
 
-        if (this.esfuerzo != null){
-            dEsfuerzo = Double.parseDouble(esfuerzo);
-        }
+        // TODO FIXEME - revisar formula
+        Double dEsfuerzo = getTotalEsfuerzo();
+
+
 
         if (incurrido == null || incurrido.doubleValue() == 0){
             return  0.0;

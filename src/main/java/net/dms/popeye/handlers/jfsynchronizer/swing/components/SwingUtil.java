@@ -15,22 +15,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyVetoException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
@@ -76,6 +70,34 @@ public class SwingUtil {
             c.addItem(s);
         }
     }
+
+
+    public static void registerListener(JComboBox component, Procedure perform, Consumer<Exception> errorHandler){
+        component.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    perform.run();
+                }catch (Exception ex){
+                    errorHandler.accept(ex);
+                }
+            }
+        });
+    }
+
+    public static void registerListener(JButton component, Procedure perform, Consumer<Exception> errorHandler){
+        component.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                   perform.run();
+                }catch (Exception ex){
+                    errorHandler.accept(ex);
+                }
+            }
+        });
+    }
+
 
 
 
@@ -193,6 +215,8 @@ public class SwingUtil {
                             .getSystemClipboard();
                     clipboard.setContents(data, data);
                 } catch (Exception ex) {
+
+                    // TODO Fixme
                     //logger.error("error copiando", ex);
                 }
 

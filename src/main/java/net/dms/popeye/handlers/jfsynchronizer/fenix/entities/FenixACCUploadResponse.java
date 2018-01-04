@@ -17,4 +17,11 @@ public class FenixACCUploadResponse {
     public void setItems(List<FenixACCUploadResponseItem> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString() {
+        return "FenixACCUploadResponse{" +
+                "items=" + items +
+                '}';
+    }
 }

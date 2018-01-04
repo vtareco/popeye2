@@ -52,7 +52,9 @@ public class FenixAccMapper {
         FenixAcc acc = new FenixAcc();
         acc.setIdAcc(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()) != null ? new Long(new Double(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()).getStringCellValue()).longValue()) : null);
         acc.setIncurrido(row.getCell(AccIncurridoRowType.INCURRIDO.getColPosition()) != null ? new Double(row.getCell(AccIncurridoRowType.INCURRIDO.getColPosition()).getStringCellValue()) : null);
-        acc.setEtc(row.getCell(AccIncurridoRowType.ETC.getColPosition()) != null ? new Double(row.getCell(AccIncurridoRowType.ETC.getColPosition()).getStringCellValue()) : null);
+
+        acc.setEtc(row.getCell(AccIncurridoRowType.ETC.getColPosition()) != null && !StringUtils.isBlank(row.getCell(AccIncurridoRowType.ETC.getColPosition()).getStringCellValue())
+                ? new Double(row.getCell(AccIncurridoRowType.ETC.getColPosition()).getStringCellValue()) : null);
 
         return acc;
     }
@@ -71,6 +73,10 @@ public class FenixAccMapper {
         row.createCell(AccRowType.CRITICIDAD.getColPosition()).setCellValue(acc.getCriticidad());
         row.createCell(AccRowType.ESFUERZO.getColPosition()).setCellValue(acc.getEsfuerzo());
         row.createCell(AccRowType.ESFUERZO_CLIENTE.getColPosition()).setCellValue(acc.getEsfuerzoCliente());
+
+// TODO FIXME only for agile
+        row.createCell(AccRowType.HISTORIA_USUARIO.getColPosition()).setCellValue(acc.getHistoriaUsuario());
+        row.createCell(AccRowType.PUNTOS_HISTORIA.getColPosition()).setCellValue(acc.getPuntosHistoria());
 
         DataFormat format = wb.createDataFormat();
         CellStyle style = wb.createCellStyle();
@@ -119,6 +125,9 @@ public class FenixAccMapper {
         fenixAcc.setRechazosEntrega(0);
         fenixAcc.setCriticidad(AccCriticidad.MEDIA.getDescription());
 
+
+        // TODO FIXME AGILE
+        fenixAcc.setHistoriaUsuario(issue.getKey());
 
         fenixAcc.setEsfuerzo("1");
         fenixAcc.setEsfuerzoCliente(fenixAcc.getEsfuerzo());

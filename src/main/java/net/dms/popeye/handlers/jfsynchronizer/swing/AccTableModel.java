@@ -27,6 +27,9 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
         SUB_TIPO(true, 80),
         ESFUERZO(true, 80),
         INCURRIDO(false, 80),
+        PUNTOS_HISTORIA(true, 80),
+        HISTORIA_USUARIO(true, 80),
+
         ETC(true, 50),
         PORCENTAJE_COMPLETADO(true, 30),
         RESPONSABLE(true, 100),

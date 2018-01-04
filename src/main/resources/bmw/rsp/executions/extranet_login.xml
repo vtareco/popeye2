@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<execution name="extraner_login">
+    <!--proxy scheme="http" host="10.114.8.100" port="8080"/-->
+    <actions>
+        <action name="login">
+            <url>${everis.conf.fenix.urlbase}/dana-na/auth/url_default/login.cgi</url>
+            <httpMethod>POST</httpMethod>
+            <headers>
+                <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
+            </headers>
+            <parameters>
+                <!--parameter>
+                    <name>tz_offset</name>
+                    <value></value>
+                </parameter-->
+                <parameter>
+                    <name>username</name>
+                    <value>${everis.conf.fenix.user}</value>
+                </parameter>
+                <parameter>
+                    <name>password</name>
+                    <value>${everis.conf.fenix.password}</value>
+                </parameter>
+                <parameter>
+                    <name>realm</name>
+                    <value>Produccion</value>
+                </parameter>
+            </parameters>
+        </action>
+    </actions>
+</execution>

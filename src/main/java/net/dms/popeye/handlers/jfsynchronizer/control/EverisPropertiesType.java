@@ -10,7 +10,7 @@ public enum EverisPropertiesType {
     PETICIONES_FOLDER_PATTERN("everis.conf.peticiones.folder.pattern"),
     RESPONSABLE_JIRA("everis.conf.responsable.jira"),
     JIRA_FILTROS("everis.conf.jira.filtro"),
-    JIRA_FILTRO_BY_ID("byId"),
+    JIRA_FILTRO_BY_ID("everis.conf.jira.filtro.byId"),
     FENIX_USER("everis.conf.fenix.user"),
     FENIX_PASSWORD("everis.conf.fenix.password"),
     FENIX_URL_BASE("everis.conf.fenix.urlbase"),

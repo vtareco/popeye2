@@ -39,6 +39,10 @@ public class FenixRepository {
 
         Map<String, String> variables = createFenixVariables(idPeticion.toString());
 
+// TODO FIXME critical, extranet pilot
+       // ActionExecutor el = new ActionExecutor("/bmw/rsp/executions/extranet_login.xml", variables);
+       // el.execute();
+
        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
        ae.execute();
 
@@ -53,8 +57,9 @@ public class FenixRepository {
         ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
         ae.execute();
 
+        // TODO FIXME, DISABLED FOr agile
         DownloadAction fs = new DownloadAction("/bmw/rsp/executions/fenix_download_accs_incurridos.xml", pathFile, variables);
-        fs.execute();
+       fs.execute();
     }
 
     public void uploadACCs(Long idPeticionOt) {
@@ -62,11 +67,27 @@ public class FenixRepository {
         Map<String, String> variables = createFenixVariables(idPeticionOt.toString());
         variables.put(EverisVariables.UPLOAD_FILE.getVariableName(), getACCsFile(idPeticionOt).getAbsolutePath().replaceAll("\\\\" , "/"));
 
+        // TODO FIXME
         ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
         ae.execute();
 
 
         ActionExecutor upload = new ActionExecutor("/bmw/rsp/executions/fenix_upload_accs.xml", variables);
+        upload.execute();
+
+
+    }
+
+    public void uploadIncidencias(Long idPeticionOt) {
+        Map<String, String> variables = createFenixVariables(idPeticionOt.toString());
+        variables.put(EverisVariables.UPLOAD_FILE.getVariableName(), getIncidenciasFile(idPeticionOt).getAbsolutePath().replaceAll("\\\\" , "/"));
+
+        // TODO FIXME
+        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
+        ae.execute();
+
+
+        ActionExecutor upload = new ActionExecutor("/bmw/rsp/executions/fenix_upload_incidencias.xml", variables);
         upload.execute();
 
 
@@ -133,6 +154,8 @@ public class FenixRepository {
                 fenixAccs.add(fenixAcc);
             }
 
+
+
             List<FenixAcc> accsIncurridos = searchACCsIncurridos(idOt, forceDownload);
             int iAcc;
 
@@ -144,6 +167,7 @@ public class FenixRepository {
                     accInc.setEtc(accsIncurridos.get(iAcc).getEtc());
                 }
             }
+
         }catch(IOException ex){
             throw new AppException(ex);
         }
@@ -310,8 +334,7 @@ public class FenixRepository {
         InputStream fis;
         try {
             if (!incidenciaFile.exists()) {
-                //TODO FIXME
-                //downloadACCs(idOt, incidenciaFile.getAbsolutePath());
+                downloadIncidencias(idOt, incidenciaFile.getAbsolutePath());
             }
             fis = new FileInputStream(incidenciaFile);
 
@@ -340,8 +363,18 @@ public class FenixRepository {
         return incidencias;
     }
 
+    private void downloadIncidencias(Long idOt, String pathFile) {
+        Map<String, String> variables = createFenixVariables(idOt.toString());
+
+        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
+        ae.execute();
+
+        DownloadAction fs = new DownloadAction("/bmw/rsp/executions/fenix_download_incidencias.xml", pathFile, variables);
+        fs.execute();
+    }
+
     public void saveIncidencias(List<FenixIncidencia> incidencias) {
-        File accFile = getIncidenciasFile(Long.valueOf(incidencias.get(0).getOtCorrector()));
+        File accFile = getIncidenciasFile(Long.valueOf(incidencias.get(0).getIdPeticionOt()));
         File template = getIncidenciasTemplate();
         InputStream fis;
         int lastRow = 4;
@@ -390,6 +423,7 @@ public class FenixRepository {
         variables.put(EverisVariables.FENIX_ID_PETICION_OT.getVariableName(), ot.toString());
         variables.put(EverisVariables.FENIX_URL_BASE.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_URL_BASE));
         variables.put(EverisVariables.FENIX_USER.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_USER));
+        variables.put(EverisVariables.FENIX_PASSWORD.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_PASSWORD));
         variables.put(EverisVariables.FENIX_PASSWORD.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_PASSWORD));
         return variables;
     }

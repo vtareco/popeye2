@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<execution name="fenix_download_accs">
+    <actions>
+        <action name="search">
+            <url>${everis.conf.fenix.urlbase}/fenix/requerimientos/incidenciaBuscarJSONAction.do</url>
+            <httpMethod>POST</httpMethod>
+            <headers>
+                <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/>
+                <header name="Accept-Encoding" value="gzip, deflate, sdch"/>
+                <header name="Accept-Language" value="es,en;q=0.8,de;q=0.6"/>
+                <header name="Connection" value="keep-alive"/>
+                <header name="Cookie" value="ActuacionesGrid=12; gridIncTab=6; TIMEZONE=21; LOGIN_LAST_USER=dminanos; JSESSIONID=${response.header.Set-Cookie.JSESSIONID}"/>
+                <header name="Host" value="fenix.car.int"/>
+                <header name="Upgrade-Insecure-Requests" value="1"/>
+                <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
+            </headers>
+            <parameters>
+                <parameter>
+                    <name>INCIDENCIA_OPTION</name>
+                    <value>BUSCAR</value>
+                </parameter>
+                busquedaPredefinidaOID:
+                <parameter>
+                    <name>portador_oid</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>corrector_oid</name>
+                    <value/>
+                </parameter>
+
+                <parameter>
+                    <name>creador_oid</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>searchName</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>searchDescription</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>entidadClase</name>
+                    <value>INCIDENCIA</value>
+                </parameter>
+                <parameter>
+                    <name>clienteOIDBusquedaPredefinida</name>
+                    <value>null</value>
+                </parameter>
+                <parameter>
+                    <name>aplicacionOIDBusquedaPredefinida</name>
+                    <value>null</value>
+                </parameter>
+                <parameter>
+                    <name>factorioOIDBusquedaPredefinida</name>
+                    <value>null</value>
+                </parameter>
+                <parameter>
+                    <name>lineaOIDBusquedaPredefinida</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>estadosSeleccionados</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>aplicacionesSeleccionados</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>idTratamientoMasivo</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>lasMias</name>
+                    <value>true</value>
+                </parameter>
+                <parameter>
+                    <name>idIncidencia</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>idPeticion</name>
+                    <value>${everis.fenix.idpeticionot}</value>
+                </parameter>
+                <parameter>
+                    <name>fechaSolicitudDesde</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>fechaSolicitudHasta</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>localizadaEn</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>tipo</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>impacto</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>nombre</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>descripcion</name>
+                    <value/>
+                </parameter>
+                <parameter>
+                    <name>factoriaOID</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>lineaOID</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>clienteOID</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>aplicacionOID</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>estado</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>urgencia</name>
+                    <value>-1</value>
+                </parameter>
+                <parameter>
+                    <name>firstResult</name>
+                    <value>0</value>
+                </parameter>
+                <parameter>
+                    <name>maxResults</name>
+                    <value>50</value>
+                </parameter>
+            </parameters>
+        </action>
+        <action name="download">
+            <url>${everis.conf.fenix.urlbase}/fenix/exportarexcel/exportarIncidenciasCargaMasiva.do?pathKey=exportarIncidenciasCargaMasiva.path.key&amp;fileName=exportarIncidenciasCargaMasiva.filename.key</url>
+            <httpMethod>GET</httpMethod>
+            <headers>
+                <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/>
+                <header name="Accept-Encoding" value="gzip, deflate, sdch"/>
+                <header name="Accept-Language" value="es,en;q=0.8,de;q=0.6"/>
+                <header name="Connection" value="keep-alive"/>
+                <header name="Cookie" value="ActuacionesGrid=12; gridIncTab=6; TIMEZONE=21; LOGIN_LAST_USER=dminanos; JSESSIONID=${response.header.Set-Cookie.JSESSIONID}"/>
+                <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
+            </headers>
+            <validators>
+                <validator className="net.dms.popeye.handlers.control.validators.ContentTypeValidator">
+                    <parameters>
+                        <parameter>
+                            <name>content-type</name>
+                            <value>application/vnd.ms-excel</value>
+                        </parameter>
+                    </parameters>
+                </validator>
+            </validators>
+        </action>
+    </actions>
+</execution>

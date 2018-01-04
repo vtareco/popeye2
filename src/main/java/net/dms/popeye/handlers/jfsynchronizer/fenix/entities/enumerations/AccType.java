@@ -5,7 +5,12 @@ package net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations;
  */
 public enum AccType implements VisualizableType{
     EVOLUTIVO("Evolutivo (ENP)"),
-    CORRECCION_INCIDENCIAS("Corrección Incidencias");
+    CORRECCION_INCIDENCIAS("Corrección Incidencias"),
+    USER_STORY("User Story"),
+    MEETING("Meeting"),
+    SCRUM_MASTER("Scrum "),
+    EXTRA_TASK("Extra-Task"),
+    BUG("BUG");
 
     private String description;
 

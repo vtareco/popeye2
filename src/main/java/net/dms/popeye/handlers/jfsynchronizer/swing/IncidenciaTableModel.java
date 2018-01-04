@@ -14,28 +14,30 @@ public class IncidenciaTableModel extends JenixTableModel<FenixIncidencia, Incid
 
     public enum Columns implements TableColumnEnumType {
 
-       ID_INCIDENCIA(false),
-       NOMBRE_INCIDENCIA(true),
-        LOCALIZADA_EN(true),
-        TIPO_INCIDENCIA(true),
-        DESCRIPCION(true),
-        FECHA_INICIO(true),
-        FECHA_FIN(true),
-        ESFUERZO_HH(true),
-        URGENCIA(true),
-        IMPACTO(true),
-        PRIORIDAD(true),
-        FECHA_PREVISTA_CENTRO(true),
-        TAREA_CAUSANTE(true),
-        OT_CORRECTOR(true),
-        ACC_CORRECTOR(true),
-        ESTADO(true);
+       ID_INCIDENCIA(false, 50),
+       NOMBRE_INCIDENCIA(true, 50),
+        LOCALIZADA_EN(true, 50),
+        TIPO_INCIDENCIA(true, 50),
+        DESCRIPCION(true, 50),
+        FECHA_INICIO(true, 50),
+        FECHA_FIN(true, 50),
+        ESFUERZO_HH(true, 50),
+        URGENCIA(true, 50),
+        IMPACTO(true, 50),
+        PRIORIDAD(true, 50),
+        FECHA_PREVISTA_CENTRO(true, 50),
+        TAREA_CAUSANTE(true, 250),
+        OT_CORRECTOR(true, 50),
+        ACC_CORRECTOR(true, 250),
+        ESTADO(true, 80);
 
+       private int width;
 
         private boolean editable;
 
-        Columns(boolean editable) {
+        Columns(boolean editable, int width) {
             this.editable = editable;
+            this.width = width;
         }
 
         public boolean isEditable() {
@@ -43,7 +45,7 @@ public class IncidenciaTableModel extends JenixTableModel<FenixIncidencia, Incid
         }
 
         public int getWidth(){
-            return 50;
+            return width;
         }
     }
 

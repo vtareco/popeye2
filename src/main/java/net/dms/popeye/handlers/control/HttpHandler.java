@@ -5,6 +5,7 @@ import net.dms.popeye.handlers.control.validators.ValidatorContext;
 import net.dms.popeye.handlers.entities.config.*;
 import net.dms.popeye.handlers.entities.ActionResponse;
 import net.dms.popeye.handlers.entities.config.Header;
+
 import net.dms.popeye.handlers.entities.enumerations.ResponseHeaderType;
 import net.dms.popeye.handlers.entities.enumerations.VariablePrefix;
 import net.dms.popeye.handlers.entities.exceptions.AppException;
@@ -15,14 +16,27 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.TrustStrategy;
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.security.KeyStore;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -43,6 +57,7 @@ public class HttpHandler {
         this.client = client;
         this.variables = variables;
         this.proxyConfiguration = proxyConfiguration;
+
     }
 
     public ActionResponse execute(){
@@ -56,6 +71,7 @@ public class HttpHandler {
             HttpRequestBase request = null;
             switch (action.getHttpMethod()){
                 case POST:
+                    //request = new HttpPost(action.getUrl());
                     request = new HttpPost(action.getUrl());
 
                     List<NameValuePair> nvps = new ArrayList<NameValuePair>();
@@ -74,7 +90,8 @@ public class HttpHandler {
 
                        // File file = new File("H:/Proyectos_2/BMW/RSP/Fenix/959829-Maintenance RSP - April/959829-accs.xlsx");
                         FileBody fileBody = new FileBody(file, ContentType.create("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"), file.getName());
-                        builder.addPart("file", fileBody);
+                       // FileBody fileBody = new FileBody(file, ContentType.create("application/vnd.ms-excel"), file.getName());
+                        builder.addPart(parameter.getName(), fileBody);
                         HttpEntity entity = builder.build();
                         ((HttpPost)request).setEntity(entity);
                     }
@@ -171,9 +188,15 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
 
     private void validate(HttpResponse response) {
 
-        if(HttpStatus.SC_OK             != response.getStatusLine().getStatusCode()){
-            throw new AppException(String.format("HTTP Error, HTTP Status: %d", response.getStatusLine().getStatusCode()));
+        switch (response.getStatusLine().getStatusCode()){
+            case HttpStatus.SC_OK:
+                break;
+            case HttpStatus.SC_MOVED_TEMPORARILY:
+                break;
+            default:
+                throw new AppException(String.format("HTTP Error, HTTP Status: %d", response.getStatusLine().getStatusCode()));
         }
+
 
         try {
 
@@ -191,4 +214,29 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
         }
     }
 
+    /*
+    private void configureSSL() {
+        try {
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            KeyStore ks = KeyStore.getInstance("JKS");
+            //File trustFile = new File("trustStore.jks");
+
+            ks.load(ThreadLocal.class.getResourceAsStream("/security/trust-store.jks"), "changeit".toCharArray());
+            tmf.init(ks);
+            sslContext.init(null, tmf.getTrustManagers(), null);
+
+            //Protocol myhttps;// = new Protocol("https", new MySSLSocketFactory(), 443);
+        } catch (Exception e) {
+            throw new AppException(e);
+        }
+
+
+
+
+
+
+    }
+    */
 }

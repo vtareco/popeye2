@@ -59,6 +59,10 @@ public class JenixTableModel<R,C extends Enum> extends AbstractTableModel {
         return columnNames[index];
     }
 
+    public R getPayload(int iRow){
+        return rows.get(iRow);
+    }
+
 
     public void load(List<R> rows) {
         this.rows.clear();

@@ -7,9 +7,12 @@ import net.dms.popeye.handlers.entities.enumerations.HttpMethod;
 import net.dms.popeye.handlers.entities.exceptions.AppException;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.ParseException;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContextBuilder;
 
+import javax.net.ssl.SSLContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -50,7 +53,20 @@ public class ActionExecutor {
             Execution execution = (Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
             System.out.println(execution);
 
-            CloseableHttpClient httpClient = HttpClients.createDefault();
+            /*
+            SSLContext sslContext = new SSLContextBuilder()
+                    .loadTrustMaterial(ThreadLocal.class.getResource("/security/trust-store.jks"), "changeit".toCharArray()).build();
+
+*/
+            SSLContext sslContext = new SSLContextBuilder()
+                    .loadTrustMaterial(null, (certificate, authType) -> true).build();
+
+
+
+            CloseableHttpClient httpClient = HttpClients.custom()
+                    .setSSLContext(sslContext)
+                    .setSSLHostnameVerifier(new NoopHostnameVerifier())
+                    .build();
 
 
             for(Action action: execution.getActions()){
@@ -61,6 +77,7 @@ public class ActionExecutor {
             }
 
         }catch(Exception ex){
+
             throw new AppException(ex);
         }
         return response;

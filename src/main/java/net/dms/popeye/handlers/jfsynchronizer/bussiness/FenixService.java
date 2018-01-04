@@ -63,6 +63,10 @@ public class FenixService {
         fenixRepository.saveIncidencias(incidencias);
     }
 
+    public void uploadIncidencias(Long idPeticionOt) {
+        fenixRepository.uploadIncidencias(idPeticionOt);
+    }
+
     public static void main(String[] args){
 
         Pattern pattern = Pattern.compile("\\d.*-.*", Pattern.CASE_INSENSITIVE);

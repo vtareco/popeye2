@@ -5,13 +5,15 @@ import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.AccTyp
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.IncidenciaEstadoType;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.IncidenciaTipoType;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Created by dminanos on 17/04/2017.
  */
-public class FenixAcc {
+public class FenixAcc implements Serializable {
     private Long idInterno;
     private Long idAcc;
     private String nombre;
@@ -42,7 +44,6 @@ public class FenixAcc {
     private Double incurrido;
     private Double etc;
 
-
     public String getJiraStatus() {
         return jiraStatus;
     }
@@ -54,7 +55,7 @@ public class FenixAcc {
     public Double getPorcentajeCompletado()
     {
 
-        // TODO FIXEME - revisar formula
+        // TODO FIxME - revisar formula
         Double dEsfuerzo = getTotalEsfuerzo();
 
 

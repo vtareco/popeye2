@@ -1,4 +1,4 @@
-package net.dms.popeye.handlers.jfsynchronizer.swing;
+package net.dms.popeye.handlers.jfsynchronizer.swing.models;
 
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraIssue;

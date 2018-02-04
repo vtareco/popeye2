@@ -12,12 +12,16 @@ import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraIssue;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraSearchResponse;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.*;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.*;
+import net.dms.popeye.handlers.jfsynchronizer.swing.dialogs.AccDialog;
 import net.dms.popeye.handlers.jfsynchronizer.swing.dialogs.InternalIncidenceDialog;
+import net.dms.popeye.handlers.jfsynchronizer.swing.models.AccTableModel;
+import net.dms.popeye.handlers.jfsynchronizer.swing.models.IncidenciaTableModel;
+import net.dms.popeye.handlers.jfsynchronizer.swing.models.JiraTableModel;
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,7 +97,6 @@ public class EverisManager {
         SwingUtil.registerListener(refreshIncidenciasBtn, this::refreshIncidencias, this::handleException);
 
 
-
         init();
 
         SwingUtil.registerListener(jiraFiltersCmb, this::filterSelectorHandler, this::handleException);
@@ -166,8 +169,22 @@ public class EverisManager {
         acc.setIdPeticionOtAsociada(getPeticionSelected(peticionesDisponiblesCmb));
         acc.setEstado(AccStatus.EN_EJECUCION.getDescription());
         acc.setRechazosEntrega(0);
-        accTableModel.getList().add(acc);
-        accTableModel.fireTableDataChanged();
+
+        AccDialog dialog = new AccDialog(panelParent, acc);
+        dialog.pack();
+
+        FenixAcc editedAcc = dialog.getPayload();
+        if (editedAcc != null) {
+            accTableModel.getList().add(editedAcc);
+            accTableModel.fireTableDataChanged();
+            accTable.setRowSelectionInterval(accTableModel.getRowCount(), accTableModel.getRowCount());
+        }
+
+
+
+
+
+
     }
 
     private void filterSelectorHandler() {
@@ -202,11 +219,23 @@ public class EverisManager {
         for (JiraIssue issue : issues) {
             FenixAcc acc = accMapper.mapJiraIssue2Acc(issue);
             acc.setIdPeticionOtAsociada(getPeticionSelected(peticionesDisponiblesCmb));
-            accs.add(acc);
+
+
+            AccDialog dialog = new AccDialog(panelParent, acc);
+            dialog.pack();
+
+            FenixAcc editedAcc = dialog.getPayload();
+            if (editedAcc != null) {
+                accs.add(editedAcc);
+            }
+
         }
 
 
-         accTable.getModel().getList().addAll(accs);
+
+
+
+        accTable.getModel().getList().addAll(accs);
         accTable.getModel().fireTableDataChanged();
     }
 
@@ -366,10 +395,39 @@ public class EverisManager {
         accTable.setSelectionBackground(MyColors.ROW_SELECTED);
         accTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        SwingUtil.agregarMenu(accTable, new JMenuItem[]{SwingUtil.menuCopiar(accTable),  menuIncidenciaInterna(accTable)});
+        SwingUtil.agregarMenu(accTable, new JMenuItem[]{menuEditarAcc(accTable), SwingUtil.menuCopiar(accTable),  menuIncidenciaInterna(accTable), menuDuplicar(accTable)});
 
 
 
+    }
+
+    private JMenuItem menuEditarAcc(JenixTable<AccTableModel, FenixAcc> tabla) {
+        JMenuItem menuDuplicar = new JMenuItem("Editar");
+        menuDuplicar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    int[] selected = tabla.getSelectedRows();
+
+                    if (selected.length > 0) {
+
+                        FenixAcc acc = ((AccTableModel) tabla.getModel()).getPayload(selected[0]);
+
+                        AccDialog dialog = new AccDialog(panelParent, acc);
+                        dialog.pack();
+                        accTable.getModel().fireTableDataChanged();
+                        tabla.setRowSelectionInterval(selected[0], selected[0]);
+
+                    }
+                } catch (Exception ex) {
+                    handleException(ex);
+                }
+
+            }
+
+        });
+        return menuDuplicar;
     }
 
 
@@ -523,6 +581,33 @@ public class EverisManager {
         return menuCrearIncidenciaInterna;
     }
 
+
+    public JMenuItem menuDuplicar(final JTable tabla) {
+        JMenuItem menuDuplicar = new JMenuItem("Duplicar");
+        menuDuplicar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                try {
+                    int[] selected = tabla.getSelectedRows();
+
+                    if (selected.length > 0) {
+
+                        FenixAcc acc = ((AccTableModel) tabla.getModel()).getPayload(selected[0]);
+                        FenixAcc copy = SerializationUtils.clone(acc);
+                        copy.setIdAcc(null);
+                        copy.setResponsable(null);
+                        accTable.addRow(copy);
+                    }
+                } catch (Exception ex) {
+                    handleException(ex);
+                }
+
+            }
+
+        });
+        return menuDuplicar;
+    }
     private void resetForm(){
         jiraTable.getModel().clear();
         accTable.getModel().clear();

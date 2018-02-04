@@ -54,6 +54,8 @@ public class InternalIncidenceDialog extends JenixDialog<FenixIncidencia> {
         txaDescription.setRows(10);
         txaDescription.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         JScrollPane sp = new JScrollPane(txaDescription);
+        sp.setPreferredSize(new Dimension(300, 200));
+        sp.setMinimumSize(new Dimension(300, 200));
        // sp.setBounds(txtSummary.getBounds());
 
 

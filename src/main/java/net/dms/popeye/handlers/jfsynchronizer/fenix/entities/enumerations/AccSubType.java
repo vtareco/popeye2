@@ -11,7 +11,9 @@ public enum AccSubType implements VisualizableType{
     CONSULTA("CONSULTA", AccType.EVOLUTIVO ),
     CODIFICACION("CODIFICACION",  AccType.EVOLUTIVO, AccType.CORRECCION_INCIDENCIAS),
     REVISION("REVISION",  AccType.EVOLUTIVO),
-    CORRECCION("CORRECCION",  AccType.CORRECCION_INCIDENCIAS);;
+    CORRECCION("CORRECCION",  AccType.CORRECCION_INCIDENCIAS),
+    DAILY_MEETING("DAILY MEETING", AccType.MEETING),
+    REFINEMENT("REFINEMENT", AccType.MEETING);
 
     private AccType[] accTypes;
     private String description;

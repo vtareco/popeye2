@@ -2,7 +2,7 @@ package net.dms.popeye.handlers.jfsynchronizer.swing.components;
 
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.AccStatus;
-import net.dms.popeye.handlers.jfsynchronizer.swing.AccTableModel;
+import net.dms.popeye.handlers.jfsynchronizer.swing.models.AccTableModel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -28,6 +28,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.ssl.TrustStrategy;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
@@ -61,7 +62,7 @@ public class HttpHandler {
     }
 
     public ActionResponse execute(){
-
+       // configureSSL();
         action.setUrl(processVariable(action.getUrl()));
         for (Parameter p : action.getParameters()){
             p.setValue(processVariable(p.getValue()));
@@ -124,6 +125,7 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
                         .build();
                 request.setConfig(config);
             }
+
 
 
             HttpResponse httpResponse = client.execute(request);
@@ -214,18 +216,24 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
         }
     }
 
-    /*
+
     private void configureSSL() {
         try {
-            SSLContext sslContext = SSLContext.getInstance("TLS");
+            SSLContext sslContext = SSLContext.getInstance("SSL");
 
             TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             KeyStore ks = KeyStore.getInstance("JKS");
-            //File trustFile = new File("trustStore.jks");
-
             ks.load(ThreadLocal.class.getResourceAsStream("/security/trust-store.jks"), "changeit".toCharArray());
             tmf.init(ks);
-            sslContext.init(null, tmf.getTrustManagers(), null);
+
+            KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+            KeyStore kk = KeyStore.getInstance("PKCS12");
+           // kk.load(ThreadLocal.class.getResourceAsStream("/security/key-store.jks"), "changeit".toCharArray());
+            kk.load(new FileInputStream("c://borrame.pfx"), "changeit".toCharArray());
+            kmf.init(kk, "changeit".toCharArray());
+
+
+            sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
             //Protocol myhttps;// = new Protocol("https", new MySSLSocketFactory(), 443);
         } catch (Exception e) {
@@ -238,5 +246,5 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
 
 
     }
-    */
+
 }

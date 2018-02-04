@@ -115,19 +115,23 @@ public class FenixAccMapper {
 
     public FenixAcc mapJiraIssue2Acc(JiraIssue issue) {
       //  SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        //language=JSON
+        String test ="{\"test\": \"prueba\", \"that\": \"test\"}";
         FenixAcc fenixAcc = new FenixAcc();
         fenixAcc.setNombre(issue.getKey() + " " + issue.getFields().getSummary());
         fenixAcc.setCodigoPeticionCliente(issue.getKey());
         fenixAcc.setDescripcion(StringUtils.truncate(StringUtils.isBlank(issue.getFields().getDescription()) ? issue.getFields().getSummary() : issue.getFields().getDescription(), 1024));
         fenixAcc.setEstado(AccStatus.EN_EJECUCION.getDescription());
-        fenixAcc.setTipo(AccType.EVOLUTIVO.getDescription());
+        // TODO FIXME AGILE
+        fenixAcc.setTipo(AccType.USER_STORY.getDescription());
         fenixAcc.setSubTipo(AccSubType.CODIFICACION.getDescription());
         fenixAcc.setRechazosEntrega(0);
         fenixAcc.setCriticidad(AccCriticidad.MEDIA.getDescription());
 
 
         // TODO FIXME AGILE
-        fenixAcc.setHistoriaUsuario(issue.getKey());
+
+        fenixAcc.setHistoriaUsuario(issue.getFields().getParent() != null ? issue.getFields().getParent().getKey() : issue.getKey());
 
         fenixAcc.setEsfuerzo("1");
         fenixAcc.setEsfuerzoCliente(fenixAcc.getEsfuerzo());

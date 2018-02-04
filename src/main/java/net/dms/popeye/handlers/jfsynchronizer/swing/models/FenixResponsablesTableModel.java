@@ -1,0 +1,80 @@
+package net.dms.popeye.handlers.jfsynchronizer.swing.models;
+
+import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixResponsable;
+import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.TableColumnEnumType;
+import net.dms.popeye.handlers.jfsynchronizer.swing.components.JenixTableModel;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
+
+
+/**
+ * Created by dminanos on 03/02/2018.
+ */
+public class FenixResponsablesTableModel extends JenixTableModel<FenixResponsable, FenixResponsablesTableModel.Columns> {
+    public enum Columns implements TableColumnEnumType {
+
+        NUMERO_EMPLEADO(false), NOMBRE_EMPLEADO(false), ESFUERZO(true);
+
+        private boolean editable;
+
+        Columns(boolean editable) {
+            this.editable = editable;
+        }
+
+        public boolean isEditable() {
+            return editable;
+        }
+
+        public int getWidth() {
+            return 50;
+        }
+
+        public static Columns lookup(int iPosition) {
+            return Arrays.stream(Columns.values()).filter(c -> c.ordinal() == iPosition).findFirst().get();
+        }
+    }
+
+    public FenixResponsablesTableModel(List<FenixResponsable> responsables) {
+        super(Columns.class, responsables);
+
+    }
+
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        switch (Columns.lookup(columnIndex)) {
+            case NUMERO_EMPLEADO:
+                return rows.get(rowIndex).getNumero();
+
+            case NOMBRE_EMPLEADO:
+
+                return rows.get(rowIndex).getNombre();
+            case ESFUERZO:
+                return rows.get(rowIndex).getEsfuerzo();
+
+            default:
+                return "no defined";
+        }
+
+    }
+
+    @Override
+    public void setValueAt(Object value, int row, int col) {
+        FenixResponsable responsable = rows.get(row);
+        switch (findColumnTypeByOrdinal(col)){
+            case ESFUERZO:
+                if (! StringUtils.isBlank((String)value)) {
+                    responsable.setEsfuerzo(Double.parseDouble((String) value));
+                }else {
+                    responsable.setEsfuerzo(null);
+                }
+                break;
+            default:
+                super.setValueAt(value, row, col);
+        }
+    }
+
+
+}

@@ -3,21 +3,15 @@ package net.dms.popeye.handlers.jfsynchronizer.swing.components;
 
 import com.google.common.base.CaseFormat;
 import net.dms.popeye.handlers.entities.exceptions.AppException;
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.AccStatus;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.TableColumnEnumType;
-import net.dms.popeye.handlers.jfsynchronizer.swing.AccTableModel;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
 
 /**

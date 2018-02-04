@@ -1,6 +1,5 @@
 package net.dms.popeye.handlers.jfsynchronizer.swing.components;
 
-import net.dms.popeye.handlers.jfsynchronizer.swing.IncidenciaTableModel;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;

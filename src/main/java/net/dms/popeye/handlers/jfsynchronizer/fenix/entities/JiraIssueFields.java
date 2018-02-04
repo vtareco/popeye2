@@ -11,6 +11,7 @@ public class JiraIssueFields {
     private Status status;
     private String summary;
     private String description;
+    private JiraIssue parent;
 
     public Assignee getAssignee() {
         return assignee;
@@ -42,6 +43,14 @@ public class JiraIssueFields {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public JiraIssue getParent() {
+        return parent;
+    }
+
+    public void setParent(JiraIssue parent) {
+        this.parent = parent;
     }
 
     @Override

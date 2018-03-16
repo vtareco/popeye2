@@ -1,30 +1,40 @@
 {
-  "accSettings": {
-    "fileName": "${idPeticionOt}-accs.xlsx",
-    "incurridoFileName": "${idPeticionOt}-accs-incurridos.xls"
-  },
-  "projectPath": "H:/Proyectos_2/BMW/RSP/Fenix",
-  "incidenciasFileName": "${idPeticionOt}-incidencias.xls",
-  "peticionesFolderPattern": "\\d.*-.*",
-  "connectionSettings": {
-
-  },
-  "jiraSettings":{
-    "filters": {
-      "byId": "key=%s",
-      "unresolved-stor": "assignee in (\"Diego Minano Sanchez\", \"Juan Amezcua\", \"Rafael Sevilla Cuenca\", \"javier rey\", \"Carlos San Emeterio Villalain\") AND resolution = Unresolved ORDER BY priority DESC, updated DESC",
-      "unresolved-juan": "assignee in (\"Juan Amezcua\") AND resolution = Unresolved ORDER BY priority DESC, updated DESC"
-
+  "actores": [
+    {
+      "numeroEmpleadoEveris": "111911",
+      "usuarioJira": "diego.minano.sanchez",
+      "email": "dminanos@everis.com",
+      "nombre": "Diego Miñano Sánchez"
     },
-    "filterByIds": "issue in (%s)",
-    "responsibles": {
-      "111911": "diego.minano.sanchez",
-      "140252": "juan jose amezcua ramon",
-      "145429": "rafael.sevilla.cuenca",
-      "137742": "jrey105",
-      "137920": "csanemet"
+    {
+      "numeroEmpleadoEveris": "140252",
+      "usuarioJira": "juan jose amezcua ramon",
+      "email": "",
+      "nombre": "Juan Amezua"
+    },
+    {
+      "numeroEmpleadoEveris": "145429",
+      "usuarioJira": "rafael.sevilla.cuenca",
+      "email": "",
+      "nombre": "Rafael Sevilla Cuenca"
+    },
+    {
+      "numeroEmpleadoEveris": "137742",
+      "usuarioJira": "jrey105",
+      "email": "",
+      "nombre": "Javi Rey"
+    },
+    {
+      "numeroEmpleadoEveris": "137920",
+      "usuarioJira": "csanemet",
+      "email": "",
+      "nombre": "Carlos San Emeterio"
+    },
+    {
+      "numeroEmpleadoEveris": "120601",
+      "usuarioJira": "ana---",
+      "email": "",
+      "nombre": "Ana María"
     }
-  }
-
-
+  ]
 }

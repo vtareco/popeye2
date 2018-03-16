@@ -1,5 +1,7 @@
 package net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 
 /**
@@ -10,7 +12,8 @@ public enum AccStatus implements VisualizableType{
     ENTREGADA("Entregada", true),
     CERRADA("Cerrada", true),
     DESESTIMADA("Desestimada", true),
-    PENDIENTE_ASIGNACION("Pendiente Asignación", false);
+    PENDIENTE_ASIGNACION("Pendiente Asignación", false),
+    INACABADA("Inacabada", false);
 
     private boolean isFinal;
 
@@ -30,6 +33,10 @@ public enum AccStatus implements VisualizableType{
     }
 
     public static AccStatus lookup(String description){
-        return Arrays.stream(AccStatus.values()).filter(c -> c.description.equals(description)).findFirst().get();
+        try {
+            return StringUtils.isBlank(description) ? null : Arrays.stream(AccStatus.values()).filter(c -> c.description.equals(description)).findFirst().get();
+        }catch (Exception ex){
+            throw ex;
+        }
     }
 }

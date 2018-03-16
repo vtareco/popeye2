@@ -6,6 +6,8 @@ import net.dms.popeye.handlers.jfsynchronizer.control.EverisConfig;
 import net.dms.popeye.handlers.jfsynchronizer.control.EverisPropertiesType;
 import net.dms.popeye.handlers.jfsynchronizer.control.FenixAccMapper;
 
+import net.dms.popeye.handlers.jfsynchronizer.control.TableSettingControl;
+import net.dms.popeye.handlers.jfsynchronizer.entities.TableType;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixIncidencia;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraIssue;
@@ -13,10 +15,16 @@ import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.JiraSearchResponse;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.*;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.*;
 import net.dms.popeye.handlers.jfsynchronizer.swing.dialogs.AccDialog;
+import net.dms.popeye.handlers.jfsynchronizer.swing.dialogs.ColumnsSettingDialog;
 import net.dms.popeye.handlers.jfsynchronizer.swing.dialogs.InternalIncidenceDialog;
 import net.dms.popeye.handlers.jfsynchronizer.swing.models.AccTableModel;
 import net.dms.popeye.handlers.jfsynchronizer.swing.models.IncidenciaTableModel;
 import net.dms.popeye.handlers.jfsynchronizer.swing.models.JiraTableModel;
+import net.dms.popeye.settings.business.SettingsService;
+import net.dms.popeye.settings.entities.Actor;
+import net.dms.popeye.settings.entities.ColumnSetting;
+import net.dms.popeye.settings.entities.Settings;
+import net.dms.popeye.settings.entities.TableSetting;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -64,6 +72,7 @@ public class EverisManager {
     private JButton removeIncidenciaBtn;
     private JButton refreshIncidenciasBtn;
     private JScrollPane incidenciasScrollPane;
+    private JButton configFenixTable;
     private JPopupMenu refreshMenu;
 
 
@@ -71,14 +80,14 @@ public class EverisManager {
     FenixService fenixService = new FenixService();
     FenixAccMapper accMapper = new FenixAccMapper();
     EverisConfig config = EverisConfig.getInstance();
-    //Settings settings = SettingsService.getInstance().getSettings();
+    Settings settings = SettingsService.getInstance().getSettings();
 
 
     private Map<String, String> jiraFilters = config.getJiraFilters();
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("EverisManager");
+        JFrame frame = new JFrame("Jira / Fenix");
         frame.setContentPane(new EverisManager().panelParent);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -106,6 +115,7 @@ public class EverisManager {
         SwingUtil.registerListener(saveIncidenciasBtn, this::saveIncidencias, this::handleException);
         SwingUtil.registerListener(removeIncidenciaBtn, this::removeIncidencia, this::handleException);
         SwingUtil.registerListener(checkJiraStatusBtn, this::checkJiraStatus, this::handleException);
+        SwingUtil.registerListener(configFenixTable, this::configFenixTable, this::handleException);
 
 
         tabbedPanel.addChangeListener(new ChangeListener() {
@@ -118,6 +128,17 @@ public class EverisManager {
                 }
             }
         });
+    }
+
+    private void configFenixTable() {
+        TableSettingControl settingControl = new TableSettingControl();
+        TableSetting tableSetting = settingControl.load(TableType.FENIX_ACC);
+
+        ColumnsSettingDialog dialog = new ColumnsSettingDialog(panelParent, tableSetting);
+        dialog.pack();
+        if (dialog.getPayload() != null) {
+            settingControl.save(TableType.FENIX_ACC, dialog.getPayload());
+        }
     }
 
     private void refreshIncidencias() {
@@ -354,14 +375,16 @@ public class EverisManager {
 
         JComboBox accResponsableEditor = new JComboBox();
         Map<String, String> responsableJiraEveris = config.getMapResponsableJiraEveris();
-        for (String responsableJira : responsableJiraEveris.keySet()){
-            accResponsableEditor.addItem(responsableJiraEveris.get(responsableJira));
+
+
+        for (Actor responsableJira : settings.getActores()){
+            accResponsableEditor.addItem(responsableJiraEveris.get(responsableJira.getNumeroEmpleadoEveris()));
 
         }
         accResponsableEditor.setToolTipText(responsableJiraEveris.toString());
 
         JComboBox accTypeEditor = new JComboBox();
-        SwingUtil.loadComboBox(AccType.class, accTypeEditor, false);
+        SwingUtil.loadComboBox(AccType.class, accTypeEditor, true);
 
         JComboBox accSubTypeEditor = new JComboBox();
         SwingUtil.loadComboBox(AccSubType.class, accSubTypeEditor, false);

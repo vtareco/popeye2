@@ -14,6 +14,8 @@ public enum EverisPropertiesType {
     FENIX_USER("everis.conf.fenix.user"),
     FENIX_PASSWORD("everis.conf.fenix.password"),
     FENIX_URL_BASE("everis.conf.fenix.urlbase"),
+    JIRA_KEYSTORE_FILE("everis.conf.jira.keystore.file"),
+    JIRA_KEYSTORE_PASSWORD("everis.conf.jira.keystore.password"),
     JIRA_USER("everis.conf.jira.user"),
     JIRA_PASSWORD("everis.conf.jira.password"),
     JIRA_URL_BASE("everis.conf.jira.urlbase"),

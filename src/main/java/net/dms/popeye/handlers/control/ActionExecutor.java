@@ -5,20 +5,29 @@ import net.dms.popeye.handlers.entities.ActionResponse;
 import net.dms.popeye.handlers.entities.config.Execution;
 import net.dms.popeye.handlers.entities.enumerations.HttpMethod;
 import net.dms.popeye.handlers.entities.exceptions.AppException;
+import net.dms.popeye.handlers.jfsynchronizer.control.EverisConfig;
+import net.dms.popeye.handlers.jfsynchronizer.control.EverisPropertiesType;
+import net.dms.popeye.settings.business.SettingsService;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.ParseException;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.security.KeyStore;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,15 +62,16 @@ public class ActionExecutor {
             Execution execution = (Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
             System.out.println(execution);
 
-            /*
-            SSLContext sslContext = new SSLContextBuilder()
-                    .loadTrustMaterial(ThreadLocal.class.getResource("/security/trust-store.jks"), "changeit".toCharArray()).build();
 
-*/
-            SSLContext sslContext = new SSLContextBuilder()
-                    .loadTrustMaterial(null, (certificate, authType) -> true).build();
+           // SSLContext sslContext = new SSLContextBuilder()
+             //       .loadTrustMaterial(ThreadLocal.class.getResource("/security/trust-store.jks"), "changeit".toCharArray()).build();
 
 
+           // SSLContext sslContext = new SSLContextBuilder()
+             //       .loadTrustMaterial(null, (certificate, authType) -> true).build();
+
+
+    SSLContext sslContext = configureSSL();
 
             CloseableHttpClient httpClient = HttpClients.custom()
                     .setSSLContext(sslContext)
@@ -125,7 +135,6 @@ public class ActionExecutor {
 
             execution.setActions(actions);
 
-            File file = new File("C:\\file.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(Execution.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -139,6 +148,45 @@ public class ActionExecutor {
             throw new AppException(e);
         }
 
+    }
+
+    private SSLContext configureSSL() {
+        try {
+            //TODO FIXME - parametrizar
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            KeyStore ks = KeyStore.getInstance("JKS");
+
+            ks.load(ThreadLocal.class.getResourceAsStream("/security/trust-store.jks"), "changeit".toCharArray());
+            tmf.init(ks);
+
+
+            // TODO FIXME - every connection should have its own keystore
+            EverisConfig everisConfig = EverisConfig.getInstance();
+            String keyFile = everisConfig.getProperty(EverisPropertiesType.JIRA_KEYSTORE_FILE);
+            if (StringUtils.isNotEmpty(keyFile)) {
+                KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+                KeyStore kk = KeyStore.getInstance("PKCS12");
+                String keyPassword = everisConfig.getProperty(EverisPropertiesType.JIRA_KEYSTORE_PASSWORD);
+                // kk.load(ThreadLocal.class.getResourceAsStream("/security/key-store.jks"), "changeit".toCharArray());
+                kk.load(new FileInputStream(keyFile), keyPassword.toCharArray());
+                kmf.init(kk, keyPassword.toCharArray());
+                sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), new SecureRandom());
+            }else{
+                sslContext.init(null, tmf.getTrustManagers(), new SecureRandom());
+            }
+
+
+
+
+           // sslContext.init(null, tmf.getTrustManagers(), new SecureRandom());
+
+            return sslContext;
+
+        } catch (Exception e) {
+            throw new AppException(e);
+        }
     }
 
 }

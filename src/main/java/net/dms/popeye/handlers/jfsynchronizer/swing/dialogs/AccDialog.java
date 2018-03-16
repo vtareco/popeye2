@@ -1,8 +1,6 @@
 package net.dms.popeye.handlers.jfsynchronizer.swing.dialogs;
 
-import net.dms.popeye.handlers.jfsynchronizer.control.EverisConfig;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixAcc;
-import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixIncidencia;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixResponsable;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.*;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.JenixDialog;
@@ -10,12 +8,14 @@ import net.dms.popeye.handlers.jfsynchronizer.swing.components.JenixTable;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.NumberCellEditor;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.SwingUtil;
 import net.dms.popeye.handlers.jfsynchronizer.swing.models.FenixResponsablesTableModel;
+import net.dms.popeye.settings.business.SettingsService;
+import net.dms.popeye.settings.entities.Actor;
 import net.sourceforge.jdatepicker.JDatePicker;
-import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import java.awt.*;
-import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
 
@@ -28,11 +28,12 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     private JComboBox cmbTipo;
     private JComboBox cmbSubTipo;
     private JTextField txtPuntosHistoria;
-    private JTextField txtEsfuerzo;
+
     private JTextField txtHistoriaUsuario;
     private JenixTable<FenixResponsablesTableModel, FenixResponsable> jtbResponsables;
     private JScrollPane responsablesScrollPane;
     private JDatePicker datFechaPrevistaProyecto;
+    private JTextField txtEsfuerzoCliente;
 
 
 
@@ -64,13 +65,12 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         cmbTipo.setSelectedItem(getPayload().getTipo());
         cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
         txtPuntosHistoria.setText(getPayload().getPuntosHistoria());
-        txtEsfuerzo.setText(getPayload().getEsfuerzo());
         txtHistoriaUsuario.setText(getPayload().getHistoriaUsuario());
-
+txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
 
-        for (Map.Entry<String,String> entry : EverisConfig.getInstance().getMapResponsableJiraEveris().entrySet()){
-            responsablesEsfuerzos.add(new FenixResponsable(null, null, entry.getValue()));
+        for (Actor actor : SettingsService.getInstance().getSettings().getActores()){
+            responsablesEsfuerzos.add(new FenixResponsable(null, actor.getNombre(), actor.getNumeroEmpleadoEveris()));
         }
 
         String[] responsables = getPayload().getResponsable() != null ? getPayload().getResponsable().split("-") : new String[0];
@@ -97,14 +97,14 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         panel.setBorder(BorderFactory.createEtchedBorder());
         panel.setLayout(new GridBagLayout());
 
-        JLabel lblSummary = new JLabel("Summary");
-        JLabel lblDescription = new JLabel("Description");
+        JLabel lblSummary = new JLabel("Nombre");
+        JLabel lblDescription = new JLabel("Descripción");
 JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
 JLabel lblEstado = new JLabel("Estado");
 JLabel lblTipo = new JLabel("Tipo");
 JLabel lblSubtipo = new JLabel("Subtipo");
 JLabel lblPuntosHistoria = new JLabel("Puntos Historia");
-JLabel lblEsfuerzo = new JLabel("Esfuerzo");
+JLabel lblEsfuerzo = new JLabel("Esfuerzo cliente");
 JLabel lblHistoriaUsuario  = new JLabel("Historia usuario");
 JLabel lblResponsables = new JLabel("Responsables");
 JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
@@ -115,15 +115,24 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         cmbTipo = new JComboBox();
         cmbSubTipo = new JComboBox();
         txtPuntosHistoria = new JTextField();
-        txtEsfuerzo = new JTextField();
         txtHistoriaUsuario = new JTextField();
+        txtEsfuerzoCliente = new JTextField();
 
         FenixResponsablesTableModel responsablesTableModel = new FenixResponsablesTableModel(new ArrayList<FenixResponsable>());
         jtbResponsables = new JenixTable(responsablesTableModel);
         responsablesScrollPane = new JScrollPane(jtbResponsables, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        responsablesScrollPane.setMinimumSize(new Dimension(200,200));
+        responsablesScrollPane.setMinimumSize(new Dimension(200,180));
         jtbResponsables.setFillsViewportHeight(true);
 
+        responsablesTableModel.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                StringBuilder responsables = new StringBuilder();
+                StringBuilder esfuerzos = new StringBuilder();
+                calculateResponsalblesEsfuerzos(responsables, esfuerzos);
+                txtEsfuerzoCliente.setText(Double.toString(FenixAcc.calculateTotalEsfuerzo(esfuerzos.toString())));
+            }
+        });
         jtbResponsables.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 
@@ -158,10 +167,10 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         constraints.gridy = fila;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblSummary, constraints);
-        constraints.weightx = 1;
-
-        constraints.gridx = 1;
-        constraints.gridy = fila;
+        constraints.weightx = 1.0;
+        constraints.gridwidth = 2;
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
         panel.add(txtNombre, constraints);
 
         constraints.gridx = 0;
@@ -170,20 +179,34 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         panel.add(lblDescription, constraints);
         constraints.weightx = 1;
 
-        constraints.gridx = 1;
-        constraints.gridy = fila;
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
         panel.add(sp, constraints);
 
-        // field
+        // fields codigo petición - historia usuario
         constraints.gridx = 0;
         constraints.gridy = ++fila;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblCodigoPeticionCliente, constraints);
         constraints.weightx = 1;
+        constraints.gridwidth = 1;
 
         constraints.gridx = 1;
         constraints.gridy = fila;
+        constraints.weightx = anchoEntiquetas;
+        panel.add(lblHistoriaUsuario, constraints);
+        constraints.weightx = 1;
+
+
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
         panel.add(txtCodigoPeticionCliente, constraints);
+
+
+        constraints.gridx = 1;
+        constraints.gridy = fila;
+        panel.add(txtHistoriaUsuario, constraints);
+
 
         // field
         constraints.gridx = 0;
@@ -192,8 +215,8 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         panel.add(lblEstado, constraints);
         constraints.weightx = 1;
 
-        constraints.gridx = 1;
-        constraints.gridy = fila;
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
         panel.add(cmbEstado, constraints);
 
         // field
@@ -205,14 +228,14 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
 
         constraints.gridx = 1;
         constraints.gridy = fila;
-        panel.add(cmbTipo, constraints);
-
-        // field
-        constraints.gridx = 0;
-        constraints.gridy = ++fila;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblSubtipo, constraints);
         constraints.weightx = 1;
+
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
+        panel.add(cmbTipo, constraints);
+
 
         constraints.gridx = 1;
         constraints.gridy = fila;
@@ -227,30 +250,19 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
 
         constraints.gridx = 1;
         constraints.gridy = fila;
-        panel.add(txtPuntosHistoria, constraints);
-
-
-        // field
-        constraints.gridx = 0;
-        constraints.gridy = ++fila;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblEsfuerzo, constraints);
         constraints.weightx = 1;
 
-        constraints.gridx = 1;
-        constraints.gridy = fila;
-        panel.add(txtEsfuerzo, constraints);
-
-        // field
         constraints.gridx = 0;
         constraints.gridy = ++fila;
-        constraints.weightx = anchoEntiquetas;
-        panel.add(lblHistoriaUsuario, constraints);
-        constraints.weightx = 1;
+        panel.add(txtPuntosHistoria, constraints);
 
         constraints.gridx = 1;
         constraints.gridy = fila;
-        panel.add(txtHistoriaUsuario, constraints);
+        panel.add(txtEsfuerzoCliente, constraints);
+
+
 
 
         // field
@@ -282,17 +294,29 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         getPayload().setTipo((String)cmbTipo.getSelectedItem());
         getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
         getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
-        getPayload().setEsfuerzo(txtEsfuerzo.getText());
-
 
         getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
+        getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
+
 
 
         StringBuilder responsables = new StringBuilder();
         StringBuilder esfuerzos = new StringBuilder();
+        calculateResponsalblesEsfuerzos(responsables, esfuerzos);
 
+        getPayload().setEsfuerzo(esfuerzos.toString());
+        getPayload().setResponsable(responsables.toString());
+
+    }
+
+    @Override
+    public void initialize() {
+
+    }
+
+    private void calculateResponsalblesEsfuerzos(StringBuilder responsables, StringBuilder esfuerzos){
         List<FenixResponsable> fenixResponsables = jtbResponsables.getList();
-        boolean addSeparator = false;
+
         for (FenixResponsable fenixResponsable : fenixResponsables){
             if (fenixResponsable.getEsfuerzo() != null) {
                 if (responsables.length() > 0) {
@@ -303,14 +327,6 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
                 esfuerzos.append(fenixResponsable.getEsfuerzo());
             }
         }
-        getPayload().setEsfuerzo(esfuerzos.toString());
-        getPayload().setResponsable(responsables.toString());
-
-    }
-
-    @Override
-    public void initialize() {
-
     }
 
 

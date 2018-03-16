@@ -9,5 +9,7 @@ public interface TableColumnEnumType {
 
     int getWidth();
 
+    String name();
+
 
 }

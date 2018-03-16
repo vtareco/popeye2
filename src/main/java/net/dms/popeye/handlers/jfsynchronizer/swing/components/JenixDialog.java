@@ -44,7 +44,7 @@ public abstract class JenixDialog <E> extends JDialog {
             initializeComponents();
 
         }catch(Exception ex){
-
+ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Se ha producido un error durante inicialización del formulario", "Error", JOptionPane.ERROR_MESSAGE);
         }
 

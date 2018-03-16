@@ -3,6 +3,7 @@ package net.dms.popeye.handlers.jfsynchronizer.swing.models;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.FenixResponsable;
 import net.dms.popeye.handlers.jfsynchronizer.fenix.entities.enumerations.TableColumnEnumType;
 import net.dms.popeye.handlers.jfsynchronizer.swing.components.JenixTableModel;
+import net.dms.popeye.settings.entities.ColumnSetting;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -10,12 +11,12 @@ import java.util.List;
 
 
 /**
- * Created by dminanos on 03/02/2018.
+ * Created by dminanos on 10/03/2018.
  */
-public class FenixResponsablesTableModel extends JenixTableModel<FenixResponsable, FenixResponsablesTableModel.Columns> {
+public class ColumnsSettingTableModel extends JenixTableModel<ColumnSetting, ColumnsSettingTableModel.Columns> {
     public enum Columns implements TableColumnEnumType {
 
-        NUMERO_EMPLEADO(false), NOMBRE_EMPLEADO(false), ESFUERZO(true);
+        VISIBLE(true), NOMBRE(false);
 
         private boolean editable;
 
@@ -36,8 +37,8 @@ public class FenixResponsablesTableModel extends JenixTableModel<FenixResponsabl
         }
     }
 
-    public FenixResponsablesTableModel(List<FenixResponsable> responsables) {
-        super(Columns.class, responsables);
+    public ColumnsSettingTableModel(List<ColumnSetting> columnSettings) {
+        super(Columns.class, columnSettings);
 
     }
 
@@ -45,31 +46,24 @@ public class FenixResponsablesTableModel extends JenixTableModel<FenixResponsabl
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (Columns.lookup(columnIndex)) {
-            case NUMERO_EMPLEADO:
-                return rows.get(rowIndex).getNumero();
+            case VISIBLE:
+                return rows.get(rowIndex).isVisible();
 
-            case NOMBRE_EMPLEADO:
+            case NOMBRE:
 
-                return rows.get(rowIndex).getNombre();
-            case ESFUERZO:
-                 return rows.get(rowIndex).getEsfuerzo();
-
+                return rows.get(rowIndex).getColumn().name();
             default:
-                return "no defined";
+                return "not defined";
         }
 
     }
 
     @Override
     public void setValueAt(Object value, int row, int col) {
-        FenixResponsable responsable = rows.get(row);
+        ColumnSetting data = rows.get(row);
         switch (findColumnTypeByOrdinal(col)){
-            case ESFUERZO:
-                if (! StringUtils.isBlank((String)value)) {
-                    responsable.setEsfuerzo(Double.parseDouble((String) value));
-                }else {
-                    responsable.setEsfuerzo(null);
-                }
+            case VISIBLE:
+               data.setVisible((Boolean)value);
                 break;
             default:
                 super.setValueAt(value, row, col);

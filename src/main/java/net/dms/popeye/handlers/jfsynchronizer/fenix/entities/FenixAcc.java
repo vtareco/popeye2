@@ -175,6 +175,10 @@ public class FenixAcc implements Serializable {
     }
 
     public double getTotalEsfuerzo() {
+        return calculateTotalEsfuerzo(esfuerzo);
+    }
+
+    public static double calculateTotalEsfuerzo(String esfuerzo) {
         double totalEsfuerzo = 0;
         String[] esfuerzos = esfuerzo != null ? esfuerzo.split("-") : new String[0];
         for (String es : esfuerzos){

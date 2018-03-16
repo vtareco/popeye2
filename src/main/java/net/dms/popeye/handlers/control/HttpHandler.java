@@ -38,6 +38,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.security.KeyStore;
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -62,7 +63,7 @@ public class HttpHandler {
     }
 
     public ActionResponse execute(){
-       // configureSSL();
+
         action.setUrl(processVariable(action.getUrl()));
         for (Parameter p : action.getParameters()){
             p.setValue(processVariable(p.getValue()));
@@ -216,35 +217,5 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
         }
     }
 
-
-    private void configureSSL() {
-        try {
-            SSLContext sslContext = SSLContext.getInstance("SSL");
-
-            TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-            KeyStore ks = KeyStore.getInstance("JKS");
-            ks.load(ThreadLocal.class.getResourceAsStream("/security/trust-store.jks"), "changeit".toCharArray());
-            tmf.init(ks);
-
-            KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-            KeyStore kk = KeyStore.getInstance("PKCS12");
-           // kk.load(ThreadLocal.class.getResourceAsStream("/security/key-store.jks"), "changeit".toCharArray());
-            kk.load(new FileInputStream("c://borrame.pfx"), "changeit".toCharArray());
-            kmf.init(kk, "changeit".toCharArray());
-
-
-            sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
-
-            //Protocol myhttps;// = new Protocol("https", new MySSLSocketFactory(), 443);
-        } catch (Exception e) {
-            throw new AppException(e);
-        }
-
-
-
-
-
-
-    }
 
 }

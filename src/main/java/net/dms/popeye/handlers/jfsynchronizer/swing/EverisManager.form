@@ -87,6 +87,12 @@
                               <text value="Comprobar estado Jira"/>
                             </properties>
                           </component>
+                          <component id="ddc62" class="javax.swing.JButton" binding="configFenixTable">
+                            <constraints/>
+                            <properties>
+                              <text value="Config"/>
+                            </properties>
+                          </component>
                         </children>
                       </toolbar>
                       <component id="24e2c" class="javax.swing.JLabel">

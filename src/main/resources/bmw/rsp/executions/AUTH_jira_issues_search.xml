@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<execution name="jira_issues_search">
+    <proxy scheme="http" host="10.114.8.100" port="8080"/>
+    <actions>
+        <!--
+        <action name="login">
+            <url>${everis.conf.jira.urlbase}/jira/login.jsp</url>
+            <httpMethod>POST</httpMethod>
+            <headers>
+
+            </headers>
+            <parameters>
+                <parameter>
+                    <name>os_username</name>
+                    <value>${everis.conf.jira.user}</value>
+                </parameter>
+                <parameter>
+                    <name>os_password</name>
+                    <value>${everis.conf.jira.password}</value>
+                </parameter>
+            </parameters>
+        </action>
+        -->
+        <action name="retrieve-issues">
+            <!--url>${everis.conf.jira.urlbase}/jira/rest/api/2/search?jql=${everis.jira.jql}</url-->
+            <url>${everis.conf.jira.urlbase}</url>
+            <httpMethod>GET</httpMethod>
+            <headers>
+                <!--header name="Content-Type" value="application/json"/-->
+                <!--header name="Cookie" value="${response.header.Set-Cookie}"/-->
+                <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"/>
+                <header name="Accept-Encoding" value="gzip, deflate, br"/>
+                <header name="Accept-Language" value="es,en;q=0.9,de;q=0.8"/>
+                <header name="Cache-Control" value="max-age=0"/>
+                <header name="Upgrade-Insecure-Requests" value="1"/>
+                <header name="Connection" value="keep-alive"/>
+                    <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"/>
+                <header name="Cookie" value="JSESSIONID_endPoint=0001z2jWrxxT_IEzeKuiBZ0P23I:18jagsu4f; AUTH_SESSION_ID=SMS_g99eiau804-ld_f4e20b::c5991e01fb270dd06b64e0ebe362032; CookieTrazabilidad=SCI1519504176365836"/>
+            </headers>
+        </action>
+
+    </actions>
+
+</execution>

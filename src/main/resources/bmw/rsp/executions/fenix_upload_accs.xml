@@ -17,7 +17,7 @@
                 </parameter>
             </parameters>
             <validators>
-                <validator className="net.dms.popeye.handlers.jfsynchronizer.fenix.control.validators.FenixAccUploadValidator">
+                <validator className="net.dms.fsync.synchronizer.fenix.control.validators.FenixAccUploadValidator">
 
                 </validator>
             </validators>

@@ -26,7 +26,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     private JTextField txtCodigoPeticionCliente;
     private JComboBox cmbEstado;
     private JComboBox cmbTipo;
-    private JComboBox cmbSubTipo;
+   // private JComboBox cmbSubTipo;
     private JTextField txtPuntosHistoria;
 
     private JTextField txtHistoriaUsuario;
@@ -53,7 +53,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     protected void loadData() {
         SwingUtil.loadComboBox(AccStatus.class, cmbEstado, true);
         SwingUtil.loadComboBox(AccType.class, cmbTipo, true);
-        SwingUtil.loadComboBox(AccSubType.class, cmbSubTipo, true);
+      //  SwingUtil.loadComboBox(AccSubType.class, cmbSubTipo, true);
     }
 
     @Override
@@ -63,26 +63,28 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
         cmbEstado.setSelectedItem(getPayload().getEstado());
         cmbTipo.setSelectedItem(getPayload().getTipo());
-        cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
+     //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
         txtPuntosHistoria.setText(getPayload().getPuntosHistoria());
         txtHistoriaUsuario.setText(getPayload().getHistoriaUsuario());
-txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
+        txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
 
         for (Actor actor : SettingsService.getInstance().getSettings().getActores()){
-            responsablesEsfuerzos.add(new FenixResponsable(null, actor.getNombre(), actor.getNumeroEmpleadoEveris()));
+            responsablesEsfuerzos.add(new FenixResponsable(null, actor.getNombre(), actor.getNumeroEmpleadoEveris(), null));
         }
 
         String[] responsables = getPayload().getResponsable() != null ? getPayload().getResponsable().split("-") : new String[0];
         String[] esfuerzos = getPayload().getEsfuerzo() != null ? getPayload().getEsfuerzo().split("-") : new String[0];
+        String[] subtiposTareas = getPayload().getSubTipo() != null ? getPayload().getSubTipo().split("-") : new String[0];
 
         for (int i = 0; i < responsables.length; i++){
             final int index = i;
             FenixResponsable fenixResponsable = responsablesEsfuerzos.stream().filter(r -> r.getNumero().equals(responsables[index])).findFirst().orElse(null);
             if (fenixResponsable != null){
                 fenixResponsable.setEsfuerzo(Double.parseDouble(esfuerzos[index]));
+                fenixResponsable.setSubtipoTarea(subtiposTareas[index]);
             }else {
-                fenixResponsable = new FenixResponsable(Double.parseDouble(esfuerzos[index]), null, responsables[index]);
+                fenixResponsable = new FenixResponsable(Double.parseDouble(esfuerzos[index]), null, responsables[index], subtiposTareas[index]);
                 responsablesEsfuerzos.add(fenixResponsable);
             }
         }
@@ -102,7 +104,7 @@ txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
 JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
 JLabel lblEstado = new JLabel("Estado");
 JLabel lblTipo = new JLabel("Tipo");
-JLabel lblSubtipo = new JLabel("Subtipo");
+//JLabel lblSubtipo = new JLabel("Subtipo");
 JLabel lblPuntosHistoria = new JLabel("Puntos Historia");
 JLabel lblEsfuerzo = new JLabel("Esfuerzo cliente");
 JLabel lblHistoriaUsuario  = new JLabel("Historia usuario");
@@ -113,7 +115,7 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         txtCodigoPeticionCliente = new JTextField();
         cmbEstado = new JComboBox();
         cmbTipo = new JComboBox();
-        cmbSubTipo = new JComboBox();
+       // cmbSubTipo = new JComboBox();
         txtPuntosHistoria = new JTextField();
         txtHistoriaUsuario = new JTextField();
         txtEsfuerzoCliente = new JTextField();
@@ -129,14 +131,18 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
             public void tableChanged(TableModelEvent e) {
                 StringBuilder responsables = new StringBuilder();
                 StringBuilder esfuerzos = new StringBuilder();
-                calculateResponsalblesEsfuerzos(responsables, esfuerzos);
+                StringBuilder subtipos = new StringBuilder();
+                splitAttributes(responsables, esfuerzos, subtipos);
                 txtEsfuerzoCliente.setText(Double.toString(FenixAcc.calculateTotalEsfuerzo(esfuerzos.toString())));
             }
         });
         jtbResponsables.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
+        JComboBox accSubTypeEditor = new JComboBox();
+        SwingUtil.loadComboBox(AccSubType.class, accSubTypeEditor, false);
 
         jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.ESFUERZO.ordinal()).setCellEditor(new NumberCellEditor());
+        jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.SUBTIPO_TAREA.ordinal()).setCellEditor(new DefaultCellEditor(accSubTypeEditor));
 
        // datFechaPrevistaProyecto = new JDatePickerImpl();
 
@@ -226,20 +232,20 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         panel.add(lblTipo, constraints);
         constraints.weightx = 1;
 
-        constraints.gridx = 1;
+     /*   constraints.gridx = 1;
         constraints.gridy = fila;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblSubtipo, constraints);
         constraints.weightx = 1;
-
+*/
         constraints.gridx = 0;
         constraints.gridy = ++fila;
         panel.add(cmbTipo, constraints);
 
 
-        constraints.gridx = 1;
-        constraints.gridy = fila;
-        panel.add(cmbSubTipo, constraints);
+        //constraints.gridx = 1;
+       // constraints.gridy = fila;
+       // panel.add(cmbSubTipo, constraints);
 
         // field
         constraints.gridx = 0;
@@ -292,7 +298,7 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
         getPayload().setEstado((String)cmbEstado.getSelectedItem());
         getPayload().setTipo((String)cmbTipo.getSelectedItem());
-        getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
+       // getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
         getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
 
         getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
@@ -302,10 +308,12 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
 
         StringBuilder responsables = new StringBuilder();
         StringBuilder esfuerzos = new StringBuilder();
-        calculateResponsalblesEsfuerzos(responsables, esfuerzos);
+        StringBuilder subtipos = new StringBuilder();
+        splitAttributes(responsables, esfuerzos, subtipos);
 
         getPayload().setEsfuerzo(esfuerzos.toString());
         getPayload().setResponsable(responsables.toString());
+        getPayload().setSubTipo(subtipos.toString());
 
     }
 
@@ -314,7 +322,7 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
 
     }
 
-    private void calculateResponsalblesEsfuerzos(StringBuilder responsables, StringBuilder esfuerzos){
+    private void splitAttributes(StringBuilder responsables, StringBuilder esfuerzos, StringBuilder subtipos){
         List<FenixResponsable> fenixResponsables = jtbResponsables.getList();
 
         for (FenixResponsable fenixResponsable : fenixResponsables){
@@ -322,9 +330,11 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
                 if (responsables.length() > 0) {
                     responsables.append("-");
                     esfuerzos.append("-");
+                    subtipos.append("-");
                 }
                 responsables.append(fenixResponsable.getNumero());
                 esfuerzos.append(fenixResponsable.getEsfuerzo());
+                subtipos.append(fenixResponsable.getSubtipoTarea());
             }
         }
     }

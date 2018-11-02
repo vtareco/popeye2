@@ -50,4 +50,13 @@ public class JenixTable<M extends JenixTableModel, R> extends JTable{
         SwingUtil.agregarMenu(this, new JMenuItem[]{SwingUtil.menuCopiar(this)});
 
     }
+
+    public int[] getModelSelectedRows(){
+        int[] selected = this.getSelectedRows();
+        for (int i = 0; i < selected.length; i++){
+            selected[i] = this.convertRowIndexToModel(selected[i]);
+        }
+        return selected;
+    }
+
 }

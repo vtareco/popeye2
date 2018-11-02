@@ -182,13 +182,13 @@ public class EverisManager {
 
     private void removeAcc() {
         AccTableModel accTM = accTable.getModel();
-        accTM.getList().removeAll(accTM.getElements(accTable.getSelectedRows()));
+        accTM.getList().removeAll(accTM.getElements(accTable.getModelSelectedRows()));
         accTM.fireTableDataChanged();
     }
 
     private void removeIncidencia(){
         IncidenciaTableModel tableModel = incidenciasTable.getModel();
-        tableModel.getList().removeAll(tableModel.getElements(incidenciasTable.getSelectedRows()));
+        tableModel.getList().removeAll(tableModel.getElements(incidenciasTable.getModelSelectedRows()));
         tableModel.fireTableDataChanged();
     }
 
@@ -208,7 +208,8 @@ public class EverisManager {
         if (editedAcc != null) {
             accTableModel.getList().add(editedAcc);
             accTableModel.fireTableDataChanged();
-            accTable.setRowSelectionInterval(accTableModel.getRowCount(), accTableModel.getRowCount());
+
+            accTable.setRowSelectionInterval(accTableModel.getRowCount()-1, accTableModel.getRowCount()-1);
         }
 
     }
@@ -240,7 +241,7 @@ public class EverisManager {
     private void jiraToAcc() {
         List<FenixAcc> accs = new ArrayList<>();
 
-        List<JiraIssue> issues = ((JiraTableModel) jiraTable.getModel()).getElements(jiraTable.getSelectedRows());
+        List<JiraIssue> issues = ((JiraTableModel) jiraTable.getModel()).getElements(jiraTable.getModelSelectedRows());
 
         for (JiraIssue issue : issues) {
             FenixAcc acc = accMapper.mapJiraIssue2Acc(issue);
@@ -376,6 +377,7 @@ public class EverisManager {
     private void initTabSyncJiraFenix() {
 
         List<String> peticionesActuales = fenixService.getPeticionesActuales();
+
         SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
 
         SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
@@ -447,7 +449,7 @@ public class EverisManager {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 try {
-                    int[] selected = tabla.getSelectedRows();
+                    int[] selected = tabla.getModelSelectedRows();
 
                     if (selected.length > 0) {
 
@@ -582,14 +584,14 @@ public class EverisManager {
     }
 
 
-    public JMenuItem menuIncidenciaInterna(final JTable tabla) {
+    public JMenuItem menuIncidenciaInterna(final JenixTable tabla) {
         JMenuItem menuCrearIncidenciaInterna = new JMenuItem("Crear incidencia interna");
         menuCrearIncidenciaInterna.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 try {
-                    int[] selected = tabla.getSelectedRows();
+                    int[] selected = tabla.getModelSelectedRows();
 
                     if (selected.length > 0) {
                         FenixIncidencia incidencia = new FenixIncidencia();
@@ -621,14 +623,14 @@ public class EverisManager {
     }
 
 
-    public JMenuItem menuDuplicar(final JTable tabla) {
+    public JMenuItem menuDuplicar(final JenixTable tabla) {
         JMenuItem menuDuplicar = new JMenuItem("Duplicar");
         menuDuplicar.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 try {
-                    int[] selected = tabla.getSelectedRows();
+                    int[] selected = tabla.getModelSelectedRows();
 
                     if (selected.length > 0) {
 

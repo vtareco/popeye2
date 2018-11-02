@@ -10,7 +10,8 @@ public enum AccType implements VisualizableType{
     MEETING("Meeting"),
     SCRUM_MASTER("Scrum "),
     EXTRA_TASK("Extra-Task"),
-    BUG("BUG");
+    BUG("BUG"),
+    GESTION_PETICION("GESTION_PETICION");
 
     private String description;
 

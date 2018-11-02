@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -61,6 +62,7 @@ public class FenixService {
               childs.add(file.getName());
           }
        }
+        Collections.reverse(childs);
 
        return childs;
     }

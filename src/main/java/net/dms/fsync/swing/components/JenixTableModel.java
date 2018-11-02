@@ -122,7 +122,9 @@ public class JenixTableModel<R,C extends Enum> extends AbstractTableModel {
         C c = findColumnTypeByOrdinal(col);
         R r = getList().get(row);
         setValue(value, r, c);
-        fireTableCellUpdated(row, col);
+
+        // TODO FIXME, caused error in responsable dialog, when the subtask was updated
+     //   fireTableCellUpdated(row, col);
     }
 
     private void setValue(Object value, R r, C c){

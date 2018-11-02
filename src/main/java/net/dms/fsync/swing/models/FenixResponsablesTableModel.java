@@ -15,7 +15,7 @@ import java.util.List;
 public class FenixResponsablesTableModel extends JenixTableModel<FenixResponsable, FenixResponsablesTableModel.Columns> {
     public enum Columns implements TableColumnEnumType {
 
-        NUMERO_EMPLEADO(false), NOMBRE_EMPLEADO(false), ESFUERZO(true);
+        NUMERO_EMPLEADO(false), NOMBRE_EMPLEADO(false), ESFUERZO(true), SUBTIPO_TAREA(true);
 
         private boolean editable;
 
@@ -49,11 +49,11 @@ public class FenixResponsablesTableModel extends JenixTableModel<FenixResponsabl
                 return rows.get(rowIndex).getNumero();
 
             case NOMBRE_EMPLEADO:
-
                 return rows.get(rowIndex).getNombre();
             case ESFUERZO:
                  return rows.get(rowIndex).getEsfuerzo();
-
+            case SUBTIPO_TAREA:
+                    return rows.get(rowIndex).getSubtipoTarea();
             default:
                 return "no defined";
         }

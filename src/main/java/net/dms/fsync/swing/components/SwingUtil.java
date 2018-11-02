@@ -140,7 +140,7 @@ public class SwingUtil {
         // button.setText(">");
     }
 
-    public static void configurarTabla(final JTable tabla, JMenuItem[] menus) {
+    public static void configurarTabla(final JenixTable tabla, JMenuItem[] menus) {
         tabla.setRowHeight(ALTO_FILA_DEFAULT);
         TableColumn column = null;
 
@@ -165,7 +165,7 @@ public class SwingUtil {
         }
     }
 
-    public static void configurarTabla(final JTable tabla) {
+    public static void configurarTabla(final JenixTable tabla) {
         configurarTabla(tabla, (JMenuItem[])null);
     }
 
@@ -173,7 +173,7 @@ public class SwingUtil {
         tabla.addMouseListener(new PopClickListener(menus));
     }
 
-    public static JMenuItem menuCopiar(final JTable tabla) {
+    public static JMenuItem menuCopiar(final JenixTable tabla) {
         JMenuItem menuCopiar = new JMenuItem("Copiar");
         menuCopiar.addActionListener(new ActionListener() {
 
@@ -181,7 +181,7 @@ public class SwingUtil {
             public void actionPerformed(ActionEvent arg0) {
                 try {
                     javax.swing.table.TableModel tm = tabla.getModel();
-                    int[] selected = tabla.getSelectedRows();
+                    int[] selected = tabla.getModelSelectedRows();
                     StringBuilder sb = new StringBuilder();
                     for (int row : selected) {
 

@@ -62,6 +62,7 @@ public class EverisManager {
     private JButton removeFenixAccBtn;
     private JTextField totalEstimatedText;
     private JTextField totalIncurridoText;
+  private JTextField estimadoVersusIncurridoText;
     private JButton addIncidenciaBtn;
 
     private JenixTable<IncidenciaTableModel, FenixIncidencia> incidenciasTable;
@@ -75,6 +76,7 @@ public class EverisManager {
     private JButton refreshIncidenciasBtn;
     private JScrollPane incidenciasScrollPane;
     private JButton configFenixTable;
+    private JButton generateSpecificationRequirementsBtn;
     private JPopupMenu refreshMenu;
 
 
@@ -112,6 +114,8 @@ public class EverisManager {
         SwingUtil.registerListener(peticionesDisponiblesCmb, this::loadAccs, this::handleException);
         SwingUtil.registerListener(uploadIncidenciasBtn, this::uploadIncidencias, this::handleException);
         SwingUtil.registerListener(refreshIncidenciasBtn, this::refreshIncidencias, this::handleException);
+        SwingUtil.registerListener(generateSpecificationRequirementsBtn, this::generateSpecificationReuirements, this::handleException);
+
 
 
         init();
@@ -136,6 +140,10 @@ public class EverisManager {
                 }
             }
         });
+    }
+
+    private void generateSpecificationReuirements() {
+        fenixService.createRequirementSpecification(accTable.getList());
     }
 
     private void configFenixTable() {
@@ -230,6 +238,7 @@ public class EverisManager {
 
     private void saveAccs() {
         fenixService.saveACCs( accTable.getModel().getList());
+        refreshTotales();
     }
 
     private void uploadAccs() {
@@ -293,8 +302,10 @@ public class EverisManager {
             }
 
         }
+                      double estimadoVsIncurrido = totalIncurrido * 100 / totalEstimado;
                        totalEstimatedText.setText(Double.toString(totalEstimado));
                        totalIncurridoText.setText(Double.toString(totalIncurrido));
+        estimadoVersusIncurridoText.setText(Double.toString(estimadoVsIncurrido));
 
 
     }
@@ -655,6 +666,7 @@ public class EverisManager {
         incidenciasTable.getModel().clear();
         totalEstimatedText.setText("");
         totalIncurridoText.setText("");
+        estimadoVersusIncurridoText.setText("");
 
         ComponentStateService.getInstance().clearInitialized(EverisComponentType.values());
     }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<execution name="extranet_login">
+    <!--proxy scheme="http" host="10.114.8.100" port="8080"/-->
+    <actions>
+
+        <action name="login_confirm">
+            <url>${response.header.location}</url>
+            <httpMethod>GET</httpMethod>
+            <headers>
+                <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
+                <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"/>
+                <header name="Accept-Encoding" value="gzip, deflate, br"/>
+                <header name="Accept-Language" value="es,en;q=0.9,de;q=0.8"/>
+                <header name="Cache-Control" value="max-age=0"/>
+                <header name="Connection" value="keep-alive"/>
+
+                <header name="Cookie" value="lastRealm=Produccion;"/>
+                <header name="Host" value="www.extranet.everis.com"/>
+                <header name="Referer" value="https://www.extranet.everis.com/dana-na/auth/url_default/welcome.cgi"/>
+                <header name="Upgrade-Insecure-Requests" value="1"/>
+            </headers>
+
+        </action>
+
+    </actions>
+</execution>

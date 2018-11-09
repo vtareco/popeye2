@@ -5,6 +5,9 @@ import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.synchronizer.fenix.control.FenixRepository;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
+import net.dms.fsync.synchronizer.fenix.entities.FenixRequirementSpecification;
+import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
+import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccType;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.IncidenciasMetaDataType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by dminanos on 17/04/2017.
@@ -85,5 +89,25 @@ public class FenixService {
 
     public Map<IncidenciasMetaDataType,Map> getIncidenciasMetaData(Long idOt) {
         return fenixRepository.getIncidenciasMetaData(idOt);
+    }
+
+    public void createRequirementSpecification(List<FenixAcc> accs){
+        if (!accs.isEmpty()) {
+            List<FenixRequirementSpecification> requirementSpecifications = new ArrayList<>();
+            for (FenixAcc acc : accs.stream()
+                    .filter(a -> !a.getEstado().equals(AccStatus.DESESTIMADA.getDescription()))
+                    .filter(a -> a.getTipo().equals(AccType.USER_STORY.getDescription()))
+                    .collect(Collectors.toList())) {
+                FenixRequirementSpecification requirementSpecification = new FenixRequirementSpecification();
+                requirementSpecification.setCodigo(acc.getHistoriaUsuario());
+                requirementSpecification.setDescription(acc.getNombre());
+                requirementSpecification.setHours(Double.toString(acc.getTotalEsfuerzo()));
+                requirementSpecification.setStoryPoints(acc.getPuntosHistoria());
+                requirementSpecifications.add(requirementSpecification);
+            }
+            File peticionDir = fenixRepository.getPeticionDir(accs.get(0).getIdPeticionOtAsociada());
+            String fileName = String.format("%s/%s_Especificacion_Requerimientos_RSPSales.xlsx", peticionDir.getAbsolutePath(), accs.get(0).getIdPeticionOtAsociada());
+            fenixRepository.saveSpecificationRequirements(fileName, requirementSpecifications);
+        }
     }
 }

@@ -139,7 +139,7 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         jtbResponsables.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         JComboBox accSubTypeEditor = new JComboBox();
-        SwingUtil.loadComboBox(AccSubType.class, accSubTypeEditor, false);
+        SwingUtil.loadComboBox(AccSubType.class, accSubTypeEditor, true);
 
         jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.ESFUERZO.ordinal()).setCellEditor(new NumberCellEditor());
         jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.SUBTIPO_TAREA.ordinal()).setCellEditor(new DefaultCellEditor(accSubTypeEditor));

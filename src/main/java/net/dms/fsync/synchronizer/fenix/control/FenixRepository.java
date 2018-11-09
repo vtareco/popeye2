@@ -10,6 +10,7 @@ import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.fenix.control.handlers.GetIncidenciaMetaDataAction;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
+import net.dms.fsync.synchronizer.fenix.entities.FenixRequirementSpecification;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -21,8 +22,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 
 import java.io.*;
@@ -38,8 +39,12 @@ import java.util.stream.Collectors;
 @Component
 public class FenixRepository {
     private Logger logger = LoggerFactory.getLogger(FenixRepository.class);
+
     private FenixAccMapper accMapper = new FenixAccMapper();
+
     private FenixIncidenciaMapper incidenciaMapper = new FenixIncidenciaMapper();
+
+    private FenixRequirementSpecificationMapper fenixRequirementSpecificationMapper= new FenixRequirementSpecificationMapper();
 
     public void downloadACCs(Long idPeticion, String pathFile) {
 
@@ -48,6 +53,9 @@ public class FenixRepository {
 // TODO FIXME critical, extranet pilot
        // ActionExecutor el = new ActionExecutor("/bmw/rsp/executions/extranet_login.xml", variables);
        // el.execute();
+
+      //  ExtranetLoginAction el = new ExtranetLoginAction(variables);
+//el.execute();
 
        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
        ae.execute();
@@ -432,5 +440,42 @@ public class FenixRepository {
         variables.put(EverisVariables.FENIX_PASSWORD.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_PASSWORD));
         variables.put(EverisVariables.FENIX_PASSWORD.getVariableName(), EverisConfig.getInstance().getProperty(EverisPropertiesType.FENIX_PASSWORD));
         return variables;
+    }
+
+    public void saveSpecificationRequirements(String fileName, List<FenixRequirementSpecification> requirementSpecifications) {
+        File requirementsFile = new File(fileName);
+        File template = getSpecificationRequirementsTemplate();
+        InputStream fis;
+        int lastRow = 4;
+        try {
+
+            fis = new FileInputStream(template);
+
+            Workbook wb = WorkbookFactory.create(fis);
+            fis.close();
+            Sheet sheet = wb.getSheetAt(0);
+
+
+            for(FenixRequirementSpecification requirementSpecification : requirementSpecifications) {
+                Row row = sheet.createRow(lastRow);
+                fenixRequirementSpecificationMapper.mapToRow(wb, row, requirementSpecification);
+                lastRow++;
+            }
+
+
+            FileOutputStream fos = new FileOutputStream(requirementsFile);
+            wb.write(fos);
+            fos.close();
+        }catch(IOException ex){
+            throw new AppException(ex);
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+            throw new AppException(e);
+        }
+    }
+
+    public File getSpecificationRequirementsTemplate(){
+        URL url =  Thread.class.getResource("/fenix/templates/PlantillaEspecificacionRequerimientos.xlsx");
+        return new File(url.getFile());
     }
 }

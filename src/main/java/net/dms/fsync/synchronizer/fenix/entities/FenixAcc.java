@@ -3,6 +3,7 @@ package net.dms.fsync.synchronizer.fenix.entities;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccType;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.IncidenciaEstadoType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -180,7 +181,9 @@ public class FenixAcc implements Serializable {
         double totalEsfuerzo = 0;
         String[] esfuerzos = esfuerzo != null ? esfuerzo.split("-") : new String[0];
         for (String es : esfuerzos){
-            totalEsfuerzo = totalEsfuerzo + Double.parseDouble(es);
+            if (StringUtils.isNotEmpty(es)) {
+                totalEsfuerzo = totalEsfuerzo + Double.parseDouble(es);
+            }
         }
 
         return totalEsfuerzo;

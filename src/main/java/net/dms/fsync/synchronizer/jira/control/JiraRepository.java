@@ -13,7 +13,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.net.URLEncoder;

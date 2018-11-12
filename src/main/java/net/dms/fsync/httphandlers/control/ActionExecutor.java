@@ -166,8 +166,8 @@ public class ActionExecutor {
                 KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
                 KeyStore kk = KeyStore.getInstance("PKCS12");
                 String keyPassword = everisConfig.getProperty(EverisPropertiesType.JIRA_KEYSTORE_PASSWORD);
-                // kk.load(ThreadLocal.class.getResourceAsStream("/security/key-store.jks"), "changeit".toCharArray());
-                kk.load(new FileInputStream(keyFile), keyPassword.toCharArray());
+                 kk.load(ThreadLocal.class.getResourceAsStream(keyFile), keyPassword.toCharArray());
+               // kk.load(new FileInputStream(keyFile), keyPassword.toCharArray());
                 kmf.init(kk, keyPassword.toCharArray());
                 sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), new SecureRandom());
             }else{

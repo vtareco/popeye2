@@ -279,8 +279,9 @@ public class EverisManager {
         if (jiraCode == null) {
             return false;
         }else {
+            // TODO fixme PARAMetrize validation
             Pattern pattern = Pattern.compile(".+-.+", Pattern.CASE_INSENSITIVE);
-            return   pattern.matcher(jiraCode).matches();
+            return   pattern.matcher(jiraCode).matches() && !jiraCode.startsWith("SCDMS ");
         }
     }
 

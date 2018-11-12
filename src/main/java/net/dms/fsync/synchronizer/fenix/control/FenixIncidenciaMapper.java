@@ -1,5 +1,6 @@
 package net.dms.fsync.synchronizer.fenix.control;
 
+import com.microsoft.schemas.office.visio.x2012.main.CellType;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.synchronizer.excel.control.ExcelMapper;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
@@ -22,7 +23,7 @@ public class FenixIncidenciaMapper {
                         IncidenciaRowType.FECHA_INICIO, IncidenciaRowType.FECHA_PREVISTA_CENTRO)));
 
 
-        incidencia.setFechaPrevistaCentro(row.getCell(IncidenciaRowType.FECHA_PREVISTA_CENTRO.getColPosition()) != null ? row.getCell(IncidenciaRowType.FECHA_PREVISTA_CENTRO.getColPosition()).getDateCellValue() : null);
+        incidencia.setFechaPrevistaCentro(row.getCell(IncidenciaRowType.FECHA_PREVISTA_CENTRO.getColPosition()) != null && row.getCell(IncidenciaRowType.FECHA_PREVISTA_CENTRO.getColPosition()).getCellType() != 1 ? row.getCell(IncidenciaRowType.FECHA_PREVISTA_CENTRO.getColPosition()).getDateCellValue() : null);
         incidencia.setFechaInicio(row.getCell(IncidenciaRowType.FECHA_INICIO.getColPosition()) != null ? row.getCell(IncidenciaRowType.FECHA_INICIO.getColPosition()).getDateCellValue() : null);
         incidencia.setFechaFin(row.getCell(IncidenciaRowType.FECHA_FIN.getColPosition()) != null ? row.getCell(IncidenciaRowType.FECHA_FIN.getColPosition()).getDateCellValue() : null);
 

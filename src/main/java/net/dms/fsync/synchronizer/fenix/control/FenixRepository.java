@@ -1,5 +1,6 @@
 package net.dms.fsync.synchronizer.fenix.control;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.control.ActionExecutor;
 import net.dms.fsync.httphandlers.control.actions.DownloadAction;
@@ -10,6 +11,7 @@ import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.fenix.control.handlers.GetIncidenciaMetaDataAction;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
+import net.dms.fsync.synchronizer.fenix.entities.FenixPeticion;
 import net.dms.fsync.synchronizer.fenix.entities.FenixRequirementSpecification;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import org.apache.commons.io.IOUtils;
@@ -138,6 +140,7 @@ public class FenixRepository {
         } catch (InvalidFormatException e) {
             e.printStackTrace();
         }
+
         return fenixAccs;
     }
 
@@ -185,6 +188,13 @@ public class FenixRepository {
         }catch(IOException ex){
             throw new AppException(ex);
         }
+
+        // TODO FIXME, 1.load asynchronously, 2.avoiding load the object each time
+        FenixPeticion fenixPeticion = loadPeticion(idOt);
+        if (fenixPeticion != null) {
+            mergeLocalData(fenixPeticion, fenixAccs);
+        }
+
         return fenixAccs;
     }
 
@@ -258,7 +268,6 @@ public class FenixRepository {
         path = new File(peticionFile.getAbsolutePath() + "/" + fileName);
         return path;
     }
-
 
 
     public void addACCs(List<FenixAcc> accs) {
@@ -477,5 +486,45 @@ public class FenixRepository {
     public File getSpecificationRequirementsTemplate(){
         URL url =  Thread.class.getResource("/fenix/templates/PlantillaEspecificacionRequerimientos.xlsx");
         return new File(url.getFile());
+    }
+
+
+    public void save(FenixPeticion peticion){
+        ObjectMapper mapper = new ObjectMapper();
+        File file = getPeticionLocalDataFile(peticion.getId());
+        try {
+            mapper.writeValue(file, peticion);
+        } catch (IOException e) {
+            throw new AppException(e);
+        }
+    }
+
+    public void mergeLocalData(FenixPeticion peticion, List<FenixAcc> accs){
+        for (FenixAcc acc : accs){
+            FenixAcc pAcc = peticion.searchAcc(acc.getIdAcc());
+            if (pAcc != null) {
+                acc.setBitacora(pAcc.getBitacora());
+            }
+        }
+    }
+
+    public File getPeticionLocalDataFile(Long idPeticion){
+        File folder = getPeticionDir(idPeticion);
+        File file = new File(String.format("%s/%s_peticion_fenix.json", folder.getAbsolutePath(), idPeticion));
+        return file;
+    }
+
+    public FenixPeticion loadPeticion(Long idPeticion){
+        ObjectMapper mapper = new ObjectMapper();
+        File file = getPeticionLocalDataFile(idPeticion);
+        try {
+            if (file.exists()) {
+                return mapper.readValue(file, FenixPeticion.class);
+            }else {
+                return null;
+            }
+        } catch (IOException e) {
+            throw new AppException(e);
+        }
     }
 }

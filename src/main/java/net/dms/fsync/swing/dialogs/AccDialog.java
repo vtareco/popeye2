@@ -1,5 +1,7 @@
 package net.dms.fsync.swing.dialogs;
 
+import net.dms.fsync.swing.models.BitacoraTableModel;
+import net.dms.fsync.synchronizer.fenix.entities.Bitacora;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixResponsable;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
@@ -16,6 +18,8 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
@@ -28,10 +32,13 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     private JComboBox cmbTipo;
    // private JComboBox cmbSubTipo;
     private JTextField txtPuntosHistoria;
+    private JTextArea txaComments;
+    private JenixTable<BitacoraTableModel, Bitacora> jtbBitacora;
 
     private JTextField txtHistoriaUsuario;
     private JenixTable<FenixResponsablesTableModel, FenixResponsable> jtbResponsables;
     private JScrollPane responsablesScrollPane;
+    private JScrollPane bitacoraScrollPane;
     private JDatePicker datFechaPrevistaProyecto;
     private JTextField txtEsfuerzoCliente;
 
@@ -41,7 +48,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public AccDialog(Component parent, FenixAcc initialPayload) {
         super(parent, initialPayload);
         // TODO FIXME, move to abstract class
-        this.setSize(550, 650);
+        this.setSize(550, 750);
         setLocationRelativeTo(parent);
         setTitle("ACC");
         setModal(true);
@@ -67,6 +74,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         txtPuntosHistoria.setText(getPayload().getPuntosHistoria());
         txtHistoriaUsuario.setText(getPayload().getHistoriaUsuario());
         txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
+        jtbBitacora.getModel().load(getPayload().getBitacora());
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
 
         for (Actor actor : SettingsService.getInstance().getSettings().getActores()){
@@ -101,15 +109,24 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         JLabel lblSummary = new JLabel("Nombre");
         JLabel lblDescription = new JLabel("Descripción");
-JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
-JLabel lblEstado = new JLabel("Estado");
-JLabel lblTipo = new JLabel("Tipo");
-//JLabel lblSubtipo = new JLabel("Subtipo");
-JLabel lblPuntosHistoria = new JLabel("Puntos Historia");
-JLabel lblEsfuerzo = new JLabel("Esfuerzo cliente");
-JLabel lblHistoriaUsuario  = new JLabel("Historia usuario");
-JLabel lblResponsables = new JLabel("Responsables");
-JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
+        JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
+        JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
+        JLabel lblEstado = new JLabel("Estado");
+        JLabel lblTipo = new JLabel("Tipo");
+        //JLabel lblSubtipo = new JLabel("Subtipo");
+        JLabel lblPuntosHistoria = new JLabel("Puntos Historia");
+        JLabel lblEsfuerzo = new JLabel("Esfuerzo cliente");
+        JLabel lblHistoriaUsuario  = new JLabel("Historia usuario");
+        JLabel lblResponsables = new JLabel("Responsables");
+        JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
+
+        JButton addBitacoraBtn = new JButton("Agregar comentario");
+        addBitacoraBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jtbBitacora.addRow(new Bitacora("-", ""));
+            }
+        });
 
 
         txtCodigoPeticionCliente = new JTextField();
@@ -123,7 +140,7 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         FenixResponsablesTableModel responsablesTableModel = new FenixResponsablesTableModel(new ArrayList<FenixResponsable>());
         jtbResponsables = new JenixTable(responsablesTableModel);
         responsablesScrollPane = new JScrollPane(jtbResponsables, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        responsablesScrollPane.setMinimumSize(new Dimension(200,180));
+        responsablesScrollPane.setMinimumSize(new Dimension(200,120));
         jtbResponsables.setFillsViewportHeight(true);
 
         responsablesTableModel.addTableModelListener(new TableModelListener() {
@@ -144,6 +161,12 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.ESFUERZO.ordinal()).setCellEditor(new NumberCellEditor());
         jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.SUBTIPO_TAREA.ordinal()).setCellEditor(new DefaultCellEditor(accSubTypeEditor));
 
+        BitacoraTableModel bitacoraTableModel = new BitacoraTableModel(new ArrayList<>());
+        jtbBitacora = new JenixTable(bitacoraTableModel);
+        bitacoraScrollPane = new JScrollPane(jtbBitacora, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        bitacoraScrollPane.setMinimumSize(new Dimension(200,120));
+        jtbBitacora.setFillsViewportHeight(true);
+
        // datFechaPrevistaProyecto = new JDatePickerImpl();
 
         txtNombre = new JTextField(15);
@@ -151,13 +174,9 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         txaDescripcion.setRows(10);
         txaDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         JScrollPane sp = new JScrollPane(txaDescripcion, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-
         sp.setPreferredSize(new Dimension(300, 200));
         sp.setMinimumSize(new Dimension(300, 200));
        // sp.setBounds(txtSummary.getBounds());
-
-
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.WEST;
@@ -188,6 +207,20 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         constraints.gridx = 0;
         constraints.gridy = ++fila;
         panel.add(sp, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
+        constraints.weightx = anchoEntiquetas;
+        panel.add(lblComments, constraints);
+        constraints.weightx = 1;
+
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
+        panel.add(bitacoraScrollPane, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = ++fila;
+        panel.add(addBitacoraBtn, constraints);
 
         // fields codigo petición - historia usuario
         constraints.gridx = 0;
@@ -304,7 +337,7 @@ JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
         getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
         getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
 
-
+        getPayload().setBitacora(jtbBitacora.getList());
 
         StringBuilder responsables = new StringBuilder();
         StringBuilder esfuerzos = new StringBuilder();

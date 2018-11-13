@@ -1,12 +1,15 @@
 package net.dms.fsync.synchronizer.fenix.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccType;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.IncidenciaEstadoType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -31,6 +34,7 @@ public class FenixAcc implements Serializable {
     private Date fechaSolicitudCliente;
     private Date fechaPrevistaProyecto;
     private String jiraStatus;
+    private List<Bitacora> bitacora = new ArrayList<>(); // used for anlysis comments, it´s not saved in Fenix
 
     private Date fechaEntrega;
     private String fechaCierre;
@@ -51,6 +55,7 @@ public class FenixAcc implements Serializable {
         this.jiraStatus = jiraStatus;
     }
 
+    @JsonIgnore
     public Double getPorcentajeCompletado()
     {
 
@@ -173,10 +178,12 @@ public class FenixAcc implements Serializable {
         return esfuerzo;
     }
 
+    @JsonIgnore
     public double getTotalEsfuerzo() {
         return calculateTotalEsfuerzo(esfuerzo);
     }
 
+    @JsonIgnore
     public static double calculateTotalEsfuerzo(String esfuerzo) {
         double totalEsfuerzo = 0;
         String[] esfuerzos = esfuerzo != null ? esfuerzo.split("-") : new String[0];
@@ -316,6 +323,7 @@ public class FenixAcc implements Serializable {
         }
     }
 
+    @JsonIgnore
     public boolean canBeAccCorrectora(){
         if (idAcc != null
                 && !AccStatus.DESESTIMADA.getDescription().equals(estado)
@@ -326,12 +334,21 @@ public class FenixAcc implements Serializable {
         }
     }
 
+    @JsonIgnore
     public Double getDesvioEtc(){
         if (etc != null){
           return getTotalEsfuerzo() - getIncurrido() + etc;
         }else{
             return null;
         }
+    }
+
+    public List<Bitacora> getBitacora() {
+        return bitacora;
+    }
+
+    public void setBitacora(List<Bitacora> bitacora) {
+        this.bitacora = bitacora;
     }
 
     @Override

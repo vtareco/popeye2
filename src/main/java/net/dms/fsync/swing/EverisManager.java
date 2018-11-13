@@ -2,6 +2,7 @@ package net.dms.fsync.swing;
 
 import net.dms.fsync.settings.entities.Application;
 import net.dms.fsync.synchronizer.fenix.business.FenixService;
+import net.dms.fsync.synchronizer.fenix.entities.FenixPeticion;
 import net.dms.fsync.synchronizer.jira.business.JiraService;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
@@ -237,6 +238,10 @@ public class EverisManager {
     }
 
     private void saveAccs() {
+        FenixPeticion fenixPeticion = new FenixPeticion();
+        fenixPeticion.setId(getPeticionSelected(peticionesDisponiblesCmb));
+        fenixPeticion.setAccList(accTable.getModel().getList());
+        fenixService.save(fenixPeticion);
         fenixService.saveACCs( accTable.getModel().getList());
         refreshTotales();
     }

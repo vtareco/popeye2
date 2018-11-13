@@ -1,10 +1,12 @@
 package net.dms.fsync.synchronizer.fenix.business;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.synchronizer.fenix.control.FenixRepository;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
+import net.dms.fsync.synchronizer.fenix.entities.FenixPeticion;
 import net.dms.fsync.synchronizer.fenix.entities.FenixRequirementSpecification;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccType;
@@ -109,5 +111,9 @@ public class FenixService {
             String fileName = String.format("%s/%s_Especificacion_Requerimientos_RSPSales.xlsx", peticionDir.getAbsolutePath(), accs.get(0).getIdPeticionOtAsociada());
             fenixRepository.saveSpecificationRequirements(fileName, requirementSpecifications);
         }
+    }
+
+    public void save(FenixPeticion peticion){
+        fenixRepository.save(peticion);
     }
 }

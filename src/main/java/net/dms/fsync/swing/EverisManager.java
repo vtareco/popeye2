@@ -475,7 +475,8 @@ public class EverisManager {
                         AccDialog dialog = new AccDialog(panelParent, acc);
                         dialog.pack();
                         accTable.getModel().fireTableDataChanged();
-                        tabla.setRowSelectionInterval(selected[0], selected[0]);
+
+                        tabla.setRowSelectionInterval(tabla.convertRowIndexToView(selected[0]), tabla.convertRowIndexToView(selected[0]));
 
                     }
                 } catch (Exception ex) {
@@ -653,6 +654,7 @@ public class EverisManager {
 
                         FenixAcc acc = ((AccTableModel) tabla.getModel()).getPayload(selected[0]);
                         FenixAcc copy = SerializationUtils.clone(acc);
+                        copy.getBitacora().clear();
                         copy.setIdAcc(null);
                         copy.setResponsable(null);
                         accTable.addRow(copy);

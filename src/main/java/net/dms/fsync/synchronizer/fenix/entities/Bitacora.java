@@ -1,8 +1,9 @@
 package net.dms.fsync.synchronizer.fenix.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Bitacora {
+public class Bitacora implements Serializable{
     private Long id;
     private String user;
     private Date creationDate;

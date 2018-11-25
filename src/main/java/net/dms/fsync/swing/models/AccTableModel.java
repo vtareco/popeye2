@@ -34,7 +34,9 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
         PORCENTAJE_COMPLETADO(true, 30),
         RESPONSABLE(true, 100),
         FECHA_PREVISTA_PROYECTO(true, 80),
-        DESCRIPCION(true, 250);
+        DESCRIPCION(true, 250),
+        ULTIMA_BITACORA(false, 50),
+        BITACORA(false, 250);
 
 
         private final static int WIDTH_M = 80;
@@ -72,6 +74,29 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
         return Columns.lookup(col).isEditable() && (AccStatus.EN_EJECUCION.getDescription().equals(acc.getEstado()) || AccStatus.PENDIENTE_ASIGNACION.getDescription().equals(acc.getEstado()));
 
     }
+
+    public Object getValueAt(int row, int col) {
+        FenixAcc acc = rows.get(row);
+        switch (Columns.lookup(col)) {
+            case BITACORA:
+                if (!acc.getBitacora().isEmpty()){
+                    return acc.getBitacora().get(acc.getBitacora().size()-1).getComment();
+                } else {
+                    return null;
+                }
+            case ULTIMA_BITACORA:
+                if (!acc.getBitacora().isEmpty()){
+                    return acc.getBitacora().get(acc.getBitacora().size()-1).getCreationDate();
+                } else {
+                    return null;
+                }
+            default:
+                return super.getValueAt(row, col);
+        }
+
+    }
+
+
     public void setValueAt(Object value, int row, int col) {
         FenixAcc acc = rows.get(row);
         switch (Columns.lookup(col)){

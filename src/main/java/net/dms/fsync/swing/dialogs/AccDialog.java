@@ -13,6 +13,7 @@ import net.dms.fsync.swing.models.FenixResponsablesTableModel;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.Actor;
 import net.sourceforge.jdatepicker.JDatePicker;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -92,7 +93,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 fenixResponsable.setEsfuerzo(Double.parseDouble(esfuerzos[index]));
                 fenixResponsable.setSubtipoTarea(subtiposTareas[index]);
             }else {
-                fenixResponsable = new FenixResponsable(Double.parseDouble(esfuerzos[index]), null, responsables[index], subtiposTareas[index]);
+                Double esfuerzo = StringUtils.isNotEmpty(esfuerzos[index]) ? Double.parseDouble(esfuerzos[index]) : null;
+                fenixResponsable = new FenixResponsable(esfuerzo, null, responsables[index], subtiposTareas[index]);
                 responsablesEsfuerzos.add(fenixResponsable);
             }
         }

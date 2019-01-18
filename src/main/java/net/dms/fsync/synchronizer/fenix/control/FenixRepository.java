@@ -188,12 +188,13 @@ public class FenixRepository {
         }catch(IOException ex){
             throw new AppException(ex);
         }
-
+/*
         // TODO FIXME, 1.load asynchronously, 2.avoiding load the object each time
         FenixPeticion fenixPeticion = loadPeticion(idOt);
         if (fenixPeticion != null) {
             mergeLocalData(fenixPeticion, fenixAccs);
         }
+        */
 
         return fenixAccs;
     }
@@ -455,7 +456,7 @@ public class FenixRepository {
         File requirementsFile = new File(fileName);
         File template = getSpecificationRequirementsTemplate();
         InputStream fis;
-        int lastRow = 4;
+        int lastRow = 1;
         try {
 
             fis = new FileInputStream(template);

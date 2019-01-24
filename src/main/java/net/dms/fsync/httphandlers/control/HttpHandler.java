@@ -23,6 +23,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 import static net.dms.fsync.httphandlers.entities.enumerations.VariablePrefix.RESPONSE_HEADER;
@@ -161,10 +162,11 @@ System.out.println("request: " + Arrays.toString(request.getAllHeaders()));
             System.out.println(">key:  " + key + ", value: " + mapValue);
             if ( value != null) {
                 try {
-                    value = value.replaceAll("\\$\\{" + key + "\\}", mapValue);
-                }catch(ParseException ex){
+                    value = value.replaceAll("\\$\\{" + key + "\\}", mapValue != null ? Matcher.quoteReplacement(mapValue): null);
+                }catch(Exception ex){
                     System.out.println("error in process value");
                     ex.printStackTrace();
+                    throw new AppException(ex);
                 }
             }
         }

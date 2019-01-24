@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 
 /**
  * Created by dminanos on 11/04/2017.
@@ -98,8 +99,8 @@ public class ActionExecutor {
             System.out.println(">key:  " + key + ", value: " + mapValue);
             if ( strExecution != null) {
                 try {
-                    strExecution = strExecution.replaceAll("\\$\\{" + key + "\\}", mapValue);
-                }catch(ParseException ex){
+                    strExecution = strExecution.replaceAll("\\$\\{" + key + "\\}", mapValue != null ? Matcher.quoteReplacement(mapValue) : null);
+                }catch(Exception ex){
                     System.out.println("error in process value");
                     ex.printStackTrace();
                     throw new AppException(ex);

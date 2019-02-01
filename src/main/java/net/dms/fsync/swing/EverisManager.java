@@ -89,8 +89,12 @@ public class EverisManager {
   private JButton configFenixTable;
   private JButton generateSpecificationRequirementsBtn;
   private JPopupMenu refreshMenu;
+  private JButton configFenixJiraConectionBtn;
+  private JButton configApplicationPropreties;
   private JButton settingsJbtn;
-  JiraIssue issue;
+  private File jenixFoulder = new File("c:/JenixFolder");
+  private File jsonUserCreate= new File(jenixFoulder.toString()+"/UserConfig.json");
+  private File jsonApplicationProperties = new File(jenixFoulder.toString()+"/ApplicationProperties.json");
   JiraService jiraService;
   FenixService fenixService;
   TableSettingControl tableSettingControl;
@@ -137,19 +141,74 @@ public class EverisManager {
     SwingUtil.registerListener(removeIncidenciaBtn, this::removeIncidencia, this::handleException);
     SwingUtil.registerListener(checkJiraStatusBtn, this::checkJiraStatus, this::handleException);
     SwingUtil.registerListener(configFenixTable, this::configFenixTable, this::handleException);
-    SwingUtil.registerListener(settingsJbtn,this::confingJenixSrttings,this::handleException);
 
-    tabbedPanel.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        try {
-          initTabIncidencias();
-        } catch (Exception ex) {
-          handleException(ex);
+        SwingUtil.registerListener(settingsJbtn,this::confingJenixSrttings,this::handleException);
+        tabbedPanel.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                try {
+                    initTabIncidencias();
+                } catch (Exception ex) {
+                    handleException(ex);
+                }
+            }
+        });
+
+      onInit();
+    }
+
+
+    private void onInit(){
+        if(!jenixFoulder.exists()){
+            jenixFoulder.mkdirs();
+            System.out.println("Directory created in " + jenixFoulder.toString());
+            try {
+                    if(jsonUserCreate.createNewFile()){
+                        System.out.println("user config json created");
+
+                    }
+                    if(jsonApplicationProperties.createNewFile()){
+                        System.out.println("properties config json created");
+
+
+                    }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(jsonUserCreate.exists() && jsonApplicationProperties.exists()){
+                configUserChange();
+            }
+
         }
-      }
-    });
-  }
+        else{
+            System.out.println("Directory Already Exists");
+            if(!jsonUserCreate.exists()){
+                try {
+                    if(jsonUserCreate.createNewFile()){
+                        System.out.println("user config json created");
+                        configUserChange();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(!jsonApplicationProperties.exists()){
+                try {
+                    if(jsonApplicationProperties.createNewFile()){
+                        System.out.println("properties config json created");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(jsonUserCreate.exists() && jsonApplicationProperties.exists()){
+                VariableService variableService= new VariableService();
+                variableService.readJsonToConfFile(jsonUserCreate,jsonApplicationProperties);
+            }
+        }
+    }
+
 
   private void generateSpecificationReuirements() {
     fenixService.createRequirementSpecification(accTable.getList());

@@ -1,6 +1,7 @@
 package net.dms.fsync.synchronizer.LocalVariables.business;
 
 
+import jdk.nashorn.internal.parser.JSONParser;
 import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
@@ -8,7 +9,12 @@ import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
+import org.json.simple.JSONObject;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 
 
 public class VariableService {
@@ -29,7 +35,7 @@ public class VariableService {
 
 
 
-    /*
+
     public void writeUserConfJsonFile(UserChange uc){
 
     }
@@ -42,7 +48,15 @@ public class VariableService {
 
 
     public  void readJsonToConfFile(File jsonUserCreate, File jsonApplicationProperties){
+
+
+
+
+
+
+         /*
         try {
+
             Object obj = new JSONParser().parse(new FileReader(jsonUserCreate));
             JSONObject jsonUserChange = (JSONObject) obj;
 
@@ -52,14 +66,15 @@ public class VariableService {
 
             System.out.println(jsonUserChange.get("fenixUser").toString());
             System.out.println(file);
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
-*/
+
 
     public ApplicationProperties getApplicationVariables(){
         ApplicationProperties ap = new ApplicationProperties();

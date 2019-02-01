@@ -60,6 +60,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     @Override
     protected void loadData() {
         SwingUtil.loadComboBox(AccStatus.class, cmbEstado, true);
+        getPayload().setEstado(AccStatus.PENDIENTE_ASIGNACION.getDescription()); //PENDIENTE
         SwingUtil.loadComboBox(AccType.class, cmbTipo, true);
       //  SwingUtil.loadComboBox(AccSubType.class, cmbSubTipo, true);
     }

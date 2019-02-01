@@ -17,10 +17,7 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -164,13 +161,11 @@ public class FenixRepository {
 
             for (int i = 1; i < sheet.getLastRowNum(); i++){
 
-                if (sheet.getRow(i) == null || sheet.getRow(i).getCell(AccRowType.ID_PETICIONOT_ASOCIADA.getColPosition()) == null){
-                 break;
+                if (isAValidRow(sheet, i)) {
+                    FenixAcc fenixAcc = accMapper.map(sheet.getRow(i));
+                    fenixAccs.add(fenixAcc);
                 }
-                FenixAcc fenixAcc = accMapper.map(sheet.getRow(i));
-                fenixAccs.add(fenixAcc);
             }
-
 
 
             List<FenixAcc> accsIncurridos = searchACCsIncurridos(idOt, forceDownload);
@@ -199,7 +194,17 @@ public class FenixRepository {
         return fenixAccs;
     }
 
-    public void removeFile(File file){
+    private boolean isAValidRow(Sheet sheet, int i) {
+        if (sheet.getRow(i) == null || sheet.getRow(i).getCell(AccRowType.ID_PETICIONOT_ASOCIADA.getColPosition()) == null) {
+            return false;
+        }
+        Row row = sheet.getRow(i);
+        Cell otCell = row.getCell(AccRowType.ID_PETICIONOT_ASOCIADA.getColPosition());
+        String stringOTid = otCell.toString();
+        return !StringUtils.isBlank(stringOTid);
+    }
+
+    public void removeFile(File file) {
         if (file.exists()) {
             File newFile = new File(file.getParent() + "/" + file.getName() + "." + (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())));
 

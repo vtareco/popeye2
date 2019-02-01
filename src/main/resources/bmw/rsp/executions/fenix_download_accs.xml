@@ -10,8 +10,8 @@
                 <header name="Accept-Language" value="es,en;q=0.8,de;q=0.6"/>
                 <header name="Connection" value="keep-alive"/>
                 <header name="Cookie" value="ActuacionesGrid=12; gridIncTab=6; TIMEZONE=21; LOGIN_LAST_USER=dminanos; JSESSIONID=${response.header.Set-Cookie.JSESSIONID}"/>
-                <header name="Host" value="fenix.car.int"/>
-                <header name="Referer" value="http://fenix.car.int/fenix/requerimientos/hyperlinkAction.do?urlOrigen=peticionAdmin&amp;urlDestino=peticionEjecutar&amp;idDestino=${everis.fenix.idpeticionot}"/>
+                <header name="Host" value="${everis.conf.fenix.upload_download}"/> 
+                <header name="Referer" value="${everis.conf.fenix.urlbase}/fenix/requerimientos/hyperlinkAction.do?urlOrigen=peticionAdmin&amp;urlDestino=peticionEjecutar&amp;idDestino=${everis.fenix.idpeticionot}"/>
                 <header name="Upgrade-Insecure-Requests" value="1"/>
                 <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
             </headers>

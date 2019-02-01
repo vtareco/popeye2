@@ -13,8 +13,10 @@ public enum EverisVariables {
     JIRA_JQL("everis.jira.jql"),
     JIRA_USER(EverisPropertiesType.JIRA_USER.getProperty()),
     JIRA_PASSWORD(EverisPropertiesType.JIRA_PASSWORD.getProperty()),
-    JIRA_URL_BASE(EverisPropertiesType.JIRA_URL_BASE.getProperty());
-
+    JIRA_URL_BASE(EverisPropertiesType.JIRA_URL_BASE.getProperty()),
+    WORKING_DIRECTORY(EverisPropertiesType.WORKING_DIRECTORY.getProperty()),
+    PROXY_HOST(EverisPropertiesType.PROXY_HOST.getProperty()),
+    PROXY_PORT(EverisPropertiesType.PROXY_PORT.getProperty());
     private String variableName;
 
     EverisVariables(String variableName) {
@@ -24,4 +26,5 @@ public enum EverisVariables {
     public String getVariableName() {
         return variableName;
     }
-}
+
+  }

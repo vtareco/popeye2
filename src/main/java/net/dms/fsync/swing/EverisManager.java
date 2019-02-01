@@ -1,8 +1,15 @@
 package net.dms.fsync.swing;
 
-import net.dms.fsync.settings.entities.Application;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.dms.fsync.settings.entities.*;
+
+import net.dms.fsync.swing.dialogs.*;
+import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.JenixSettings;
+import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
 import net.dms.fsync.synchronizer.fenix.business.FenixService;
-import net.dms.fsync.synchronizer.fenix.entities.FenixPeticion;
+import net.dms.fsync.synchronizer.fenix.entities.*;
 import net.dms.fsync.synchronizer.jira.business.JiraService;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
@@ -37,6 +44,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -80,7 +89,7 @@ public class EverisManager {
   private JButton configFenixTable;
   private JButton generateSpecificationRequirementsBtn;
   private JPopupMenu refreshMenu;
-
+  private JButton settingsJbtn;
   JiraIssue issue;
   JiraService jiraService;
   FenixService fenixService;
@@ -128,7 +137,7 @@ public class EverisManager {
     SwingUtil.registerListener(removeIncidenciaBtn, this::removeIncidencia, this::handleException);
     SwingUtil.registerListener(checkJiraStatusBtn, this::checkJiraStatus, this::handleException);
     SwingUtil.registerListener(configFenixTable, this::configFenixTable, this::handleException);
-
+    SwingUtil.registerListener(settingsJbtn,this::confingJenixSrttings,this::handleException);
 
     tabbedPanel.addChangeListener(new ChangeListener() {
       @Override
@@ -200,9 +209,41 @@ public class EverisManager {
     tableModel.fireTableDataChanged();
   }
 
-  private void addAcc() {
-    AccTableModel accTableModel = accTable.getModel();
-    FenixAcc acc = new FenixAcc();
+    private void confingJenixSrttings(){
+        VariableService variableService= new VariableService();
+        JenixSettings js = new JenixSettings();
+
+        ApplicationProperties ap = variableService.getApplicationVariables();
+        UserChange uc = variableService.getUserVariables();
+
+        js.setAp(ap);
+        js.setUc(uc);
+        SettingsDialog settingsDialog = new SettingsDialog(tabbedPanel,js);
+      //  settingsDialog.pack();
+    }
+
+    private void configUserChange() {
+        /*
+        VariableService variableService = new VariableService();
+        UserChange uc = variableService.getUserVariables();
+        UserChangePane ucDialog = new UserChangePanepanelParent, uc);
+        ucDialog.pack();
+        */
+    }
+
+    private void configAppProperties(){
+        /*
+        VariableService variableService= new VariableService();
+        ApplicationProperties ap = variableService.getApplicationVariables();
+        ServerChangePane scPane = new ServerChangePane(panelParent,ap);
+        scDialog.pack();
+        */
+    }
+
+
+    private void addAcc() {
+        AccTableModel accTableModel = accTable.getModel();
+        FenixAcc acc = new FenixAcc();
 
     acc.setCriticidad(AccCriticidad.MEDIA.getDescription());
     acc.setIdPeticionOtAsociada(getPeticionSelected(peticionesDisponiblesCmb));

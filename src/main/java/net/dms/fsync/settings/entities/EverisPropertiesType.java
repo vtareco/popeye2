@@ -19,7 +19,11 @@ public enum EverisPropertiesType {
     JIRA_USER("everis.conf.jira.user"),
     JIRA_PASSWORD("everis.conf.jira.password"),
     JIRA_URL_BASE("everis.conf.jira.urlbase"),
-    INCIDENCIAS_FILE_NAME("everis.conf.incidencias.file.name");
+    INCIDENCIAS_FILE_NAME("everis.conf.incidencias.file.name"),
+    PROXY_HOST("everis.conf.proxyConfiguration.host"),
+    PROXY_PORT("everis.conf.proxyConfiguration.port"),
+    WORKING_DIRECTORY("everis.conf.project.path");
+
 
     private String property;
 
@@ -30,4 +34,7 @@ public enum EverisPropertiesType {
     public String getProperty() {
         return property;
     }
-}
+
+    public void setProperty(String property) {
+        this.property = property;
+    }}

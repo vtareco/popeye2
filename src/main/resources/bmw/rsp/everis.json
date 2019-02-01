@@ -1,34 +1,10 @@
 {
   "actores": [
     {
-      "numeroEmpleadoEveris": "111911",
-      "usuarioJira": "diego.minano.sanchez",
-      "email": "dminanos@everis.com",
-      "nombre": "Diego Miñano Sánchez"
-    },
-    {
-      "numeroEmpleadoEveris": "145429",
-      "usuarioJira": "rafael.sevilla.cuenca",
-      "email": "",
-      "nombre": "Rafael Sevilla Cuenca"
-    },
-    {
-      "numeroEmpleadoEveris": "137742",
-      "usuarioJira": "jrey105",
-      "email": "",
-      "nombre": "Javi Rey"
-    },
-    {
-      "numeroEmpleadoEveris": "137920",
-      "usuarioJira": "csanemet",
-      "email": "",
-      "nombre": "Carlos San Emeterio"
-    },
-    {
-      "numeroEmpleadoEveris": "120601",
-      "usuarioJira": "ana---",
-      "email": "",
-      "nombre": "Ana María"
+      "numeroEmpleadoEveris": "151028",
+      "usuarioJira": "vasco.matos.tareco@everis.com",
+      "email": "vasco.matos.tareco@everis.com",
+      "nombre": "Vasco Matos Tareco"
     }
   ]
 }

@@ -36,6 +36,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -80,7 +81,7 @@ public class EverisManager {
   private JButton generateSpecificationRequirementsBtn;
   private JPopupMenu refreshMenu;
 
-
+  JiraIssue issue;
   JiraService jiraService;
   FenixService fenixService;
   TableSettingControl tableSettingControl;
@@ -205,7 +206,7 @@ public class EverisManager {
 
     acc.setCriticidad(AccCriticidad.MEDIA.getDescription());
     acc.setIdPeticionOtAsociada(getPeticionSelected(peticionesDisponiblesCmb));
-    acc.setEstado(AccStatus.EN_EJECUCION.getDescription());
+    acc.setEstado(AccStatus.PENDIENTE_ASIGNACION.getDescription());
     acc.setRechazosEntrega(0);
 
     AccDialog dialog = new AccDialog(panelParent, acc);
@@ -325,20 +326,41 @@ public class EverisManager {
 
   private void refreshJira() {
     String filter;
+    String text=txtJiraTask.getText();
     if (isSelectedFilterById()) {
       filter = String.format(getJiraFilterSelected(), txtJiraTask.getText());
-    } else {
+    }
+    else {
       filter = getJiraFilterSelected();
     }
-    if (filter != null) {
+
+    if(filter.equals("key=")){
+      errorPopup();
+    }else if(filter != null){
       searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
 
     }
+   /* if (filter != null) {
+      searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
+      System.out.println("entrei  ");
+
+    }*/
+
+
   }
 
   private void searchJiras(Consumer<List<JiraIssue>> consumer, String filter) {
+
     JiraSearchResponse response = jiraService.search(filter);
     consumer.accept(response.getIssues());
+
+   /*for(JiraIssue j: response.getIssues()){
+     if(j.getKey().compareToIgnoreCase(filter.substring(4))!=0){
+       System.out.println("key "+j.getKey());
+       System.out.println("filter "+filter.substring(4));
+       errorPopup();
+     }
+   }*/
   }
 
   private void handleException(Exception ex) {
@@ -828,6 +850,36 @@ public class EverisManager {
     estimadoVersusIncurridoText.setText("");
 
     ComponentStateService.getInstance().clearInitialized(EverisComponentType.values());
+  }
+
+
+  public void errorPopup(){
+    JFrame frmError = new JFrame();
+    //frmError.setSize(100,100);
+    frmError.setTitle("Error");
+    frmError.setPreferredSize(new Dimension(448, 210));
+    //frmError.setBounds(100, 100, 448, 210);
+    frmError.dispatchEvent(new WindowEvent(frmError, WindowEvent.WINDOW_CLOSING));
+    frmError.getContentPane().setLayout(null);
+
+    JLabel lblPeticinIncorrectaOu = new JLabel("Petici\u00F3n incorrecta o datos no v\u00E1lidos !");
+    lblPeticinIncorrectaOu.setFont(new Font("Arial", Font.BOLD, 17));
+    lblPeticinIncorrectaOu.setBounds(59, 75, 308, 20);
+    frmError.getContentPane().add(lblPeticinIncorrectaOu);
+
+    JButton btnNewButton = new JButton("Close");
+    btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    btnNewButton.setBounds(317, 137, 89, 23);
+    frmError.getContentPane().add(btnNewButton);
+    btnNewButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        frmError.dispatchEvent(new WindowEvent(frmError, WindowEvent.WINDOW_CLOSING));
+      }
+    });
+
+    frmError.pack();
+    frmError.setVisible(true);
   }
 
 }

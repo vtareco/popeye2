@@ -5,6 +5,21 @@
       "usuarioJira": "vasco.matos.tareco@everis.com",
       "email": "vasco.matos.tareco@everis.com",
       "nombre": "Vasco Matos Tareco"
+    },{
+      "numeroEmpleadoEveris": "156894",
+      "usuarioJira": "belmiro.edgar.morais@everis.com",
+      "email": "belmiro.edgar.morais@everis.com",
+      "nombre": "Belmiro Edgar Morais"
+    },{
+      "numeroEmpleadoEveris": "166086",
+      "usuarioJira": "monica.santos.lemos@everis.com",
+      "email": "monica.santos.lemos@everis.com",
+      "nombre": "Mónica Santos Lemos"
+    },{
+      "numeroEmpleadoEveris": "170216",
+      "usuarioJira": "helio.dinis.primo@everis.com",
+      "email": "helio.dinis.primo@everis.com",
+      "nombre": "Hélio Dinis Primo"
     }
   ]
 }

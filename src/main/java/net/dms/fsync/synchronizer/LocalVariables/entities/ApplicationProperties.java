@@ -27,8 +27,8 @@ public class ApplicationProperties {
         return fenixUrl;
     }
 
-    public void setFenirUrl(String fenirUrl) {
-        this.fenixUrl = fenirUrl;
+    public void setFenixUrl(String fenixUrl) {
+        this.fenixUrl = fenixUrl;
     }
 
     public String getJiraUrl() {

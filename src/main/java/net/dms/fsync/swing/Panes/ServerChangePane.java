@@ -20,15 +20,17 @@ public class ServerChangePane extends JPanel {
     private JButton acceptChangesJbtn, declineChangesJbtn, openFileChooser;
     private JLabel proxyJl,fenixServerJl,jiraServerJl,currentPathJl;
 
-    public ServerChangePane(JenixSettings js) {
+
+    public ServerChangePane(String path) {
         setLayout(null);
         this.setSize(600, 400);
       this.setName("ApplicationProperties");
-        loadPane(js);
-
+        loadPane(path);
     }
 
-    public void loadPane(JenixSettings js) {
+
+    public void loadPane(String path) {
+        LocalVariables lv = new LocalVariables();
         pathJfc = new JFileChooser();
         fenixServerJtf = new JTextField();
         jiraServerJtf = new JTextField();
@@ -41,10 +43,11 @@ public class ServerChangePane extends JPanel {
         fenixServerJl = new JLabel();
         jiraServerJl = new JLabel();
         proxyJl = new JLabel();
+        ApplicationProperties ap = lv.getApFromJson(path);
         labelConfigutationLoader();
-        buttonConfigurationLoad(js.getAp().getWorkingDirectory());
-        textFieldConfigurationLoader(js);
-        pathConfigurationLoader(js);
+        buttonConfigurationLoad(ap.getWorkingDirectory());
+        textFieldConfigurationLoader(ap);
+        pathConfigurationLoader(ap);
 
 
 
@@ -53,7 +56,7 @@ public class ServerChangePane extends JPanel {
         acceptChangesJbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeServerFunction(js);
+                changeServerFunction(ap,path);
             }
         });
 
@@ -62,7 +65,7 @@ public class ServerChangePane extends JPanel {
         openFileChooser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pathChooserFunction(js);
+                pathChooserFunction(ap);
             }
         });
 
@@ -74,7 +77,7 @@ public class ServerChangePane extends JPanel {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                openFileChooser.setText("Current path: " + js.getAp().getWorkingDirectory());
+                openFileChooser.setText("Current path: " + ap.getWorkingDirectory());
             }
         });
 
@@ -82,37 +85,38 @@ public class ServerChangePane extends JPanel {
     }
 
 
-   private void  changeServerFunction(JenixSettings js){
+   private void  changeServerFunction(ApplicationProperties ap,String path){
        LocalVariables lv = new LocalVariables();
 
-       js.getAp().setFenirUrl(fenixServerJtf.getText());
-       js.getAp().setJiraUrl(jiraServerJtf.getText());
-       js.getAp().setProxyHost(proxyHostJtf.getText());
-       js.getAp().setProxyHost(proxyHostJtf.getText());
-
-     lv.alterConf(js);
+       ap.setFenixUrl(fenixServerJtf.getText());
+       ap.setJiraUrl(jiraServerJtf.getText());
+       ap.setProxyHost(proxyHostJtf.getText());
+       ap.setProxyHost(proxyHostJtf.getText());
+       ap.setProxyPort(proxyPortJtf.getText());
+        lv.serverConfiguration(ap,path);
+    // lv.alterConf(js);
 
     }
 
-    private void textFieldConfigurationLoader(JenixSettings js) {
-        fenixServerJtf.setText(js.getAp().getFenixUrl());
+    private void textFieldConfigurationLoader(ApplicationProperties ap) {
+        fenixServerJtf.setText(ap.getFenixUrl());
         fenixServerJtf.setBounds(160,30,300,25);
         fenixServerJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         this.add(fenixServerJtf);
 
 
-        jiraServerJtf.setText(js.getAp().getJiraUrl());
+        jiraServerJtf.setText(ap.getJiraUrl());
         jiraServerJtf.setBounds(160,90,300,25);
         jiraServerJtf.setFont(new Font("Arial", Font.PLAIN, 16));
        this.add(jiraServerJtf);
 
 
-        proxyHostJtf.setText(js.getAp().getProxyHost());
+        proxyHostJtf.setText(ap.getProxyHost());
         proxyHostJtf.setBounds(160,150,300,25);
         proxyHostJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         this.add(proxyHostJtf);
 
-        proxyPortJtf.setText(js.getAp().getProxyPort());
+        proxyPortJtf.setText(ap.getProxyPort());
         proxyPortJtf.setBounds(480,150,50,25);
         proxyPortJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         this.add(proxyPortJtf);
@@ -143,8 +147,9 @@ public class ServerChangePane extends JPanel {
     }
 
 
-    private void pathConfigurationLoader(JenixSettings js) {
-        pathJfc.setCurrentDirectory(new File(js.getAp().getWorkingDirectory()));
+    private void pathConfigurationLoader(ApplicationProperties ap) {
+
+        pathJfc.setCurrentDirectory(new File(ap.getWorkingDirectory()));
         pathJfc.setDialogTitle("Working path");
         pathJfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         pathJfc.setAcceptAllFileFilterUsed(false);
@@ -169,12 +174,12 @@ public class ServerChangePane extends JPanel {
     }
 
 
-    private void pathChooserFunction(JenixSettings js) {
+    private void pathChooserFunction(ApplicationProperties ap) {
 
         if (pathJfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            js.getAp().setWorkingDirectory(pathJfc.getSelectedFile().toString());
+            ap.setWorkingDirectory(pathJfc.getSelectedFile().toString());
 
-            buttonConfigurationLoad(js.getAp().getWorkingDirectory());
+            buttonConfigurationLoad(ap.getWorkingDirectory());
         } else {
             System.out.println("No Selection ");
         }

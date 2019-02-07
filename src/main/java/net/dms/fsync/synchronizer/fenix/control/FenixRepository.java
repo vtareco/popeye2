@@ -599,8 +599,9 @@ public class FenixRepository {
             Workbook wb = WorkbookFactory.create(fis);
             IOUtils.closeQuietly(fis);
             Sheet sheet = wb.getSheetAt(0);
+            System.out.println("ult "+sheet.getLastRowNum());
 
-            for (int i = 1; i < sheet.getLastRowNum(); i++){
+            for (int i = 1; i <= sheet.getLastRowNum(); i++){
                 if (sheet.getRow(i) == null || sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()) == null
                         || StringUtils.isEmpty(sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()).getStringCellValue())){
                     continue;

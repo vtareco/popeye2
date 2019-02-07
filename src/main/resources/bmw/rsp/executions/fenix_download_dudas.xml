@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<execution name="fenix_download_dudas">
+    <actions>
+        <action name="download">
+            <url>${everis.conf.fenix.urlbase}/fenix/requerimientos/exportarDudasAction.do?PETICION_OID=${everis.fenix.idpeticionot}&amp;pathKey=dudas.template.path.key&amp;fileName=dudas.template.filename.key</url>
+            <httpMethod>GET</httpMethod>
+            <headers>
+                <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"/>
+                <header name="Accept-Encoding" value="gzip, deflate, sdch"/>
+                <header name="Accept-Language" value="es,en;q=0.8,de;q=0.6"/>
+                <header name="Connection" value="keep-alive"/>
+                <header name="Cookie" value="ActuacionesGrid=12; gridIncTab=6; TIMEZONE=21; LOGIN_LAST_USER=dminanos; JSESSIONID=${response.header.Set-Cookie.JSESSIONID}"/>
+                <header name="Host" value="${everis.conf.fenix.upload_download}"/> 
+                <header name="Referer" value="${everis.conf.fenix.urlbase}/fenix/requerimientos/hyperlinkAction.do?urlOrigen=peticionAdmin&amp;urlDestino=peticionEjecutar&amp;idDestino=${everis.fenix.idpeticionot}"/>
+                <header name="Upgrade-Insecure-Requests" value="1"/>
+                <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
+            </headers>
+            <validators>
+                <validator className="net.dms.fsync.httphandlers.control.validators.ContentTypeValidator">
+                    <parameters>
+                        <parameter>
+                            <name>content-type</name>
+                            <value>application/vnd.ms-excel</value>
+                        </parameter>
+                    </parameters>
+                </validator>
+            </validators>
+        </action>
+    </actions>
+</execution>

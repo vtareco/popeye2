@@ -1,17 +1,15 @@
 package net.dms.fsync.synchronizer.fenix.entities.enumerations;
 
 /**
- * Created by dminanos on 19/04/2017.
+ * Created by vics on 05/02/2019.
  */
-public enum AccCriticidad implements VisualizableType{
-    CRITICA("Crítica"),
-    ALTA("Alta"),
-    MEDIA("Media"),
-    BAJA("Baja");
+public enum DudaDocEntrIncType implements VisualizableType{
+    SI("Si"),
+    NO("No");
 
     private String description;
 
-    AccCriticidad(String description) {
+    DudaDocEntrIncType(String description) {
         this.description = description;
     }
 

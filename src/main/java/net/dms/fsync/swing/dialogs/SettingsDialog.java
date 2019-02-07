@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.dialogs;
 
+import net.dms.fsync.swing.Panes.AddFilter;
 import net.dms.fsync.swing.Panes.ServerChangePane;
 import net.dms.fsync.swing.Panes.UserChangePane;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
@@ -38,6 +39,11 @@ public class SettingsDialog  extends JDialog {
 
         JPanel serverChange = new ServerChangePane(js);
         tabbedPane.addTab("Application Properties", null, serverChange, null);
+
+        JPanel addFilter = new AddFilter(js);
+        tabbedPane.addTab("Filters Configuration", null, addFilter, null);
+
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 

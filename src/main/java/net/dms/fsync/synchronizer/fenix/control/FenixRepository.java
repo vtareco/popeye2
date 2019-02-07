@@ -9,10 +9,7 @@ import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.fenix.control.handlers.GetIncidenciaMetaDataAction;
-import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
-import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
-import net.dms.fsync.synchronizer.fenix.entities.FenixPeticion;
-import net.dms.fsync.synchronizer.fenix.entities.FenixRequirementSpecification;
+import net.dms.fsync.synchronizer.fenix.entities.*;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -21,10 +18,10 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
+import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -42,6 +39,8 @@ public class FenixRepository {
     private FenixAccMapper accMapper = new FenixAccMapper();
 
     private FenixIncidenciaMapper incidenciaMapper = new FenixIncidenciaMapper();
+/*AQUI*/
+    private FenixDudaMapper dudaMapper = new FenixDudaMapper();
 
     private FenixRequirementSpecificationMapper fenixRequirementSpecificationMapper= new FenixRequirementSpecificationMapper();
 
@@ -104,6 +103,19 @@ public class FenixRepository {
         upload.execute();
 
 
+    }
+
+    public void uploadDudas(Long idPeticionOt){
+        Map<String, String> variables = createFenixVariables(idPeticionOt.toString());
+        variables.put(EverisVariables.UPLOAD_FILE.getVariableName(), getDudasFile(idPeticionOt).getAbsolutePath().replaceAll("\\\\" , "/"));
+
+        // TODO FIXME
+        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
+        ae.execute();
+
+
+       /* ActionExecutor upload = new ActionExecutor("/bmw/rsp/executions/fenix_upload_incidencias.xml", variables);
+        upload.execute();*/
     }
 
     public List<FenixAcc> searchACCsIncurridos(Long idOt, boolean forceDownload){
@@ -239,6 +251,13 @@ public class FenixRepository {
         URL url =  Thread.class.getResource("/fenix/templates/PlantillaCargaMasivaIncidencias.xls");
         return new File(url.getFile());
     }
+
+    /* AQUI */
+    public File getDudasTemplate(){
+        URL url =  Thread.class.getResource("/fenix/templates/Plantilla_de_dudas.xlsx");
+        return new File(url.getFile());
+    }
+
     public File getACCsFile(Long idPeticion){
         File path;
         File peticionFile = getPeticionDir(idPeticion);
@@ -272,6 +291,19 @@ public class FenixRepository {
         String fileName = EverisConfig.getInstance().getProperty(EverisPropertiesType.ACC_INCURRIDOS_FILE_NAME);
         fileName = Utils.replaceVariable("idPeticionOt", idPeticionOt.toString(), fileName);
         path = new File(peticionFile.getAbsolutePath() + "/" + fileName);
+        return path;
+    }
+
+    /* AQUI*/
+    public File getDudasFile(Long idPeticionOt){
+        File path;
+        File dudasFile = getPeticionDir(idPeticionOt);
+        if (dudasFile == null){
+            throw new AppException("Peticion folder doesn´t exist");
+        }
+        String fileName = EverisConfig.getInstance().getProperty(EverisPropertiesType.DUDAS_FILE_NAME);
+        fileName = Utils.replaceVariable("idPeticionOt", idPeticionOt.toString(), fileName);
+        path = new File(dudasFile.getAbsolutePath() + "/" + fileName);
         return path;
     }
 
@@ -402,7 +434,19 @@ public class FenixRepository {
         fs.execute();
     }
 
+    /*DOWNLOAD AQUI*/
+    private void downloadDudas(Long idOt, String pathFile) {
+        Map<String, String> variables = createFenixVariables(idOt.toString());
+
+        ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
+        ae.execute();
+
+        DownloadAction fs = new DownloadAction("/bmw/rsp/executions/fenix_download_dudas.xml", pathFile, variables);
+        fs.execute();
+    }
+
     public void saveIncidencias(List<FenixIncidencia> incidencias) {
+        System.out.println("incidencias com valores");
         File accFile = getIncidenciasFile(Long.valueOf(incidencias.get(0).getIdPeticionOt()));
         File template = getIncidenciasTemplate();
         InputStream fis;
@@ -438,6 +482,7 @@ public class FenixRepository {
 
         Map<String, String> variables = createFenixVariables(idOt.toString());
         ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_login.xml", variables);
+        System.out.println("2 passo");
         ae.execute();
 
         GetIncidenciaMetaDataAction getIncidencias = new GetIncidenciaMetaDataAction(variables);
@@ -530,6 +575,79 @@ public class FenixRepository {
                 return null;
             }
         } catch (IOException e) {
+            throw new AppException(e);
+        }
+    }
+
+    /* AQUI */
+
+    public List<FenixDuda> searchDudasByOtId(Long idOt, boolean forceDownload) {
+
+        List<FenixDuda> dudas = new ArrayList<>();
+
+        File dudaFile = getDudasFile(idOt);
+        if (forceDownload){
+            removeFile(dudaFile);
+        }
+        InputStream fis;
+        try {
+            if (!dudaFile.exists()) {
+                downloadDudas(idOt, dudaFile.getAbsolutePath());
+            }
+            fis = new FileInputStream(dudaFile);
+
+            Workbook wb = WorkbookFactory.create(fis);
+            IOUtils.closeQuietly(fis);
+            Sheet sheet = wb.getSheetAt(0);
+
+            for (int i = 1; i < sheet.getLastRowNum(); i++){
+                if (sheet.getRow(i) == null || sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()) == null
+                        || StringUtils.isEmpty(sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()).getStringCellValue())){
+                    continue;
+                }
+                logger.debug("Processing row {}", i);
+                FenixDuda duda = dudaMapper.map(sheet.getRow(i));
+                dudas.add(duda);
+            }
+
+
+        }catch(IOException ex){
+            throw new AppException(ex);
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+            throw new AppException(e);
+        }
+        return dudas;
+    }
+
+    public void saveDudas(List<FenixDuda> dudas) {
+        File dudaFile = getDudasFile(Long.valueOf(dudas.get(0).getAcc()));
+        File template = getDudasTemplate();
+        InputStream fis;
+        int lastRow = 4;
+        try {
+
+            fis = new FileInputStream(template);
+
+            Workbook wb = WorkbookFactory.create(fis);
+            fis.close();
+            Sheet sheet = wb.getSheetAt(0);
+
+
+            for(FenixDuda duda : dudas) {
+                Row row = sheet.createRow(lastRow);
+                dudaMapper.mapDudaToRow(wb,row,duda);
+                lastRow++;
+            }
+
+
+            FileOutputStream fos = new FileOutputStream(dudaFile);
+            wb.write(fos);
+            fos.close();
+        }catch(IOException ex){
+            throw new AppException(ex);
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
             throw new AppException(e);
         }
     }

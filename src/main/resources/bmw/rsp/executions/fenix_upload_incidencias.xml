@@ -7,14 +7,14 @@
             <httpMethod>POST</httpMethod>
             <headers>
                 <header name="Cookie" value="TIMEZONE=21; LOGIN_LAST_USER=dminanos; JSESSIONID=${response.header.Set-Cookie.JSESSIONID}"/>
-                <header name="Host" value="${everis.conf.fenix.urlbase}"/>
+                <header name="Host" value="${everis.conf.fenix.upload_download}"/> <!-- UPLOAD INCIDENCIAS -->
                 <header name="User-Agent" value="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"/>
                 <header name="Accept" value="text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"/>
                 <header name="Accept-Encoding" value="gzip, deflate"/>
                 <header name="Accept-Language" value="es,en;q=0.9,de;q=0.8"/>
                 <header name="Cache-Control" value="max-age=0"/>
                 <header name="Connection" value="keep-alive"/>
-                <header name="Upgrade-Insecure-Requests" value="1"/>
+                <header name="Upgrade-Insecure-Requests" value="1"/>ss
                 <header name="Origin" value="${everis.conf.fenix.urlbase}"/>
                 <header name="Referer" value="${everis.conf.fenix.urlbase}/fenix/requerimientos/CargaMasivaIncidenciasNuevo.jsp"/>
             </headers>

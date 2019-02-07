@@ -52,7 +52,7 @@ public class JiraRepository {
            return response;
 
         }catch(Exception ex){
-           throw new AppException("Invalid Number");
+           throw new AppException(ex);
         }
     }
 

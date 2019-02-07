@@ -305,22 +305,24 @@ public class EverisManager {
 
 
     private void filterSelectorHandler() {
+
+      /*
         LocalVariables lv = new LocalVariables();
         Filter filter = lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(),jsonFilters.toString());
         if(!filter.getFilterName().equals("null")){
             System.out.println(filter.getFilterName() + " "+ filter.getFilterQuery());
         }
 
+*/
 
 
-        /*
         if (isSelectedFilterById()) {
             txtJiraTask.setVisible(true);
         } else {
             txtJiraTask.setVisible(false);
             refreshJira();
         }
-*/
+
 
     }
 
@@ -503,8 +505,9 @@ public class EverisManager {
             filtersName.add(f.getFilterName());
         }
         SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
+        SwingUtil.loadComboBox(jiraFilters.keySet(),jiraFiltersCmb, true);
 
-        SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
+        //SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
         // txtJiraTask.setVisible(false);
 
 

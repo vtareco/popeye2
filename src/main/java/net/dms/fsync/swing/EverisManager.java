@@ -15,10 +15,7 @@ import net.dms.fsync.swing.preferences.TableSettingControl;
 import net.dms.fsync.swing.preferences.TableType;
 import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
-import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
-import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
-import net.dms.fsync.synchronizer.LocalVariables.entities.JsonPaths;
-import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
+import net.dms.fsync.synchronizer.LocalVariables.entities.*;
 import net.dms.fsync.synchronizer.fenix.business.FenixService;
 import net.dms.fsync.synchronizer.fenix.control.FenixAccMapper;
 import net.dms.fsync.synchronizer.fenix.entities.*;
@@ -203,9 +200,7 @@ public class EverisManager {
                 e.printStackTrace();
             }
 
-            if (jsonUserCreate.exists() && jsonApplicationProperties.exists()) {
-                configUserChange();
-            }
+
 
         } else {
             System.out.println("Directory Already Exists");
@@ -318,23 +313,6 @@ public class EverisManager {
 
     }
 
-    private void configUserChange() {
-        /*
-        VariableService variableService = new VariableService();
-        UserChange uc = variableService.getUserVariables();
-        UserChangePane ucDialog = new UserChangePanepanelParent, uc);
-        ucDialog.pack();
-        */
-    }
-
-    private void configAppProperties() {
-        /*
-        VariableService variableService= new VariableService();
-        ApplicationProperties ap = variableService.getApplicationVariables();
-        ServerChangePane scPane = new ServerChangePane(panelParent,ap);
-        scDialog.pack();
-        */
-    }
 
 
     private void addAcc() {
@@ -357,15 +335,6 @@ public class EverisManager {
             accTable.setRowSelectionInterval(accTableModel.getRowCount() - 1, accTableModel.getRowCount() - 1);
         }
 
-    }
-
-    private void filterSelectorHandler() {
-        if (isSelectedFilterById()) {
-            txtJiraTask.setVisible(true);
-        } else {
-            txtJiraTask.setVisible(false);
-            refreshJira();
-        }
     }
 
     private void uploadIncidencias() {
@@ -449,8 +418,25 @@ public class EverisManager {
 
     }
 
+
+    private void filterSelectorHandler() {
+        LocalVariables lv = new LocalVariables();
+        Filter filter = lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(),jsonFilters.toString());
+        if(!filter.getFilterName().equals("null")){
+            if(isSelectedFilterById()){
+                txtJiraTask.setVisible(true);
+                System.out.println(filter.getFilterName() + " " + filter.getFilterQuery());
+            }
+            else{
+                refreshJira();
+            }
+        }
+    }
+
     private boolean isSelectedFilterById() {
-        return EverisPropertiesType.JIRA_FILTRO_BY_ID.getProperty().equals(jiraFiltersCmb.getSelectedItem());
+        System.out.println(EverisPropertiesType.JIRA_FILTRO_BY_ID.getProperty());
+        System.out.println(WorkingJira.getJiraFilterProperty() + jiraFiltersCmb.getSelectedItem());
+        return EverisPropertiesType.JIRA_FILTRO_BY_ID.getProperty().equals(WorkingJira.getJiraFilterProperty() + jiraFiltersCmb.getSelectedItem());
     }
 
     private void loadAccs() {
@@ -464,6 +450,7 @@ public class EverisManager {
     private void refreshJira() {
         String filter;
         String text = txtJiraTask.getText();
+        LocalVariables lv = new LocalVariables();
         if (isSelectedFilterById()) {
             filter = String.format(getJiraFilterSelected(), txtJiraTask.getText());
         } else {
@@ -471,8 +458,9 @@ public class EverisManager {
         }
 
         if (filter.equals("key=")) {
-            throw new UnsupportedOperationException();//// FIXME: 07/02/2019 PEDRO
+            throw new UnsupportedOperationException();
         } else if (filter != null) {
+            System.out.println("aquiiii"+filter);
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
 
         }
@@ -517,11 +505,12 @@ public class EverisManager {
     }
 
     private String getJiraFilterSelected() {
+        LocalVariables lv = new LocalVariables();
         String selected = (String) jiraFiltersCmb.getSelectedItem();
         if (StringUtils.isEmpty(selected)) {
             return null;
         } else {
-            return jiraFilters.get(selected);
+            return lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(),jsonFilters.toString()).getFilterQuery();
         }
     }
 
@@ -546,9 +535,9 @@ public class EverisManager {
             filtersName.add(f.getFilterName());
         }
         SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
-        SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
+        //SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
 
-        //SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
+        SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
         // txtJiraTask.setVisible(false);
 
 

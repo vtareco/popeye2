@@ -507,6 +507,8 @@ public class EverisManager {
         SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
         SwingUtil.loadComboBox(jiraFilters.keySet(),jiraFiltersCmb, true);
 
+
+
         //SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
         // txtJiraTask.setVisible(false);
 

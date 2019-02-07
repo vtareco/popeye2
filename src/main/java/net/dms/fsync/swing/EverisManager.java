@@ -8,6 +8,7 @@ import net.dms.fsync.swing.dialogs.ColumnsSettingDialog;
 import net.dms.fsync.swing.dialogs.InternalIncidenceDialog;
 import net.dms.fsync.swing.dialogs.SettingsDialog;
 import net.dms.fsync.swing.models.AccTableModel;
+import net.dms.fsync.swing.models.DudaTableModel;
 import net.dms.fsync.swing.models.IncidenciaTableModel;
 import net.dms.fsync.swing.models.JiraTableModel;
 import net.dms.fsync.swing.preferences.TableSettingControl;
@@ -34,7 +35,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,6 +88,15 @@ public class EverisManager {
     private File jsonApplicationProperties = new File(jenixFoulder.toString() + "/ApplicationProperties.json");
     private File jsonFilters = new File(jenixFoulder.toString() + "/Filters.json");
 
+    /* AQUI */
+    private JenixTable<DudaTableModel, FenixDuda> dudasTable;
+    private JButton addDudasBtn;
+    private JButton saveDudasBtn;
+    private JButton uploadDudasBtn;
+    private JButton refreshDudasBtn;
+    private JButton removeDudasBtn;
+    private JScrollPane dudasScrollPane;
+
 
     JiraService jiraService;
     FenixService fenixService;
@@ -136,12 +145,26 @@ public class EverisManager {
         SwingUtil.registerListener(checkJiraStatusBtn, this::checkJiraStatus, this::handleException);
         SwingUtil.registerListener(configFenixTable, this::configFenixTable, this::handleException);
 
+
+        /* AQUI */
+        SwingUtil.registerListener(saveDudasBtn, this::saveDudas, this::handleException);
+        SwingUtil.registerListener(removeDudasBtn, this::removeDuda, this::handleException);
+
         SwingUtil.registerListener(settingsJbtn, this::confingJenixSettings, this::handleException);
+
         tabbedPanel.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 try {
+               /* if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_INCIDENCIA)){
+                    System.out.println("incidencias");
                     initTabIncidencias();
+                  }*/
+                    if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA)) {
+                        System.out.println("dudas");
+                        initTabDudas();
+                    }
+
                 } catch (Exception ex) {
                     handleException(ex);
                 }
@@ -180,6 +203,9 @@ public class EverisManager {
                 e.printStackTrace();
             }
 
+            if (jsonUserCreate.exists() && jsonApplicationProperties.exists()) {
+                configUserChange();
+            }
 
         } else {
             System.out.println("Directory Already Exists");
@@ -261,6 +287,11 @@ public class EverisManager {
         fenixService.saveIncidencia(incidenciasTable.getList());
     }
 
+    /* AQUI */
+    private void saveDudas() {
+        fenixService.saveDuda(dudasTable.getList());
+    }
+
     private void removeAcc() {
         AccTableModel accTM = accTable.getModel();
         accTM.getList().removeAll(accTM.getElements(accTable.getModelSelectedRows()));
@@ -273,11 +304,36 @@ public class EverisManager {
         tableModel.fireTableDataChanged();
     }
 
+    /* AQUI */
+    private void removeDuda() {
+        DudaTableModel dudaTableModel = dudasTable.getModel();
+        dudaTableModel.getList().removeAll(dudaTableModel.getElements(dudasTable.getModelSelectedRows()));
+        dudaTableModel.fireTableDataChanged();
+    }
+
     private void confingJenixSettings() {
         JsonPaths jsonpaths = new JsonPaths(jsonUserCreate.toString(), jsonApplicationProperties.toString(), jsonFilters.toString());
         SettingsDialog settingsDialog = new SettingsDialog(tabbedPanel, jsonpaths);
         settingsDialog.pack();
 
+    }
+
+    private void configUserChange() {
+        /*
+        VariableService variableService = new VariableService();
+        UserChange uc = variableService.getUserVariables();
+        UserChangePane ucDialog = new UserChangePanepanelParent, uc);
+        ucDialog.pack();
+        */
+    }
+
+    private void configAppProperties() {
+        /*
+        VariableService variableService= new VariableService();
+        ApplicationProperties ap = variableService.getApplicationVariables();
+        ServerChangePane scPane = new ServerChangePane(panelParent,ap);
+        scDialog.pack();
+        */
     }
 
 
@@ -303,29 +359,14 @@ public class EverisManager {
 
     }
 
-
     private void filterSelectorHandler() {
-
-      /*
-        LocalVariables lv = new LocalVariables();
-        Filter filter = lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(),jsonFilters.toString());
-        if(!filter.getFilterName().equals("null")){
-            System.out.println(filter.getFilterName() + " "+ filter.getFilterQuery());
-        }
-
-*/
-
-
         if (isSelectedFilterById()) {
             txtJiraTask.setVisible(true);
         } else {
             txtJiraTask.setVisible(false);
             refreshJira();
         }
-
-
     }
-
 
     private void uploadIncidencias() {
         fenixService.uploadIncidencias(getPeticionSelected(peticionesDisponiblesCmb));
@@ -430,7 +471,7 @@ public class EverisManager {
         }
 
         if (filter.equals("key=")) {
-            errorPopup();
+            throw new UnsupportedOperationException();//// FIXME: 07/02/2019 PEDRO
         } else if (filter != null) {
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
 
@@ -505,7 +546,7 @@ public class EverisManager {
             filtersName.add(f.getFilterName());
         }
         SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
-        SwingUtil.loadComboBox(jiraFilters.keySet(),jiraFiltersCmb, true);
+        SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
 
         //SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
         // txtJiraTask.setVisible(false);
@@ -634,6 +675,7 @@ public class EverisManager {
                         fenixIncidencia.setPrioridad(IncidenciaPrioridadType.MEDIA.getDescription());
                         fenixIncidencia.setOtCorrector(getPeticionSelected(peticionesDisponiblesCmb).toString());
 
+                        fenixIncidencia.setIdPeticionOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
                         incidenciasTable.addRow(fenixIncidencia);
                     } catch (Exception ex) {
                         handleException(ex);
@@ -692,6 +734,12 @@ public class EverisManager {
         incidenciasTable = new JenixTable(incidenciaTableModel);
         incidenciasScrollPane = new JScrollPane(incidenciasTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         incidenciasTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        /* AQUI */
+        DudaTableModel dudaTableModel = new DudaTableModel(new ArrayList<>());
+        dudasTable = new JenixTable(dudaTableModel);
+        dudasScrollPane = new JScrollPane(dudasTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        dudasTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
     }
 
@@ -842,6 +890,39 @@ public class EverisManager {
         forceDownloadCheckBox = new JCheckBox();
         forceDownloadCheckBox.setText("Forzar descarga");
         otPanel.add(forceDownloadCheckBox, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
+        /* AQUI */
+
+        final JPanel panel_dudas = new JPanel();
+        panel_dudas.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+
+        tabbedPanel.addTab("Dudas", panel_dudas);
+        incidenciasScrollPane = new JScrollPane();
+        panel5.add(incidenciasScrollPane, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        dudasScrollPane.setViewportView(dudasTable);
+
+        final JToolBar toolBar_dudas = new JToolBar();
+        panel_dudas.add(toolBar_dudas, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 20), null, 0, false));
+
+        addDudasBtn = new JButton();
+        addDudasBtn.setText("Add");
+        toolBar_dudas.add(addDudasBtn);
+
+        saveDudasBtn = new JButton();
+        saveDudasBtn.setText("Guardar excel");
+        toolBar_dudas.add(saveDudasBtn);
+
+        uploadDudasBtn = new JButton();
+        uploadDudasBtn.setText("Upload");
+        toolBar_dudas.add(uploadDudasBtn);
+
+        refreshDudasBtn = new JButton();
+        refreshDudasBtn.setText("Actualizar");
+        toolBar_dudas.add(refreshDudasBtn);
+
+        removeDudasBtn = new JButton();
+        removeDudasBtn.setText("Eliminar");
+        toolBar_dudas.add(removeDudasBtn);
     }
 
     /**
@@ -946,34 +1027,93 @@ public class EverisManager {
         ComponentStateService.getInstance().clearInitialized(EverisComponentType.values());
     }
 
+    private void initTabDudas() {
 
-    public void errorPopup() {
-        JFrame frmError = new JFrame();
-        //frmError.setSize(100,100);
-        frmError.setTitle("Error");
-        frmError.setPreferredSize(new Dimension(448, 210));
-        //frmError.setBounds(100, 100, 448, 210);
-        frmError.dispatchEvent(new WindowEvent(frmError, WindowEvent.WINDOW_CLOSING));
-        frmError.getContentPane().setLayout(null);
+        if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA)) {
 
-        JLabel lblPeticinIncorrectaOu = new JLabel("Petici\u00F3n incorrecta o datos no v\u00E1lidos !");
-        lblPeticinIncorrectaOu.setFont(new Font("Arial", Font.BOLD, 17));
-        lblPeticinIncorrectaOu.setBounds(59, 75, 308, 20);
-        frmError.getContentPane().add(lblPeticinIncorrectaOu);
+            ComponentStateService.getInstance().addInitializedComponent(EverisComponentType.TAB_DUDA);
+            dudasTable.getModel().load(fenixService.searchDudasByOtId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
 
-        JButton btnNewButton = new JButton("Close");
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        btnNewButton.setBounds(317, 137, 89, 23);
-        frmError.getContentPane().add(btnNewButton);
-        btnNewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frmError.dispatchEvent(new WindowEvent(frmError, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+      /*
+      ComponentStateService.getInstance().addInitializedComponent(EverisComponentType.TAB_INCIDENCIA);
+      incidenciasTable.getModel().load(fenixService.searchIncidenciasByOtId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
+*/
 
-        frmError.pack();
-        frmError.setVisible(true);
+            JComboBox estadoDudaCmb = new JComboBox();
+            SwingUtil.loadComboBox(DudaEstadoType.class, estadoDudaCmb, false);
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.ESTADO.ordinal()).setCellEditor(new DefaultCellEditor(estadoDudaCmb));
+
+            JComboBox ambitoDudaCmb = new JComboBox();
+            SwingUtil.loadComboBox(DudaAmbitoType.class, ambitoDudaCmb, false);
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.AMBITO.ordinal()).setCellEditor(new DefaultCellEditor(ambitoDudaCmb));
+
+            JComboBox criticidadDudaCmb = new JComboBox();
+            SwingUtil.loadComboBox(Criticidad.class, criticidadDudaCmb, false);
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.CRITICIDAD.ordinal()).setCellEditor(new DefaultCellEditor(criticidadDudaCmb));
+
+
+            JComboBox faseLocalizadaDudaCmb = new JComboBox();
+            SwingUtil.loadComboBox(DudaFaseLocalizadaType.class, faseLocalizadaDudaCmb, false);
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.F_LOCALIZADA.ordinal()).setCellEditor(new DefaultCellEditor(faseLocalizadaDudaCmb));
+
+      /*JComboBox ambitoDudaCmb = new JComboBox();
+      SwingUtil.loadComboBox(DudaEstadoType.class, ambitoDudaCmb, false);
+      dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.A.ordinal()).setCellEditor(new DefaultCellEditor(ambitoDudaCmb));*/
+
+            JComboBox relativaACmb = new JComboBox();
+            SwingUtil.loadComboBox(DudaRelativaAType.class, relativaACmb, false);
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.RELATIVA_A.ordinal()).setCellEditor(new DefaultCellEditor(relativaACmb));
+
+            JComboBox docEntIncCmb = new JComboBox();
+            SwingUtil.loadComboBox(DudaDocEntrIncType.class, docEntIncCmb, false);
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.DOC_INCOMP.ordinal()).setCellEditor(new DefaultCellEditor(docEntIncCmb));
+
+
+            TableUtil.configureColumnWidths(dudasTable, DudaTableModel.Columns.class);
+
+            addDudasBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        FenixDuda fenixDuda = new FenixDuda();
+                        fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
+                        fenixDuda.setRespRespuestaProyecto(1.5);
+                        fenixDuda.setAgrupacion(Long.valueOf(44));
+                        fenixDuda.setIdRelacionada(Long.valueOf("123"));
+           /* fenixDuda.setAcc("1718622");
+            fenixDuda.setDescripcion("ola");
+            fenixDuda.setRespuesta("nada");
+            fenixDuda.setRespRespuestaProyecto("ze");
+            fenixDuda.setRespRespuestaCliente("yo123");
+            fenixDuda.setAgrupacion("321");
+            fenixDuda.setIdRelacionada(Long.valueOf("123"));
+            fenixDuda.setCriticidad(Criticidad.BAJA.getDescription());
+            fenixDuda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
+            fenixDuda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
+            fenixDuda.setAgrupacion(DudaAmbitoType.EXTERNO.getDescription());*/
+
+
+                        //fenixDuda.setAcc(getPeticionSelected(peticionesDisponiblesCmb).toString());
+
+                        dudasTable.addRow(fenixDuda);
+                    } catch (Exception ex) {
+                        handleException(ex);
+                    }
+                }
+            });
+
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.FECHA_ALTA.ordinal())
+                    .setCellEditor(new CalendarCellEditor());
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.FECHA_ALTA.ordinal()).setCellRenderer(new DateCellRenderer());
+
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.FECHA_PREVISTA_RESPUESTA.ordinal())
+                    .setCellEditor(new CalendarCellEditor());
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.FECHA_PREVISTA_RESPUESTA.ordinal()).setCellRenderer(new DateCellRenderer());
+
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.FECHA_ULT_ACT.ordinal())
+                    .setCellEditor(new CalendarCellEditor());
+            dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.FECHA_ULT_ACT.ordinal()).setCellRenderer(new DateCellRenderer());
+
+        }
     }
-
 }

@@ -8,6 +8,7 @@ import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.settings.entities.EverisVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
 import net.dms.fsync.synchronizer.fenix.entities.JiraSearchResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;

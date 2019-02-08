@@ -17,7 +17,7 @@ public class FilterManagePane extends JPanel {
     private JList filters;
     private JScrollPane scroll;
     private JTextField filterNameJtf;
-    private JTextField filterQueryJtf;
+    private JTextArea filterQueryJtf;
 
     private JButton saveJBtn, deleteFilterJBtn, newFiltrJBtn;
 
@@ -39,7 +39,7 @@ public class FilterManagePane extends JPanel {
         scroll = new JScrollPane();
         filters = new JList<Filter>();
         filterNameJtf = new JTextField();
-        filterQueryJtf = new JTextField();
+        filterQueryJtf = new JTextArea();
 
 
         buttonConfigurationLoad();
@@ -133,9 +133,10 @@ public class FilterManagePane extends JPanel {
         filterNameJtf.setText(null);
         this.add(filterNameJtf);
 
-        filterQueryJtf.setBounds(300, 110, 250, 25);
+        filterQueryJtf.setBounds(300, 110, 250, 75);
         filterQueryJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         filterQueryJtf.setText(null);
+        filterQueryJtf.setLineWrap(true);
         this.add(filterQueryJtf);
 
     }
@@ -143,12 +144,12 @@ public class FilterManagePane extends JPanel {
     private void buttonConfigurationLoad() {
 
 
-        saveJBtn.setBounds(300, 160, 80, 20);
+        saveJBtn.setBounds(300, 200, 80, 20);
         saveJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         saveJBtn.setText("Save");
         this.add(saveJBtn);
 
-        deleteFilterJBtn.setBounds(470, 160, 80, 20);
+        deleteFilterJBtn.setBounds(470, 200, 80, 20);
         deleteFilterJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         deleteFilterJBtn.setText("Delete");
         this.add(deleteFilterJBtn);

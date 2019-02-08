@@ -11,7 +11,7 @@
             <parameters>
                 <parameter>
                     <name>os_username</name>
-                    <value>${everis.conf.jira.user}</value>
+                    <value>$jiraUserName;</value>
                 </parameter>
                 <parameter>
                     <name>os_password</name>

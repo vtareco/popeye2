@@ -415,6 +415,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 responsables.append(fenixResponsable.getNumero());
                 esfuerzos.append(fenixResponsable.getEsfuerzo());
                 subtipos.append(fenixResponsable.getSubtipoTarea());
+                System.out.println("esfuerzo "+fenixResponsable.getEsfuerzo());
             }
         }
     }

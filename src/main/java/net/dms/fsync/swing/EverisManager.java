@@ -1,5 +1,6 @@
 package net.dms.fsync.swing;
 
+import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.*;
 import net.dms.fsync.swing.components.*;
@@ -159,14 +160,23 @@ public class EverisManager {
             @Override
             public void stateChanged(ChangeEvent e) {
                 try {
-                if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_INCIDENCIA)){
+
+                    System.out.println("Tab: " + tabbedPanel.getSelectedIndex());
+
+                    if(tabbedPanel.getSelectedIndex()==1){
+                        initTabIncidencias();
+                    }else{
+                        initTabDudas();
+                    }
+
+             /*   if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_INCIDENCIA)){
                     System.out.println("incidencias");
                     initTabIncidencias();
                   }
                     if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA)) {
                         System.out.println("dudas");
                         initTabDudas();
-                    }
+                    }*/
 
                 } catch (Exception ex) {
                     handleException(ex);
@@ -483,12 +493,10 @@ public class EverisManager {
         }
 
         if (filter.equals("key=")) {
-            throw new UnsupportedOperationException();//// FIXME: 07/02/2019 PEDRO
+            throw new AppException("No se ha introducido ninguna ACC");
         } else if (filter != null) {
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
-
         }
-
 
     }
 

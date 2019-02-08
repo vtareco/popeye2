@@ -148,7 +148,10 @@ public class EverisManager {
 
         /* AQUI */
         SwingUtil.registerListener(saveDudasBtn, this::saveDudas, this::handleException);
+        SwingUtil.registerListener(uploadDudasBtn, this::uploadDudas, this::handleException);
         SwingUtil.registerListener(removeDudasBtn, this::removeDuda, this::handleException);
+        SwingUtil.registerListener(refreshDudasBtn, this::refreshDudas, this::handleException);
+
 
         SwingUtil.registerListener(settingsJbtn, this::confingJenixSettings, this::handleException);
 
@@ -156,10 +159,10 @@ public class EverisManager {
             @Override
             public void stateChanged(ChangeEvent e) {
                 try {
-               /* if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_INCIDENCIA)){
+                if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_INCIDENCIA)){
                     System.out.println("incidencias");
                     initTabIncidencias();
-                  }*/
+                  }
                     if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA)) {
                         System.out.println("dudas");
                         initTabDudas();
@@ -261,6 +264,10 @@ public class EverisManager {
     private void refreshIncidencias() {
         incidenciasTable.getModel().load(fenixService.searchIncidenciasByOtId(getPeticionSelected(peticionesDisponiblesCmb), this.forceDownloadCheckBox.isSelected()));
 
+    }
+
+    private void  refreshDudas(){
+        dudasTable.getModel().load(fenixService.searchDudasByOtId(getPeticionSelected(peticionesDisponiblesCmb), this.forceDownloadCheckBox.isSelected()));
     }
 
     private void checkJiraStatus() {
@@ -371,6 +378,11 @@ public class EverisManager {
     private void uploadIncidencias() {
         fenixService.uploadIncidencias(getPeticionSelected(peticionesDisponiblesCmb));
         incidenciasTable.getModel().load(fenixService.searchIncidenciasByOtId(getPeticionSelected(peticionesDisponiblesCmb), true));
+    }
+
+    private void uploadDudas(){
+        fenixService.uploadDudas(getPeticionSelected(peticionesDisponiblesCmb));
+        dudasTable.getModel().load(fenixService.searchDudasByOtId(getPeticionSelected(peticionesDisponiblesCmb),true));
     }
 
     private void saveAccs() {

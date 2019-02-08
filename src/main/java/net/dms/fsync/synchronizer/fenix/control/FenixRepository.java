@@ -114,8 +114,8 @@ public class FenixRepository {
         ae.execute();
 
 
-       /* ActionExecutor upload = new ActionExecutor("/bmw/rsp/executions/fenix_upload_incidencias.xml", variables);
-        upload.execute();*/
+        ActionExecutor upload = new ActionExecutor("/bmw/rsp/executions/fenix_upload_dudas.xml", variables);
+        upload.execute();
     }
 
     public List<FenixAcc> searchACCsIncurridos(Long idOt, boolean forceDownload){
@@ -599,7 +599,6 @@ public class FenixRepository {
             Workbook wb = WorkbookFactory.create(fis);
             IOUtils.closeQuietly(fis);
             Sheet sheet = wb.getSheetAt(0);
-            System.out.println("ult "+sheet.getLastRowNum());
 
             for (int i = 1; i <= sheet.getLastRowNum(); i++){
                 if (sheet.getRow(i) == null || sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()) == null

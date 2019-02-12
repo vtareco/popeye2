@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<execution name="extraner_login">
+<execution name="extranet_login">
     <!--proxy scheme="http" host="10.114.8.100" port="8080"/-->
     <name>extranet_login</name>
     <actions>

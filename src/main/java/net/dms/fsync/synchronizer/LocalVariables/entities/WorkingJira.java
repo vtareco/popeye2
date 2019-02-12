@@ -19,12 +19,17 @@ public class WorkingJira {
 
     private static String osUser = "os_username";
     private static String osPassword = "os_password";
+    private static String user = "username";
+    private static String password = "password";
     private static String jUser = "j_username";
     private static String jPassword = "j_password";
     private static String upload = "upload";
     private static String headerOrigin = "Origin";
     private static String headerReferer = "Referer";
+    private static String search = "search";
     private static String logIn = "login";
+    private static String download = "download";
+    private static String loginConfirm= "login_confirm";
     private static String fenix_Upload_incidencias = "fenix_upload_incidencias";
     private static String fenixUploadAccs = "fenix_upload_accs";
     private static String fenixLogin = "fenix_login";
@@ -34,7 +39,7 @@ public class WorkingJira {
     private static String fenixDownloadAccsIncurridos = "fenix_download_accs_incurridos";
     private static String fenixDownloadAccs = "fenix_download_accs";
     private static String extranetLoginConfirm = "extranet_login_confirm";
-    private static String extranetLogin = "extranet_login";
+    private static String extranetLogin = "extranet_ogin";
     private static String authJiraIssuesSearch = "AUTH_jira_issues_search";
     private static String metaInfo = "metainfo";
     private static String fenixLoginLoginUrl = " fenix/validarLoginAction.dojo?timestamp=${everis.fenix.timestamp}";
@@ -49,6 +54,26 @@ public class WorkingJira {
     private static String jiraIssuesSearchLogIn = "login";
     private static String jiraISsuesSearchRetrieveIssues = "retrieve-issues";
 
+
+    public static String getUser() {
+        return user;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static String getLoginConfirm() {
+        return loginConfirm;
+    }
+
+    public static String getDownload() {
+        return download;
+    }
+
+    public static String getSearch() {
+        return search;
+    }
 
     public static String getFenixProduction() {
         return fenixProduction;

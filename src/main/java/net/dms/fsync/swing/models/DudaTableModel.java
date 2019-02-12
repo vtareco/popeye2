@@ -32,8 +32,10 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
         F_LOCALIZADA(true, 250),
         RELATIVA_A(true, 50),
         DOC_INCOMP(true, 250),
-        FECHA_ULT_ACT(true, 80),
-        FECHA_ALTA(true, 50);
+        AUTOR_ULT_ACT(true, 80),
+        CREADOR(true, 80),
+        FECHA_ALTA(true, 50),
+        FECHA_ULT_ACT(true, 80);
         private int width;
 
         private boolean editable;
@@ -79,10 +81,14 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 return duda.getRespRespuestaProyecto();
             case RESP_RESPUESTA_CLIENTE:
                 return duda.getRespRespuestaCliente();
+            case RESPONSABLE_CONSULTA:
+                return duda.getResponsableConsulta();
             case AGRUPACION:
                 return duda.getAgrupacion();
             case ID_RELACIONADA:
                 return duda.getIdRelacionada();
+            case AMBITO:
+                return duda.getAmbito();
             case CRITICIDAD:
                 return duda.getCriticidad();
             case F_LOCALIZADA:
@@ -95,6 +101,9 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 return  duda.getFechaUltAct();
             case AUTOR_ULT_ACT:
                 return duda.getAutorUltAct();
+            case CREADOR:
+                return duda.getCreador();
+
         }
         return null;
     /*    Columns c = findColumnTypeByOrdinal(columnIndex);
@@ -147,13 +156,18 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 fireTableCellUpdated(row,col);
                 break;
             case RESP_RESPUESTA_PROYECTO:
-                duda.setRespRespuestaProyecto((double)value);
+                duda.setRespRespuestaProyecto((String)value);
                 duda.setRespRespuestaProyecto(duda.getRespRespuestaProyecto());
                 fireTableCellUpdated(row,col);
                 break;
             case RESP_RESPUESTA_CLIENTE:
                 duda.setRespRespuestaCliente((String)value);
                 duda.setRespRespuestaCliente(duda.getRespRespuestaCliente());
+                fireTableCellUpdated(row,col);
+                break;
+            case RESPONSABLE_CONSULTA:
+                duda.setResponsableConsulta((String)value);
+                duda.setResponsableConsulta(duda.getResponsableConsulta());
                 fireTableCellUpdated(row,col);
                 break;
             case AGRUPACION:
@@ -165,6 +179,11 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 /*duda.setIdRelacionada((Long)value);
                 duda.setIdRelacionada(duda.getIdRelacionada());
                 fireTableCellUpdated(row,col);*/
+                break;
+            case AMBITO:
+                duda.setAmbito((String)value);
+                duda.setAmbito(duda.getAmbito());
+                fireTableCellUpdated(row,col);
                 break;
             case CRITICIDAD:
                 duda.setCriticidad((String)value);
@@ -194,6 +213,11 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
             case AUTOR_ULT_ACT:
                 duda.setAutorUltAct((String)value);
                 duda.setAutorUltAct(duda.getAutorUltAct());
+                fireTableCellUpdated(row,col);
+                break;
+            case CREADOR:
+                duda.setCreador((String)value);
+                duda.setCreador(duda.getCreador());
                 fireTableCellUpdated(row,col);
                 break;
         }

@@ -71,7 +71,10 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public void edit() {
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
+
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
+
+
         cmbEstado.setSelectedItem(getPayload().getEstado());
         cmbTipo.setSelectedItem(getPayload().getTipo());
      //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
@@ -84,7 +87,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         txtHistoriaUsuario.setText(getPayload().getHistoriaUsuario());
 
-        txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
+        //txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
 
         jtbBitacora.getModel().load(getPayload().getBitacora());
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
@@ -378,6 +381,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
             }
 
+
           /*  if(txtEsfuerzoCliente.getText().equals("8")){
                 txtPuntosHistoria.setText("3");
                 getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
@@ -392,7 +396,14 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
             getPayload().setEsfuerzo(esfuerzos.toString());
             getPayload().setResponsable(responsables.toString());
-            getPayload().setSubTipo(subtipos.toString());
+
+            if(subtipos.toString().equals(null) || subtipos.toString().equals("null-null")){
+                throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos");
+            }else{
+                getPayload().setSubTipo(subtipos.toString());
+            }
+
+
 
 
     }

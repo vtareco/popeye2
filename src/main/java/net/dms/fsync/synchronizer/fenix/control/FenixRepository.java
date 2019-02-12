@@ -8,6 +8,8 @@ import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.settings.entities.EverisVariables;
+import net.dms.fsync.swing.EverisManager;
+import net.dms.fsync.synchronizer.fenix.business.FenixService;
 import net.dms.fsync.synchronizer.fenix.control.handlers.GetIncidenciaMetaDataAction;
 import net.dms.fsync.synchronizer.fenix.entities.*;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
@@ -34,6 +36,7 @@ import java.util.stream.Collectors;
  */
 @Component
 public class FenixRepository {
+
     private Logger logger = LoggerFactory.getLogger(FenixRepository.class);
 
     private FenixAccMapper accMapper = new FenixAccMapper();
@@ -298,6 +301,7 @@ public class FenixRepository {
     public File getDudasFile(Long idPeticionOt){
         File path;
         File dudasFile = getPeticionDir(idPeticionOt);
+        System.out.println("AHH "+idPeticionOt);
         if (dudasFile == null){
             throw new AppException("Peticion folder doesn´t exist");
         }
@@ -621,7 +625,9 @@ public class FenixRepository {
     }
 
     public void saveDudas(List<FenixDuda> dudas) {
-        File dudaFile = getDudasFile(Long.valueOf(dudas.get(0).getAcc()));
+
+        File dudaFile = getDudasFile(Long.valueOf(dudas.get(0).getIdot())); //SUPER BUG
+//        System.out.println("boy "+getDudasFile(Long.valueOf(dudas.get(0).getIdot())));
         File template = getDudasTemplate();
         InputStream fis;
         int lastRow = 4;

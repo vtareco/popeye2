@@ -15,7 +15,7 @@ public class JiraService {
     private JiraRepository jiraRepository;
 
     public JiraSearchResponse search(String jql){
-        System.out.println("nsei "+jql);
+
 
         JiraSearchResponse response = jiraRepository.search(jql);
 

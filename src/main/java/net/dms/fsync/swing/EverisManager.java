@@ -1,13 +1,11 @@
 package net.dms.fsync.swing;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.*;
 import net.dms.fsync.swing.components.*;
-import net.dms.fsync.swing.dialogs.AccDialog;
-import net.dms.fsync.swing.dialogs.ColumnsSettingDialog;
-import net.dms.fsync.swing.dialogs.InternalIncidenceDialog;
-import net.dms.fsync.swing.dialogs.SettingsDialog;
+import net.dms.fsync.swing.dialogs.*;
 import net.dms.fsync.swing.models.AccTableModel;
 import net.dms.fsync.swing.models.DudaTableModel;
 import net.dms.fsync.swing.models.IncidenciaTableModel;
@@ -27,6 +25,7 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import net.dms.fsync.synchronizer.jira.business.JiraService;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.json.simple.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -37,6 +36,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -623,7 +624,7 @@ public class EverisManager {
         accTable.setSelectionBackground(MyColors.ROW_SELECTED);
         accTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 */
-        SwingUtil.agregarMenu(accTable, new JMenuItem[]{menuEditarAcc(accTable), SwingUtil.menuCopiar(accTable), menuIncidenciaInterna(accTable), menuDuplicar(accTable)});
+        SwingUtil.agregarMenu(accTable, new JMenuItem[]{menuEditarAcc(accTable), SwingUtil.menuCopiar(accTable), menuIncidenciaInterna(accTable), menuDuda(accTable), menuDuplicar(accTable)});
 
 
         tableSettingControl.apply(accTable, tableSettingControl.load(TableType.FENIX_ACC));
@@ -758,7 +759,7 @@ public class EverisManager {
         /* AQUI */
         DudaTableModel dudaTableModel = new DudaTableModel(new ArrayList<>());
         dudasTable = new JenixTable(dudaTableModel);
-        dudasScrollPane = new JScrollPane(dudasTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        dudasScrollPane = new JScrollPane(dudasTable);
         dudasTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
     }
@@ -983,6 +984,7 @@ public class EverisManager {
                         FenixAcc acc = ((AccTableModel) tabla.getModel()).getPayload(selected[0]);
                         incidencia.setNombreIncidencia(acc.getNombre());
                         incidencia.setDescripcion(acc.getDescripcion());
+
                         incidencia.setOtCorrector(getPeticionSelected(peticionesDisponiblesCmb).toString());
                         incidencia.setIdPeticionOt(incidencia.getOtCorrector());
                         InternalIncidenceDialog dialog = new InternalIncidenceDialog(panelParent, incidencia);
@@ -1003,8 +1005,81 @@ public class EverisManager {
 
             }
 
+
         });
+
         return menuCrearIncidenciaInterna;
+    }
+
+
+
+    public JMenuItem menuDuda(final JenixTable tabla) {
+        JMenuItem menuCrearDuda = new JMenuItem("Crear duda");
+        VariableService vs = new VariableService();
+
+       /* JSONParser parser = new JSONParser();
+        Object obj = null;
+        try {
+            obj = parser.parse(new FileReader("c:\\file.json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject jsonObject =  (JSONObject) obj;*/
+
+        menuCrearDuda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+
+                try {
+                    int[] selected = tabla.getModelSelectedRows();
+
+                    if (selected.length > 0) {
+                        FenixDuda duda = new FenixDuda();
+                        FenixAcc acc = ((AccTableModel) tabla.getModel()).getPayload(selected[0]);
+
+                        String autor= acc.getResponsable();
+
+                        /*BUG*/
+                        //duda.setAcc(String.valueOf(acc.getIdAcc()));
+
+                       // duda.setAcc();
+                      //  System.out.println("PETICION "+acc.getIdPeticionOtAsociada());
+
+                        duda.setIdot(getPeticionSelected(peticionesDisponiblesCmb).toString());
+                        System.out.println("MY GOD "+getPeticionSelected(peticionesDisponiblesCmb).toString());
+
+
+
+                        duda.setDescripcion(acc.getDescripcion());
+                        duda.setEstado(DudaEstadoType.ABIERTA.getDescription());
+                        duda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
+                        duda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());
+                        duda.setAutorUltAct(acc.getResponsable());
+                        duda.setAutorUltAct(autor.substring(0,6));
+                        duda.setCreador(acc.getResponsable());
+
+
+                        DudaDialog dudaDialog = new DudaDialog(panelParent,duda);
+                        dudaDialog.pack();
+
+                        if (dudaDialog.getPayload() != null) {
+                            initTabDudas();
+                            System.out.println("PASSEI");
+                            dudasTable.getList().add(dudaDialog.getPayload());
+                            dudasTable.getModel().fireTableDataChanged();
+                            fenixService.saveDuda(dudasTable.getList());
+                        }
+
+                    }
+                } catch (Exception ex) {
+                    handleException(ex);
+                }
+
+            }
+
+        });
+        return menuCrearDuda;
     }
 
 
@@ -1047,10 +1122,8 @@ public class EverisManager {
         ComponentStateService.getInstance().clearInitialized(EverisComponentType.values());
     }
 
-    private void initTabDudas() {
-
+    public void initTabDudas() {
         if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA)) {
-
             ComponentStateService.getInstance().addInitializedComponent(EverisComponentType.TAB_DUDA);
             dudasTable.getModel().load(fenixService.searchDudasByOtId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
 
@@ -1096,24 +1169,15 @@ public class EverisManager {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         FenixDuda fenixDuda = new FenixDuda();
+                        VariableService vs = new VariableService();
+
                         fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
-                        fenixDuda.setRespRespuestaProyecto(1.5);
-                        fenixDuda.setAgrupacion(Long.valueOf(44));
-                        fenixDuda.setIdRelacionada(Long.valueOf("123"));
-           /* fenixDuda.setAcc("1718622");
-            fenixDuda.setDescripcion("ola");
-            fenixDuda.setRespuesta("nada");
-            fenixDuda.setRespRespuestaProyecto("ze");
-            fenixDuda.setRespRespuestaCliente("yo123");
-            fenixDuda.setAgrupacion("321");
-            fenixDuda.setIdRelacionada(Long.valueOf("123"));
-            fenixDuda.setCriticidad(Criticidad.BAJA.getDescription());
-            fenixDuda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
-            fenixDuda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
-            fenixDuda.setAgrupacion(DudaAmbitoType.EXTERNO.getDescription());*/
-
-
+                        fenixDuda.setIdot(getPeticionSelected(peticionesDisponiblesCmb).toString());
                         //fenixDuda.setAcc(getPeticionSelected(peticionesDisponiblesCmb).toString());
+                        fenixDuda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
+                        fenixDuda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());
+
+
 
                         dudasTable.addRow(fenixDuda);
                     } catch (Exception ex) {

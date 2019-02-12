@@ -84,10 +84,10 @@ public class EverisManager {
     private JButton generateSpecificationRequirementsBtn;
     private JPopupMenu refreshMenu;
     private JButton settingsJbtn;
-    private File jenixFoulder = new File("c:/JenixSettings");
-    private File jsonUserCreate = new File(jenixFoulder.toString() + "/UserConfig.json");
-    private File jsonApplicationProperties = new File(jenixFoulder.toString() + "/ApplicationProperties.json");
-    private File jsonFilters = new File(jenixFoulder.toString() + "/Filters.json");
+    private File jenixFoulder = new File(WorkingJira.getJenixFoulder());
+    private File jsonUserCreate = new File(WorkingJira.getJsonUserCreate());
+    private File jsonApplicationProperties = new File(WorkingJira.getJsonApplicationProperties());
+    private File jsonFilters = new File(WorkingJira.getJsonFilters());
 
     /* AQUI */
     private JenixTable<DudaTableModel, FenixDuda> dudasTable;
@@ -264,6 +264,7 @@ public class EverisManager {
     }
 
     private void checkJiraStatus() {
+        JsonPaths jsonpaths = new JsonPaths(jsonUserCreate.toString(), jsonApplicationProperties.toString(), jsonFilters.toString());
         List<FenixAcc> accs = accTable.getModel().getList();
         Set<String> jiraCodes = accs.stream().map(FenixAcc::getCodigoPeticionCliente).collect(Collectors.toSet());
         jiraCodes = jiraCodes.stream().filter(c -> isValidJiraCode(c)).collect(Collectors.toSet());

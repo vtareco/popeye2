@@ -1,5 +1,8 @@
 package net.dms.fsync.synchronizer.LocalVariables.business;
 
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
+import com.sun.xml.internal.txw2.annotation.XmlElement;
+import net.dms.fsync.httphandlers.entities.config.*;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
@@ -11,11 +14,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
-
+//CREATED BY VDIVIZIN 08/02/2019
 public class VariableService {
 
     LocalVariables localVariables = new LocalVariables();
@@ -262,7 +269,6 @@ public class VariableService {
 
         URL url = this.getClass().getClassLoader().getResource("bmw/rsp/everis_overriden.conf");
         File everisOverConfPath = new File(url.getPath());
-        System.out.println(everisOverConfPath);
 
         try (BufferedReader br = new BufferedReader(new FileReader(everisOverConfPath.toString()))) {
             String filterName;
@@ -318,17 +324,86 @@ public class VariableService {
 
 
     public Filter getFilter(String filterName, String path) {
-        Filter filter  = new Filter();
+        Filter filter = new Filter();
         filter.setFilterName("null");
         ArrayList<Filter> arFilters = readJsonFilterList(path);
         for (Filter f : arFilters) {
-            if (f.getFilterName().equals(filterName)){
-                filter=f;
+            if (f.getFilterName().equals(filterName)) {
+                filter = f;
                 return filter;
             }
         }
 
         return filter;
+    }
+
+
+    public Execution executionModifier(Execution execution) {
+        System.out.println("ANTSESSSSSSSSSSSSSSSss" + execution);
+        UserChange uc = readJsonUserConf(WorkingJira.getJsonUserCreate());
+        ApplicationProperties ap = readJsonServerConf(WorkingJira.getJsonApplicationProperties());
+        List<Action> objectArrays = execution.getActions();
+
+        for (Action action : objectArrays) {
+
+            //begin of jira_issues_search
+            if (execution.getName().equals(WorkingJira.getJiraIssuesSearch()) && action.getName().equals(WorkingJira.getLogIn())) {
+                action.setUrl(ap.getJiraUrl() + WorkingJira.getJiraIssuesSearchLogInUrl());
+                for (Parameter params : action.getParameters()) {
+
+                    if (params.getName().equals(WorkingJira.getOsUser())) {
+                        params.setValue(uc.getJirauser());
+                    } else if (params.getName().equals(WorkingJira.getOsPassword())) {
+                        params.setValue(uc.getJiraPassword());
+                    }
+                }
+
+            } else if (execution.getName().equals(WorkingJira.getJiraIssuesSearch()) && action.getName().equals(WorkingJira.getJiraISsuesSearchRetrieveIssues())) {
+                String url = ap.getJiraUrl() + action.getUrl().substring(action.getUrl().indexOf("/jira/rest") );
+                action.setUrl(url);
+            }  //end of jira_issues_search
+            //begin of fenix_upload_incidencias
+            else if (execution.getName().equals(WorkingJira.getFenix_Upload_incidencias()) && action.getName().equals(WorkingJira.getUpload())) {
+                action.setUrl(ap.getFenixUrl() + WorkingJira.getFenixUploadincidenciasUploadUrl());
+                for (Header headers : action.getHeaders()) {
+                    if (headers.getName().equals(WorkingJira.getHeaderOrigin())) {
+                        headers.setValue(ap.getFenixUrl());
+                    } else if (headers.getName().equals(WorkingJira.getHeaderReferer())) {
+                        headers.setValue(ap.getFenixUrl() + WorkingJira.getFenixUploadincidenciasUploadReferer());
+                    }
+                }
+
+            }
+            //end of fenix_upload_incidencias
+            //begin of fenix_upload_accs
+            else if (execution.getName().equals(WorkingJira.getFenixUploadAccs()) && action.getName().equals(WorkingJira.getUpload())) {
+                action.setUrl(ap.getFenixUrl() + WorkingJira.getFenixUploadAccsUploadUrl());
+            }
+            //end of fenix_upload_accs
+            //begin of fenix_login
+            else if (execution.getName().equals(WorkingJira.getFenixLogin()) && action.getName().equals(WorkingJira.getLogIn())) {
+                String url = ap.getFenixUrl() + action.getUrl().substring(action.getUrl().indexOf("/fenix")-6);
+                action.setUrl(url);
+                for (Parameter parameter : action.getParameters()) {
+                    if (parameter.getName().equals(WorkingJira.getjUser())) {
+                        parameter.setValue(uc.getFenixUser());
+                    } else if (parameter.getName().equals(WorkingJira.getjPassword())) {
+                        parameter.setValue(uc.getFenixPassword());
+                    }
+                }
+            }
+            //end of fenix_login
+            // start of fenix_metainfo_incidencias
+            else if (execution.getName().equals(WorkingJira.getFenixMetaInfoIncidencias()) && action.getName().equals(WorkingJira.getMetaInfo())){
+                String url = ap.getFenixUrl() + action.getUrl().substring(action.getUrl().indexOf("/fenix")-6);
+                action.setUrl(url);
+            }
+            //end of fenix_metainfo_incidencias
+        }
+
+        execution.setActions(objectArrays);
+        System.out.println("DEPOISSSSSSSSSSSSSSS" + execution);
+        return execution;
     }
 
 

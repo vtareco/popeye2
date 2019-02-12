@@ -15,16 +15,22 @@ public class Execution {
     private ProxyConfiguration proxyConfiguration;
 
     private List<Action> actions;
+    private String name;
+
+    @XmlElement
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     @XmlElementWrapper
     @XmlElement(name="action")
-    public List<Action> getActions() {
-        return actions;
-    }
-
-    public void setActions(List<Action> actions) {
-        this.actions = actions;
-    }
+    public List<Action> getActions() { return actions; }
+    public void setActions(List<Action> actions) { this.actions = actions; }
 
     @XmlElement(name = "proxy")
     public ProxyConfiguration getProxyConfiguration() {
@@ -41,4 +47,7 @@ public class Execution {
                 "actions=" + actions +
                 '}';
     }
+
+
+
 }

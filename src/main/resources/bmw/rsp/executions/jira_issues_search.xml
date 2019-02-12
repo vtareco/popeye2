@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <execution name="jira_issues_search">
     <!--proxy scheme="http" host="10.114.8.100" port="8080"/-->
+    <name>jira_issues_search</name>
     <actions>
         <action name="login">
             <url>${everis.conf.jira.urlbase}/jira/login.jsp</url>
@@ -11,7 +12,7 @@
             <parameters>
                 <parameter>
                     <name>os_username</name>
-                    <value>$jiraUserName;</value>
+                    <value>${everis.conf.jira.user}</value>
                 </parameter>
                 <parameter>
                     <name>os_password</name>

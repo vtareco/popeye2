@@ -7,6 +7,7 @@ import net.dms.fsync.httphandlers.entities.enumerations.HttpMethod;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
+import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.ParseException;
@@ -38,7 +39,7 @@ public class ActionExecutor {
     private Map<String, ActionResponse> responses = new HashMap<String, ActionResponse>();
     private String executionFile;
     private Map<String, String> variables = new HashMap<String, String>();
-
+    private VariableService vs = new VariableService();
 
 
     public ActionExecutor(String executionFile, Map<String, String> variables){
@@ -57,8 +58,9 @@ public class ActionExecutor {
             String strExecution = IOUtils.toString(is, "UTF-8");
             strExecution = processVariables(strExecution);
 
-            Execution execution = (Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
-            System.out.println(execution);
+           // Execution execution = (Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
+            Execution execution = vs.executionModifier((Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8")));
+           System.out.println(execution);
 
 
            // SSLContext sslContext = new SSLContextBuilder()
@@ -132,7 +134,6 @@ public class ActionExecutor {
             actions.add(action2            );
 
             execution.setActions(actions);
-
             JAXBContext jaxbContext = JAXBContext.newInstance(Execution.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <execution name="fenix_download_dudas">
+    <name>fenix_download_dudas</name>
     <actions>
         <action name="download">
             <url>${everis.conf.fenix.urlbase}/fenix/requerimientos/exportarDudasAction.do?PETICION_OID=${everis.fenix.idpeticionot}&amp;pathKey=dudas.template.path.key&amp;fileName=dudas.template.filename.key</url>

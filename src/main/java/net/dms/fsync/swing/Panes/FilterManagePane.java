@@ -15,12 +15,9 @@ import java.util.ArrayList;
 public class FilterManagePane extends JPanel {
 
     private JList filters;
-    private JScrollPane scroll;
     private JTextField filterNameJtf;
     private JTextArea filterQueryJtf;
-
-    private JButton saveJBtn, deleteFilterJBtn, newFiltrJBtn;
-
+    private JButton saveJBtn, deleteFilterJBtn;
 
     public FilterManagePane(String path) {
         setLayout(null);
@@ -34,13 +31,10 @@ public class FilterManagePane extends JPanel {
         LocalVariables lv = new LocalVariables();
         saveJBtn = new JButton();
         deleteFilterJBtn = new JButton();
-        newFiltrJBtn = new JButton();
         ArrayList<Filter> arFilter = lv.filterList(path);
-        scroll = new JScrollPane();
         filters = new JList<Filter>();
         filterNameJtf = new JTextField();
         filterQueryJtf = new JTextArea();
-
 
         buttonConfigurationLoad();
         textFieldConfigurationLoader();
@@ -122,12 +116,10 @@ public class FilterManagePane extends JPanel {
         filters.setFont(new Font("Arial", Font.PLAIN, 16));
         filters.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-
         this.add(filters);
     }
 
     private void textFieldConfigurationLoader() {
-
         filterNameJtf.setBounds(300, 80, 250, 25);
         filterNameJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         filterNameJtf.setText(null);
@@ -142,8 +134,6 @@ public class FilterManagePane extends JPanel {
     }
 
     private void buttonConfigurationLoad() {
-
-
         saveJBtn.setBounds(300, 200, 80, 20);
         saveJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         saveJBtn.setText("Save");

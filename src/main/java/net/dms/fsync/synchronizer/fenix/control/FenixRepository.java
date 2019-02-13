@@ -9,7 +9,6 @@ import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.swing.EverisManager;
-import net.dms.fsync.synchronizer.fenix.business.FenixService;
 import net.dms.fsync.synchronizer.fenix.control.handlers.GetIncidenciaMetaDataAction;
 import net.dms.fsync.synchronizer.fenix.entities.*;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
@@ -23,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
-import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -36,6 +34,8 @@ import java.util.stream.Collectors;
  */
 @Component
 public class FenixRepository {
+
+    EverisManager em;
 
     private Logger logger = LoggerFactory.getLogger(FenixRepository.class);
 
@@ -605,9 +605,10 @@ public class FenixRepository {
             Sheet sheet = wb.getSheetAt(0);
             /*IMPORTANTE*/
             for (int i = 1; i <= sheet.getLastRowNum(); i++){
-                if (sheet.getRow(i) == null || sheet.getRow(i).getCell(DudaRowType.ID_REQUERIMIENTO.getColPosition()) == null)
+                if (sheet.getRow(i) == null || sheet.getRow(i).getCell(DudaRowType.ID_REQUERIMIENTO.getColPosition()) == null
+                        || StringUtils.isBlank(sheet.getRow(i).getCell(DudaRowType.ID_REQUERIMIENTO.getColPosition()).toString()))  {
                 //  || StringUtils.isEmpty(sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()).getStringCellValue())){ gg
-                {
+                    //isCreatable(String)
                     continue;
                 }
                 logger.debug("Processing row {}", i);
@@ -627,9 +628,10 @@ public class FenixRepository {
 
     public void saveDudas(List<FenixDuda> dudas) {
 
-        System.out.println("ULTIMA "+dudas.get(dudas.size()-1).getDescripcion());
-        File dudaFile = getDudasFile(Long.valueOf(dudas.get(dudas.size()-1).getIdot())); //SUPER BUG
-      //  System.out.println("boy "+(Long.valueOf(dudas.get(0).getIdot())));
+        //System.out.println("ULTIMA "+dudas.get(dudas.size()-1).getDescripcion());
+
+        File dudaFile = getDudasFile(Long.valueOf(dudas.get(0).getIdOt()));
+        System.out.println("boy "+(Long.valueOf(dudas.get(0).getIdOt())));
         File template = getDudasTemplate();
         InputStream fis;
         int lastRow = 4;

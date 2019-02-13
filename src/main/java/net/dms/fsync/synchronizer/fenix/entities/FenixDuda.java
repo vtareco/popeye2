@@ -28,18 +28,18 @@ public class FenixDuda {
     private String autorUltAct;
     private String ambito;
 
-    private String idot;
+    private String idOt;
 
     public FenixDuda() {
 
     }
 
-    public String getIdot() {
-        return idot;
+    public String getIdOt() {
+        return idOt;
     }
 
-    public void setIdot(String idot) {
-        this.idot = idot;
+    public void setIdOt(String idot) {
+        this.idOt = idot;
     }
 
     public String getAmbito() {

@@ -1,17 +1,10 @@
 package net.dms.fsync.swing.dialogs;
 
-import net.dms.fsync.swing.EverisManager;
 import net.dms.fsync.swing.components.JenixDialog;
 import net.dms.fsync.synchronizer.fenix.entities.FenixDuda;
-import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
-import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.function.LongBinaryOperator;
 
 
 public class DudaDialog extends JenixDialog<FenixDuda> {
@@ -97,7 +90,7 @@ public class DudaDialog extends JenixDialog<FenixDuda> {
 
         getPayload().setDescripcion(txaDudaDescription.getText());
         getPayload().setIdRequerimiento(Long.valueOf("1218336")); //PETICAO
-        System.out.println("AQUI "+getPayload().getIdot());
+        System.out.println("AQUI "+getPayload().getIdOt());
       /*
         duda.setDescripcion(txaDudaDescription.getText());
         duda.setEstado(DudaEstadoType.ABIERTA.getDescription());*/

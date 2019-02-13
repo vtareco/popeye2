@@ -1,6 +1,5 @@
 package net.dms.fsync.swing;
 
-import jdk.nashorn.internal.parser.JSONParser;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.*;
@@ -25,7 +24,6 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import net.dms.fsync.synchronizer.jira.business.JiraService;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.json.simple.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -36,8 +34,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -1040,15 +1036,17 @@ public class EverisManager {
 
                         String autor= acc.getResponsable();
 
-                        /*BUG*/
-                        //duda.setAcc(String.valueOf(acc.getIdAcc()));
 
                        // duda.setAcc();
                       //  System.out.println("PETICION "+acc.getIdPeticionOtAsociada());
 
+                        if(acc.getIdAcc()!=null){
+                            duda.setAcc(String.valueOf(acc.getIdAcc()));
+                        }else{
+                            duda.setAcc("");
+                        }
 
-
-                        duda.setIdot(getPeticionSelected(peticionesDisponiblesCmb).toString());
+                        duda.setIdOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
                         System.out.println("MY GOD "+acc.getIdPeticionOtAsociada());
 
                         duda.setDescripcion(acc.getDescripcion());
@@ -1059,9 +1057,7 @@ public class EverisManager {
 
                         if(acc.getResponsable()==null || StringUtils.isBlank(acc.getResponsable())){
                             duda.setAutorUltAct("");
-                            System.out.println("we");
                         }else{
-                            System.out.println("xD");
                             duda.setAutorUltAct(autor.substring(0,6));
                         }
 
@@ -1180,12 +1176,12 @@ public class EverisManager {
                         VariableService vs = new VariableService();
 
                         fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
-                        fenixDuda.setIdot(getPeticionSelected(peticionesDisponiblesCmb).toString());
-                        //fenixDuda.setAcc(getPeticionSelected(peticionesDisponiblesCmb).toString());
+                        fenixDuda.setIdOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
+
                         fenixDuda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
                         fenixDuda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());
 
-                        fenixDuda.setIdRelacionada(Long.valueOf("1218336")); //PETICAO
+                        fenixDuda.setIdRequerimiento(Long.valueOf("1218336")); //PETICAO
 
 
                         dudasTable.addRow(fenixDuda);

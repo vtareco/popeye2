@@ -35,7 +35,8 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
         AUTOR_ULT_ACT(true, 80),
         CREADOR(true, 80),
         FECHA_ALTA(true, 50),
-        FECHA_ULT_ACT(true, 80);
+        FECHA_ULT_ACT(true, 80),
+        ID_OT(true, 80);
         private int width;
 
         private boolean editable;
@@ -105,7 +106,8 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 return duda.getAutorUltAct();
             case CREADOR:
                 return duda.getCreador();
-
+            case ID_OT:
+                return duda.getIdOt();
         }
         return null;
     /*    Columns c = findColumnTypeByOrdinal(columnIndex);
@@ -225,6 +227,12 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
             case CREADOR:
                 duda.setCreador((String)value);
                 duda.setCreador(duda.getCreador());
+                fireTableCellUpdated(row,col);
+                break;
+
+            case ID_OT:
+                duda.setIdOt((String)value);
+                duda.setIdOt(duda.getIdOt());
                 fireTableCellUpdated(row,col);
                 break;
         }

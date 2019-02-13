@@ -24,7 +24,8 @@ public enum DudaRowType {
     AUTOR_ULT_ACT,
     CREADOR,
     FECHA_ALTA,
-    FECHA_ULT_ACT;
+    FECHA_ULT_ACT,
+    ID_OT;
 
     public int getColPosition(){
         return this.ordinal();

@@ -1046,17 +1046,25 @@ public class EverisManager {
                        // duda.setAcc();
                       //  System.out.println("PETICION "+acc.getIdPeticionOtAsociada());
 
+
+
                         duda.setIdot(getPeticionSelected(peticionesDisponiblesCmb).toString());
-                        System.out.println("MY GOD "+getPeticionSelected(peticionesDisponiblesCmb).toString());
-
-
+                        System.out.println("MY GOD "+acc.getIdPeticionOtAsociada());
 
                         duda.setDescripcion(acc.getDescripcion());
                         duda.setEstado(DudaEstadoType.ABIERTA.getDescription());
                         duda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
                         duda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());
                         duda.setAutorUltAct(acc.getResponsable());
-                        duda.setAutorUltAct(autor.substring(0,6));
+
+                        if(acc.getResponsable()==null || StringUtils.isBlank(acc.getResponsable())){
+                            duda.setAutorUltAct("");
+                            System.out.println("we");
+                        }else{
+                            System.out.println("xD");
+                            duda.setAutorUltAct(autor.substring(0,6));
+                        }
+
                         duda.setCreador(acc.getResponsable());
 
 
@@ -1177,6 +1185,7 @@ public class EverisManager {
                         fenixDuda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
                         fenixDuda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());
 
+                        fenixDuda.setIdRelacionada(Long.valueOf("1218336")); //PETICAO
 
 
                         dudasTable.addRow(fenixDuda);

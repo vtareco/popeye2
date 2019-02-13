@@ -96,7 +96,8 @@ public class DudaDialog extends JenixDialog<FenixDuda> {
         // TODO FIXME, use a builder
 
         getPayload().setDescripcion(txaDudaDescription.getText());
-        getPayload().setIdRequerimiento(Long.valueOf("1218336"));
+        getPayload().setIdRequerimiento(Long.valueOf("1218336")); //PETICAO
+        System.out.println("AQUI "+getPayload().getIdot());
       /*
         duda.setDescripcion(txaDudaDescription.getText());
         duda.setEstado(DudaEstadoType.ABIERTA.getDescription());*/

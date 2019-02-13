@@ -603,10 +603,11 @@ public class FenixRepository {
             Workbook wb = WorkbookFactory.create(fis);
             IOUtils.closeQuietly(fis);
             Sheet sheet = wb.getSheetAt(0);
-
+            /*IMPORTANTE*/
             for (int i = 1; i <= sheet.getLastRowNum(); i++){
-                if (sheet.getRow(i) == null || sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()) == null
-                        || StringUtils.isEmpty(sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()).getStringCellValue())){
+                if (sheet.getRow(i) == null || sheet.getRow(i).getCell(DudaRowType.ID_REQUERIMIENTO.getColPosition()) == null)
+                //  || StringUtils.isEmpty(sheet.getRow(i).getCell(DudaRowType.ACC.getColPosition()).getStringCellValue())){ gg
+                {
                     continue;
                 }
                 logger.debug("Processing row {}", i);
@@ -626,8 +627,9 @@ public class FenixRepository {
 
     public void saveDudas(List<FenixDuda> dudas) {
 
-        File dudaFile = getDudasFile(Long.valueOf(dudas.get(0).getIdot())); //SUPER BUG
-//        System.out.println("boy "+getDudasFile(Long.valueOf(dudas.get(0).getIdot())));
+        System.out.println("ULTIMA "+dudas.get(dudas.size()-1).getDescripcion());
+        File dudaFile = getDudasFile(Long.valueOf(dudas.get(dudas.size()-1).getIdot())); //SUPER BUG
+      //  System.out.println("boy "+(Long.valueOf(dudas.get(0).getIdot())));
         File template = getDudasTemplate();
         InputStream fis;
         int lastRow = 4;

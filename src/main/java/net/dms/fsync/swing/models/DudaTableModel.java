@@ -65,6 +65,8 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
         switch (DudaRowType.values()[columnIndex]) {
             case ID_DUDA:
                 return duda.getIdDuda();
+            case ID_REQUERIMIENTO:
+                return duda.getIdRequerimiento();
             case ACC:
                 return duda.getAcc();
             case FECHA_ALTA:
@@ -125,6 +127,11 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 duda.setIdDuda(duda.getIdDuda());
                 fireTableCellUpdated(row,col);
                 break;
+            case ID_REQUERIMIENTO:
+                duda.setIdRequerimiento((Long)value);
+                duda.setIdRequerimiento(duda.getIdRequerimiento());
+                fireTableCellUpdated(row,col);
+                break;
             case ACC:
                 duda.setAcc((String)value);
                 duda.setAcc(duda.getAcc());
@@ -176,9 +183,9 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 fireTableCellUpdated(row,col);
                 break;
             case ID_RELACIONADA:
-                /*duda.setIdRelacionada((Long)value);
+                duda.setIdRelacionada((Long)value);
                 duda.setIdRelacionada(duda.getIdRelacionada());
-                fireTableCellUpdated(row,col);*/
+                fireTableCellUpdated(row,col);
                 break;
             case AMBITO:
                 duda.setAmbito((String)value);

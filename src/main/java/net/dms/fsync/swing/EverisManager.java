@@ -146,7 +146,7 @@ public class EverisManager {
 
         /* AQUI */
         SwingUtil.registerListener(saveDudasBtn, this::saveDudas, this::handleException);
-        SwingUtil.registerListener(uploadDudasBtn, this::uploadDudas, this::handleException);
+       // SwingUtil.registerListener(uploadDudasBtn, this::uploadDudas, this::handleException);
         SwingUtil.registerListener(removeDudasBtn, this::removeDuda, this::handleException);
         SwingUtil.registerListener(refreshDudasBtn, this::refreshDudas, this::handleException);
 
@@ -932,6 +932,7 @@ public class EverisManager {
         uploadDudasBtn = new JButton();
         uploadDudasBtn.setText("Upload");
         toolBar_dudas.add(uploadDudasBtn);
+
 
         refreshDudasBtn = new JButton();
         refreshDudasBtn.setText("Actualizar");

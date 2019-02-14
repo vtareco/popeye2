@@ -571,6 +571,9 @@ public class EverisManager {
 
         List<String> peticionesActuales = fenixService.getPeticionesActuales();
 
+        SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
+        SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
+
 
         //SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
 

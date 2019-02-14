@@ -30,7 +30,12 @@ import java.util.List;
 public class AccDialog extends JenixDialog<FenixAcc> {
     private JTextField txtNombre;
     private JTextArea txaDescripcion;
+
+
     private JTextField txtCodigoPeticionCliente;
+    private JTextField txtIdPeticion;
+
+
     private JComboBox cmbEstado;
     private JComboBox cmbTipo;
    // private JComboBox cmbSubTipo;
@@ -73,6 +78,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         txaDescripcion.setText(getPayload().getDescripcion());
 
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
+
+        //txtIdPeticion.setText(getPayload().);
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
@@ -127,6 +134,11 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         JLabel lblDescription = new JLabel("Descripción");
         JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
         JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
+
+
+        JLabel lblPeticion = new JLabel("ID Peticion");
+
+
         JLabel lblEstado = new JLabel("Estado");
         JLabel lblTipo = new JLabel("Tipo");
         //JLabel lblSubtipo = new JLabel("Subtipo");
@@ -146,6 +158,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         txtCodigoPeticionCliente = new JTextField();
+        txtIdPeticion = new JTextField();
+
         cmbEstado = new JComboBox();
         cmbTipo = new JComboBox();
        // cmbSubTipo = new JComboBox();

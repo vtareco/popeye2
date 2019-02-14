@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 
 
 import java.io.*;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -250,27 +249,23 @@ public class FenixRepository {
     }
 
     public File getACCsTemplate() {
-        return getFile("C:\\ExcelTemplates","\\PlantillaCargaMasivaActuacionesCortas.xlsx", "/fenix/templates/PlantillaCargaMasivaActuacionesCortas.xlsx");
+        return getFile(Utils.getProgramRoot()+"\\ExcelTemplates","\\PlantillaCargaMasivaActuacionesCortas.xlsx", "/fenix/templates/PlantillaCargaMasivaActuacionesCortas.xlsx");
 
     }
 
     public File getIncidenciasTemplate() {
-        return getFile("C:\\ExcelTemplates","\\PlantillaCargaMasivaIncidencias.xls", "/fenix/templates/PlantillaCargaMasivaIncidencias.xls");
+        return getFile(Utils.getProgramRoot()+"\\ExcelTemplates","\\PlantillaCargaMasivaIncidencias.xls", "/fenix/templates/PlantillaCargaMasivaIncidencias.xls");
 
     }
 
     /* AQUI */
     public File getDudasTemplate() {
-        return getFile("C:\\ExcelTemplates", "\\Plantilla_de_dudas.xlsx", "/fenix/templates/Plantilla_de_dudas.xlsx");
+        return getFile(Utils.getProgramRoot()+"\\ExcelTemplates", "\\Plantilla_de_dudas.xlsx", "/fenix/templates/Plantilla_de_dudas.xlsx");
     }
 
     public File getFile(String diskFolder, String fileName, String filePathInJar) {
         String filePath = diskFolder + fileName;
         Path path = Paths.get(filePath);
-
-        if (Files.exists(path)) {
-            return path.toFile();
-        }
 
         InputStream resource = getClass().getResourceAsStream(filePathInJar); //informação pronta a deitar fora
 
@@ -282,10 +277,6 @@ public class FenixRepository {
             new File(diskFolder).mkdirs();
 
             file = Utils.convertInputStreamToFileCommonWay(resource, filePath);
-
-
-            URL resources = getClass().getResource(String.valueOf(file));
-            System.out.println(resources);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -573,7 +564,7 @@ public class FenixRepository {
     }
 
     public File getSpecificationRequirementsTemplate() {
-        return getFile("C:\\ExcelTemplates", "\\PlantillaEspecificacionRequerimientos.xlsx", "/fenix/templates/PlantillaEspecificacionRequerimientos.xlsx");
+        return getFile(Utils.getProgramRoot()+"\\ExcelTemplates", "\\PlantillaEspecificacionRequerimientos.xlsx", "/fenix/templates/PlantillaEspecificacionRequerimientos.xlsx");
     }
 
     public void save(FenixPeticion peticion) {

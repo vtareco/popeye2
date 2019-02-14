@@ -1,6 +1,8 @@
 package net.dms.fsync.httphandlers.common;
 
 import java.io.*;
+import java.net.URL;
+import java.net.URLDecoder;
 
 /**
  * Created by dminanos on 18/04/2017.
@@ -27,5 +29,16 @@ public class Utils {
                 outputStream.close();
             }
         }
+    }
+
+    public static String getProgramRoot() {
+        URL url = Utils.class.getProtectionDomain().getCodeSource().getLocation();
+        String jarPath = null;
+        try {
+            jarPath = URLDecoder.decode(url.getFile(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return "";
+        }
+        return new File(jarPath).getParentFile().getPath();
     }
 }

@@ -28,7 +28,5 @@
                 <header name="Cookie" value="${response.header.Set-Cookie}"/>
             </headers>
         </action>
-
     </actions>
-
 </execution>

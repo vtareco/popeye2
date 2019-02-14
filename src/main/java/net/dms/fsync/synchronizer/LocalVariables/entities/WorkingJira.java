@@ -30,6 +30,9 @@ public class WorkingJira {
     private static String logIn = "login";
     private static String download = "download";
     private static String loginConfirm= "login_confirm";
+    private static String metaInfo = "metainfo";
+
+
     private static String fenix_Upload_incidencias = "fenix_upload_incidencias";
     private static String fenixUploadAccs = "fenix_upload_accs";
     private static String fenixLogin = "fenix_login";
@@ -37,17 +40,17 @@ public class WorkingJira {
     private static String fenixDownloadIncidencias = "fenix_download_accs";
     private static String fenixDownloadDudas = "fenix_download_dudas";
     private static String fenixDownloadAccsIncurridos = "fenix_download_accs_incurridos";
-    private static String fenixDownloadAccs = "fenix_download_accs";
+    public static String fenixDownloadAccs = "fenix_download_accs";
     private static String extranetLoginConfirm = "extranet_login_confirm";
     private static String extranetLogin = "extranet_ogin";
     private static String authJiraIssuesSearch = "AUTH_jira_issues_search";
-    private static String metaInfo = "metainfo";
+
+
+
     private static String fenixLoginLoginUrl = " fenix/validarLoginAction.dojo?timestamp=${everis.fenix.timestamp}";
     private static String fenixUploadincidenciasUploadUrl = "/fenix/requerimientos/IncidenciaNuevoCargaMasivaAction.do?perform=carga";
     private static String fenixUploadincidenciasUploadReferer = "/fenix/requerimientos/CargaMasivaIncidenciasNuevo.jsp";
-
     private static String fenixUploadAccsUploadUrl = "/fenix/actuaciones/accCargaMasivaAction.do?perform=cargaACCs";
-
     private static String jiraIssuesSearch = "jira_issues_search";
     private static String jiraIssuesSearchLogInUrl = "/jira/login.jsp";
     private static String jiraIssuesSearchRetrieveStatusUrl = "/jira/rest/api/2/search?jql=${everis.jira.jql}";

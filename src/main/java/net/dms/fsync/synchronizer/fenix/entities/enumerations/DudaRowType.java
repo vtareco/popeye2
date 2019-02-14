@@ -16,6 +16,7 @@ public enum DudaRowType {
     FECHA_PREVISTA_RESPUESTA,
     AGRUPACION,
     ID_RELACIONADA,
+    AMBITO,
     CRITICIDAD,
     F_LOCALIZADA,
     RELATIVA_A,
@@ -23,7 +24,8 @@ public enum DudaRowType {
     AUTOR_ULT_ACT,
     CREADOR,
     FECHA_ALTA,
-    FECHA_ULT_ACT;
+    FECHA_ULT_ACT,
+    ID_OT;
 
     public int getColPosition(){
         return this.ordinal();

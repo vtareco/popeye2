@@ -30,7 +30,12 @@ import java.util.List;
 public class AccDialog extends JenixDialog<FenixAcc> {
     private JTextField txtNombre;
     private JTextArea txaDescripcion;
+
+
     private JTextField txtCodigoPeticionCliente;
+    private JTextField txtIdPeticion;
+
+
     private JComboBox cmbEstado;
     private JComboBox cmbTipo;
    // private JComboBox cmbSubTipo;
@@ -71,7 +76,12 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public void edit() {
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
+
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
+
+        //txtIdPeticion.setText(getPayload().);
+
+
         cmbEstado.setSelectedItem(getPayload().getEstado());
         cmbTipo.setSelectedItem(getPayload().getTipo());
      //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
@@ -84,7 +94,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         txtHistoriaUsuario.setText(getPayload().getHistoriaUsuario());
 
-        txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
+        //txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
 
         jtbBitacora.getModel().load(getPayload().getBitacora());
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
@@ -124,6 +134,11 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         JLabel lblDescription = new JLabel("Descripción");
         JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
         JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
+
+
+        JLabel lblPeticion = new JLabel("ID Peticion");
+
+
         JLabel lblEstado = new JLabel("Estado");
         JLabel lblTipo = new JLabel("Tipo");
         //JLabel lblSubtipo = new JLabel("Subtipo");
@@ -143,6 +158,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         txtCodigoPeticionCliente = new JTextField();
+        txtIdPeticion = new JTextField();
+
         cmbEstado = new JComboBox();
         cmbTipo = new JComboBox();
        // cmbSubTipo = new JComboBox();
@@ -378,6 +395,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
             }
 
+
           /*  if(txtEsfuerzoCliente.getText().equals("8")){
                 txtPuntosHistoria.setText("3");
                 getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
@@ -392,7 +410,14 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
             getPayload().setEsfuerzo(esfuerzos.toString());
             getPayload().setResponsable(responsables.toString());
-            getPayload().setSubTipo(subtipos.toString());
+
+            if(subtipos.toString().equals("null") || subtipos.toString().equals("null-null")){
+                throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos");
+            }else{
+                getPayload().setSubTipo(subtipos.toString());
+            }
+
+
 
 
     }
@@ -415,6 +440,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 responsables.append(fenixResponsable.getNumero());
                 esfuerzos.append(fenixResponsable.getEsfuerzo());
                 subtipos.append(fenixResponsable.getSubtipoTarea());
+                System.out.println("esfuerzo "+fenixResponsable.getEsfuerzo());
             }
         }
     }

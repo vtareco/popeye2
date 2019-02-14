@@ -14,7 +14,7 @@ public class FenixDuda {
     private Long idRequerimiento;
     private String respuesta;
     private Date fechaPrevistaRespuesta;
-    private double respRespuestaProyecto;
+    private String respRespuestaProyecto;
     private String responsableConsulta;
     private String respRespuestaCliente;
     private Long agrupacion;
@@ -26,9 +26,28 @@ public class FenixDuda {
     private String docIncomp;
     private Date fechaUltAct;
     private String autorUltAct;
+    private String ambito;
+
+    private String idOt;
 
     public FenixDuda() {
 
+    }
+
+    public String getIdOt() {
+        return idOt;
+    }
+
+    public void setIdOt(String idot) {
+        this.idOt = idot;
+    }
+
+    public String getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(String ambito) {
+        this.ambito = ambito;
     }
 
     public String getResponsableConsulta() {
@@ -111,11 +130,11 @@ public class FenixDuda {
         this.fechaPrevistaRespuesta = fechaPrevistaRespuesta;
     }
 
-    public double getRespRespuestaProyecto() {
+    public String getRespRespuestaProyecto() {
         return respRespuestaProyecto;
     }
 
-    public void setRespRespuestaProyecto(double respRespuestaProyecto) {
+    public void setRespRespuestaProyecto(String respRespuestaProyecto) {
         this.respRespuestaProyecto = respRespuestaProyecto;
     }
 

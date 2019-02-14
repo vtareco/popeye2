@@ -30,7 +30,6 @@ public class SettingsDialog  extends JDialog {
         setLocationRelativeTo(tabbedPane);
         setModal(true);
         setResizable(false);
-
         loadDialog(jsonPaths);
     }
 

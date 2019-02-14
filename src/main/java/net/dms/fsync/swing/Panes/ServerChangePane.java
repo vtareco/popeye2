@@ -2,7 +2,7 @@ package net.dms.fsync.swing.Panes;
 
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
-import net.dms.fsync.synchronizer.LocalVariables.entities.JenixSettings;
+
 
 import javax.swing.*;
 import java.awt.*;

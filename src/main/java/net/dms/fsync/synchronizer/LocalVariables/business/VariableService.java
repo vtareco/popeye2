@@ -1,5 +1,8 @@
 package net.dms.fsync.synchronizer.LocalVariables.business;
 
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
+import com.sun.xml.internal.txw2.annotation.XmlElement;
+import net.dms.fsync.httphandlers.entities.config.*;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
@@ -11,11 +14,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
-
+//CREATED BY VDIVIZIN 08/02/2019
 public class VariableService {
 
     LocalVariables localVariables = new LocalVariables();
@@ -262,7 +269,6 @@ public class VariableService {
 
         URL url = this.getClass().getClassLoader().getResource("bmw/rsp/everis_overriden.conf");
         File everisOverConfPath = new File(url.getPath());
-        System.out.println(everisOverConfPath);
 
         try (BufferedReader br = new BufferedReader(new FileReader(everisOverConfPath.toString()))) {
             String filterName;
@@ -318,17 +324,19 @@ public class VariableService {
 
 
     public Filter getFilter(String filterName, String path) {
-        Filter filter  = new Filter();
+        Filter filter = new Filter();
         filter.setFilterName("null");
         ArrayList<Filter> arFilters = readJsonFilterList(path);
         for (Filter f : arFilters) {
-            if (f.getFilterName().equals(filterName)){
-                filter=f;
+            if (f.getFilterName().equals(filterName)) {
+                filter = f;
                 return filter;
             }
         }
 
         return filter;
     }
+
+
 
 }

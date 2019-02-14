@@ -1,6 +1,6 @@
 package net.dms.fsync.swing.Panes;
 
-import net.dms.fsync.synchronizer.LocalVariables.entities.JenixSettings;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +12,7 @@ public class AddFilter extends JPanel {
     private JButton addFilter;
     private JLabel labelFilter, labelTitle;
 
-    private void loadPane(JenixSettings js){
+    private void loadPane(){
         labelFilter = new JLabel();
         labelTitle = new JLabel();
         textFilter = new JTextField();
@@ -28,9 +28,9 @@ public class AddFilter extends JPanel {
         setVisible(true);
     }
 
-    public AddFilter(JenixSettings js) {
+    public AddFilter() {
         setLayout(null);
-        loadPane(js);
+        loadPane();
     }
 
     private void fenixConfigurationLoad() {

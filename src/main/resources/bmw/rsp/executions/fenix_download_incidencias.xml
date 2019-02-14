@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <execution name="fenix_download_accs">
+    <name>fenix_download_accs</name>
     <actions>
         <action name="search">
             <url>${everis.conf.fenix.urlbase}/fenix/requerimientos/incidenciaBuscarJSONAction.do</url>

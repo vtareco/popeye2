@@ -15,12 +15,9 @@ import java.util.ArrayList;
 public class FilterManagePane extends JPanel {
 
     private JList filters;
-    private JScrollPane scroll;
     private JTextField filterNameJtf;
-    private JTextField filterQueryJtf;
-
-    private JButton saveJBtn, deleteFilterJBtn, newFiltrJBtn;
-
+    private JTextArea filterQueryJtf;
+    private JButton saveJBtn, deleteFilterJBtn;
 
     public FilterManagePane(String path) {
         setLayout(null);
@@ -34,13 +31,10 @@ public class FilterManagePane extends JPanel {
         LocalVariables lv = new LocalVariables();
         saveJBtn = new JButton();
         deleteFilterJBtn = new JButton();
-        newFiltrJBtn = new JButton();
         ArrayList<Filter> arFilter = lv.filterList(path);
-        scroll = new JScrollPane();
         filters = new JList<Filter>();
         filterNameJtf = new JTextField();
-        filterQueryJtf = new JTextField();
-
+        filterQueryJtf = new JTextArea();
 
         buttonConfigurationLoad();
         textFieldConfigurationLoader();
@@ -122,33 +116,30 @@ public class FilterManagePane extends JPanel {
         filters.setFont(new Font("Arial", Font.PLAIN, 16));
         filters.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-
         this.add(filters);
     }
 
     private void textFieldConfigurationLoader() {
-
         filterNameJtf.setBounds(300, 80, 250, 25);
         filterNameJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         filterNameJtf.setText(null);
         this.add(filterNameJtf);
 
-        filterQueryJtf.setBounds(300, 110, 250, 25);
+        filterQueryJtf.setBounds(300, 110, 250, 75);
         filterQueryJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         filterQueryJtf.setText(null);
+        filterQueryJtf.setLineWrap(true);
         this.add(filterQueryJtf);
 
     }
 
     private void buttonConfigurationLoad() {
-
-
-        saveJBtn.setBounds(300, 160, 80, 20);
+        saveJBtn.setBounds(300, 200, 80, 20);
         saveJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         saveJBtn.setText("Save");
         this.add(saveJBtn);
 
-        deleteFilterJBtn.setBounds(470, 160, 80, 20);
+        deleteFilterJBtn.setBounds(470, 200, 80, 20);
         deleteFilterJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         deleteFilterJBtn.setText("Delete");
         this.add(deleteFilterJBtn);

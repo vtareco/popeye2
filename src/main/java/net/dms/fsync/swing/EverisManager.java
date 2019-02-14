@@ -23,15 +23,19 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import net.dms.fsync.synchronizer.jira.business.JiraService;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.auth.AUTH;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.xml.bind.Element;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -80,10 +84,10 @@ public class EverisManager {
     private JButton generateSpecificationRequirementsBtn;
     private JPopupMenu refreshMenu;
     private JButton settingsJbtn;
-    private File jenixFoulder = new File("c:/JenixSettings");
-    private File jsonUserCreate = new File(jenixFoulder.toString() + "/UserConfig.json");
-    private File jsonApplicationProperties = new File(jenixFoulder.toString() + "/ApplicationProperties.json");
-    private File jsonFilters = new File(jenixFoulder.toString() + "/Filters.json");
+    private File jenixFoulder = new File(WorkingJira.getJenixFoulder());
+    private File jsonUserCreate = new File(WorkingJira.getJsonUserCreate());
+    private File jsonApplicationProperties = new File(WorkingJira.getJsonApplicationProperties());
+    private File jsonFilters = new File(WorkingJira.getJsonFilters());
 
     /* AQUI */
     private JenixTable<DudaTableModel, FenixDuda> dudasTable;
@@ -173,6 +177,8 @@ public class EverisManager {
 
 
     private void onInit() {
+
+
         if (!jenixFoulder.exists()) {
             jenixFoulder.mkdirs();
             System.out.println("Directory created in " + jenixFoulder.toString());
@@ -199,7 +205,6 @@ public class EverisManager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
 
         } else {
@@ -259,6 +264,7 @@ public class EverisManager {
     }
 
     private void checkJiraStatus() {
+        JsonPaths jsonpaths = new JsonPaths(jsonUserCreate.toString(), jsonApplicationProperties.toString(), jsonFilters.toString());
         List<FenixAcc> accs = accTable.getModel().getList();
         Set<String> jiraCodes = accs.stream().map(FenixAcc::getCodigoPeticionCliente).collect(Collectors.toSet());
         jiraCodes = jiraCodes.stream().filter(c -> isValidJiraCode(c)).collect(Collectors.toSet());
@@ -309,10 +315,16 @@ public class EverisManager {
     private void confingJenixSettings() {
         JsonPaths jsonpaths = new JsonPaths(jsonUserCreate.toString(), jsonApplicationProperties.toString(), jsonFilters.toString());
         SettingsDialog settingsDialog = new SettingsDialog(tabbedPanel, jsonpaths);
+        settingsDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                System.out.println("hey");
+                refreshJiraFiltersCMB();
+            }
+        });
         settingsDialog.pack();
 
     }
-
 
 
     private void addAcc() {
@@ -421,21 +433,22 @@ public class EverisManager {
 
     private void filterSelectorHandler() {
         LocalVariables lv = new LocalVariables();
-        Filter filter = lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(),jsonFilters.toString());
-        if(!filter.getFilterName().equals("null")){
-            if(isSelectedFilterById()){
-                txtJiraTask.setVisible(true);
-                System.out.println(filter.getFilterName() + " " + filter.getFilterQuery());
-            }
-            else{
-                refreshJira();
+        if(jiraFiltersCmb.getSelectedItem() != null){
+            Filter filter = lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(), jsonFilters.toString());
+            if (!filter.getFilterName().equals("null")) {
+                if (isSelectedFilterById()) {
+                    txtJiraTask.setVisible(true);
+
+                } else {
+                    refreshJira();
+                }
             }
         }
+
+
     }
 
     private boolean isSelectedFilterById() {
-        System.out.println(EverisPropertiesType.JIRA_FILTRO_BY_ID.getProperty());
-        System.out.println(WorkingJira.getJiraFilterProperty() + jiraFiltersCmb.getSelectedItem());
         return EverisPropertiesType.JIRA_FILTRO_BY_ID.getProperty().equals(WorkingJira.getJiraFilterProperty() + jiraFiltersCmb.getSelectedItem());
     }
 
@@ -460,7 +473,7 @@ public class EverisManager {
         if (filter.equals("key=")) {
             throw new UnsupportedOperationException();
         } else if (filter != null) {
-            System.out.println("aquiiii"+filter);
+
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
 
         }
@@ -510,7 +523,7 @@ public class EverisManager {
         if (StringUtils.isEmpty(selected)) {
             return null;
         } else {
-            return lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(),jsonFilters.toString()).getFilterQuery();
+            return lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(), jsonFilters.toString()).getFilterQuery();
         }
     }
 
@@ -527,17 +540,26 @@ public class EverisManager {
 
     }
 
-    private void initTabSyncJiraFenix() {
+    private void refreshJiraFiltersCMB() {
+        jiraFiltersCmb.removeAllItems();
         LocalVariables lv = new LocalVariables();
-        List<String> peticionesActuales = fenixService.getPeticionesActuales();
         ArrayList<String> filtersName = new ArrayList<>();
         for (Filter f : lv.filterList(jsonFilters.toString())) {
             filtersName.add(f.getFilterName());
         }
-        SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
+        SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
+
+    }
+
+
+    private void initTabSyncJiraFenix() {
+
+        List<String> peticionesActuales = fenixService.getPeticionesActuales();
+
+
         //SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
 
-        SwingUtil.loadComboBox(filtersName, jiraFiltersCmb, true);
+        refreshJiraFiltersCMB();
         // txtJiraTask.setVisible(false);
 
 

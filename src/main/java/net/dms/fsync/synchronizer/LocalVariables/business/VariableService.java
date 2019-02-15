@@ -93,9 +93,7 @@ public class VariableService {
                     arListfilters.add(filter);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

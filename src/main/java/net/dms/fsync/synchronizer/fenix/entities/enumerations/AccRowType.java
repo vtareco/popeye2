@@ -29,7 +29,8 @@ public enum AccRowType {
     RESULTADO_TESTING(20),
     PUNTOS_HISTORIA(21),
     HISTORIA_USUARIO(22),
-    EPICA(24);
+    EPICA(23),
+    ID_PETICION(24);
 
     private int colPosition;
 

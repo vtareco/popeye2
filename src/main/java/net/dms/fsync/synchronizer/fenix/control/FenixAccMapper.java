@@ -47,6 +47,7 @@ public class FenixAccMapper {
        acc.setPuntosHistoria(row.getCell(AccRowType.PUNTOS_HISTORIA.getColPosition()) != null ? row.getCell(AccRowType.PUNTOS_HISTORIA.getColPosition()).getStringCellValue() : null);
        acc.setHistoriaUsuario(row.getCell(AccRowType.HISTORIA_USUARIO.getColPosition()) != null ? row.getCell(AccRowType.HISTORIA_USUARIO.getColPosition()).getStringCellValue() : null);
        acc.setEpica(row.getCell(AccRowType.EPICA.getColPosition()) != null ? row.getCell(AccRowType.EPICA.getColPosition()).getStringCellValue() : null);
+        acc.setIdPeticion(row.getCell(AccRowType.ID_PETICION.getColPosition()) != null ? row.getCell(AccRowType.ID_PETICION.getColPosition()).getStringCellValue() : null);
         return acc;
     }
 
@@ -112,6 +113,7 @@ public class FenixAccMapper {
 
         row.createCell(AccRowType.RESPONSABLE.getColPosition()).setCellValue(acc.getResponsable());
         row.createCell(AccRowType.ID_PETICIONOT_ASOCIADA.getColPosition()).setCellValue(acc.getIdPeticionOtAsociada());
+        row.createCell(AccRowType.ID_PETICION.getColPosition()).setCellValue(acc.getIdPeticion());
 
     }
 
@@ -135,7 +137,7 @@ public class FenixAccMapper {
 
         fenixAcc.setHistoriaUsuario(issue.getFields().getParent() != null ? issue.getFields().getParent().getKey() : issue.getKey());
 
-        fenixAcc.setEsfuerzo("1");
+        //fenixAcc.setEsfuerzo("1");
         fenixAcc.setEsfuerzoCliente(fenixAcc.getEsfuerzo());
         fenixAcc.setFechaCreacion(new Date());
         fenixAcc.setFechaSolicitudCliente(fenixAcc.getFechaCreacion());

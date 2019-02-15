@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <execution name="fenix_download_accs">
+    <name>fenix_download_accs</name>
     <actions>
         <action name="download">
             <url>${everis.conf.fenix.urlbase}/fenix/actuaciones/exportarActuacionesCargaMasivaPetOtAction.do?pathKey=actuaciones.template.path.key&amp;fileName=actuaciones.template.filename.key&amp;PETICION_OID=${everis.fenix.idpeticionot}</url>

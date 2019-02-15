@@ -16,6 +16,8 @@ import java.util.List;
 public class Action {
 private String url;
 private String name;
+
+
     private HttpMethod httpMethod;
     private List<Header> headers = new ArrayList<>();
     private List<Parameter> parameters  = new ArrayList<>();
@@ -89,4 +91,6 @@ private String name;
                 ", parameters=" + parameters +
                 '}';
     }
+
+
 }

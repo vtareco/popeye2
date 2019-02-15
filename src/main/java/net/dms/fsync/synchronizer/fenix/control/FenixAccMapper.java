@@ -29,6 +29,7 @@ public class FenixAccMapper {
        acc.setSubTipo(row.getCell(AccRowType.SUBTIPO.getColPosition()).getStringCellValue());
        acc.setRechazosEntrega(new Double(row.getCell(AccRowType.RECHAZOS_ENTREGA.getColPosition()).getNumericCellValue()).intValue());
        acc.setCriticidad(row.getCell(AccRowType.CRITICIDAD.getColPosition()).getStringCellValue());
+
        acc.setEsfuerzo(row.getCell(AccRowType.ESFUERZO.getColPosition()).getStringCellValue());
        acc.setEsfuerzoCliente(row.getCell(AccRowType.ESFUERZO_CLIENTE.getColPosition()).getStringCellValue());
      //  acc.setFechaCreacion(row.getCell(AccRowType.FECHA_CREACION.getColPosition()).getNumericCellValue());
@@ -127,7 +128,7 @@ public class FenixAccMapper {
         fenixAcc.setTipo(AccType.USER_STORY.getDescription());
         fenixAcc.setSubTipo(AccSubType.CODIFICACION.getDescription());
         fenixAcc.setRechazosEntrega(0);
-        fenixAcc.setCriticidad(AccCriticidad.MEDIA.getDescription());
+        fenixAcc.setCriticidad(Criticidad.MEDIA.getDescription());
 
 
         // TODO FIXME AGILE

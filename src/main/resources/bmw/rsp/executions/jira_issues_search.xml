@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <execution name="jira_issues_search">
     <!--proxy scheme="http" host="10.114.8.100" port="8080"/-->
+    <name>jira_issues_search</name>
     <actions>
         <action name="login">
             <url>${everis.conf.jira.urlbase}/jira/login.jsp</url>
@@ -20,14 +21,12 @@
             </parameters>
         </action>
         <action name="retrieve-issues">
-            <url>${everis.conf.jira.urlbase}/jira/rest/api/2/search?jql=${everis.jira.jql}</url>
+            <url>${everis.conf.jira.urlbase}/jira/rest/api/2/search?jql=${everis.jira.jql}</url> <!-- COMPROBAR ESTADO Jira -->
             <httpMethod>GET</httpMethod>
             <headers>
                 <header name="Content-Type" value="application/json"/>
                 <header name="Cookie" value="${response.header.Set-Cookie}"/>
             </headers>
         </action>
-
     </actions>
-
 </execution>

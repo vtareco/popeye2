@@ -149,7 +149,6 @@ public class EverisManager {
         SwingUtil.registerListener(removeDudasBtn, this::removeDuda, this::handleException);
         SwingUtil.registerListener(refreshDudasBtn, this::refreshDudas, this::handleException);
 
-
         SwingUtil.registerListener(settingsJbtn, this::confingJenixSettings, this::handleException);
 
         tabbedPanel.addChangeListener(new ChangeListener() {
@@ -827,6 +826,9 @@ public class EverisManager {
         configFenixTable = new JButton();
         configFenixTable.setText("Config");
         toolBar1.add(configFenixTable);
+        settingsJbtn = new JButton();
+        settingsJbtn.setText("Settings");
+        toolBar1.add(settingsJbtn);
         final JLabel label1 = new JLabel();
         label1.setText("FENIX");
         panel2.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

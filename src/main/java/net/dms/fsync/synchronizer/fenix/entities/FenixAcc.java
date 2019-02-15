@@ -47,6 +47,8 @@ public class FenixAcc implements Serializable {
     private Double incurrido;
     private Double etc;
 
+    private String idPeticion;
+
     public String getJiraStatus() {
         return jiraStatus;
     }
@@ -72,6 +74,13 @@ public class FenixAcc implements Serializable {
 
     }
 
+    public String getIdPeticion() {
+        return idPeticion;
+    }
+
+    public void setIdPeticion(String idPeticion) {
+        this.idPeticion = idPeticion;
+    }
 
     public Double getEtc() {
         return etc;

@@ -36,7 +36,8 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
         FECHA_PREVISTA_PROYECTO(true, 80),
         DESCRIPCION(true, 250),
         ULTIMA_BITACORA(false, 50),
-        BITACORA(false, 250);
+        BITACORA(false, 250),
+        ID_PETICION(false, 50);
 
 
         private final static int WIDTH_M = 80;
@@ -103,6 +104,11 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
             case ESFUERZO:
                 acc.setEsfuerzo((String)value);
                 acc.setEsfuerzoCliente(acc.getEsfuerzo());
+                fireTableCellUpdated(row, col);
+                break;
+            case ID_PETICION:
+                acc.setIdPeticion((String)value);
+                acc.setIdPeticion(acc.getIdPeticion());
                 fireTableCellUpdated(row, col);
                 break;
             case ESTADO:

@@ -3,6 +3,9 @@ package net.dms.fsync.synchronizer.fenix.business;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
+import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import net.dms.fsync.synchronizer.fenix.control.FenixRepository;
 import net.dms.fsync.synchronizer.fenix.entities.*;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
@@ -58,9 +61,12 @@ public class FenixService {
     }
 
     public List<String> getPeticionesActuales(){
-       File parent = new File(config.getProperty(EverisPropertiesType.PROJECT_PATH));
+        LocalVariables lv = new LocalVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        File parent = new File(ap.getWorkingDirectory());
 
-       List<String> childs = new ArrayList<>();
+        List<String> childs = new ArrayList<>();
+
 
        Pattern pattern = Pattern.compile(config.getProperty(EverisPropertiesType.PETICIONES_FOLDER_PATTERN), Pattern.CASE_INSENSITIVE);
 

@@ -56,7 +56,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public AccDialog(Component parent, FenixAcc initialPayload) {
         super(parent, initialPayload);
         // TODO FIXME, move to abstract class
-        this.setSize(550, 770);
+        this.setSize(550, 810);
         setLocationRelativeTo(parent);
         setTitle("ACC");
         setModal(true);
@@ -79,7 +79,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
-        //txtIdPeticion.setText(getPayload().);
+        txtIdPeticion.setText(getPayload().getIdPeticion());
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
@@ -89,6 +89,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         txtPuntosHistoria.setEditable(false);
         txtEsfuerzoCliente.setEditable(false);
 
+        txtEsfuerzoCliente.setText(getPayload().getEsfuerzo());
         txtPuntosHistoria.setText(getPayload().getPuntosHistoria());
 
 
@@ -135,8 +136,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
         JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
 
-
-        JLabel lblPeticion = new JLabel("ID Peticion");
+        JLabel lblIdPeticion = new JLabel("ID Peticion");
 
 
         JLabel lblEstado = new JLabel("Estado");
@@ -288,30 +288,45 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         constraints.weightx = 1;
 
 
+        /*AQUI*/
+        constraints.gridx = 0;
+        constraints.gridy = ++fila+2;
+        constraints.weightx = anchoEntiquetas;
+        panel.add(lblIdPeticion, constraints);
+        constraints.weightx = 1;
+        constraints.gridwidth = 1;
+
+
         constraints.gridx = 0;
         constraints.gridy = ++fila;
         panel.add(txtCodigoPeticionCliente, constraints);
 
 
+        /*AQUI*/
+        constraints.gridx = 0;
+        constraints.gridy = ++fila+1;
+        panel.add(txtIdPeticion, constraints);
+
+        /*AQUI*/
         constraints.gridx = 1;
-        constraints.gridy = fila;
+        constraints.gridy = fila-1;
         panel.add(txtHistoriaUsuario, constraints);
 
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblEstado, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         panel.add(cmbEstado, constraints);
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblTipo, constraints);
         constraints.weightx = 1;
@@ -323,7 +338,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         constraints.weightx = 1;
 */
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         panel.add(cmbTipo, constraints);
 
 
@@ -333,37 +348,35 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblPuntosHistoria, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 1;
-        constraints.gridy = fila;
+        constraints.gridy = fila+1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblEsfuerzo, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         panel.add(txtPuntosHistoria, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = fila;
+        constraints.gridy = fila+1;
         panel.add(txtEsfuerzoCliente, constraints);
-
-
 
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblResponsables, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 0;
-        constraints.gridy = ++fila;
+        constraints.gridy = ++fila+1;
         constraints.gridwidth = 2;
         constraints.gridheight = 5;
         constraints.fill = GridBagConstraints.BOTH;
@@ -380,6 +393,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
             getPayload().setNombre(txtNombre.getText());
 
             getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+            getPayload().setIdPeticion(txtIdPeticion.getText());
+
+
             getPayload().setEstado((String) cmbEstado.getSelectedItem());
             getPayload().setTipo((String) cmbTipo.getSelectedItem());
             // getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());

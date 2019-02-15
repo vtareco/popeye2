@@ -145,7 +145,7 @@ public class EverisManager {
 
         /* AQUI */
         SwingUtil.registerListener(saveDudasBtn, this::saveDudas, this::handleException);
-       // SwingUtil.registerListener(uploadDudasBtn, this::uploadDudas, this::handleException);
+        // SwingUtil.registerListener(uploadDudasBtn, this::uploadDudas, this::handleException);
         SwingUtil.registerListener(removeDudasBtn, this::removeDuda, this::handleException);
         SwingUtil.registerListener(refreshDudasBtn, this::refreshDudas, this::handleException);
 
@@ -158,9 +158,9 @@ public class EverisManager {
 
                     System.out.println("Tab: " + tabbedPanel.getSelectedIndex());
 
-                    if(tabbedPanel.getSelectedIndex()==1){
+                    if (tabbedPanel.getSelectedIndex() == 1) {
                         initTabIncidencias();
-                    }else{
+                    } else {
                         initTabDudas();
                     }
 
@@ -268,7 +268,7 @@ public class EverisManager {
 
     }
 
-    private void  refreshDudas(){
+    private void refreshDudas() {
         dudasTable.getModel().load(fenixService.searchDudasByOtId(getPeticionSelected(peticionesDisponiblesCmb), this.forceDownloadCheckBox.isSelected()));
     }
 
@@ -329,6 +329,7 @@ public class EverisManager {
             public void windowClosed(WindowEvent e) {
                 System.out.println("hey");
                 refreshJiraFiltersCMB();
+                refreshPeticionesDisponiblesCMB();
             }
         });
         settingsDialog.pack();
@@ -363,9 +364,9 @@ public class EverisManager {
         incidenciasTable.getModel().load(fenixService.searchIncidenciasByOtId(getPeticionSelected(peticionesDisponiblesCmb), true));
     }
 
-    private void uploadDudas(){
+    private void uploadDudas() {
         fenixService.uploadDudas(getPeticionSelected(peticionesDisponiblesCmb));
-        dudasTable.getModel().load(fenixService.searchDudasByOtId(getPeticionSelected(peticionesDisponiblesCmb),true));
+        dudasTable.getModel().load(fenixService.searchDudasByOtId(getPeticionSelected(peticionesDisponiblesCmb), true));
     }
 
     private void saveAccs() {
@@ -447,7 +448,7 @@ public class EverisManager {
 
     private void filterSelectorHandler() {
         LocalVariables lv = new LocalVariables();
-        if(jiraFiltersCmb.getSelectedItem() != null){
+        if (jiraFiltersCmb.getSelectedItem() != null) {
             Filter filter = lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(), jsonFilters.toString());
             if (!filter.getFilterName().equals("null")) {
                 if (isSelectedFilterById()) {
@@ -565,17 +566,19 @@ public class EverisManager {
 
     }
 
+    private void refreshPeticionesDisponiblesCMB() {
+        peticionesDisponiblesCmb.removeAllItems();
+        List<String> peticionesActuales = fenixService.getPeticionesActuales();
+        SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
+
+    }
 
     private void initTabSyncJiraFenix() {
 
-        List<String> peticionesActuales = fenixService.getPeticionesActuales();
-
-        SwingUtil.loadComboBox(peticionesActuales, peticionesDisponiblesCmb, true);
-        SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
 
 
         //SwingUtil.loadComboBox(jiraFilters.keySet(), jiraFiltersCmb, true);
-
+        refreshPeticionesDisponiblesCMB();
         refreshJiraFiltersCMB();
         // txtJiraTask.setVisible(false);
 
@@ -1019,7 +1022,6 @@ public class EverisManager {
     }
 
 
-
     public JMenuItem menuDuda(final JenixTable tabla) {
         JMenuItem menuCrearDuda = new JMenuItem("Crear duda");
         VariableService vs = new VariableService();
@@ -1045,20 +1047,20 @@ public class EverisManager {
                         FenixDuda duda = new FenixDuda();
                         FenixAcc acc = ((AccTableModel) tabla.getModel()).getPayload(selected[0]);
 
-                        String autor= acc.getResponsable();
+                        String autor = acc.getResponsable();
 
 
-                       // duda.setAcc();
-                      //  System.out.println("PETICION "+acc.getIdPeticionOtAsociada());
+                        // duda.setAcc();
+                        //  System.out.println("PETICION "+acc.getIdPeticionOtAsociada());
 
-                        if(acc.getIdAcc()!=null){
+                        if (acc.getIdAcc() != null) {
                             duda.setAcc(String.valueOf(acc.getIdAcc()));
-                        }else{
+                        } else {
                             duda.setAcc("");
                         }
 
                         duda.setIdOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
-                        System.out.println("MY GOD "+acc.getIdPeticionOtAsociada());
+                        System.out.println("MY GOD " + acc.getIdPeticionOtAsociada());
 
                         duda.setDescripcion(acc.getDescripcion());
                         duda.setEstado(DudaEstadoType.ABIERTA.getDescription());
@@ -1066,16 +1068,16 @@ public class EverisManager {
                         duda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());
                         duda.setAutorUltAct(acc.getResponsable());
 
-                        if(acc.getResponsable()==null || StringUtils.isBlank(acc.getResponsable())){
+                        if (acc.getResponsable() == null || StringUtils.isBlank(acc.getResponsable())) {
                             duda.setAutorUltAct("");
-                        }else{
-                            duda.setAutorUltAct(autor.substring(0,6));
+                        } else {
+                            duda.setAutorUltAct(autor.substring(0, 6));
                         }
 
                         duda.setCreador(acc.getResponsable());
 
 
-                        DudaDialog dudaDialog = new DudaDialog(panelParent,duda);
+                        DudaDialog dudaDialog = new DudaDialog(panelParent, duda);
                         dudaDialog.pack();
 
                         if (dudaDialog.getPayload() != null) {

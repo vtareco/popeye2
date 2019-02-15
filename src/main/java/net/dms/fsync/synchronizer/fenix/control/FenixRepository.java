@@ -9,6 +9,9 @@ import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.swing.EverisManager;
+import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import net.dms.fsync.synchronizer.fenix.control.handlers.GetIncidenciaMetaDataAction;
 import net.dms.fsync.synchronizer.fenix.entities.*;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
@@ -234,8 +237,11 @@ public class FenixRepository {
     }
 
     public File getPeticionDir(Long idPeticion) {
+        LocalVariables lv = new LocalVariables();
         File path = null;
-        String projectPath = EverisConfig.getInstance().getProperty(EverisPropertiesType.PROJECT_PATH);
+
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
         File dirProject = new File(projectPath);
 
         for (File child : dirProject.listFiles()) {

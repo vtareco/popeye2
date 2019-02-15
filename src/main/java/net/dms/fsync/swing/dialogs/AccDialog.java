@@ -56,7 +56,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public AccDialog(Component parent, FenixAcc initialPayload) {
         super(parent, initialPayload);
         // TODO FIXME, move to abstract class
-        this.setSize(550, 750);
+        this.setSize(550, 770);
         setLocationRelativeTo(parent);
         setTitle("ACC");
         setModal(true);

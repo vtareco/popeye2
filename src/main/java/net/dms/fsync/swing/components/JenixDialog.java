@@ -26,7 +26,7 @@ public abstract class JenixDialog <E> extends JDialog {
 
     public JenixDialog(Component parent, E initialPayload){
         this(parent);
-        this.payload = initialPayload;
+        this.payload = initialPayload; /*passagem de objeto */
         buildDialog();
     }
 

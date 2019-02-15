@@ -4,13 +4,11 @@ import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.settings.entities.EverisVariables;
 
-import net.dms.fsync.synchronizer.LocalVariables.entities.JenixSettings;
+import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
 
-
-import java.io.*;
-
-import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,12 +22,7 @@ public class LocalVariables {
         return variables;
     }
 
-    /*
-        public Map<String, String> getVariables2(){
-            Map<String, String> variables = LocalVariables2();
-            return variables;
-        }
-    */
+
     private Map<String, String> LocalVariables() {
         Map<String, String> localvariables = new HashMap<String, String>();
         localvariables.put(EverisVariables.FENIX_TIMESTAMP.getVariableName(), new Long(System.currentTimeMillis()).toString());
@@ -48,82 +41,55 @@ public class LocalVariables {
         return localvariables;
     }
 
-    public void alterConf(JenixSettings js) {
-
-        URL url = this.getClass().getClassLoader().getResource("bmw/rsp/everis_overriden.conf");
-        File everisOverConfPath = new File(url.getPath());
-        //System.out.println(everisOverConfPath);
-
-        File everisReadOverFile = new File(everisOverConfPath.toString());
-        File everisWriteOverFIle = new File(everisOverConfPath.toString());
-
-        ArrayList<String> newLines = new ArrayList<>();
 
 
-        try (
-                BufferedReader br = new BufferedReader(new FileReader(everisReadOverFile)
-                )
-        ) {
-            String line;
 
-            while ((line = br.readLine()) != null) {
-
-                //System.out.println(line);
-                if (line.startsWith("everis.conf.fenix.user=") && !js.getUc().getFenixUser().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getUc().getFenixUser());
-                } else if (line.startsWith("everis.conf.fenix.password=") && !js.getUc().getFenixPassword().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getUc().getFenixPassword());
-                } else if (line.startsWith("everis.conf.jira.user=") && !js.getUc().getJirauser().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getUc().getJirauser());
-                } else if (line.startsWith("everis.conf.jira.password=") && !js.getUc().getJiraPassword().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getUc().getJiraPassword());
-                } else if (line.startsWith("everis.conf.fenix.urlbase=") && !js.getAp().getFenixUrl().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getAp().getFenixUrl());
-                } else if (line.startsWith("everis.conf.jira.urlbase=") && !js.getAp().getJiraUrl().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getAp().getJiraUrl());
-                } else if (line.startsWith("everis.conf.proxyConfiguration.host=") && !js.getAp().getProxyHost().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getAp().getProxyHost());
-                } else if (line.startsWith("everis.conf.proxyConfiguration.post=") && !js.getAp().getProxyPort().isEmpty()) {
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + js.getAp().getProxyPort());
-                } else if (line.startsWith("everis.conf.project.path=") && !js.getAp().getWorkingDirectory().isEmpty()) {
-                    char[] currectPath = js.getAp().getWorkingDirectory().toCharArray();
-
-                    for (int i = 0; i < currectPath.length; i++) {
-                        if (currectPath[i] == '\\') {
-                            currectPath[i] = '/';
-                        }
-
-                    }
-
-                    newLines.add(line.substring(0, line.indexOf("=") + 1) + String.valueOf(currectPath));
-                } else {
-                    newLines.add(line);
-                }
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(everisWriteOverFIle));
-            for (String s : newLines) {
-                bw.write(s);
-                bw.newLine();
-            }
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+    public void userConfiguration(UserChange uc,String path){
+        VariableService vs = new VariableService();
+        vs.writeUserConfIntoJson(uc,path);
     }
 
-   /* private Map<String, String> LocalVariables2(){
-        Map<String, String> localvariables2= new HashMap<String, String>();
-        localvariables2.put();
-        return localvariables2;
+
+   public void serverConfiguration(ApplicationProperties ap, String path){
+       VariableService vs = new VariableService();
+       vs.writeServerConfIntoJson(ap,path);
+   }
+
+   public void filterConfiguration(Filter filter,String path){
+       VariableService vs = new VariableService();
+       vs.writeFilterConfIntoJson(filter,path);
+   }
+    public void filterDelete(Filter filter, String path) {
+        VariableService vs = new VariableService();
+        vs.filterDeleteFromJson(filter,path);
     }
-    */
+
+
+
+
+   public   ApplicationProperties getApFromJson(String path){
+       VariableService vs = new VariableService();
+
+        return vs.readJsonServerConf(path);
+   }
+
+  public UserChange getUcFromJson(String path) {
+      VariableService vs = new VariableService();
+      return vs.readJsonUserConf(path);
+  }
+
+  public ArrayList<Filter> filterList(String path){
+      VariableService vs = new VariableService();
+
+      return vs.readJsonFilterList(path);
+  }
+
+
+  public Filter getSelectedFilter(String filterName,String path){
+        VariableService vs = new VariableService();
+        return vs.getFilter(filterName,path);
+    }
+
+
 
 }

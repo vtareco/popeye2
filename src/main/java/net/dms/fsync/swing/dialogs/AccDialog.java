@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.dialogs;
 
+import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.swing.models.BitacoraTableModel;
 import net.dms.fsync.synchronizer.fenix.entities.Bitacora;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
@@ -21,6 +22,7 @@ import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -28,7 +30,12 @@ import java.util.List;
 public class AccDialog extends JenixDialog<FenixAcc> {
     private JTextField txtNombre;
     private JTextArea txaDescripcion;
+
+
     private JTextField txtCodigoPeticionCliente;
+    private JTextField txtIdPeticion;
+
+
     private JComboBox cmbEstado;
     private JComboBox cmbTipo;
    // private JComboBox cmbSubTipo;
@@ -69,18 +76,31 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public void edit() {
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
+
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
+
+        //txtIdPeticion.setText(getPayload().);
+
+
         cmbEstado.setSelectedItem(getPayload().getEstado());
         cmbTipo.setSelectedItem(getPayload().getTipo());
      //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
+
+        txtPuntosHistoria.setEditable(false);
+        txtEsfuerzoCliente.setEditable(false);
+
         txtPuntosHistoria.setText(getPayload().getPuntosHistoria());
+
+
         txtHistoriaUsuario.setText(getPayload().getHistoriaUsuario());
-        txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
+
+        //txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
+
         jtbBitacora.getModel().load(getPayload().getBitacora());
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
 
         for (Actor actor : SettingsService.getInstance().getSettings().getActores()){
-            responsablesEsfuerzos.add(new FenixResponsable(null, actor.getNombre(), actor.getNumeroEmpleadoEveris(), null));
+            responsablesEsfuerzos.add(new FenixResponsable(  null, actor.getNombre(), actor.getNumeroEmpleadoEveris(), null));
         }
 
         String[] responsables = getPayload().getResponsable() != null ? getPayload().getResponsable().split("-") : new String[0];
@@ -114,6 +134,11 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         JLabel lblDescription = new JLabel("Descripción");
         JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
         JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
+
+
+        JLabel lblPeticion = new JLabel("ID Peticion");
+
+
         JLabel lblEstado = new JLabel("Estado");
         JLabel lblTipo = new JLabel("Tipo");
         //JLabel lblSubtipo = new JLabel("Subtipo");
@@ -133,6 +158,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         txtCodigoPeticionCliente = new JTextField();
+        txtIdPeticion = new JTextField();
+
         cmbEstado = new JComboBox();
         cmbTipo = new JComboBox();
        // cmbSubTipo = new JComboBox();
@@ -149,11 +176,32 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         responsablesTableModel.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
+
+                double puntos;
+                double esfurzo;
+                double arredondado;
+
                 StringBuilder responsables = new StringBuilder();
                 StringBuilder esfuerzos = new StringBuilder();
                 StringBuilder subtipos = new StringBuilder();
                 splitAttributes(responsables, esfuerzos, subtipos);
+
                 txtEsfuerzoCliente.setText(Double.toString(FenixAcc.calculateTotalEsfuerzo(esfuerzos.toString())));
+
+                //Add by vics
+               // try{
+                    esfurzo=Double.valueOf(txtEsfuerzoCliente.getText());
+                    puntos=esfurzo*0.375;
+
+                    arredondado=Math.round(puntos);
+
+                    txtPuntosHistoria.setText(String.valueOf(arredondado));
+             /*   }catch(Exception ex){
+                    throw new AppException("TESTE");
+                }*/
+
+
+
             }
         });
         jtbResponsables.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -328,28 +376,49 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
     @Override
     public void fillPayLoad() {
-        getPayload().setDescripcion(txaDescripcion.getText());
-        getPayload().setNombre(txtNombre.getText());
+            getPayload().setDescripcion(txaDescripcion.getText());
+            getPayload().setNombre(txtNombre.getText());
 
-        getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
-        getPayload().setEstado((String)cmbEstado.getSelectedItem());
-        getPayload().setTipo((String)cmbTipo.getSelectedItem());
-       // getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
-        getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
+            getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+            getPayload().setEstado((String) cmbEstado.getSelectedItem());
+            getPayload().setTipo((String) cmbTipo.getSelectedItem());
+            // getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
 
-        getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
-        getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
+            getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
 
-        getPayload().setBitacora(jtbBitacora.getList());
+            getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
 
-        StringBuilder responsables = new StringBuilder();
-        StringBuilder esfuerzos = new StringBuilder();
-        StringBuilder subtipos = new StringBuilder();
-        splitAttributes(responsables, esfuerzos, subtipos);
+            if(txtEsfuerzoCliente.getText().equals(null) || StringUtils.isBlank(txtEsfuerzoCliente.getText()) || txtEsfuerzoCliente.getText().equals("0.0")){ //validacao esfurzo
+                throw new AppException("Esfurzo no hay sido cumplido o datos invalidos");
+            }else {
+                //getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
+                getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
+            }
 
-        getPayload().setEsfuerzo(esfuerzos.toString());
-        getPayload().setResponsable(responsables.toString());
-        getPayload().setSubTipo(subtipos.toString());
+
+          /*  if(txtEsfuerzoCliente.getText().equals("8")){
+                txtPuntosHistoria.setText("3");
+                getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
+            }*/
+
+            getPayload().setBitacora(jtbBitacora.getList());
+
+            StringBuilder responsables = new StringBuilder();
+            StringBuilder esfuerzos = new StringBuilder();
+            StringBuilder subtipos = new StringBuilder();
+            splitAttributes(responsables, esfuerzos, subtipos);
+
+            getPayload().setEsfuerzo(esfuerzos.toString());
+            getPayload().setResponsable(responsables.toString());
+
+            if(subtipos.toString().equals("null") || subtipos.toString().equals("null-null")){
+                throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos");
+            }else{
+                getPayload().setSubTipo(subtipos.toString());
+            }
+
+
+
 
     }
 
@@ -371,9 +440,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 responsables.append(fenixResponsable.getNumero());
                 esfuerzos.append(fenixResponsable.getEsfuerzo());
                 subtipos.append(fenixResponsable.getSubtipoTarea());
+                System.out.println("esfuerzo "+fenixResponsable.getEsfuerzo());
             }
         }
     }
-
 
 }

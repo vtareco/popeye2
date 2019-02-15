@@ -1,5 +1,8 @@
 package net.dms.fsync.httphandlers.entities.config;
 
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,9 +18,20 @@ public class Execution {
     private ProxyConfiguration proxyConfiguration;
 
     private List<Action> actions;
+    private String name;
+
+    @XmlElement
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     @XmlElementWrapper
-    @XmlElement(name="action")
+    @XmlElement(name = "action")
     public List<Action> getActions() {
         return actions;
     }
@@ -40,5 +54,8 @@ public class Execution {
         return "Execution{" +
                 "actions=" + actions +
                 '}';
+    }
+
+    public void initActions(ApplicationProperties applicationProperties, UserChange userChange) {
     }
 }

@@ -3,17 +3,18 @@ package net.dms.fsync.httphandlers.control;
 import net.dms.fsync.httphandlers.entities.config.Action;
 import net.dms.fsync.httphandlers.entities.ActionResponse;
 import net.dms.fsync.httphandlers.entities.config.Execution;
+import net.dms.fsync.httphandlers.entities.config.executions.ExecutionFactory;
 import net.dms.fsync.httphandlers.entities.enumerations.HttpMethod;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
+import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.ParseException;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
@@ -21,7 +22,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.SecureRandom;
@@ -38,7 +38,7 @@ public class ActionExecutor {
     private Map<String, ActionResponse> responses = new HashMap<String, ActionResponse>();
     private String executionFile;
     private Map<String, String> variables = new HashMap<String, String>();
-
+    private VariableService vs = new VariableService();
 
 
     public ActionExecutor(String executionFile, Map<String, String> variables){
@@ -47,6 +47,7 @@ public class ActionExecutor {
     }
     public ActionResponse  execute(){
         ActionResponse response = null;
+        VariableService vs = new VariableService();
         try {
             InputStream is = Thread.class.getResourceAsStream(executionFile);
 
@@ -57,8 +58,13 @@ public class ActionExecutor {
             String strExecution = IOUtils.toString(is, "UTF-8");
             strExecution = processVariables(strExecution);
 
-            Execution execution = (Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
-            System.out.println(execution);
+           // Execution execution = (Execution)jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
+            Execution unmarshalExe = (Execution) jaxbMarshaller.unmarshal(IOUtils.toInputStream(strExecution, "UTF-8"));
+            Execution execution = ExecutionFactory.createExecution(unmarshalExe);
+
+
+            execution.initActions(vs.readJsonServerConf(WorkingJira.getJsonApplicationProperties()),vs.readJsonUserConf(WorkingJira.getJsonUserCreate()));
+           System.out.println(execution);
 
 
            // SSLContext sslContext = new SSLContextBuilder()
@@ -132,7 +138,6 @@ public class ActionExecutor {
             actions.add(action2            );
 
             execution.setActions(actions);
-
             JAXBContext jaxbContext = JAXBContext.newInstance(Execution.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 

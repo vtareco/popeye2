@@ -29,7 +29,7 @@ public class GetIncidenciaMetaDataAction {
     public void execute(){
         ActionExecutor ae = new ActionExecutor("/bmw/rsp/executions/fenix_incidencias_tarea_causante.xml", variables);
         ActionResponse ar = ae.execute();
-
+        System.out.println("3 passo");
         HttpResponse httpResponse = (HttpResponse)ar.getResponse();
         InputStream in = null;
         OutputStream os = null;
@@ -44,7 +44,7 @@ public class GetIncidenciaMetaDataAction {
             Map<String, String> mapAccCorrector = getAccCorrector(content);
             metadataMaps.put(IncidenciasMetaDataType.ACC_CORRECTOR, mapAccCorrector);
 
-
+            System.out.println("Ligação incidencias");
 
         }catch(Exception ex){
             throw new AppException(ex);

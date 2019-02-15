@@ -41,6 +41,7 @@ public class EverisConfig {
             for(String key : jiraFiltrosKeys) {
                 jiraFilters.put(key, properties.getProperty(key));
             }
+
         } catch (IOException e) {
             e.printStackTrace();
             throw new AppException(e);

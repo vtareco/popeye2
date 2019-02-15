@@ -1,7 +1,6 @@
 package net.dms.fsync.swing.Panes;
 
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
-import net.dms.fsync.synchronizer.LocalVariables.entities.JenixSettings;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
 
 import javax.swing.*;
@@ -20,36 +19,17 @@ public class UserChangePane extends JPanel {
     private String cacheFenixPw;
     private String cacheJiraUser;
     private String cacheJiraPw;
+    private UserChange uc;
 
-/*
-    public UserChangePane JPanel panelparent, File jsonUserCrete) {
+    public UserChangePane(String path) {
         setLayout(null);
-        this.setSize(600, 400);
-        setTitle("User Settings");
-        setLocationRelativeTo(panelparent);
-        setModal(true);
-        setResizable(false);
-        preLoadDialog(jsonUserCrete);
 
-    }
-
-    private void preLoadDialog(File jsonUserCrete) {
-        UserChange uc = new UserChange();
-        uc.setFenixPassword("");
-        uc.setFenixUser("");
-        uc.setJiraPassword("");
-        uc.setFenixUser("");
-        loadPane(uc);
-    }
-*/
-
-    public UserChangePane(JenixSettings js) {
-        setLayout(null);
-        loadPane(js);
+        loadPane(path);
     }
 
 
-    private void loadPane(JenixSettings js ) {
+    private void loadPane(String path) {
+        LocalVariables lv = new LocalVariables();
         jiraCredentialsJl = new JLabel();
         fenixCredentialsJl = new JLabel();
         fenixUserJtf = new JTextField();
@@ -60,20 +40,22 @@ public class UserChangePane extends JPanel {
         declineChangesJbtn = new JButton();
         reReloadChanges = new JButton();
         clearAllBtn = new JButton();
-        cacheFenixUser = js.getUc().getFenixUser();
-        cacheFenixPw = js.getUc().getFenixPassword();
-        cacheJiraUser = js.getUc().getJirauser();
-        cacheJiraPw = js.getUc().getJiraPassword();
+        uc = lv.getUcFromJson(path);
+        cacheFenixUser = uc.getFenixUser();
+        cacheFenixPw = uc.getFenixPassword();
+        cacheJiraUser = uc.getJirauser();
+        cacheJiraPw = uc.getJiraPassword();
 
 
-        fenixConfigurationLoad(js.getUc().getFenixUser(), js.getUc().getFenixPassword());
-        jiraConfigurationLoad(js.getUc().getJirauser(), js.getUc().getJiraPassword());
+        fenixConfigurationLoad(uc.getFenixUser(), uc.getFenixPassword());
+        jiraConfigurationLoad(uc.getJirauser(), uc.getJiraPassword());
         buttonConfigurationLoad();
 
         acceptChangesJbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                changeUserFunction(js);
+
+                changeUserFunction(uc,path);
             }
         });
 
@@ -102,6 +84,7 @@ public class UserChangePane extends JPanel {
 
     }
 
+
     public void clearFields() {
         fenixUserJtf.setText(null);
         fenixPasswordJtf.setText(null);
@@ -110,22 +93,16 @@ public class UserChangePane extends JPanel {
     }
 
 
-    public void changeUserFunction(JenixSettings js) {
-        //VariableService vl = new VariableService();
+    private void changeUserFunction(UserChange uc,String path) {
         LocalVariables lv = new LocalVariables();
-        js.getUc().setFenixUser(fenixUserJtf.getText());
-        js.getUc().setFenixPassword(fenixPasswordJtf.getText());
-        js.getUc().setJirauser(jiraUserJtf.getText());
-        js.getUc().setJiraPassword(jiraPasswordJtf.getText());
-       // System.out.println(fenixUserJtf.getText());
-
-
-
-        lv.alterConf(js);
-
-        // vl.writeUserConfJsonFile(uc);
-
+        uc.setFenixUser(fenixUserJtf.getText());
+        uc.setFenixPassword(fenixPasswordJtf.getText());
+        uc.setJirauser(jiraUserJtf.getText());
+        uc.setJiraPassword(jiraPasswordJtf.getText());
+        lv.userConfiguration(uc,path);
     }
+
+
 
     public void cancelUserFunction() {
 
@@ -189,7 +166,7 @@ public class UserChangePane extends JPanel {
         declineChangesJbtn.setName("declineChangesBtn");
         declineChangesJbtn.setText("Cancel");
         declineChangesJbtn.setBounds(455, 300, 110, 30);
-       // this.add(declineChangesJbtn);
+
 
         reReloadChanges.setFont(new Font("Arial", Font.PLAIN, 10));
         reReloadChanges.setName("reloadChanges");

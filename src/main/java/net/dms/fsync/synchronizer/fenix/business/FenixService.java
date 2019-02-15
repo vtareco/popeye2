@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.synchronizer.fenix.control.FenixRepository;
-import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
-import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
-import net.dms.fsync.synchronizer.fenix.entities.FenixPeticion;
-import net.dms.fsync.synchronizer.fenix.entities.FenixRequirementSpecification;
+import net.dms.fsync.synchronizer.fenix.entities.*;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccType;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.IncidenciasMetaDataType;
@@ -41,6 +38,10 @@ public class FenixService {
 
     public List<FenixIncidencia> searchIncidenciasByOtId(Long idOt, boolean forceDownload){
         return fenixRepository.searchIncidenciasByOtId(idOt, forceDownload);
+    }
+
+    public List<FenixDuda> searchDudasByOtId(Long idOt, boolean forceDownload){
+        return fenixRepository.searchDudasByOtId(idOt, forceDownload);
     }
 
 
@@ -77,8 +78,16 @@ public class FenixService {
         fenixRepository.saveIncidencias(incidencias);
     }
 
+    public void saveDuda(List<FenixDuda> dudas){
+        fenixRepository.saveDudas(dudas);
+    }
+
     public void uploadIncidencias(Long idPeticionOt) {
         fenixRepository.uploadIncidencias(idPeticionOt);
+    }
+    /*AQUI*/
+    public void uploadDudas(Long idPeticionOt){
+        fenixRepository.uploadDudas(idPeticionOt);
     }
 
     public static void main(String[] args){
@@ -90,6 +99,7 @@ public class FenixService {
     }
 
     public Map<IncidenciasMetaDataType,Map> getIncidenciasMetaData(Long idOt) {
+        System.out.println("1 passo");
         return fenixRepository.getIncidenciasMetaData(idOt);
     }
 

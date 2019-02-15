@@ -16,6 +16,7 @@ public class JiraService {
 
     public JiraSearchResponse search(String jql){
 
+
         JiraSearchResponse response = jiraRepository.search(jql);
 
         return response;

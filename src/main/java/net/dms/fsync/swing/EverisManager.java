@@ -1071,6 +1071,14 @@ public class EverisManager {
                         duda.setRespRespuestaProyecto(uc.getFenixUser());
                         duda.setAutorUltAct(acc.getResponsable());
                         duda.setIdRequerimiento(Long.valueOf(acc.getIdPeticion()));
+                        duda.setAmbito(DudaAmbitoType.INTERNO.getDescription());
+                        duda.setCriticidad(Criticidad.BAJA.getDescription());
+                        duda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
+                        duda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
+                        duda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
+
+
+
                         System.out.println("AGORA "+duda.getIdRequerimiento());
 
                         if(acc.getResponsable()==null || StringUtils.isBlank(acc.getResponsable())){

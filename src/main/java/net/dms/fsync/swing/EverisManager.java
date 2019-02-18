@@ -34,10 +34,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -687,6 +685,7 @@ public class EverisManager {
             JComboBox tareaCausanteCmb = new JComboBox();
             SwingUtil.loadComboBox(SwingUtil.mapToSelectOptionList((Map<String, String>) incidenciasMetadata.get(IncidenciasMetaDataType.TAREA_CAUSANTE)), tareaCausanteCmb, false);
             incidenciasTable.getColumnModel().getColumn(IncidenciaTableModel.Columns.TAREA_CAUSANTE.ordinal()).setCellEditor(new DefaultCellEditor(tareaCausanteCmb));
+
 
             JComboBox estadoCmb = new JComboBox();
             SwingUtil.loadComboBox(IncidenciaEstadoType.class, estadoCmb, false);

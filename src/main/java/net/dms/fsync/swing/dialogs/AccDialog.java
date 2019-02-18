@@ -90,6 +90,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         txtEsfuerzoCliente.setEditable(false);
 
         txtEsfuerzoCliente.setText(getPayload().getEsfuerzo());
+
         txtPuntosHistoria.setText(getPayload().getPuntosHistoria());
 
 
@@ -120,6 +121,12 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 responsablesEsfuerzos.add(fenixResponsable);
             }
         }
+
+      /*  if(subtipos.toString().equals("null") || subtipos.toString().equals("null-null")){
+            throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos");
+        }else{
+            getPayload().setSubTipo(subtipos.toString());
+        }*/
 
 
     }
@@ -393,7 +400,12 @@ public class AccDialog extends JenixDialog<FenixAcc> {
             getPayload().setNombre(txtNombre.getText());
 
             getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+
+        if(StringUtils.isBlank(txtIdPeticion.getText()) || txtIdPeticion.equals(null)){
+            throw new AppException("ID Peticion es requerido");
+        }else{
             getPayload().setIdPeticion(txtIdPeticion.getText());
+        }
 
 
             getPayload().setEstado((String) cmbEstado.getSelectedItem());
@@ -410,7 +422,6 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 //getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
                 getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
             }
-
 
           /*  if(txtEsfuerzoCliente.getText().equals("8")){
                 txtPuntosHistoria.setText("3");

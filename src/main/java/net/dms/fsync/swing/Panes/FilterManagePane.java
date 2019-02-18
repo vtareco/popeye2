@@ -17,7 +17,7 @@ public class FilterManagePane extends JPanel {
     private JList filters;
     private JTextField filterNameJtf;
     private JTextArea filterQueryJtf;
-    private JButton saveJBtn, deleteFilterJBtn;
+    private JButton saveJBtn, deleteFilterJBtn,clearFieldsJbtn;
 
     public FilterManagePane(String path) {
         setLayout(null);
@@ -30,6 +30,7 @@ public class FilterManagePane extends JPanel {
     public void loadPane(String path) {
         LocalVariables lv = new LocalVariables();
         saveJBtn = new JButton();
+        clearFieldsJbtn = new JButton();
         deleteFilterJBtn = new JButton();
         ArrayList<Filter> arFilter = lv.filterList(path);
         filters = new JList<Filter>();
@@ -62,6 +63,15 @@ public class FilterManagePane extends JPanel {
             }
         });
 
+        clearFieldsJbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                queryTextClear();
+            }
+
+
+        });
+
         deleteFilterJBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +84,11 @@ public class FilterManagePane extends JPanel {
             }
         });
 
+    }
+
+    private void queryTextClear() {
+        filterNameJtf.setText(null);
+        filterQueryJtf.setText(null);
     }
 
     private void filterDelete(String filterName, String filterQuery, String path) {
@@ -143,6 +158,11 @@ public class FilterManagePane extends JPanel {
         deleteFilterJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         deleteFilterJBtn.setText("Delete");
         this.add(deleteFilterJBtn);
+
+        clearFieldsJbtn.setFont(new Font("Arial", Font.PLAIN, 12));
+        clearFieldsJbtn.setBounds(300, 50, 250, 25);
+        clearFieldsJbtn.setText("Clear");
+        this.add(clearFieldsJbtn);
     }
 
 }

@@ -118,7 +118,7 @@ public class EverisManager {
 
 
     public EverisManager() {
-
+        onInit();
         $$$setupUI$$$();
         SwingUtil.registerListener(refreshJiraBtn, this::refreshJira, this::handleException);
         SwingUtil.registerListener(searchACCs, this::loadAccs, this::handleException);
@@ -179,11 +179,12 @@ public class EverisManager {
             }
         });
 
-        onInit();
+
     }
 
 
     private void onInit() {
+        System.out.println("heyyyyy");
         if (!jenixFoulder.exists()) {
             jenixFoulder.mkdirs();
             System.out.println("Directory created in " + jenixFoulder.toString());

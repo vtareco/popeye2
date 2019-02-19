@@ -37,7 +37,7 @@ public class WorkingJira {
     private static String fenixUploadAccs = "fenix_upload_accs";
     private static String fenixLogin = "fenix_login";
     private static String fenixMetaInfoIncidencias = "fenix_metainfo_incidencias";
-    private static String fenixDownloadIncidencias = "fenix_download_accs";
+    private static String fenixDownloadIncidencias = "fenix_download_incidencias";
     private static String fenixDownloadDudas = "fenix_download_dudas";
     private static String fenixDownloadAccsIncurridos = "fenix_download_accs_incurridos";
     public static String fenixDownloadAccs = "fenix_download_accs";

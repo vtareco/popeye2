@@ -21,7 +21,7 @@ public class FenixDownloadAccExecution extends Execution {
                 action.setUrl(applicationProperties.getFenixUrl() + action.getUrl().substring(action.getUrl().indexOf("/fenix/actuaciones")));
                 for (Header header: action.getHeaders()){
                     if(header.getName().equals(WorkingJira.getHeaderReferer())){
-                        header.setValue(applicationProperties.getFenixUrl() + header.getValue().substring(action.getUrl().indexOf("/fenix/requerimientos")));
+                        header.setValue(applicationProperties.getFenixUrl() + header.getValue().substring(header.getValue().indexOf("/fenix/requerimientos")));
                     }
                 }
             }

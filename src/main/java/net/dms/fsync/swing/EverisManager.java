@@ -1076,7 +1076,6 @@ public class EverisManager {
                         duda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
                         duda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
                         duda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
-                        System.out.println("teste");
 
 
                         System.out.println("AGORA "+duda.getIdRequerimiento());
@@ -1200,16 +1199,34 @@ public class EverisManager {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         FenixDuda fenixDuda = new FenixDuda();
-                        VariableService vs = new VariableService();
+                        //VariableService vs = new VariableService();
+                        LocalVariables lv = new LocalVariables();
+                        UserChange uc = lv.getUcFromJson(WorkingJira.getJsonUserCreate());
 
                         fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
                         fenixDuda.setIdOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
 
-                        fenixDuda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
-                        fenixDuda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());
+                       /* fenixDuda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
+                        fenixDuda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());*/
 
-                        //fenixDuda.setIdRequerimiento(Long.valueOf("1218336")); //PETICAO
-                        //fenixDuda.setIdRequerimiento();
+                        fenixDuda.setResponsableConsulta(uc.getFenixUser());
+                        fenixDuda.setRespRespuestaProyecto(uc.getFenixUser());
+                        
+                        fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
+                        fenixDuda.setAmbito(DudaAmbitoType.INTERNO.getDescription());
+                        fenixDuda.setCriticidad(Criticidad.BAJA.getDescription());
+                        fenixDuda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
+                        fenixDuda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
+                        fenixDuda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
+
+                        /* duda.setDescripcion(acc.getDescripcion());
+                        duda
+                        duda.setResponsableConsulta(uc.getFenixUser());
+                        duda.setRespRespuestaProyecto(uc.getFenixUser());
+                        duda.setAutorUltAct(acc.getResponsable());
+                        duda.setIdRequerimiento(Long.valueOf(acc.getIdPeticion()));
+
+ */
 
 
                         dudasTable.addRow(fenixDuda);

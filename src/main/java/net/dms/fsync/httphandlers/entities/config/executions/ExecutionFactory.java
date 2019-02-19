@@ -7,7 +7,7 @@ public class ExecutionFactory {
 
     public static Execution createExecution(Execution execution) {
         System.out.println(execution + "OLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        if (execution.getName().equals(WorkingJira.getFenixDownloadAccs())) {
+        if (execution.getName().equals(WorkingJira.getFenixDownloadDudas())) {
             execution = new FenixDownloadDudaExecution(execution);
         } else if (execution.getName().equals(WorkingJira.getFenixLogin())) {
             execution = new FenixLoginExecution(execution);

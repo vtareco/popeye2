@@ -438,11 +438,19 @@ public class AccDialog extends JenixDialog<FenixAcc> {
             getPayload().setEsfuerzo(esfuerzos.toString());
             getPayload().setResponsable(responsables.toString());
 
-            if(subtipos.toString().equals("null") || subtipos.toString().equals("null-null")){
+        System.out.println("hehe "+subtipos.toString());
+
+        //System.out.println(subtipos.length());
+
+
+            if(StringUtils.isBlank(subtipos.toString()) || StringUtils.isEmpty(subtipos.toString()) || subtipos.toString().indexOf("null")!=-1)   {
                 throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos");
             }else{
                 getPayload().setSubTipo(subtipos.toString());
             }
+
+
+
 
 
 

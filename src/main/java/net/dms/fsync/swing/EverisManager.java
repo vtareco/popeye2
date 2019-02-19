@@ -1076,7 +1076,7 @@ public class EverisManager {
                         duda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
                         duda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
                         duda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
-
+                        System.out.println("teste");
 
 
                         System.out.println("AGORA "+duda.getIdRequerimiento());

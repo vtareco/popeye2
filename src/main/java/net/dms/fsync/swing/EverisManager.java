@@ -177,24 +177,15 @@ public class EverisManager {
             }
         });
 
-        txtJiraTask.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
+        txtJiraTask.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode()==KeyEvent.VK_ENTER && jiraFiltersCmb.getSelectedItem().toString().equals("byId")){
                     refreshJira();
                 }
             }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
         });
+
 
 
     }

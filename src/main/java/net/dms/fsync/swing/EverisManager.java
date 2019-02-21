@@ -21,6 +21,8 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import net.dms.fsync.synchronizer.jira.business.JiraService;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -28,11 +30,9 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -174,6 +174,25 @@ public class EverisManager {
                 } catch (Exception ex) {
                     handleException(ex);
                 }
+            }
+        });
+
+        txtJiraTask.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode()==KeyEvent.VK_ENTER && jiraFiltersCmb.getSelectedItem().toString().equals("byId")){
+                    refreshJira();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
             }
         });
 
@@ -467,7 +486,19 @@ public class EverisManager {
 
     private void loadAccs() {
         resetForm();
+        LocalVariables lv = new LocalVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
+
         if (getPeticionSelected(peticionesDisponiblesCmb) != null) {
+
+            File file = new File(projectPath+"/"+peticionesDisponiblesCmb.getSelectedItem().toString()+"/OT_INFO"+"/info.json");
+
+            if (!file.exists()) {
+                PeticionDialog peticionDialog = new PeticionDialog(panelParent,peticionesDisponiblesCmb.getSelectedItem().toString());
+                peticionDialog.setVisible(true);
+            }
+
             accTable.getModel().load(fenixService.searchAccByPeticionId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
             refreshTotales();
         }
@@ -492,6 +523,10 @@ public class EverisManager {
 
 
     }
+
+
+
+
 
     private void searchJiras(Consumer<List<JiraIssue>> consumer, String filter) {
 
@@ -527,6 +562,7 @@ public class EverisManager {
         } else {
             return new Long(selected.split("-")[0]);
         }
+
     }
 
     private String getJiraFilterSelected() {
@@ -1067,15 +1103,9 @@ public class EverisManager {
 
                         duda.setDescripcion(acc.getDescripcion());
                         duda.setEstado(DudaEstadoType.ABIERTA.getDescription());
-                        duda.setResponsableConsulta(uc.getFenixUser());
-                        duda.setRespRespuestaProyecto(uc.getFenixUser());
-                        duda.setAutorUltAct(acc.getResponsable());
                         duda.setIdRequerimiento(Long.valueOf(acc.getIdPeticion()));
-                        duda.setAmbito(DudaAmbitoType.INTERNO.getDescription());
-                        duda.setCriticidad(Criticidad.BAJA.getDescription());
-                        duda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
-                        duda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
-                        duda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
+
+                        addDuda(duda, acc, uc);
 
 
                         System.out.println("AGORA "+duda.getIdRequerimiento());
@@ -1124,6 +1154,7 @@ public class EverisManager {
                     if (selected.length > 0) {
 
                         FenixAcc acc = ((AccTableModel) tabla.getModel()).getPayload(selected[0]);
+
                         FenixAcc copy = SerializationUtils.clone(acc);
                         copy.getBitacora().clear();
                         copy.setIdAcc(null);
@@ -1197,11 +1228,32 @@ public class EverisManager {
             addDudasBtn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    LocalVariables lv = new LocalVariables();
+                    ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+                    String projectPath = ap.getWorkingDirectory();
+
+                    JSONParser jsonparser = new JSONParser();
                     try {
+
+                        Object obj = jsonparser.parse(new FileReader(projectPath+"/"+peticionesDisponiblesCmb.getSelectedItem().toString()+"/OT_INFO"+"/info.json"));
+
+                        //projectPath + "/" + peticionSelected + "/OT_INFO" + "/info.json")
+
+                        JSONObject object = (JSONObject) obj;
+
+                        String idPeticion = (String) object.get("ID_Peticion");
+
+
                         FenixDuda fenixDuda = new FenixDuda();
+                        FenixAcc acc =  accTable.getModel().getPayload(0);
                         //VariableService vs = new VariableService();
-                        LocalVariables lv = new LocalVariables();
+
+                        //LocalVariables lv = new LocalVariables();
                         UserChange uc = lv.getUcFromJson(WorkingJira.getJsonUserCreate());
+
+
+
+                        fenixDuda.setIdRequerimiento(Long.valueOf(idPeticion));
 
                         fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
                         fenixDuda.setIdOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
@@ -1209,24 +1261,10 @@ public class EverisManager {
                        /* fenixDuda.setResponsableConsulta(vs.getUserVariables().getFenixUser());
                         fenixDuda.setRespRespuestaProyecto(vs.getUserVariables().getFenixUser());*/
 
-                        fenixDuda.setResponsableConsulta(uc.getFenixUser());
-                        fenixDuda.setRespRespuestaProyecto(uc.getFenixUser());
-                        
+
                         fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
-                        fenixDuda.setAmbito(DudaAmbitoType.INTERNO.getDescription());
-                        fenixDuda.setCriticidad(Criticidad.BAJA.getDescription());
-                        fenixDuda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
-                        fenixDuda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
-                        fenixDuda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
 
-                        /* duda.setDescripcion(acc.getDescripcion());
-                        duda
-                        duda.setResponsableConsulta(uc.getFenixUser());
-                        duda.setRespRespuestaProyecto(uc.getFenixUser());
-                        duda.setAutorUltAct(acc.getResponsable());
-                        duda.setIdRequerimiento(Long.valueOf(acc.getIdPeticion()));
-
- */
+                        addDuda(fenixDuda, acc, uc);
 
 
                         dudasTable.addRow(fenixDuda);
@@ -1250,4 +1288,17 @@ public class EverisManager {
 
         }
     }
+
+    private void addDuda(FenixDuda fenixDuda, FenixAcc acc, UserChange uc) {
+        fenixDuda.setResponsableConsulta(uc.getFenixUser());
+        fenixDuda.setRespRespuestaProyecto(uc.getFenixUser());
+        fenixDuda.setAutorUltAct(acc.getResponsable());
+        fenixDuda.setCreador(acc.getResponsable());
+        fenixDuda.setAmbito(DudaAmbitoType.INTERNO.getDescription());
+        fenixDuda.setCriticidad(Criticidad.BAJA.getDescription());
+        fenixDuda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
+        fenixDuda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
+        fenixDuda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
+    }
+
 }

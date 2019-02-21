@@ -1,9 +1,11 @@
 package net.dms.fsync.swing.models;
 
 import net.dms.fsync.swing.components.JenixTableModel;
+import net.dms.fsync.swing.components.SwingUtil;
 import net.dms.fsync.synchronizer.fenix.entities.FenixDuda;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.DudaRowType;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumType;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -45,6 +47,7 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
             this.editable = editable;
             this.width = width;
         }
+
 
         public boolean isEditable() {
             return editable;
@@ -130,7 +133,11 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 fireTableCellUpdated(row,col);
                 break;
             case ID_REQUERIMIENTO:
-                duda.setIdRequerimiento((Long)value);
+                if(StringUtils.isBlank(value.toString())) {
+                    SwingUtil.msgErrorTxt("Meko meko");
+                    return; 
+                }
+                duda.setIdRequerimiento(Long.valueOf(value.toString()));
                 duda.setIdRequerimiento(duda.getIdRequerimiento());
                 fireTableCellUpdated(row,col);
                 break;

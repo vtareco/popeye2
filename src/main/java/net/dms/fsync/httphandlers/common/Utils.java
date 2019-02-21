@@ -1,5 +1,7 @@
 package net.dms.fsync.httphandlers.common;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -8,6 +10,8 @@ import java.net.URLDecoder;
  * Created by dminanos on 18/04/2017.
  */
 public class Utils {
+    public static String EMPTY_STRING = "";
+
     public static String replaceVariable(String key, String mapValue, String value) {
         return value.replaceAll("\\$\\{" + key + "\\}", mapValue);
     }
@@ -40,5 +44,12 @@ public class Utils {
             return "";
         }
         return new File(jarPath).getParentFile().getPath();
+    }
+
+    public static String getSubtipo(String subtiposTarea) {
+        if(StringUtils.isBlank(subtiposTarea)) {
+            return EMPTY_STRING;
+        }
+        return subtiposTarea;
     }
 }

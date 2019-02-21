@@ -1,14 +1,16 @@
 package net.dms.fsync.swing.dialogs;
 
 import net.dms.fsync.swing.components.JenixDialog;
+import net.dms.fsync.swing.components.MyColors;
 import net.dms.fsync.synchronizer.fenix.entities.FenixDuda;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
 
 
 public class DudaDialog extends JenixDialog<FenixDuda> {
-    private JTextArea txaDudaDescription;
+    private JTextArea txtDudaDescription;
 
 
     public DudaDialog(Component parent, FenixDuda initialPayload) {
@@ -29,7 +31,7 @@ public class DudaDialog extends JenixDialog<FenixDuda> {
 
     @Override
     public void edit() {
-        txaDudaDescription.setText(getPayload().getDescripcion());
+        txtDudaDescription.setText(getPayload().getDescripcion());
     }
 
     @Override
@@ -42,10 +44,10 @@ public class DudaDialog extends JenixDialog<FenixDuda> {
 
         JLabel lblDescription = new JLabel("Description");
 
-        txaDudaDescription = new JTextArea();
-        txaDudaDescription.setRows(10);
-        txaDudaDescription.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        JScrollPane sp = new JScrollPane(txaDudaDescription);
+        txtDudaDescription = new JTextArea();
+        txtDudaDescription.setRows(10);
+        txtDudaDescription.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JScrollPane sp = new JScrollPane(txtDudaDescription);
         sp.setPreferredSize(new Dimension(300, 200));
         sp.setMinimumSize(new Dimension(300, 200));
        // sp.setBounds(txtSummary.getBounds());
@@ -88,13 +90,17 @@ public class DudaDialog extends JenixDialog<FenixDuda> {
     public void fillPayLoad() {
         // TODO FIXME, use a builder
 
-        getPayload().setDescripcion(txaDudaDescription.getText());
+        getPayload().setDescripcion(txtDudaDescription.getText());
+
+       if(StringUtils.isBlank(txtDudaDescription.getText())){
+           txtDudaDescription.setBackground(MyColors.TABLE_FIELD_REQUIRED);
+       }
 
         //getPayload().setIdRequerimiento(Long.valueOf("1218336")); //PETICAO
 
         System.out.println("AGORA "+getPayload().getIdRequerimiento());
       /*
-        duda.setDescripcion(txaDudaDescription.getText());
+        duda.setDescripcion(txtDudaDescription.getText());
         duda.setEstado(DudaEstadoType.ABIERTA.getDescription());*/
        /* duda.setIdRelacionada(Long.valueOf("123"));
         duda.setIdRequerimiento(Long.valueOf("1234"));

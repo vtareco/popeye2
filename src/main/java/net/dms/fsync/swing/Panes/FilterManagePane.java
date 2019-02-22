@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.Panes;
 
+import net.dms.fsync.swing.EverisManager;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
 
@@ -58,6 +59,8 @@ public class FilterManagePane extends JPanel {
                     textFieldConfigurationLoader();
                     jlistConfigurationLoad(path);
                     filters.removeAll();
+
+                    JOptionPane.showMessageDialog(null,"Filter successfully added","Information",1,null);
                 }
 
             }

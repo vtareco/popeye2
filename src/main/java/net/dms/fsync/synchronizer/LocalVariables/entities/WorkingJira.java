@@ -1,11 +1,9 @@
 package net.dms.fsync.synchronizer.LocalVariables.entities;
 
-import java.io.File;
-
 public class WorkingJira {
 
 
-    public static String idot;
+    public static String idPeticion;
 
     private static String jenixFoulder = "c://JenixSettings";
     private static String jsonUserCreate = jenixFoulder + "/UserConfig.json";
@@ -59,12 +57,12 @@ public class WorkingJira {
     private static String jiraIssuesSearchLogIn = "login";
     private static String jiraISsuesSearchRetrieveIssues = "retrieve-issues";
 
-    public static String getIdot() {
-        return idot;
+    public static String getIdPeticion() {
+        return idPeticion;
     }
 
-    public static void setIdot(String idot) {
-        WorkingJira.idot = idot;
+    public static void setIdPeticion(String idPeticion) {
+        WorkingJira.idPeticion = idPeticion;
     }
 
     public static String getUser() {

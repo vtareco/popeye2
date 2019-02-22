@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.Panes;
 
+import net.dms.fsync.swing.EverisManager;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 
@@ -57,6 +58,8 @@ public class ServerChangePane extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeServerFunction(ap,path);
+
+                JOptionPane.showMessageDialog(null,"Success","Information",1,null);
             }
         });
 

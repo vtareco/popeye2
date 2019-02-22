@@ -21,8 +21,6 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
 import net.dms.fsync.synchronizer.jira.business.JiraService;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -32,7 +30,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -492,7 +489,7 @@ public class EverisManager {
 
         if (getPeticionSelected(peticionesDisponiblesCmb) != null) {
 
-            WorkingJira.setIdot(peticionesDisponiblesCmb.getSelectedItem().toString());
+            WorkingJira.setIdPeticion(peticionesDisponiblesCmb.getSelectedItem().toString());
 
             File file = new File(projectPath+"/"+peticionesDisponiblesCmb.getSelectedItem().toString()+"/OT_INFO"+"/info.json");
 

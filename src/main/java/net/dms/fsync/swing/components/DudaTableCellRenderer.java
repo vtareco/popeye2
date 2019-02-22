@@ -25,7 +25,6 @@ public class DudaTableCellRenderer extends JenixTableCellRenderer {
 
                 }
 
-
         return c;
     }
 }

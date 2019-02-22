@@ -1283,7 +1283,6 @@ public class EverisManager {
 
 
                         dudasTable.addRow(fenixDuda);
-                        dudasTable.setDefaultRenderer(Object.class, new DudaTableCellRenderer());
                     } catch (Exception ex) {
                         handleException(ex);
                     }
@@ -1302,6 +1301,7 @@ public class EverisManager {
                     .setCellEditor(new CalendarCellEditor());
             dudasTable.getColumnModel().getColumn(DudaTableModel.Columns.FECHA_ULT_ACT.ordinal()).setCellRenderer(new DateCellRenderer());
 
+            dudasTable.setDefaultRenderer(Object.class, new DudaTableCellRenderer());
         }
     }
 

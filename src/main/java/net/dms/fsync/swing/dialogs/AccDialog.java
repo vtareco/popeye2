@@ -1,7 +1,11 @@
 package net.dms.fsync.swing.dialogs;
 
+import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.swing.EverisManager;
 import net.dms.fsync.swing.models.BitacoraTableModel;
+import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import net.dms.fsync.synchronizer.fenix.entities.Bitacora;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixResponsable;
@@ -38,7 +42,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
     private JComboBox cmbEstado;
     private JComboBox cmbTipo;
-   // private JComboBox cmbSubTipo;
+    // private JComboBox cmbSubTipo;
     private JTextField txtPuntosHistoria;
     private JTextArea txaComments;
     private JenixTable<BitacoraTableModel, Bitacora> jtbBitacora;
@@ -49,8 +53,6 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     private JScrollPane bitacoraScrollPane;
     private JDatePicker datFechaPrevistaProyecto;
     private JTextField txtEsfuerzoCliente;
-
-
 
 
     public AccDialog(Component parent, FenixAcc initialPayload) {
@@ -69,22 +71,30 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         SwingUtil.loadComboBox(AccStatus.class, cmbEstado, true);
         getPayload().setEstado(AccStatus.PENDIENTE_ASIGNACION.getDescription()); //PENDIENTE
         SwingUtil.loadComboBox(AccType.class, cmbTipo, true);
-      //  SwingUtil.loadComboBox(AccSubType.class, cmbSubTipo, true);
+        //  SwingUtil.loadComboBox(AccSubType.class, cmbSubTipo, true);
     }
 
     @Override
     public void edit() {
+
+        LocalVariables lv = new LocalVariables();
+        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdot());
+
+        txtIdPeticion.setText(idpeticion);
+
+        System.out.println("KUK "+idpeticion);
+
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
 
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
-        txtIdPeticion.setText(getPayload().getIdPeticion());
+       // txtIdPeticion.setText(getPayload().getIdPeticion());
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
         cmbTipo.setSelectedItem(getPayload().getTipo());
-     //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
+        //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
 
         txtPuntosHistoria.setEditable(false);
         txtEsfuerzoCliente.setEditable(false);
@@ -101,23 +111,23 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         jtbBitacora.getModel().load(getPayload().getBitacora());
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
 
-        for (Actor actor : SettingsService.getInstance().getSettings().getActores()){
-            responsablesEsfuerzos.add(new FenixResponsable(  null, actor.getNombre(), actor.getNumeroEmpleadoEveris(), null));
+        for (Actor actor : SettingsService.getInstance().getSettings().getActores()) {
+            responsablesEsfuerzos.add(new FenixResponsable(null, actor.getNombre(), actor.getNumeroEmpleadoEveris(), Utils.EMPTY_STRING));
         }
 
         String[] responsables = getPayload().getResponsable() != null ? getPayload().getResponsable().split("-") : new String[0];
         String[] esfuerzos = getPayload().getEsfuerzo() != null ? getPayload().getEsfuerzo().split("-") : new String[0];
         String[] subtiposTareas = getPayload().getSubTipo() != null ? getPayload().getSubTipo().split("-") : new String[0];
 
-        for (int i = 0; i < responsables.length; i++){
+        for (int i = 0; i < responsables.length; i++) {
             final int index = i;
             FenixResponsable fenixResponsable = responsablesEsfuerzos.stream().filter(r -> r.getNumero().equals(responsables[index])).findFirst().orElse(null);
-            if (fenixResponsable != null){
+            if (fenixResponsable != null) {
                 fenixResponsable.setEsfuerzo(Double.parseDouble(esfuerzos[index]));
                 fenixResponsable.setSubtipoTarea(subtiposTareas[index]);
-            }else {
+            } else {
                 Double esfuerzo = StringUtils.isNotEmpty(esfuerzos[index]) ? Double.parseDouble(esfuerzos[index]) : null;
-                fenixResponsable = new FenixResponsable(esfuerzo, null, responsables[index], subtiposTareas[index]);
+                fenixResponsable = new FenixResponsable(esfuerzo, null, responsables[index], Utils.getSubtipo(subtiposTareas[index]));
                 responsablesEsfuerzos.add(fenixResponsable);
             }
         }
@@ -151,7 +161,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         //JLabel lblSubtipo = new JLabel("Subtipo");
         JLabel lblPuntosHistoria = new JLabel("Puntos Historia");
         JLabel lblEsfuerzo = new JLabel("Esfuerzo cliente");
-        JLabel lblHistoriaUsuario  = new JLabel("Historia usuario");
+        JLabel lblHistoriaUsuario = new JLabel("Historia usuario");
         JLabel lblResponsables = new JLabel("Responsables");
         JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
 
@@ -169,7 +179,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         cmbEstado = new JComboBox();
         cmbTipo = new JComboBox();
-       // cmbSubTipo = new JComboBox();
+        // cmbSubTipo = new JComboBox();
         txtPuntosHistoria = new JTextField();
         txtHistoriaUsuario = new JTextField();
         txtEsfuerzoCliente = new JTextField();
@@ -177,7 +187,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         FenixResponsablesTableModel responsablesTableModel = new FenixResponsablesTableModel(new ArrayList<FenixResponsable>());
         jtbResponsables = new JenixTable(responsablesTableModel);
         responsablesScrollPane = new JScrollPane(jtbResponsables, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        responsablesScrollPane.setMinimumSize(new Dimension(200,120));
+        responsablesScrollPane.setMinimumSize(new Dimension(200, 120));
         jtbResponsables.setFillsViewportHeight(true);
 
         responsablesTableModel.addTableModelListener(new TableModelListener() {
@@ -196,17 +206,16 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 txtEsfuerzoCliente.setText(Double.toString(FenixAcc.calculateTotalEsfuerzo(esfuerzos.toString())));
 
                 //Add by vics
-               // try{
-                    esfurzo=Double.valueOf(txtEsfuerzoCliente.getText());
-                    puntos=esfurzo*0.375;
+                // try{
+                esfurzo = Double.valueOf(txtEsfuerzoCliente.getText());
+                puntos = esfurzo * 0.375;
 
-                    arredondado=Math.round(puntos);
+                arredondado = Math.round(puntos);
 
-                    txtPuntosHistoria.setText(String.valueOf(arredondado));
+                txtPuntosHistoria.setText(String.valueOf(arredondado));
              /*   }catch(Exception ex){
                     throw new AppException("TESTE");
                 }*/
-
 
 
             }
@@ -222,10 +231,10 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         BitacoraTableModel bitacoraTableModel = new BitacoraTableModel(new ArrayList<>());
         jtbBitacora = new JenixTable(bitacoraTableModel);
         bitacoraScrollPane = new JScrollPane(jtbBitacora, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        bitacoraScrollPane.setMinimumSize(new Dimension(200,120));
+        bitacoraScrollPane.setMinimumSize(new Dimension(200, 120));
         jtbBitacora.setFillsViewportHeight(true);
 
-       // datFechaPrevistaProyecto = new JDatePickerImpl();
+        // datFechaPrevistaProyecto = new JDatePickerImpl();
 
         txtNombre = new JTextField(15);
         txaDescripcion = new JTextArea();
@@ -234,7 +243,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         JScrollPane sp = new JScrollPane(txaDescripcion, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setPreferredSize(new Dimension(300, 200));
         sp.setMinimumSize(new Dimension(300, 200));
-       // sp.setBounds(txtSummary.getBounds());
+        // sp.setBounds(txtSummary.getBounds());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.WEST;
@@ -297,7 +306,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         /*AQUI*/
         constraints.gridx = 0;
-        constraints.gridy = ++fila+2;
+        constraints.gridy = ++fila + 2;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblIdPeticion, constraints);
         constraints.weightx = 1;
@@ -311,29 +320,29 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         /*AQUI*/
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         panel.add(txtIdPeticion, constraints);
 
         /*AQUI*/
         constraints.gridx = 1;
-        constraints.gridy = fila-1;
+        constraints.gridy = fila - 1;
         panel.add(txtHistoriaUsuario, constraints);
 
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblEstado, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         panel.add(cmbEstado, constraints);
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblTipo, constraints);
         constraints.weightx = 1;
@@ -345,50 +354,49 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         constraints.weightx = 1;
 */
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         panel.add(cmbTipo, constraints);
 
 
         //constraints.gridx = 1;
-       // constraints.gridy = fila;
-       // panel.add(cmbSubTipo, constraints);
+        // constraints.gridy = fila;
+        // panel.add(cmbSubTipo, constraints);
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblPuntosHistoria, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 1;
-        constraints.gridy = fila+1;
+        constraints.gridy = fila + 1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblEsfuerzo, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         panel.add(txtPuntosHistoria, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = fila+1;
+        constraints.gridy = fila + 1;
         panel.add(txtEsfuerzoCliente, constraints);
 
 
         // field
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblResponsables, constraints);
         constraints.weightx = 1;
 
         constraints.gridx = 0;
-        constraints.gridy = ++fila+1;
+        constraints.gridy = ++fila + 1;
         constraints.gridwidth = 2;
         constraints.gridheight = 5;
         constraints.fill = GridBagConstraints.BOTH;
         panel.add(responsablesScrollPane, constraints);
-
 
 
         return panel;
@@ -396,63 +404,60 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
     @Override
     public void fillPayLoad() {
-            getPayload().setDescripcion(txaDescripcion.getText());
-            getPayload().setNombre(txtNombre.getText());
 
-            getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+        getPayload().setDescripcion(txaDescripcion.getText());
+        getPayload().setNombre(txtNombre.getText());
 
-        if(StringUtils.isBlank(txtIdPeticion.getText()) || txtIdPeticion.equals(null)){
+        getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+
+
+        if (txtIdPeticion.equals(null) || StringUtils.isBlank(txtIdPeticion.getText())) {
             throw new AppException("ID Peticion es requerido");
-        }else{
+        } else {
             getPayload().setIdPeticion(txtIdPeticion.getText());
         }
 
 
-            getPayload().setEstado((String) cmbEstado.getSelectedItem());
-            getPayload().setTipo((String) cmbTipo.getSelectedItem());
-            // getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
+        getPayload().setEstado((String) cmbEstado.getSelectedItem());
+        getPayload().setTipo((String) cmbTipo.getSelectedItem());
+        // getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
 
-            getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
+        getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
 
-            getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
+        getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
 
-            if(txtEsfuerzoCliente.getText().equals(null) || StringUtils.isBlank(txtEsfuerzoCliente.getText()) || txtEsfuerzoCliente.getText().equals("0.0")){ //validacao esfurzo
-                throw new AppException("Esfurzo no hay sido cumplido o datos invalidos");
-            }else {
-                //getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
-                getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
-            }
+        if (txtEsfuerzoCliente.getText().equals(null) || StringUtils.isBlank(txtEsfuerzoCliente.getText()) || txtEsfuerzoCliente.getText().equals("0.0")) { //validacao esfurzo
+            throw new AppException("Esfurzo no hay sido cumplido o datos invalidos");
+        } else {
+            //getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
+            getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
+        }
 
           /*  if(txtEsfuerzoCliente.getText().equals("8")){
                 txtPuntosHistoria.setText("3");
                 getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
             }*/
 
-            getPayload().setBitacora(jtbBitacora.getList());
+        getPayload().setBitacora(jtbBitacora.getList());
 
-            StringBuilder responsables = new StringBuilder();
-            StringBuilder esfuerzos = new StringBuilder();
-            StringBuilder subtipos = new StringBuilder();
-            splitAttributes(responsables, esfuerzos, subtipos);
+        StringBuilder responsables = new StringBuilder();
+        StringBuilder esfuerzos = new StringBuilder();
+        StringBuilder subtipos = new StringBuilder();
+        splitAttributes(responsables, esfuerzos, subtipos);
 
-            getPayload().setEsfuerzo(esfuerzos.toString());
-            getPayload().setResponsable(responsables.toString());
+        getPayload().setEsfuerzo(esfuerzos.toString());
+        getPayload().setResponsable(responsables.toString());
 
-        System.out.println("hehe "+subtipos.toString());
+        System.out.println("hehe " + subtipos.toString());
 
         //System.out.println(subtipos.length());
 
 
-            if(StringUtils.isBlank(subtipos.toString()) || StringUtils.isEmpty(subtipos.toString()) || subtipos.toString().indexOf("null")!=-1)   {
-                throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos");
-            }else{
-                getPayload().setSubTipo(subtipos.toString());
-            }
-
-
-
-
-
+        if (StringUtils.isBlank(subtipos.toString()) || subtipos.toString().matches("^-(.*)|(.*)-$|(.*)--(.*)")) {
+            throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos"); //("^-(.*)|(.*)-$|(.*)--(.*)")
+        } else {
+            getPayload().setSubTipo(subtipos.toString());
+        }
 
 
     }
@@ -462,21 +467,22 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
     }
 
-    private void splitAttributes(StringBuilder responsables, StringBuilder esfuerzos, StringBuilder subtipos){
+    private void splitAttributes(StringBuilder responsables, StringBuilder esfuerzos, StringBuilder subtipos) {
         List<FenixResponsable> fenixResponsables = jtbResponsables.getList();
 
-        for (FenixResponsable fenixResponsable : fenixResponsables){
-            if (fenixResponsable.getEsfuerzo() != null) {
-                if (responsables.length() > 0) {
-                    responsables.append("-");
-                    esfuerzos.append("-");
-                    subtipos.append("-");
-                }
-                responsables.append(fenixResponsable.getNumero());
-                esfuerzos.append(fenixResponsable.getEsfuerzo());
-                subtipos.append(fenixResponsable.getSubtipoTarea());
-                System.out.println("esfuerzo "+fenixResponsable.getEsfuerzo());
+        for (FenixResponsable fenixResponsable : fenixResponsables) {
+            if (fenixResponsable.getEsfuerzo() == null) {
+                continue;
             }
+            if (responsables.length() > 0) {
+                responsables.append("-");
+                esfuerzos.append("-");
+                subtipos.append("-");
+            }
+            responsables.append(fenixResponsable.getNumero());
+            esfuerzos.append(fenixResponsable.getEsfuerzo());
+            subtipos.append(fenixResponsable.getSubtipoTarea());
+            System.out.println("esfuerzo " + fenixResponsable.getEsfuerzo());
         }
     }
 

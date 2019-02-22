@@ -8,6 +8,7 @@ import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
+import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 
 
 import java.util.ArrayList;
@@ -88,6 +89,12 @@ public class LocalVariables {
   public Filter getSelectedFilter(String filterName,String path){
         VariableService vs = new VariableService();
         return vs.getFilter(filterName,path);
+    }
+
+
+    public String readOtInfoFile(String peticionselect){
+        VariableService vs = new VariableService();
+        return vs.readInfo(peticionselect);
     }
 
 

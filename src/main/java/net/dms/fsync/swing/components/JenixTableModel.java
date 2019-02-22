@@ -91,6 +91,7 @@ public class JenixTableModel<R,C extends Enum> extends AbstractTableModel {
     }
 
 
+
     public C findColumnTypeByOrdinal(int iPosition){
         return Arrays.stream(columns.getEnumConstants()).filter(c -> c.ordinal() == iPosition).findFirst().get();
     }

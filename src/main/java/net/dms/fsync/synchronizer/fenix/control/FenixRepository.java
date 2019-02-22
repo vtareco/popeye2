@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
-
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -658,6 +658,12 @@ public class FenixRepository {
     public void saveDudas(List<FenixDuda> dudas) {
 
         //System.out.println("ULTIMA "+dudas.get(dudas.size()-1).getDescripcion());
+
+        for(FenixDuda d: dudas){
+            if(StringUtils.isBlank(d.getDescripcion())){
+                throw new AppException("Descripcion es Requerida");
+            }
+        }
 
         File dudaFile = getDudasFile(Long.valueOf(dudas.get(0).getIdOt()));
         System.out.println("boy " + (Long.valueOf(dudas.get(0).getIdOt())));

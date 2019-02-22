@@ -1,10 +1,15 @@
 package net.dms.fsync.swing.models;
 
 import net.dms.fsync.swing.components.JenixTableModel;
+import net.dms.fsync.swing.components.MyColors;
+import net.dms.fsync.swing.components.SwingUtil;
 import net.dms.fsync.synchronizer.fenix.entities.FenixDuda;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.DudaRowType;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumType;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +51,7 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
             this.width = width;
         }
 
+
         public boolean isEditable() {
             return editable;
         }
@@ -75,6 +81,7 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
             case ESTADO:
                 return duda.getEstado();
             case DESCRIPCION:
+
                 return  duda.getDescripcion();
             case RESPUESTA:
                 return duda.getRespuesta();
@@ -130,7 +137,11 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 fireTableCellUpdated(row,col);
                 break;
             case ID_REQUERIMIENTO:
-                duda.setIdRequerimiento((Long)value);
+                if(StringUtils.isBlank(value.toString())) {
+                    SwingUtil.msgErrorTxt("Meko meko");
+                    return; 
+                }
+                duda.setIdRequerimiento(Long.valueOf(value.toString()));
                 duda.setIdRequerimiento(duda.getIdRequerimiento());
                 fireTableCellUpdated(row,col);
                 break;
@@ -249,5 +260,12 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 super.setValueAt(value, row, col);
         }*/
 
+            }
+
+
+
+        /* if(StringUtils.isBlank(txtDudaDescription.getText())){
+           txtDudaDescription.setBackground(MyColors.TABLE_FIELD_REQUIRED);
+       }*/
+
     }
-}

@@ -5,6 +5,8 @@ import java.io.File;
 public class WorkingJira {
 
 
+    public static String idot;
+
     private static String jenixFoulder = "c://JenixSettings";
     private static String jsonUserCreate = jenixFoulder + "/UserConfig.json";
     private static String jsonApplicationProperties = jenixFoulder + "/ApplicationProperties.json";
@@ -57,6 +59,13 @@ public class WorkingJira {
     private static String jiraIssuesSearchLogIn = "login";
     private static String jiraISsuesSearchRetrieveIssues = "retrieve-issues";
 
+    public static String getIdot() {
+        return idot;
+    }
+
+    public static void setIdot(String idot) {
+        WorkingJira.idot = idot;
+    }
 
     public static String getUser() {
         return user;
@@ -223,4 +232,5 @@ public class WorkingJira {
     public static String getJiraISsuesSearchRetrieveIssues() {
         return jiraISsuesSearchRetrieveIssues;
     }
+
 }

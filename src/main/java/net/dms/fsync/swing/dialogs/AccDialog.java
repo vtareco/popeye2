@@ -2,7 +2,10 @@ package net.dms.fsync.swing.dialogs;
 
 import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.swing.EverisManager;
 import net.dms.fsync.swing.models.BitacoraTableModel;
+import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import net.dms.fsync.synchronizer.fenix.entities.Bitacora;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixResponsable;
@@ -73,12 +76,20 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
     @Override
     public void edit() {
+
+        LocalVariables lv = new LocalVariables();
+        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdot());
+
+        txtIdPeticion.setText(idpeticion);
+
+        System.out.println("KUK "+idpeticion);
+
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
 
         txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
-        txtIdPeticion.setText(getPayload().getIdPeticion());
+       // txtIdPeticion.setText(getPayload().getIdPeticion());
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
@@ -393,10 +404,12 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
     @Override
     public void fillPayLoad() {
+
         getPayload().setDescripcion(txaDescripcion.getText());
         getPayload().setNombre(txtNombre.getText());
 
         getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+
 
         if (txtIdPeticion.equals(null) || StringUtils.isBlank(txtIdPeticion.getText())) {
             throw new AppException("ID Peticion es requerido");

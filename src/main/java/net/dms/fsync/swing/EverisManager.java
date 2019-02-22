@@ -176,7 +176,6 @@ public class EverisManager {
                 }
             }
         });
-
         txtJiraTask.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -186,6 +185,16 @@ public class EverisManager {
             }
         });
 
+      /*  Action action = new AbstractAction()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println("some action");
+            }
+        };
+
+        txtJiraTask.addActionListener(action);*/
 
 
     }
@@ -483,6 +492,8 @@ public class EverisManager {
 
         if (getPeticionSelected(peticionesDisponiblesCmb) != null) {
 
+            WorkingJira.setIdot(peticionesDisponiblesCmb.getSelectedItem().toString());
+
             File file = new File(projectPath+"/"+peticionesDisponiblesCmb.getSelectedItem().toString()+"/OT_INFO"+"/info.json");
 
             if (!file.exists()) {
@@ -493,6 +504,9 @@ public class EverisManager {
             accTable.getModel().load(fenixService.searchAccByPeticionId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
             refreshTotales();
         }
+
+
+
     }
 
     private void refreshJira() {
@@ -1220,19 +1234,25 @@ public class EverisManager {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     LocalVariables lv = new LocalVariables();
-                    ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
-                    String projectPath = ap.getWorkingDirectory();
+                    String idpeticion= lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString());
+                  /*  ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+                    String projectPath = ap.getWorkingDirectory();*/
 
-                    JSONParser jsonparser = new JSONParser();
+                  //  JSONParser jsonparser = new JSONParser();
                     try {
 
-                        Object obj = jsonparser.parse(new FileReader(projectPath+"/"+peticionesDisponiblesCmb.getSelectedItem().toString()+"/OT_INFO"+"/info.json"));
+                       // FenixAcc a = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString());
+                       // System.out.println("ID PETICION "+a.getIdPeticion());
+
+
+
+                       // Object obj = jsonparser.parse(new FileReader(projectPath+"/"+peticionesDisponiblesCmb.getSelectedItem().toString()+"/OT_INFO"+"/info.json"));
 
                         //projectPath + "/" + peticionSelected + "/OT_INFO" + "/info.json")
 
-                        JSONObject object = (JSONObject) obj;
+                     //   JSONObject object = (JSONObject) obj;
 
-                        String idPeticion = (String) object.get("ID_Peticion");
+                       // String idPeticion = (String) object.get("ID_Peticion");
 
 
                         FenixDuda fenixDuda = new FenixDuda();
@@ -1244,7 +1264,7 @@ public class EverisManager {
 
 
 
-                        fenixDuda.setIdRequerimiento(Long.valueOf(idPeticion));
+                        fenixDuda.setIdRequerimiento(Long.valueOf(idpeticion));
 
                         fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
                         fenixDuda.setIdOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
@@ -1292,4 +1312,8 @@ public class EverisManager {
         fenixDuda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
     }
 
+
+
 }
+
+

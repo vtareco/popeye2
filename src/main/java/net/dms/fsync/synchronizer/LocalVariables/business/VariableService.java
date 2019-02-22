@@ -9,6 +9,7 @@ import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
+import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -333,6 +334,69 @@ public class VariableService {
         }
 
         return filter;
+    }
+
+
+
+    /*public FenixAcc readInfo(String peticion){
+        FenixAcc acc = new FenixAcc();
+        LocalVariables lv = new LocalVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
+
+        JSONParser jsonparser = new JSONParser();
+
+
+        try{
+            Object obj = jsonparser.parse(new FileReader(projectPath+"/"+peticion+"/OT_INFO"+"/info.json"));
+            System.out.println("PETICAO BOYS "+peticion);
+
+            //projectPath + "/" + peticionSelected + "/OT_INFO" + "/info.json")
+
+            JSONObject object = (JSONObject) obj;
+
+            acc.setIdPeticion((String) object.get("ID_Peticion"));
+
+            System.out.println("OBJETO "+object);
+
+            return acc;
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
+    }*/
+
+    public String readInfo(String peticion){
+        LocalVariables lv = new LocalVariables();
+        // FenixAcc a = new FenixAcc();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
+
+        JSONParser jsonparser = new JSONParser();
+
+
+        try{
+            Object obj = jsonparser.parse(new FileReader(projectPath+"/"+peticion+"/OT_INFO"+"/info.json"));
+
+
+            JSONObject object = (JSONObject) obj;
+
+            String idPeticion = (String) object.get("ID_Peticion");
+            // a.setIdPeticion((String) object.get("ID_Peticion"));
+            // System.out.println("LOL "+a.getIdPeticion());
+
+            System.out.println("OBJETO "+object);
+
+            return idPeticion;
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 

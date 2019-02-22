@@ -8,6 +8,7 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.DudaRowType;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumType;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 import java.util.List;
@@ -80,10 +81,7 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
             case ESTADO:
                 return duda.getEstado();
             case DESCRIPCION:
-                if(StringUtils.isBlank(duda.getDescripcion())){
-                    System.out.println(getRowColour(rowIndex));
 
-                }
                 return  duda.getDescripcion();
             case RESPUESTA:
                 return duda.getRespuesta();

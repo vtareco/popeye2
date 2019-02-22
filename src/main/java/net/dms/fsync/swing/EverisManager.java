@@ -1266,6 +1266,10 @@ public class EverisManager {
 
                         fenixDuda.setIdRequerimiento(Long.valueOf(idpeticion));
 
+                        if(StringUtils.isBlank(fenixDuda.getDescripcion())){
+                           //dudasTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor());
+                        }
+
                         fenixDuda.setEstado(DudaEstadoType.ABIERTA.getDescription());
                         fenixDuda.setIdOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
 
@@ -1279,6 +1283,7 @@ public class EverisManager {
 
 
                         dudasTable.addRow(fenixDuda);
+                        dudasTable.setDefaultRenderer(Object.class, new DudaTableCellRenderer());
                     } catch (Exception ex) {
                         handleException(ex);
                     }

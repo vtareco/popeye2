@@ -56,6 +56,7 @@ public class UserChangePane extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 changeUserFunction(uc,path);
+                JOptionPane.showMessageDialog(null,"Success","Information",1,null);
             }
         });
 

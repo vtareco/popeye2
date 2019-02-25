@@ -1,5 +1,7 @@
 package net.dms.fsync.swing.components;
 
+import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,10 +17,11 @@ import java.awt.Toolkit;
  */
 public class Toast extends JDialog {
 
-	private int miliseconds;
+	//private int miliseconds;
 
-	public Toast(String toastString, int time, ToastType toastType) {
-		this.miliseconds = time;
+	public Toast(String toastString,ToastType toastType) {
+		//this.miliseconds = time;
+
 		setUndecorated(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		JPanel panel = setupContainer(toastType);
@@ -76,7 +79,11 @@ public class Toast extends JDialog {
 	private void destroyWhenTimeIsOver() {
 		new Thread(() -> {
 			try {
-				Thread.sleep(miliseconds);
+				for (double d = 1.0; d > 0.2; d -= 0.1) {
+					Thread.sleep(200);
+					setOpacity((float)d);
+				}
+				//Thread.sleep(miliseconds);
 				dispose();
 			} catch(InterruptedException e) {
 				e.printStackTrace();
@@ -84,9 +91,9 @@ public class Toast extends JDialog {
 		}).start();
 	}
 	
-	private enum ToastType {
+	public enum ToastType {
 		ERROR(Color.RED, MyColors.TOAST_ERROR_LINE),
-		INFO(Color.CYAN, Color.BLUE),
+		INFO(MyColors.TOAST_INFO_COLOR,Color.BLACK),
 		WARNING(Color.YELLOW, Color.ORANGE);
 
 		private final Color bkgColor;
@@ -97,4 +104,5 @@ public class Toast extends JDialog {
 			this.lineColor = lineColor;
 		}
 	}
+
 }

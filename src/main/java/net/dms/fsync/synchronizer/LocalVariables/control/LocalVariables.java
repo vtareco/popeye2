@@ -7,6 +7,7 @@ import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
+import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 
@@ -92,9 +93,15 @@ public class LocalVariables {
     }
 
 
-    public String readOtInfoFile(String peticionselect){
+    public OtInfo readOtInfoFile(String peticionselect){
         VariableService vs = new VariableService();
         return vs.readInfo(peticionselect);
+    }
+
+
+    public OtInfo setValuesOtInfoFile(String peticionselect,OtInfo otinfo){
+        VariableService vs = new VariableService();
+        return vs.setInfo(peticionselect,otinfo);
     }
 
 

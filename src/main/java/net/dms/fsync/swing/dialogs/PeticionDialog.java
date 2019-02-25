@@ -4,6 +4,7 @@ import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.swing.components.JNumberField;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
@@ -134,10 +135,15 @@ public class PeticionDialog extends JDialog{
     }*/
 
     private void createFile(String projectPath, String peticionSelected) {
-        try {
-            /* PrintWriter writer = new PrintWriter(projectPath+"/"+peticionSelected+"/OT_INFO"+"/info.txt", "UTF-8");
+        LocalVariables lv = new LocalVariables();
+        OtInfo otInfo = new OtInfo();
+        otInfo.setId_peticion(txtIdPeticion.getText());
+
+        lv.setValuesOtInfoFile(peticionSelected,otInfo);
+     /*   try {
+             //comentar PrintWriter writer = new PrintWriter(projectPath+"/"+peticionSelected+"/OT_INFO"+"/info.txt", "UTF-8");
                writer.println(txtIdPeticion.getText());
-               writer.close();*/
+               writer.close(); //comentar
             new File(projectPath + "/" + peticionSelected + "/OT_INFO").mkdirs();
 
             JSONObject object = new JSONObject();
@@ -148,14 +154,14 @@ public class PeticionDialog extends JDialog{
                 System.out.println("OT_INFO: " + object);
             }
 
-                /*  try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                  //comentar try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(projectPath+"/OT_INFO/info.txt"), "utf-8"))) {
                     writer.write(txtIdPeticion.getText());
-                }*/
+                //comentar
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 

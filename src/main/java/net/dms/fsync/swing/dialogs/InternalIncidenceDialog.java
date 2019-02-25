@@ -105,7 +105,6 @@ public class InternalIncidenceDialog extends JenixDialog<FenixIncidencia> {
         getPayload().setEsfuerzoHh(1d);
         getPayload().setFechaInicio(new Date());
         getPayload().setUrgencia(IncidenciaUrgenciaType.MEDIA.getDescription());
-
     }
 
     @Override

@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.Panes;
 
+import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
 
@@ -56,7 +57,10 @@ public class UserChangePane extends JPanel {
             public void actionPerformed(ActionEvent e) {
 
                 changeUserFunction(uc,path);
-                JOptionPane.showMessageDialog(null,"Success","Information",1,null);
+                //JOptionPane.showMessageDialog(null,"Success","Information",1,null);
+                Toast toast = new Toast("Success",Toast.ToastType.INFO);
+                toast.setVisible(true);
+
             }
         });
 

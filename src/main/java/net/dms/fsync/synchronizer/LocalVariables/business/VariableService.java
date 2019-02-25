@@ -5,10 +5,7 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
 import net.dms.fsync.httphandlers.entities.config.*;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
-import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
-import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
-import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
-import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
+import net.dms.fsync.synchronizer.LocalVariables.entities.*;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -369,9 +366,9 @@ public class VariableService {
         return null;
     }*/
 
-    public String readInfo(String peticion){
+    public OtInfo readInfo(String peticion){
         LocalVariables lv = new LocalVariables();
-        // FenixAcc a = new FenixAcc();
+        OtInfo otinfo = new OtInfo();
         ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
         String projectPath = ap.getWorkingDirectory();
 
@@ -384,15 +381,43 @@ public class VariableService {
 
             JSONObject object = (JSONObject) obj;
 
-            String idPeticion = (String) object.get("ID_Peticion");
+            otinfo.setId_peticion((String) object.get("ID_Peticion"));
+            otinfo.setCodigoPeticionCliente((String) object.get("Codigo_Peticion_Cliente"));
+
             // a.setIdPeticion((String) object.get("ID_Peticion"));
             // System.out.println("LOL "+a.getIdPeticion());
 
-            System.out.println("OBJETO "+object);
+            System.out.println("OBJETO INFO"+otinfo);
 
-            return idPeticion;
+            return otinfo;
 
         }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+    public OtInfo setInfo(String peticion,OtInfo otinfo){
+        LocalVariables lv = new LocalVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
+        try {
+            new File(projectPath + "/" + peticion + "/OT_INFO").mkdirs();
+
+            JSONObject object = new JSONObject();
+            object.put("ID_Peticion",otinfo.getId_peticion());
+            object.put("Codigo_Peticion_Cliente",otinfo.getCodigoPeticionCliente());
+
+            try (FileWriter f = new FileWriter(projectPath + "/" + peticion + "/OT_INFO" + "/info.json")) {
+                f.write(object.toJSONString());
+                System.out.println("OT_INFO: " + object);
+            }
+
+            return otinfo;
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

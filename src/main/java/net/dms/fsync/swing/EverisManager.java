@@ -543,6 +543,9 @@ public class EverisManager {
         String filter;
         String text = txtJiraTask.getText();
         LocalVariables lv = new LocalVariables();
+        if (peticionesDisponiblesCmb.getSelectedItem().toString() == null || StringUtils.isBlank(peticionesDisponiblesCmb.getSelectedItem().toString())) {
+            throw new AppException("Peticion folder doesn´t exist");
+        }
         if (isSelectedFilterById()) {
             filter = String.format(getJiraFilterSelected(), txtJiraTask.getText());
         } else {
@@ -555,7 +558,6 @@ public class EverisManager {
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
 
         }
-
 
     }
 
@@ -1261,7 +1263,12 @@ public class EverisManager {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     LocalVariables lv = new LocalVariables();
-                    String idpeticion = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString());
+
+                    //String idpeticion = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString());
+
+                     String idpeticion = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString()).getId_peticion();
+
+
                   /*  ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
                     String projectPath = ap.getWorkingDirectory();*/
 
@@ -1291,7 +1298,7 @@ public class EverisManager {
 
                         fenixDuda.setIdRequerimiento(Long.valueOf(idpeticion));
 
-                        if (StringUtils.isBlank(fenixDuda.getDescripcion())) {
+                        if(StringUtils.isBlank(fenixDuda.getDescripcion())) {
                             //dudasTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor());
                         }
 

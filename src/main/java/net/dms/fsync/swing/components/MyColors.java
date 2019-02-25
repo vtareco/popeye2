@@ -13,6 +13,7 @@ public class MyColors {
     public final static Color TABLE_FIELD_REQUIRED = new Color(255,0,0);
     //TOAST
     final static Color TOAST_ERROR_LINE = new Color(155,0,0);
+    public final static Color TOAST_INFO_COLOR = new Color(56, 226, 110);
 
     public final static Color  ROW_SELECTED = new Color(0,0, 255);
 }

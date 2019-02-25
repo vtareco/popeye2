@@ -4,6 +4,8 @@ import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.swing.models.BitacoraTableModel;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import net.dms.fsync.synchronizer.fenix.entities.Bitacora;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
@@ -25,6 +27,9 @@ import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.*;
 import java.util.List;
 
@@ -72,23 +77,36 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         //  SwingUtil.loadComboBox(AccSubType.class, cmbSubTipo, true);
     }
 
+
+    @Override
+    protected void onAccept() {
+        super.onAccept();
+        LocalVariables lv = new LocalVariables();
+        String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getCodigoPeticionCliente();
+        updateCodigoPeticion(codigopeticion);
+    }
+
     @Override
     public void edit() {
 
        /* LocalVariables lv = new LocalVariables();
         String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion());
-
         txtIdPeticion.setText(idpeticion);*/
 
-        //System.out.println("KUK "+idpeticion);
+        /*ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();*/
+
 
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
 
-       // txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
-        txtCodigoPeticionCliente.setText("BMW.SA3.SPRINT");
+        // txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
-       // txtIdPeticion.setText(getPayload().getIdPeticion());
+       verif();
+
+        //txtCodigoPeticionCliente.setText("BMW.SA3.SPRINT");
+
+        // txtIdPeticion.setText(getPayload().getIdPeticion());
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
@@ -405,7 +423,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public void fillPayLoad() {
 
         LocalVariables lv = new LocalVariables();
-        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion());
+        //String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion());
+        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getId_peticion();
 
         getPayload().setDescripcion(txaDescripcion.getText());
         getPayload().setNombre(txtNombre.getText());
@@ -436,6 +455,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         } else {
             //getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
             getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
+            //verif();
         }
 
           /*  if(txtEsfuerzoCliente.getText().equals("8")){
@@ -488,6 +508,32 @@ public class AccDialog extends JenixDialog<FenixAcc> {
             esfuerzos.append(fenixResponsable.getEsfuerzo());
             subtipos.append(fenixResponsable.getSubtipoTarea());
             System.out.println("esfuerzo " + fenixResponsable.getEsfuerzo());
+        }
+    }
+
+    private void verif() {
+        LocalVariables lv = new LocalVariables();
+        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdPeticion());
+        String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getCodigoPeticionCliente();
+        if (codigopeticion != null) {
+            txtCodigoPeticionCliente.setText(codigopeticion);
+
+           updateCodigoPeticion(codigopeticion);
+
+        }else {
+            otinfo.setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), otinfo);
+        }
+
+    }
+
+    private void updateCodigoPeticion(String codigo) {
+        LocalVariables lv = new LocalVariables();
+        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdPeticion());
+        if (!txtCodigoPeticionCliente.getText().equals(codigo)) {
+            System.out.println("YOOO");
+            otinfo.setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
+            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), otinfo);
         }
     }
 

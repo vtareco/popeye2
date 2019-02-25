@@ -1,6 +1,7 @@
 package net.dms.fsync.swing.Panes;
 
 import net.dms.fsync.swing.EverisManager;
+import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
 
@@ -60,7 +61,12 @@ public class FilterManagePane extends JPanel {
                     jlistConfigurationLoad(path);
                     filters.removeAll();
 
-                    JOptionPane.showMessageDialog(null,"Filter successfully added","Information",1,null);
+                    //JOptionPane.showMessageDialog(null,"Filter successfully added","Information",1,null);
+                    Toast toast = new Toast("Filter successfully added",Toast.ToastType.INFO);
+                    toast.setVisible(true);
+                } else {
+                    Toast toast = new Toast("Filter not added, fields are empty ",Toast.ToastType.ERROR);
+                    toast.setVisible(true);
                 }
 
             }

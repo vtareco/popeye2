@@ -78,11 +78,8 @@ public class EverisManager {
     private JButton generateSpecificationRequirementsBtn;
     private JPopupMenu refreshMenu;
     private JButton settingsJbtn;
-    private File jenixFoulder = new File(WorkingJira.getJenixFoulder());
+    private File jenixFoulder;
 
-    private File jsonUserCreate = new File(WorkingJira.getJsonUserCreate());
-    private File jsonApplicationProperties = new File(WorkingJira.getJsonApplicationProperties());
-    private File jsonFilters = new File(WorkingJira.getJsonFilters());
 
     /* AQUI */
     private JenixTable<DudaTableModel, FenixDuda> dudasTable;
@@ -241,17 +238,20 @@ public class EverisManager {
     private void onInit() {
         VariableService vs = new VariableService();
 
-
+        File jenixFoulder = new File(WorkingJira.getJenixFoulder());
+        File jsonFilters = new File(WorkingJira.getJsonFilters());
         if (!jenixFoulder.exists()) {
             jenixFoulder.mkdirs();
             System.out.println("Directory created in " + jenixFoulder.toString());
             try {
+                File jsonUserCreate = WorkingJira.getJsonUserCreateFile();
                 if (jsonUserCreate.createNewFile()) {
                     System.out.println("user config json created");
 
                     UserChange uc = vs.getUserVariables();
                     vs.createUserJson(uc, jsonUserCreate.toString());
                 }
+                File jsonApplicationProperties = WorkingJira.getJsonApplicationPropertiesFile();
                 if (jsonApplicationProperties.createNewFile()) {
                     System.out.println("properties config json created");
 
@@ -272,6 +272,7 @@ public class EverisManager {
         } else {
             System.out.println("Directory Already Exists");
             try {
+                File jsonUserCreate = WorkingJira.getJsonUserCreateFile();
                 if (!jsonUserCreate.exists()) {
                     if (jsonUserCreate.createNewFile()) {
                         UserChange uc = vs.getUserVariables();
@@ -279,6 +280,7 @@ public class EverisManager {
                         System.out.println("user config json created");
                     }
                 }
+                File jsonApplicationProperties = WorkingJira.getJsonApplicationPropertiesFile();
                 if (!jsonApplicationProperties.exists()) {
                     if (jsonApplicationProperties.createNewFile()) {
                         ApplicationProperties ap = vs.getApplicationVariables();
@@ -303,7 +305,6 @@ public class EverisManager {
         if (!mainFolder.exists()) {
             mainFolder.mkdirs();
         }
-
 
 
     }
@@ -336,6 +337,9 @@ public class EverisManager {
     }
 
     private void checkJiraStatus() {
+        File jsonUserCreate = WorkingJira.getJsonUserCreateFile();
+        File jsonApplicationProperties = WorkingJira.getJsonApplicationPropertiesFile();
+        File jsonFilters = WorkingJira.getJsonFiltersFile();
         JsonPaths jsonpaths = new JsonPaths(jsonUserCreate.toString(), jsonApplicationProperties.toString(), jsonFilters.toString());
         List<FenixAcc> accs = accTable.getModel().getList();
         Set<String> jiraCodes = accs.stream().map(FenixAcc::getCodigoPeticionCliente).collect(Collectors.toSet());
@@ -385,6 +389,9 @@ public class EverisManager {
     }
 
     private void confingJenixSettings() {
+        File jsonFilters = new File(WorkingJira.getJsonFilters());
+        File jsonUserCreate = WorkingJira.getJsonUserCreateFile();
+        File jsonApplicationProperties = WorkingJira.getJsonApplicationPropertiesFile();
         JsonPaths jsonpaths = new JsonPaths(jsonUserCreate.toString(), jsonApplicationProperties.toString(), jsonFilters.toString());
         SettingsDialog settingsDialog = new SettingsDialog(tabbedPanel, jsonpaths);
         settingsDialog.addWindowListener(new WindowAdapter() {
@@ -510,6 +517,7 @@ public class EverisManager {
     private void filterSelectorHandler() {
         LocalVariables lv = new LocalVariables();
         if (jiraFiltersCmb.getSelectedItem() != null) {
+            File jsonFilters = new File(WorkingJira.getJsonFilters());
             Filter filter = lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(), jsonFilters.toString());
             if (!filter.getFilterName().equals("null")) {
                 if (isSelectedFilterById()) {
@@ -618,6 +626,7 @@ public class EverisManager {
         if (StringUtils.isEmpty(selected)) {
             return null;
         } else {
+            File jsonFilters = new File(WorkingJira.getJsonFilters());
             return lv.getSelectedFilter(jiraFiltersCmb.getSelectedItem().toString(), jsonFilters.toString()).getFilterQuery();
         }
     }
@@ -641,6 +650,7 @@ public class EverisManager {
         LocalVariables lv = new LocalVariables();
         List<String> peticionesActuales = fenixService.getPeticionesActuales();
         ArrayList<String> filtersName = new ArrayList<>();
+        File jsonFilters = new File(WorkingJira.getJsonFilters());
         for (Filter f : lv.filterList(jsonFilters.toString())) {
             filtersName.add(f.getFilterName());
         }

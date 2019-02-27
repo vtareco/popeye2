@@ -1,18 +1,21 @@
 package net.dms.fsync.synchronizer.LocalVariables.entities;
 
-import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.httphandlers.common.Utils;
+import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
+
+import java.io.File;
 
 public class WorkingJira {
 
-
     public static String idPeticion;
 
-    private static String jenixFoulder = "c://JenixSettings";
-    private static String jsonUserCreate = jenixFoulder + "/UserConfig.json";
-    private static String jsonApplicationProperties = jenixFoulder + "/ApplicationProperties.json";
-    private static String jsonFilters = jenixFoulder + "/Filters.json";
 
-    private static String fenixProduction  = "https://fe";
+    private static String jenixFoulder = "/JenixSettings";
+    private static String jsonUserCreate = "/UserConfig.json";
+    private static String jsonApplicationProperties ="/ApplicationProperties.json";
+    private static String jsonFilters = "/Filters.json";
+
+    private static String fenixProduction = "https://fe";
     private static String fenixTest = "http://10";
 
 
@@ -31,7 +34,7 @@ public class WorkingJira {
     private static String search = "search";
     private static String logIn = "login";
     private static String download = "download";
-    private static String loginConfirm= "login_confirm";
+    private static String loginConfirm = "login_confirm";
     private static String metaInfo = "metainfo";
 
 
@@ -46,7 +49,6 @@ public class WorkingJira {
     private static String extranetLoginConfirm = "extranet_login_confirm";
     private static String extranetLogin = "extranet_ogin";
     private static String authJiraIssuesSearch = "AUTH_jira_issues_search";
-
 
 
     private static String fenixLoginLoginUrl = " fenix/validarLoginAction.dojo?timestamp=${everis.fenix.timestamp}";
@@ -138,19 +140,33 @@ public class WorkingJira {
     }
 
     public static String getJenixFoulder() {
-        return jenixFoulder;
+        VariableService variableService = new VariableService();
+        String workingDirectory = variableService.getApplicationVariables().getWorkingDirectory();
+        return workingDirectory + jenixFoulder;
     }
 
     public static String getJsonUserCreate() {
-        return jsonUserCreate;
+        return getJenixFoulder() + jsonUserCreate;
+    }
+
+    public static File getJsonUserCreateFile() {
+        return new File(getJsonUserCreate());
     }
 
     public static String getJsonApplicationProperties() {
-        return jsonApplicationProperties;
+        return getJenixFoulder() + jsonApplicationProperties;
+    }
+
+    public static File getJsonApplicationPropertiesFile() {
+        return new File(getJsonApplicationProperties());
     }
 
     public static String getJsonFilters() {
-        return jsonFilters;
+        return getJenixFoulder() + jsonFilters;
+    }
+
+    public static File getJsonFiltersFile() {
+        return new File(getJsonApplicationProperties());
     }
 
     public static String getJiraBmw() {

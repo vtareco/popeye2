@@ -51,15 +51,29 @@ public class FenixAccMapper {
         return acc;
     }
 
-    public FenixAcc mapIncurridos(Row row){
+    public FenixAcc mapIncurridos(Row row) {
         FenixAcc acc = new FenixAcc();
-        acc.setIdAcc(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()) != null ? new Long(new Double(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()).getStringCellValue()).longValue()) : null);
-        acc.setIncurrido(row.getCell(AccIncurridoRowType.INCURRIDO.getColPosition()) != null ? new Double(row.getCell(AccIncurridoRowType.INCURRIDO.getColPosition()).getStringCellValue()) : null);
+        //acc.setIdAcc(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()) != null ? new Long(new Double(row.getCell(AccIncurridoRowType.ID_ACC.getColPosition()).getStringCellValue()).longValue()) : null);
 
-        acc.setEtc(row.getCell(AccIncurridoRowType.ETC.getColPosition()) != null && !StringUtils.isBlank(row.getCell(AccIncurridoRowType.ETC.getColPosition()).getStringCellValue())
-                ? new Double(row.getCell(AccIncurridoRowType.ETC.getColPosition()).getStringCellValue()) : null);
+        long idAccValue = (long) getCellValue(AccIncurridoRowType.ID_ACC, row);
+        acc.setIdAcc(idAccValue);
 
+        double incurridoValue = getCellValue(AccIncurridoRowType.INCURRIDO, row);
+        acc.setIncurrido(incurridoValue);
+
+        double etcValue = getCellValue(AccIncurridoRowType.ETC, row);
+        acc.setEtc(etcValue);
         return acc;
+    }
+
+    private double getCellValue(AccIncurridoRowType rowType, Row row) {
+        Cell cell = row.getCell(rowType.getColPosition());
+        double value = 0;
+        try {
+            value = Double.parseDouble(cell.getStringCellValue());
+        } catch (RuntimeException e) {
+        }
+        return value;
     }
 
     public void mapAccToRow(Workbook wb, Row row, FenixAcc acc){

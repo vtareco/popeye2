@@ -16,7 +16,7 @@ import java.util.List;
 public class JiraTableModel extends JenixTableModel<JiraIssue, JiraTableModel.Columns> {
     public enum Columns implements TableColumnEnumType{
 
-        KEY(false), SUMMARY(false), ASSIGNEE(false), STATUS(false);
+        KEY(false), SUMMARY(false), ASSIGNEE(false), STATUS(false),STORYPOINT(false);
 
         private boolean editable;
 
@@ -56,6 +56,8 @@ public class JiraTableModel extends JenixTableModel<JiraIssue, JiraTableModel.Co
                 return rows.get(rowIndex).getFields().getAssignee() != null ? rows.get(rowIndex).getFields().getAssignee().getName() : null;
             case STATUS:
                 return rows.get(rowIndex).getFields().getStatus() != null ? rows.get(rowIndex).getFields().getStatus().getName() : null;
+            case STORYPOINT:
+                return rows.get(rowIndex).getFields().getStorypoints();
             default:
                 return "no defined";
         }

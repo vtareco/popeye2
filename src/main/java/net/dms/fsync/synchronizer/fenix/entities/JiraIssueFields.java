@@ -11,7 +11,16 @@ public class JiraIssueFields {
     private Status status;
     private String summary;
     private String description;
+    private int   storypoints;
     private JiraIssue parent;
+
+    public int getStorypoints() {
+        return storypoints;
+    }
+
+    public void setStorypoints(int storypoints) {
+        this.storypoints = storypoints;
+    }
 
     public Assignee getAssignee() {
         return assignee;

@@ -2,6 +2,7 @@ package net.dms.fsync.synchronizer.LocalVariables.business;
 
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import com.sun.xml.internal.txw2.annotation.XmlElement;
+import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.entities.config.*;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
@@ -15,7 +16,10 @@ import org.json.simple.parser.ParseException;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -23,6 +27,7 @@ import java.util.regex.Pattern;
 //CREATED BY VDIVIZIN 08/02/2019
 public class VariableService {
 
+    public static final String EVERIS_CONF_JIRA_FILTRO = "everis.conf.jira.filtro.";
     LocalVariables localVariables = new LocalVariables();
 
     public UserChange getUserVariables() {
@@ -262,11 +267,9 @@ public class VariableService {
 
     public void createFilterJson(String path) {
         JSONObject newFilters = new JSONObject();
+        InputStream url2 = getClass().getResourceAsStream("/bmw/rsp/everis_overriden.conf");
 
-        URL url = this.getClass().getClassLoader().getResource("bmw/rsp/everis_overriden.conf");
-        File everisOverConfPath = new File(url.getPath());
-
-        try (BufferedReader br = new BufferedReader(new FileReader(everisOverConfPath.toString()))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(url2))) {
             String filterName;
             String filterQuery;
 
@@ -274,9 +277,9 @@ public class VariableService {
 
             String line;
             while ((line = br.readLine()) != null) {
-                if (line.startsWith("everis.conf.jira.filtro.")) {
+                if (line.startsWith(EVERIS_CONF_JIRA_FILTRO)) {
                     JSONObject filter = new JSONObject();
-                    filterName = line.substring(24, line.indexOf("="));
+                    filterName = line.substring(EVERIS_CONF_JIRA_FILTRO.length(), line.indexOf("="));
                     filterQuery = line.substring(line.indexOf("=") + 1);
                     filter.put("filterName", filterName);
                     filter.put("filterQuery", filterQuery);

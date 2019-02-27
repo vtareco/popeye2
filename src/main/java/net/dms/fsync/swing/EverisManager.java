@@ -43,6 +43,7 @@ import java.util.stream.Collectors;
  * Created by dminanos on 17/04/2017.
  */
 public class EverisManager {
+    LocalVariables lv = new LocalVariables();
     private JTabbedPane tabbedPanel;
     private JPanel panelParent;
     private JenixTable<JiraTableModel, JiraIssue> jiraTable;
@@ -78,6 +79,7 @@ public class EverisManager {
     private JPopupMenu refreshMenu;
     private JButton settingsJbtn;
     private File jenixFoulder = new File(WorkingJira.getJenixFoulder());
+
     private File jsonUserCreate = new File(WorkingJira.getJsonUserCreate());
     private File jsonApplicationProperties = new File(WorkingJira.getJsonApplicationProperties());
     private File jsonFilters = new File(WorkingJira.getJsonFilters());
@@ -90,6 +92,7 @@ public class EverisManager {
     private JButton refreshDudasBtn;
     private JButton removeDudasBtn;
     private JScrollPane dudasScrollPane;
+    private JButton btnCrearOt;
 
 
     JiraService jiraService;
@@ -145,6 +148,8 @@ public class EverisManager {
         // SwingUtil.registerListener(uploadDudasBtn, this::uploadDudas, this::handleException);
         SwingUtil.registerListener(removeDudasBtn, this::removeDuda, this::handleException);
         SwingUtil.registerListener(refreshDudasBtn, this::refreshDudas, this::handleException);
+        SwingUtil.registerListener(btnCrearOt, this::createOt, this::handleException);
+
 
         SwingUtil.registerListener(settingsJbtn, this::confingJenixSettings, this::handleException);
 
@@ -196,22 +201,22 @@ public class EverisManager {
         txtJiraTask.addActionListener(action);*/
 
 
-     jiraFiltersCmb.addPopupMenuListener(new PopupMenuListener() {
-         @Override
-         public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-             refreshJiraFiltersCMB();
-         }
+        jiraFiltersCmb.addPopupMenuListener(new PopupMenuListener() {
+            @Override
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                refreshJiraFiltersCMB();
+            }
 
-         @Override
-         public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 
-         }
+            }
 
-         @Override
-         public void popupMenuCanceled(PopupMenuEvent e) {
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
 
-         }
-     });
+            }
+        });
 
 
         peticionesDisponiblesCmb.addPopupMenuListener(new PopupMenuListener() {
@@ -234,26 +239,28 @@ public class EverisManager {
 
 
     private void onInit() {
+        VariableService vs = new VariableService();
+
+
         if (!jenixFoulder.exists()) {
             jenixFoulder.mkdirs();
             System.out.println("Directory created in " + jenixFoulder.toString());
             try {
                 if (jsonUserCreate.createNewFile()) {
                     System.out.println("user config json created");
-                    VariableService vs = new VariableService();
+
                     UserChange uc = vs.getUserVariables();
                     vs.createUserJson(uc, jsonUserCreate.toString());
                 }
                 if (jsonApplicationProperties.createNewFile()) {
                     System.out.println("properties config json created");
-                    VariableService vs = new VariableService();
+
                     ApplicationProperties ap = vs.getApplicationVariables();
                     vs.createApplicationPropertiesJson(ap, jsonApplicationProperties.toString());
 
-
                 }
                 if (jsonFilters.createNewFile()) {
-                    VariableService vs = new VariableService();
+
                     vs.createFilterJson(jsonFilters.toString());
                     System.out.println("filters config json created");
                 }
@@ -267,7 +274,6 @@ public class EverisManager {
             try {
                 if (!jsonUserCreate.exists()) {
                     if (jsonUserCreate.createNewFile()) {
-                        VariableService vs = new VariableService();
                         UserChange uc = vs.getUserVariables();
                         vs.createUserJson(uc, jsonUserCreate.toString());
                         System.out.println("user config json created");
@@ -275,7 +281,6 @@ public class EverisManager {
                 }
                 if (!jsonApplicationProperties.exists()) {
                     if (jsonApplicationProperties.createNewFile()) {
-                        VariableService vs = new VariableService();
                         ApplicationProperties ap = vs.getApplicationVariables();
                         vs.createApplicationPropertiesJson(ap, jsonApplicationProperties.toString());
                         System.out.println("properties config json created");
@@ -283,7 +288,6 @@ public class EverisManager {
                 }
                 if (!jsonFilters.exists()) {
                     if (jsonFilters.createNewFile()) {
-                        VariableService vs = new VariableService();
                         vs.createFilterJson(jsonFilters.toString());
                         System.out.println("filters config json created");
                     }
@@ -293,6 +297,15 @@ public class EverisManager {
                 e.printStackTrace();
             }
         }
+
+        ApplicationProperties ap = vs.getApplicationVariables();
+        File mainFolder = new File(ap.getWorkingDirectory());
+        if (!mainFolder.exists()) {
+            mainFolder.mkdirs();
+        }
+
+
+
     }
 
 
@@ -1069,6 +1082,17 @@ public class EverisManager {
                         incidencia.setDescripcion(acc.getDescripcion());
                         incidencia.setOtCorrector(getPeticionSelected(peticionesDisponiblesCmb).toString());
                         incidencia.setIdPeticionOt(incidencia.getOtCorrector());
+
+                        // System.out.println("UFF "+acc.getEsfuerzo().split("^.*|.*-.*"));
+                        //String[] esfurzos = acc.getEsfuerzo().split("^.*|.*-.*");
+
+                        //System.out.println("HAHA 2"+esfurzos[1]);
+                        //incidencia.setEsfuerzoHh(Double.valueOf(esfurzos[0]));
+                        //  if(acc.getEsfuerzo().matches("^.*|.*-.*")){
+                        //  incidencia.setEsfuerzoHh(Double.valueOf(acc.getEsfuerzo()));
+                        //  }
+
+                        System.out.println("AHHHH " + acc.getEsfuerzo().matches("^.*|.*-.*"));
                         InternalIncidenceDialog dialog = new InternalIncidenceDialog(panelParent, incidencia);
                         dialog.pack();
 
@@ -1266,7 +1290,7 @@ public class EverisManager {
 
                     //String idpeticion = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString());
 
-                     String idpeticion = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString()).getId_peticion();
+                    String idpeticion = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString()).getId_peticion();
 
 
                   /*  ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
@@ -1298,7 +1322,7 @@ public class EverisManager {
 
                         fenixDuda.setIdRequerimiento(Long.valueOf(idpeticion));
 
-                        if(StringUtils.isBlank(fenixDuda.getDescripcion())) {
+                        if (StringUtils.isBlank(fenixDuda.getDescripcion())) {
                             //dudasTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor());
                         }
 
@@ -1347,6 +1371,10 @@ public class EverisManager {
         fenixDuda.setRelativaA(DudaRelativaAType.CODIGO.getDescription());
         fenixDuda.setFLocalizada(DudaFaseLocalizadaType.CO.getDescription());
         fenixDuda.setDocIncomp(DudaDocEntrIncType.NO.getDescription());
+    }
+
+    private void createOt() {
+
     }
 
 

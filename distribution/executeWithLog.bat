@@ -1,1 +1,1 @@
-java -jar popeyePT_BETA.jar
+java -jar popeye.jar

@@ -1,5 +1,7 @@
 package net.dms.fsync.synchronizer.LocalVariables.entities;
 
+import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+
 public class WorkingJira {
 
 

@@ -16,14 +16,14 @@ public class DudaTableCellRenderer extends JenixTableCellRenderer {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         FenixDuda duda = ((DudaTableModel) table.getModel()).getList().get(row);
 
-        switch (DudaRowType.values()[column]){
+        switch (DudaRowType.values()[column]) {
             case DESCRIPCION:
-               if(StringUtils.isBlank(duda.getDescripcion())){
-                   c.setBackground(MyColors.TABLE_FIELD_REQUIRED);
-                   break;
-               }
-
+                if (StringUtils.isBlank(duda.getDescripcion())) {
+                    c.setBackground(MyColors.TABLE_FIELD_REQUIRED);
+                    break;
                 }
+
+        }
 
         return c;
     }

@@ -90,6 +90,7 @@ public class FenixAcc implements Serializable {
         this.etc = etc;
     }
 
+
     public FenixAcc(){
         setIdInterno(-1 * System.currentTimeMillis());
     }
@@ -306,6 +307,9 @@ public class FenixAcc implements Serializable {
     }
 
     public Double getIncurrido() {
+       /* if(incurrido==null){
+            return 0.0;
+        }*/
         return incurrido;
     }
 

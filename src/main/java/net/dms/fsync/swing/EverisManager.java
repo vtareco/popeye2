@@ -1384,6 +1384,8 @@ public class EverisManager {
     }
 
     private void createOt() {
+        CreateOtDialog createot = new CreateOtDialog(panelParent);
+        createot.setVisible(true);
 
     }
 

@@ -41,11 +41,11 @@ public class CreateOtDialog extends JDialog {
 
         txtId=new JLabel();
         txtId.setText("ID_OT:");
-        txtId.setBounds(59, 83, 38, 14);
+        txtId.setBounds(59, 93, 38, 14);
         add(txtId);
 
         fieldId=new JNumberField();
-        fieldId.setBounds(141, 80, 172, 20);
+        fieldId.setBounds(141, 90, 172, 20);
         add(fieldId);
 
         txtDescription=new JLabel();
@@ -59,8 +59,9 @@ public class CreateOtDialog extends JDialog {
         txtOptional.setFont(new Font("Tahoma", Font.PLAIN, 10));
         add(txtOptional);
 
-        fieldDescription=new JTextField();
-        fieldDescription.setBounds(141, 127, 172, 20);
+
+        fieldDescription=new JNumberField();
+        fieldDescription.setBounds(141, 187, 172, 20);
         add(fieldDescription);
 
         txtIdPeticion=new JLabel();
@@ -68,8 +69,9 @@ public class CreateOtDialog extends JDialog {
         txtIdPeticion.setBounds(50, 140, 72, 14);
         add(txtIdPeticion);
 
-       fieldIdPetcion=new JNumberField();
-        fieldIdPetcion.setBounds(141, 177, 172, 20);
+
+        fieldIdPetcion=new JTextField();
+        fieldIdPetcion.setBounds(141, 137, 172, 20);
         add(fieldIdPetcion);
 
         btnCreate=new JButton();

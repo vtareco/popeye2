@@ -82,8 +82,15 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     protected void onAccept() {
         super.onAccept();
         LocalVariables lv = new LocalVariables();
+        if (AccStatus.PENDIENTE_ASIGNACION.getDescription().equals(cmbEstado.getSelectedItem())){
+            getPayload().setEstado(AccStatus.EN_EJECUCION.getDescription());
+            System.out.println("entrei no if" + cmbEstado.getSelectedItem());
+        }
+
         String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getCodigoPeticionCliente();
         updateCodigoPeticion(codigopeticion);
+
+
     }
 
     @Override
@@ -102,7 +109,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         // txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
-       verif();
+        verif();
 
         //txtCodigoPeticionCliente.setText("BMW.SA3.SPRINT");
 
@@ -110,6 +117,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
+
+
         cmbTipo.setSelectedItem(getPayload().getTipo());
         //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
 
@@ -518,9 +527,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         if (codigopeticion != null) {
             txtCodigoPeticionCliente.setText(codigopeticion);
 
-           updateCodigoPeticion(codigopeticion);
+            updateCodigoPeticion(codigopeticion);
 
-        }else {
+        } else {
             otinfo.setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
             lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), otinfo);
         }

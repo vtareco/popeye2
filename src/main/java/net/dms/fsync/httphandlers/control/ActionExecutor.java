@@ -8,6 +8,7 @@ import net.dms.fsync.httphandlers.entities.enumerations.HttpMethod;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
+import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import org.apache.commons.io.IOUtils;
@@ -88,6 +89,11 @@ public class ActionExecutor {
                 response = handler.execute();
                 variables.putAll(response.getVariables());
                 responses.put(response.getName(), response);
+            }
+//PARA TESTAR FUNCIONALIDADE
+            if(execution.getName().equals("fenix_upload_accs")){
+                Toast  toast = new Toast("Successo", Toast.ToastType.INFO);
+                toast.setVisible(true);
             }
 
         }catch(Exception ex){

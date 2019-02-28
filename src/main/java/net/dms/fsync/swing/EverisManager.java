@@ -105,7 +105,7 @@ public class EverisManager {
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Jira / Fenix");
+        JFrame frame = new JFrame("Jira / Fenix popeye_v1.jar");
         frame.setContentPane(new EverisManager().panelParent);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

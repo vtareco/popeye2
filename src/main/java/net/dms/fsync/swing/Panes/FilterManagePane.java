@@ -62,11 +62,9 @@ public class FilterManagePane extends JPanel {
                     filters.removeAll();
 
                     //JOptionPane.showMessageDialog(null,"Filter successfully added","Information",1,null);
-                    Toast toast = new Toast("Filter successfully added",Toast.ToastType.INFO);
-                    toast.setVisible(true);
+                    Toast.display("Filter successfully added",Toast.ToastType.INFO);
                 } else {
-                    Toast toast = new Toast("Filter not added, fields are empty ",Toast.ToastType.ERROR);
-                    toast.setVisible(true);
+                    Toast.display("Filter not added, fields are empty ",Toast.ToastType.ERROR);
                 }
 
             }

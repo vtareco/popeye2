@@ -408,6 +408,7 @@ public class VariableService {
         String projectPath = ap.getWorkingDirectory();
         try {
             new File(projectPath + "/" + peticion + "/OT_INFO").mkdirs();
+            System.out.println("OK "+projectPath + "/" + peticion + "/OT_INFO");
 
             JSONObject object = new JSONObject();
             object.put("ID_Peticion",otinfo.getId_peticion());

@@ -306,7 +306,6 @@ public class EverisManager {
             mainFolder.mkdirs();
         }
 
-
     }
 
 
@@ -551,10 +550,27 @@ public class EverisManager {
             if (!file.exists()) {
                 PeticionDialog peticionDialog = new PeticionDialog(panelParent, peticionesDisponiblesCmb.getSelectedItem().toString());
                 peticionDialog.setVisible(true);
-            }
 
-            accTable.getModel().load(fenixService.searchAccByPeticionId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
-            refreshTotales();
+                peticionDialog.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        //super.windowClosed(e);
+                        if(StringUtils.isBlank(peticionDialog.txtIdPeticion.getText())){
+
+                            Toast.display("ID Peticion doesn´t exist", Toast.ToastType.ERROR);
+
+
+                        }else{
+                            accTable.getModel().load(fenixService.searchAccByPeticionId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
+                            refreshTotales();
+                        }
+                    }
+                });
+            }else{
+                accTable.getModel().load(fenixService.searchAccByPeticionId(getPeticionSelected(peticionesDisponiblesCmb), forceDownloadCheckBox.isSelected()));
+                refreshTotales();
+            }
+           // String idpeticion = lv.readOtInfoFile(peticionesDisponiblesCmb.getSelectedItem().toString()).getId_peticion();
         }
 
 
@@ -801,6 +817,7 @@ public class EverisManager {
 
                         fenixIncidencia.setIdPeticionOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
                         incidenciasTable.addRow(fenixIncidencia);
+                        incidenciasTable.setDefaultRenderer(Object.class, new IncidenciaTableCellRenderer());
                     } catch (Exception ex) {
                         handleException(ex);
                     }
@@ -840,6 +857,8 @@ public class EverisManager {
             incidenciasTable.getColumnModel().getColumn(IncidenciaTableModel.Columns.FECHA_PREVISTA_CENTRO.ordinal())
                     .setCellEditor(new CalendarCellEditor());
             incidenciasTable.getColumnModel().getColumn(IncidenciaTableModel.Columns.FECHA_PREVISTA_CENTRO.ordinal()).setCellRenderer(new DateCellRenderer());
+
+            incidenciasTable.setDefaultRenderer(Object.class, new IncidenciaTableCellRenderer());
         }
     }
 
@@ -1384,9 +1403,9 @@ public class EverisManager {
     }
 
     private void createOt() {
-        CreateOtDialog createot = new CreateOtDialog(panelParent);
+        CreateOtDialog createot = new CreateOtDialog(panelParent,peticionesDisponiblesCmb);
         createot.setVisible(true);
-
+        refreshPeticionesDisponiblesCMB();
     }
 
 

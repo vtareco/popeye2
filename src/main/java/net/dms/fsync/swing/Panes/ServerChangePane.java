@@ -57,8 +57,7 @@ public class ServerChangePane extends JPanel {
                 changeServerFunction(ap,path);
 
                 //JOptionPane.showMessageDialog(null,"Success","Information",1,null);
-                Toast toast = new Toast("Success",Toast.ToastType.INFO);
-                toast.setVisible(true);
+                Toast.display("Success",Toast.ToastType.INFO);
             }
         });
 

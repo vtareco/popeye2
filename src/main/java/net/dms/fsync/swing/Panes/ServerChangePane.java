@@ -51,10 +51,6 @@ public class ServerChangePane extends JPanel {
         textFieldConfigurationLoader(ap);
         pathConfigurationLoader(ap);
 
-
-
-
-
         acceptChangesJbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

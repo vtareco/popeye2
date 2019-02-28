@@ -90,6 +90,7 @@ public class EverisManager {
     private JButton removeDudasBtn;
     private JScrollPane dudasScrollPane;
     private JButton btnCrearOt;
+    private JButton downloadDocumentationJbtn;
 
 
     JiraService jiraService;
@@ -126,7 +127,7 @@ public class EverisManager {
         SwingUtil.registerListener(uploadIncidenciasBtn, this::uploadIncidencias, this::handleException);
         SwingUtil.registerListener(refreshIncidenciasBtn, this::refreshIncidencias, this::handleException);
         SwingUtil.registerListener(generateSpecificationRequirementsBtn, this::generateSpecificationReuirements, this::handleException);
-
+        SwingUtil.registerListener(downloadDocumentationJbtn,this::openDocumentationDownload,this::handleException);
 
         init();
 
@@ -232,6 +233,14 @@ public class EverisManager {
 
             }
         });
+    }
+
+    private void openDocumentationDownload() {
+        try {
+            Desktop.getDesktop().browse(java.net.URI.create("https://github.com/vtareco/popeye_PT/raw/master/distribution/Fenix%20Tool%20Documenta%C3%A7%C3%A3o%20oficial%20.docx"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

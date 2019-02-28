@@ -20,7 +20,7 @@ public class FilterManagePane extends JPanel {
     private JTextField filterNameJtf;
     private JTextArea filterQueryJtf;
     private JButton saveJBtn, deleteFilterJBtn,clearFieldsJbtn;
-
+    private JScrollPane scroller;
     public FilterManagePane(String path) {
         setLayout(null);
         this.setSize(600, 400);
@@ -136,7 +136,7 @@ public class FilterManagePane extends JPanel {
 
         }
 
-        filters.setBounds(20, 20, 250, 300);
+        filters.setBounds(20, 20, 220, 300);
         filters.setFont(new Font("Arial", Font.PLAIN, 16));
         filters.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -144,32 +144,40 @@ public class FilterManagePane extends JPanel {
     }
 
     private void textFieldConfigurationLoader() {
-        filterNameJtf.setBounds(300, 80, 250, 25);
+        filterNameJtf.setBounds(250, 20, 300, 25);
         filterNameJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         filterNameJtf.setText(null);
         this.add(filterNameJtf);
 
-        filterQueryJtf.setBounds(300, 110, 250, 75);
+
         filterQueryJtf.setFont(new Font("Arial", Font.PLAIN, 16));
         filterQueryJtf.setText(null);
         filterQueryJtf.setLineWrap(true);
-        this.add(filterQueryJtf);
+        scrollerConfiguration();
+
 
     }
 
+    private void scrollerConfiguration() {
+        scroller = new JScrollPane(filterQueryJtf);
+        scroller.setBounds(250, 50, 300, 230);
+        scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        this.add(scroller);
+    }
+
     private void buttonConfigurationLoad() {
-        saveJBtn.setBounds(300, 200, 80, 20);
+        saveJBtn.setBounds(250, 300, 80, 20);
         saveJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         saveJBtn.setText("Save");
         this.add(saveJBtn);
 
-        deleteFilterJBtn.setBounds(470, 200, 80, 20);
+        deleteFilterJBtn.setBounds(470, 300, 80, 20);
         deleteFilterJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
         deleteFilterJBtn.setText("Delete");
         this.add(deleteFilterJBtn);
 
         clearFieldsJbtn.setFont(new Font("Arial", Font.PLAIN, 12));
-        clearFieldsJbtn.setBounds(300, 50, 250, 25);
+        clearFieldsJbtn.setBounds(360, 300, 80, 20);
         clearFieldsJbtn.setText("Clear");
         this.add(clearFieldsJbtn);
     }

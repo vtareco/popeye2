@@ -5,6 +5,9 @@ import net.dms.fsync.swing.components.JNumberField;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class CreateOtDialog extends JDialog {
 
@@ -54,13 +57,13 @@ public class CreateOtDialog extends JDialog {
         add(txtDescription);
 
         txtOptional=new JLabel();
-        txtOptional.setText("Optional");
+        txtOptional.setText("(Optional)");
         txtOptional.setBounds(50, 200, 56, 14);
         txtOptional.setFont(new Font("Tahoma", Font.PLAIN, 10));
         add(txtOptional);
 
 
-        fieldDescription=new JNumberField();
+        fieldDescription=new JTextField();
         fieldDescription.setBounds(141, 187, 172, 20);
         add(fieldDescription);
 
@@ -70,7 +73,7 @@ public class CreateOtDialog extends JDialog {
         add(txtIdPeticion);
 
 
-        fieldIdPetcion=new JTextField();
+        fieldIdPetcion=new JNumberField();
         fieldIdPetcion.setBounds(141, 137, 172, 20);
         add(fieldIdPetcion);
 
@@ -83,6 +86,13 @@ public class CreateOtDialog extends JDialog {
         btnCancel.setBounds(75, 257, 76, 23);
         btnCancel.setText("Cancel");
         add(btnCancel);
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
 
     }
 }

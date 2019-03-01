@@ -22,7 +22,10 @@ public class IncidenciaTableCellRenderer extends JenixTableCellRenderer {
                     c.setBackground(MyColors.TABLE_FIELD_REQUIRED);
                     break;
                 }
+
+
         }
+
 
         return c;
     }

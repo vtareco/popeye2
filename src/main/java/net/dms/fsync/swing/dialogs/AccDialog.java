@@ -103,7 +103,6 @@ public class AccDialog extends JenixDialog<FenixAcc> {
             Toast.display("Please fill the ID Peticion", Toast.ToastType.ERROR);
         }
 
-
         verif();
 
         //txtCodigoPeticionCliente.setText("BMW.SA3.SPRINT");

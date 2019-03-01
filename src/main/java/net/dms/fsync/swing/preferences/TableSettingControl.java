@@ -6,6 +6,9 @@ import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.swing.components.JenixTable;
+import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import net.dms.fsync.synchronizer.fenix.control.FenixRepository;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumType;
 import net.dms.fsync.settings.entities.TableSetting;
@@ -60,7 +63,13 @@ public class TableSettingControl {
     }
 
     private String getTableSettingFile(TableType tableType){
-       return config.getProperty(EverisPropertiesType.PROJECT_PATH) + "/_preferences/" + tableType + ".json";
+        LocalVariables lv = new LocalVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
+        //return config.getProperty(EverisPropertiesType.WORKING_DIRECTORY) + "/_preferences/" + tableType + ".json";
+        String teste = projectPath + "/" +tableType + ".json";
+        System.out.println("OLA "+teste);
+        return  projectPath + "/" +tableType + ".json";
     }
 
     public void apply(JenixTable table, TableSetting tableSetting) {

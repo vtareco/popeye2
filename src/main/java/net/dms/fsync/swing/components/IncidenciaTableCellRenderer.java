@@ -16,12 +16,12 @@ public class IncidenciaTableCellRenderer extends JenixTableCellRenderer {
         FenixIncidencia incidencia = ((IncidenciaTableModel) table.getModel()).getList().get(row);
 
         switch (IncidenciaRowType.values()[column]) {
-         /*   case FECHA_FIN:
+            case FECHA_FIN:
                // String fechaFin = String.valueOf(incidencia.getFechaFin());
                 if (incidencia.getFechaFin() == null) {
                     c.setBackground(MyColors.TABLE_FIELD_REQUIRED);
                     break;
-                }*/
+                }
         }
 
         return c;

@@ -29,21 +29,21 @@ public class CreateOtDialog extends JDialog {
     private JTextField fieldIdPetcion;
     private JButton btnCancel;
     private JButton btnCreate;
-
+//22, 30, 46, 14
     //Icon icon = UIManager.getIcon("OptionPane.");
 
 
-    public CreateOtDialog(JPanel panel,JComboBox peticions) {
+    public CreateOtDialog(JPanel panel) {
         setLayout(null);
         setSize(450,340);
         setTitle("Create new OT folder");
         setLocationRelativeTo(panel);
         setModal(true);
         setResizable(false);
-        loadDialog(peticions);
+        loadDialog();
     }
 
-    public void loadDialog(JComboBox peticions){
+    public void loadDialog(){
 
         txtTitle=new JLabel();
         txtTitle.setText("Create new OT Folder");
@@ -53,7 +53,7 @@ public class CreateOtDialog extends JDialog {
 
         txtId=new JLabel();
         txtId.setText("ID_OT:");
-        txtId.setBounds(59, 93, 38, 14);
+        txtId.setBounds(50, 93, 38, 14);
         add(txtId);
 
         fieldId=new JNumberField();
@@ -87,12 +87,12 @@ public class CreateOtDialog extends JDialog {
         add(fieldIdPetcion);
 
         btnCreate=new JButton();
-        btnCreate.setText("Create");
-        btnCreate.setBounds(284, 257, 76, 23);
+        btnCreate.setText("Save");
+        btnCreate.setBounds(75, 257, 76, 23);
         add(btnCreate);
 
         btnCancel=new JButton();
-        btnCancel.setBounds(75, 257, 76, 23);
+        btnCancel.setBounds(284, 257, 76, 23);
         btnCancel.setText("Cancel");
         add(btnCancel);
 
@@ -106,14 +106,17 @@ public class CreateOtDialog extends JDialog {
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createOtFolder(peticions);
+              createOtFolder();
+              if(!fieldNotFill()){
+                  dispose();
+              }
             }
         });
 
     }
 
 
-    private void createOtFolder(JComboBox peticions){
+    private void createOtFolder(){
         LocalVariables lv = new LocalVariables();
         ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
         String projectPath = ap.getWorkingDirectory();
@@ -142,19 +145,25 @@ public class CreateOtDialog extends JDialog {
         }*/
         String nameOfCreatedFolder = fieldId.getText()+ "-" + fieldDescription.getText();
         System.out.println("NOME "+nameOfCreatedFolder);
-        if(StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText()) || nameOfCreatedFolder.equals("-")){
+      /*  if(StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText()) || nameOfCreatedFolder.equals("-")){
             Toast.display("Please fill the fields", Toast.ToastType.ERROR);
             return;
-        }
-        if(!Files.exists(Paths.get(nameOfCreatedFolder))){
+        }*/
+        if(fieldNotFill()){
+          Toast.display("Please fill the fields", Toast.ToastType.ERROR);
+          return;
+         }
+
+        if(folderNotExists(projectPath,nameOfCreatedFolder)){//Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder))
             OtInfo otinfo = new OtInfo();
-            new File(nameOfCreatedFolder).mkdirs();
+            //new File(projectPath+"/"+nameOfCreatedFolder).mkdirs();
             otinfo.setId_peticion(fieldIdPetcion.getText());
             //otinfo.setCodigoPeticionCliente(fieldDescription.getText());
             lv.setValuesOtInfoFile(nameOfCreatedFolder,otinfo);
             Toast.display("Folder OT created Successfully", Toast.ToastType.INFO);
         }else{
             Toast.display("Folder OT not created, folder already exists", Toast.ToastType.ERROR);
+
         }
 
       /*  if(cont == 1){
@@ -169,6 +178,30 @@ public class CreateOtDialog extends JDialog {
     }
 
 
+    }
+
+    private boolean fieldNotFill(){
+
+        boolean field;
+        if(StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText())){
+            field = true;
+        }else {
+            field = false;
+        }
+
+        return field;
+    }
+
+    private boolean folderNotExists(String projectPath,String nameOfCreatedFolder){
+        boolean folder;
+
+        if(!Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder))){
+            folder = true;
+        }else {
+            folder = false;
+        }
+
+        return folder;
     }
 
 }

@@ -2,19 +2,20 @@ package net.dms.fsync.swing.dialogs;
 
 import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.settings.business.SettingsService;
+import net.dms.fsync.settings.entities.Actor;
 import net.dms.fsync.swing.components.*;
 import net.dms.fsync.swing.models.BitacoraTableModel;
+import net.dms.fsync.swing.models.FenixResponsablesTableModel;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
-import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import net.dms.fsync.synchronizer.fenix.entities.Bitacora;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.FenixResponsable;
-import net.dms.fsync.synchronizer.fenix.entities.enumerations.*;
-import net.dms.fsync.swing.models.FenixResponsablesTableModel;
-import net.dms.fsync.settings.business.SettingsService;
-import net.dms.fsync.settings.entities.Actor;
+import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
+import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccSubType;
+import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccType;
 import net.sourceforge.jdatepicker.JDatePicker;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,10 +25,7 @@ import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -79,19 +77,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     protected void onAccept() {
         super.onAccept();
         LocalVariables lv = new LocalVariables();
-        if (AccStatus.PENDIENTE_ASIGNACION.getDescription().equals(cmbEstado.getSelectedItem())){
-            getPayload().setEstado(AccStatus.EN_EJECUCION.getDescription());
-            System.out.println("entrei no if" + cmbEstado.getSelectedItem());
-        }
-
         String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getCodigoPeticionCliente();
         updateCodigoPeticion(codigopeticion);
-<<<<<<< HEAD
-
-
-=======
         updateCodigoPeticionCliente();
->>>>>>> BotaoOtpastas
     }
 
     @Override
@@ -110,16 +98,12 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         txtIdPeticion.setText(idpeticion);
         // txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
-<<<<<<< HEAD
-        verif();
-=======
-        if(StringUtils.isBlank(txtIdPeticion.getText())){
+        if (StringUtils.isBlank(txtIdPeticion.getText())) {
             Toast.display("Please fill the ID Peticion", Toast.ToastType.ERROR);
         }
 
 
-       verif();
->>>>>>> BotaoOtpastas
+        verif();
 
         //txtCodigoPeticionCliente.setText("BMW.SA3.SPRINT");
 
@@ -127,8 +111,6 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
-
-
         cmbTipo.setSelectedItem(getPayload().getTipo());
         //   cmbSubTipo.setSelectedItem(getPayload().getSubTipo());
 
@@ -185,9 +167,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         panel.setLayout(new GridBagLayout());
 
         JLabel lblSummary = new JLabel("Nombre");
-        JLabel lblDescription = new JLabel("Descripci髇");
+        JLabel lblDescription = new JLabel("Descripci贸n");
         JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
-        JLabel lblCodigoPeticionCliente = new JLabel("C骴igo petici髇 cliente");
+        JLabel lblCodigoPeticionCliente = new JLabel("C贸digo petici贸n cliente");
 
         JLabel lblIdPeticion = new JLabel("ID Peticion");
 
@@ -325,7 +307,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         constraints.gridy = ++fila;
         panel.add(addBitacoraBtn, constraints);
 
-        // fields codigo petici髇 - historia usuario
+        // fields codigo petici贸n - historia usuario
         constraints.gridx = 0;
         constraints.gridy = ++fila;
         constraints.weightx = anchoEntiquetas;
@@ -450,11 +432,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         getPayload().setIdPeticion(idpeticion);
 
 
-
-
-        if(StringUtils.isBlank(txtCodigoPeticionCliente.getText())){
+        if (StringUtils.isBlank(txtCodigoPeticionCliente.getText())) {
             throw new AppException("Codigo Peticion Cliente es requerido");
-        }else{
+        } else {
             getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
         }
 
@@ -561,14 +541,14 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         }
     }
 
-    private void updateCodigoPeticionCliente(){
+    private void updateCodigoPeticionCliente() {
         LocalVariables lv = new LocalVariables();
         OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdPeticion());
-        if(StringUtils.isBlank(txtIdPeticion.getText())){
-            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(),lv.readOtInfoFile(WorkingJira.getIdPeticion()));
-        }else {
+        if (StringUtils.isBlank(txtIdPeticion.getText())) {
+            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), lv.readOtInfoFile(WorkingJira.getIdPeticion()));
+        } else {
             otinfo.setId_peticion(txtIdPeticion.getText());
-            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(),otinfo);
+            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), otinfo);
         }
 
     }

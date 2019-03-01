@@ -51,7 +51,6 @@ public class WorkingJira {
     private static String authJiraIssuesSearch = "AUTH_jira_issues_search";
 
 
-    private static String fenixLoginLoginUrl = " fenix/validarLoginAction.dojo?timestamp=${everis.fenix.timestamp}";
     private static String fenixUploadincidenciasUploadUrl = "/fenix/requerimientos/IncidenciaNuevoCargaMasivaAction.do?perform=carga";
     private static String fenixUploadincidenciasUploadReferer = "/fenix/requerimientos/CargaMasivaIncidenciasNuevo.jsp";
     private static String fenixUploadAccsUploadUrl = "/fenix/actuaciones/accCargaMasivaAction.do?perform=cargaACCs";

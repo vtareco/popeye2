@@ -8,12 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5970f862-9e4b-46f2-aa4c-5b24f0cb5cfb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bmw/rsp/everis_overriden.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bmw/rsp/everis_overriden.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,13 +20,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="458" column="25" lean-forward="true" selection-start-line="458" selection-start-column="25" selection-end-line="458" selection-end-column="25" />
+            <state relative-caret-position="3791">
+              <caret line="269" column="17" lean-forward="true" selection-start-line="269" selection-start-column="17" selection-end-line="269" selection-end-column="17" />
               <folding>
                 <element signature="docComment;class#EverisManager#0" />
+                <element signature="e#37162#53810#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/FenixDownloadAccIncurridoExecution.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/FenixDownloadDudaExecution.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/FenixIncidenciasTareaCausanteExecution.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="112" column="8" lean-forward="true" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,11 +75,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/business/FenixService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+            <state relative-caret-position="176">
+              <caret line="60" column="29" lean-forward="true" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
               <folding>
                 <element signature="e#2246#2247#0" expanded="true" />
                 <element signature="e#2300#2301#0" expanded="true" />
+                <element signature="e#2349#2350#0" expanded="true" />
+                <element signature="e#2394#2395#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="97" selection-start-line="97" selection-end-line="97" />
+            <state relative-caret-position="227">
+              <caret line="85" column="16" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
               <folding>
                 <element signature="e#5166#5176#0" expanded="true" />
                 <element signature="e#6312#6322#0" expanded="true" />
@@ -62,11 +100,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="92" column="28" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+            <state relative-caret-position="442">
+              <caret line="90" column="39" lean-forward="true" selection-start-line="90" selection-start-column="39" selection-end-line="90" selection-end-column="39" />
               <folding>
                 <element signature="e#1561#1585#0" expanded="true" />
                 <element signature="method#processVariables#0;class#ActionExecutor#0" />
@@ -101,7 +139,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ActionEx</find>
       <find>hey</find>
       <find>fenixlogin</find>
       <find>akamaiLogin</find>
@@ -131,6 +168,7 @@
       <find>ID_PETI</find>
       <find>ID_PETICION</find>
       <find>id</find>
+      <find>excel</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -168,7 +206,6 @@
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/PeticionDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/business/VariableService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/JiraIssueFields.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/JiraTableModel.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -176,10 +213,11 @@
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java" />
         <option value="$PROJECT_DIR$/src/main/resources/bmw/rsp/everis_overriden.conf" />
-        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form" />
-        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java" />
       </list>
     </option>
   </component>
@@ -264,6 +302,39 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="httphandlers" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="httphandlers" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="httphandlers" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="executions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
               <item name="notifications" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -274,6 +345,36 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="fsync" type="462c0819:PsiDirectoryNode" />
               <item name="swing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+              <item name="LocalVariables" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+              <item name="LocalVariables" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
@@ -311,7 +412,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="287" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551374006523" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551447687900" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -445,17 +546,23 @@
       <option name="project" value="LOCAL" />
       <updated>1551350893679</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Toast para upload e guardar excell a funcionar em caso de successo">
+      <created>1551374078042</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1551374078042</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122533000" />
+    <option name="totallyTimeSpent" value="128059000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="13" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49823943" visible="true" weight="0.22677262" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49823943" visible="true" weight="0.28973106" />
       <window_info id="Structure" order="1" sideWeight="0.50176054" side_tool="true" weight="0.2683374" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -464,7 +571,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18253079" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.23404256" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3629469" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -510,7 +617,8 @@
     <MESSAGE value="creates jenix settings in apppopeye" />
     <MESSAGE value="test" />
     <MESSAGE value="ola belmiro" />
-    <option name="LAST_COMMIT_MESSAGE" value="ola belmiro" />
+    <MESSAGE value="Toast para upload e guardar excell a funcionar em caso de successo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Toast para upload e guardar excell a funcionar em caso de successo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -652,21 +760,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/net/URI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="2847" selection-start-line="2847" selection-end-line="2847" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/AkamaiLoginExecution.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/bmw/rsp/everis.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/bmw/rsp/executions/fenix_upload_dudas.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -786,30 +879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="71" column="41" lean-forward="true" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="161" column="5" lean-forward="true" selection-start-line="161" selection-start-column="5" selection-end-line="161" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5085#5086#0" expanded="true" />
-            <element signature="e#5141#5142#0" expanded="true" />
-            <element signature="e#5154#5155#0" expanded="true" />
-            <element signature="e#5188#5189#0" expanded="true" />
-            <element signature="e#5206#5207#0" expanded="true" />
-            <element signature="e#5254#5255#0" expanded="true" />
-            <element signature="e#5390#5391#0" expanded="true" />
-            <element signature="e#5438#5439#0" expanded="true" />
-            <element signature="e#5299#5300#0" expanded="true" />
-            <element signature="e#5333#5334#0" expanded="true" />
-            <element signature="e#5609#5610#0" expanded="true" />
-            <element signature="e#5672#5673#0" expanded="true" />
-            <element signature="e#5970#5971#0" expanded="true" />
-            <element signature="e#6017#6018#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -976,41 +1045,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="458" column="25" lean-forward="true" selection-start-line="458" selection-start-column="25" selection-end-line="458" selection-end-column="25" />
-          <folding>
-            <element signature="docComment;class#EverisManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/business/FenixService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
-          <folding>
-            <element signature="e#2246#2247#0" expanded="true" />
-            <element signature="e#2300#2301#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
-          <folding>
-            <element signature="e#5166#5176#0" expanded="true" />
-            <element signature="e#6312#6322#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/bmw/rsp/executions/fenix_upload_accs.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1018,13 +1052,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="92" column="28" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+        <state relative-caret-position="442">
+          <caret line="90" column="39" lean-forward="true" selection-start-line="90" selection-start-column="39" selection-end-line="90" selection-end-column="39" />
           <folding>
             <element signature="e#1561#1585#0" expanded="true" />
             <element signature="method#processVariables#0;class#ActionExecutor#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/business/FenixService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="60" column="29" lean-forward="true" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+          <folding>
+            <element signature="e#2246#2247#0" expanded="true" />
+            <element signature="e#2300#2301#0" expanded="true" />
+            <element signature="e#2349#2350#0" expanded="true" />
+            <element signature="e#2394#2395#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="85" column="16" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
+          <folding>
+            <element signature="e#5166#5176#0" expanded="true" />
+            <element signature="e#6312#6322#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/FenixDownloadAccIncurridoExecution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/FenixDownloadDudaExecution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/FenixIncidenciasTareaCausanteExecution.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="112" column="8" lean-forward="true" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3791">
+          <caret line="269" column="17" lean-forward="true" selection-start-line="269" selection-start-column="17" selection-end-line="269" selection-end-column="17" />
+          <folding>
+            <element signature="docComment;class#EverisManager#0" />
+            <element signature="e#37162#53810#0" expanded="true" />
           </folding>
         </state>
       </provider>

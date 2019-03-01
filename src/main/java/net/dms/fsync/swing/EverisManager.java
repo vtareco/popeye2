@@ -458,7 +458,7 @@ public class EverisManager {
     private void uploadAccs() {
         fenixService.uploadACCs(getPeticionSelected(peticionesDisponiblesCmb));
         accTable.getModel().load(fenixService.searchAccByPeticionId(getPeticionSelected(peticionesDisponiblesCmb), true));
-        refreshTotales();
+        //.refreshTotales();
     }
 
     private void jiraToAcc() {

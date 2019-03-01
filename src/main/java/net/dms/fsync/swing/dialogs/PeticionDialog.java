@@ -21,10 +21,11 @@ public class PeticionDialog extends JDialog{
     //private NumberFormat peticionFormat;
     //private JFormattedTextField  txtIdPeticion;
 
-    private JNumberField txtIdPeticion;
+    public JNumberField txtIdPeticion;
     private JLabel lblTitle;
     private JLabel lblId;
     private JButton btnSave;
+    private JButton btnCancel;
     private JLabel topIcon;
     private String peticion;
     boolean check;
@@ -83,9 +84,14 @@ public class PeticionDialog extends JDialog{
 
 
         btnSave = new JButton();
-        btnSave.setBounds(175, 211, 89, 23);
+        btnSave.setBounds(52, 210, 89, 23);
         btnSave.setText("Save");
         this.add(btnSave);
+
+        btnCancel = new JButton();
+        btnCancel.setBounds(289, 210, 89, 23);
+        btnCancel.setText("Cancel");
+        this.add(btnCancel);
 
         btnSave.addActionListener(new ActionListener() {
             @Override
@@ -99,6 +105,13 @@ public class PeticionDialog extends JDialog{
                     System.out.println("ola");
                     JOptionPane.showMessageDialog(null,"Petición Requerida !");
                 }
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
             }
         });
 

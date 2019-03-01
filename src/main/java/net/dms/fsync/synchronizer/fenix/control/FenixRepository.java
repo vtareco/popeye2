@@ -455,8 +455,7 @@ public class FenixRepository {
                 logger.debug("Processing row {}", i);
                 FenixIncidencia incidencia = incidenciaMapper.map(sheet.getRow(i));
                 incidencias.add(incidencia);
-                Toast toast = new Toast("Upload Sucess", Toast.ToastType.INFO);
-                toast.setVisible(true);
+                Toast.display("Upload Sucess", Toast.ToastType.INFO);
             }
 
 

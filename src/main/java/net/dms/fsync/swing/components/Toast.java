@@ -10,6 +10,7 @@ import java.awt.*;
 public class Toast extends JDialog {
     private final String toastString;
 
+
     //private int miliseconds;
 
     public Toast(String toastString, ToastType toastType) {
@@ -22,6 +23,11 @@ public class Toast extends JDialog {
         JLabel toastLabel = setupMessageLabel(this.toastString);
         setBounds(panel, toastLabel);
         destroyWhenTimeIsOver();
+    }
+
+    public static void display (String toastString, ToastType toastType){
+        Toast toast = new Toast(toastString, toastType);
+        toast.setVisible(true);
     }
 
     /**

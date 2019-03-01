@@ -1,13 +1,21 @@
 package net.dms.fsync.swing.dialogs;
 
-import com.sun.deploy.net.proxy.pac.PACFunctions;
+import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.swing.components.JNumberField;
+import net.dms.fsync.swing.components.Toast;
+import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class CreateOtDialog extends JDialog {
 
@@ -21,8 +29,9 @@ public class CreateOtDialog extends JDialog {
     private JTextField fieldIdPetcion;
     private JButton btnCancel;
     private JButton btnCreate;
+//22, 30, 46, 14
+    //Icon icon = UIManager.getIcon("OptionPane.");
 
-   // Icon icon = UIManager.getIcon("OptionPane.informationIcon");
 
     public CreateOtDialog(JPanel panel) {
         setLayout(null);
@@ -44,7 +53,7 @@ public class CreateOtDialog extends JDialog {
 
         txtId=new JLabel();
         txtId.setText("ID_OT:");
-        txtId.setBounds(59, 93, 38, 14);
+        txtId.setBounds(50, 93, 38, 14);
         add(txtId);
 
         fieldId=new JNumberField();
@@ -78,12 +87,12 @@ public class CreateOtDialog extends JDialog {
         add(fieldIdPetcion);
 
         btnCreate=new JButton();
-        btnCreate.setText("Create");
-        btnCreate.setBounds(284, 257, 76, 23);
+        btnCreate.setText("Save");
+        btnCreate.setBounds(75, 257, 76, 23);
         add(btnCreate);
 
         btnCancel=new JButton();
-        btnCancel.setBounds(75, 257, 76, 23);
+        btnCancel.setBounds(284, 257, 76, 23);
         btnCancel.setText("Cancel");
         add(btnCancel);
 
@@ -94,5 +103,105 @@ public class CreateOtDialog extends JDialog {
             }
         });
 
+        btnCreate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              createOtFolder();
+              if(!fieldNotFill()){
+                  dispose();
+              }
+            }
+        });
+
     }
+
+
+    private void createOtFolder(){
+        LocalVariables lv = new LocalVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
+        //int cont=0;
+        //File file = null;
+    try {
+
+      /*  ArrayList<String> list = new ArrayList<>();
+        if (peticions!= null){
+            System.out.println(peticions.getItemCount());
+            for(int i=0; i<peticions.getItemCount(); i++){
+                list.add(String.valueOf(peticions.getItemAt(i)));
+                System.out.println("porra "+peticions.getItemAt(i));
+
+            }
+            System.out.println("YOO "+list);
+        }
+        for (String peticiones : list) {
+            if(peticiones.compareToIgnoreCase(nameOfCreatedFolder)!=0) {
+                cont = 1;
+            }else {
+                cont = 0;
+                break;
+            }
+
+        }*/
+        String nameOfCreatedFolder = fieldId.getText()+ "-" + fieldDescription.getText();
+        System.out.println("NOME "+nameOfCreatedFolder);
+      /*  if(StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText()) || nameOfCreatedFolder.equals("-")){
+            Toast.display("Please fill the fields", Toast.ToastType.ERROR);
+            return;
+        }*/
+        if(fieldNotFill()){
+          Toast.display("Please fill the fields", Toast.ToastType.ERROR);
+          return;
+         }
+
+        if(folderNotExists(projectPath,nameOfCreatedFolder)){//Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder))
+            OtInfo otinfo = new OtInfo();
+            //new File(projectPath+"/"+nameOfCreatedFolder).mkdirs();
+            otinfo.setId_peticion(fieldIdPetcion.getText());
+            //otinfo.setCodigoPeticionCliente(fieldDescription.getText());
+            lv.setValuesOtInfoFile(nameOfCreatedFolder,otinfo);
+            Toast.display("Folder OT created Successfully", Toast.ToastType.INFO);
+        }else{
+            Toast.display("Folder OT not created, folder already exists", Toast.ToastType.ERROR);
+
+        }
+
+      /*  if(cont == 1){
+
+            //refreshPeticionesDisponiblesCMB();
+        }else if(cont == 0){
+
+        }*/
+
+    }catch (AppException e){
+        e.printStackTrace();
+    }
+
+
+    }
+
+    private boolean fieldNotFill(){
+
+        boolean field;
+        if(StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText())){
+            field = true;
+        }else {
+            field = false;
+        }
+
+        return field;
+    }
+
+    private boolean folderNotExists(String projectPath,String nameOfCreatedFolder){
+        boolean folder;
+
+        if(!Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder))){
+            folder = true;
+        }else {
+            folder = false;
+        }
+
+        return folder;
+    }
+
 }

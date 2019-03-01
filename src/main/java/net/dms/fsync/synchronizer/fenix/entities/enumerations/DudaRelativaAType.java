@@ -7,7 +7,7 @@ public enum DudaRelativaAType implements VisualizableType{
     REQUERIMIENTOS("Requerimientos"),
     DF("DF"),
     DT_CC("DT/CC"),
-    CODIGO("CÃ³digo"),
+    CODIGO("Código"),
     PLAN_DE_PRUEBAS("Plan de Pruebas");
 
     private String description;

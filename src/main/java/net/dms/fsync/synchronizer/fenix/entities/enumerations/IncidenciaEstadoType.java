@@ -4,8 +4,8 @@ package net.dms.fsync.synchronizer.fenix.entities.enumerations;
  * Created by dminanos on 24/05/2017.
  */
 public enum IncidenciaEstadoType implements VisualizableType{
-    EN_ANALISIS("En an√°lisis"),
-    EN_EJECUCION("En ejecuci√≥n"),
+    EN_ANALISIS("En an·lisis"),
+    EN_EJECUCION("En ejecuciÛn"),
     ENTREGADA("Entregada"),
     ENTREGA_RECHAZADA("Entrega Rechazada"),
     CERRADA("Cerrada"),

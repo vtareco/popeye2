@@ -18,7 +18,7 @@ public class DudaDialog extends JenixDialog<FenixDuda> {
         // TODO FIXME, move to abstract class
         this.setSize(550, 350);
         setLocationRelativeTo(parent);
-        setTitle("CreaciÃ³n de Duda");
+        setTitle("Creación de Duda");
         setModal(true);
         setResizable(false);
         setVisible(true);

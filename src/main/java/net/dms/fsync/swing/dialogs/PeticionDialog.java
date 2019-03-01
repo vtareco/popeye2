@@ -103,7 +103,7 @@ public class PeticionDialog extends JDialog{
                     dispose();
                 }else{
                     System.out.println("ola");
-                    JOptionPane.showMessageDialog(null,"PeticiÃ³n Requerida !");
+                    JOptionPane.showMessageDialog(null,"Petición Requerida !");
                 }
             }
         });

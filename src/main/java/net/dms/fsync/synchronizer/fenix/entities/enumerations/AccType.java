@@ -5,7 +5,7 @@ package net.dms.fsync.synchronizer.fenix.entities.enumerations;
  */
 public enum AccType implements VisualizableType{
     EVOLUTIVO("Evolutivo (ENP)"),
-    CORRECCION_INCIDENCIAS("CorrecciÃ³n Incidencias"),
+    CORRECCION_INCIDENCIAS("Corrección Incidencias"),
     USER_STORY("User Story"),
     MEETING("Meeting"),
     SCRUM_MASTER("Scrum "),

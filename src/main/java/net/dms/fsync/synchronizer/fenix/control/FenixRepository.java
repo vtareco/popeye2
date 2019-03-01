@@ -97,6 +97,8 @@ public class FenixRepository {
         upload.execute();
 
 
+
+
     }
 
     public void uploadIncidencias(Long idPeticionOt) {
@@ -419,6 +421,11 @@ public class FenixRepository {
         } catch (IOException ex) {
             throw new AppException(ex);
         }
+
+            Toast  toast = new Toast("Successo", Toast.ToastType.INFO);
+            toast.setVisible(true);
+
+
     }
 
     public List<FenixIncidencia> searchIncidenciasByOtId(Long idOt, boolean forceDownload) {

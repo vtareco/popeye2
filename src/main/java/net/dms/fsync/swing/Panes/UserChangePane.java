@@ -175,7 +175,7 @@ public class UserChangePane extends JPanel {
 
         reReloadChanges.setFont(new Font("Arial", Font.PLAIN, 10));
         reReloadChanges.setName("reloadChanges");
-        reReloadChanges.setText("Re-Writte");
+        reReloadChanges.setText("Return");
         reReloadChanges.setBounds(470, 7, 100, 25);
         this.add(reReloadChanges);
 

@@ -9,26 +9,24 @@ import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 
 public class ExtranetLoginExecution extends Execution {
 
-    public ExtranetLoginExecution(Execution execution) {
-        setProxyConfiguration(execution.getProxyConfiguration());
-        setActions(execution.getActions());
-        setName(execution.getName());
-    }
+	public ExtranetLoginExecution(Execution execution) {
+		setProxyConfiguration(execution.getProxyConfiguration());
+		setActions(execution.getActions());
+		setName(execution.getName());
+	}
 
-    @Override
-    public void initActions(ApplicationProperties applicationProperties, UserChange userChange) {
-        for (Action action: getActions()){
-
-            if (action.getName().equals(WorkingJira.getLogIn())){
-                for(Parameter parameter : action.getParameters()){
-                    if (parameter.getName().equals(WorkingJira.getUser())){
-                        parameter.setValue(userChange.getFenixUser());
-                    }
-                    else if (parameter.getName().equals(WorkingJira.getPassword())){
-                        parameter.setValue(userChange.getFenixPassword());
-                    }
-                }
-            }
-        }
-    }
+	@Override
+	public void initActions(ApplicationProperties applicationProperties, UserChange userChange) {
+		for(Action action : getActions()) {
+			if(action.getName().equals(WorkingJira.getLogIn())) {
+				for(Parameter parameter : action.getParameters()) {
+					if(parameter.getName().equals(WorkingJira.getUser())) {
+						parameter.setValue(userChange.getFenixUser());
+					} else if(parameter.getName().equals(WorkingJira.getPassword())) {
+						parameter.setValue(userChange.getFenixPassword());
+					}
+				}
+			}
+		}
+	}
 }

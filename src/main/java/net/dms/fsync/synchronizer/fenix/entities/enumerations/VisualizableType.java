@@ -5,5 +5,5 @@ package net.dms.fsync.synchronizer.fenix.entities.enumerations;
  */
 public interface VisualizableType {
 
-    public String getDescription();
+	public String getDescription();
 }

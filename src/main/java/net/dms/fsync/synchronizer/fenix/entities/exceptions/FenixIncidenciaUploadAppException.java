@@ -1,28 +1,29 @@
 package net.dms.fsync.synchronizer.fenix.entities.exceptions;
 
+import java.util.List;
+
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidenciaUploadResponseItem;
-
-import java.util.List;
 
 /**
  * Created by dminanos on 26/04/2017.
  */
-public class FenixIncidenciaUploadAppException extends AppException{
-    public FenixIncidenciaUploadAppException(Throwable ex) {
-        super(ex);
-    }
+public class FenixIncidenciaUploadAppException extends AppException {
 
-    public FenixIncidenciaUploadAppException(List<FenixIncidenciaUploadResponseItem> fenixIncidenciaUploadItems) {
+	public FenixIncidenciaUploadAppException(Throwable ex) {
+		super(ex);
+	}
 
-       StringBuilder sb = new StringBuilder();
-       for (FenixIncidenciaUploadResponseItem item : fenixIncidenciaUploadItems){
-           sb.append(item);
-           sb.append("\n");
-       }
-       throw new FenixIncidenciaUploadAppException(sb.toString());
-    }
-    public FenixIncidenciaUploadAppException(String msg){
-        super(msg);
-    }
+	public FenixIncidenciaUploadAppException(List<FenixIncidenciaUploadResponseItem> fenixIncidenciaUploadItems) {
+		StringBuilder sb = new StringBuilder();
+		for(FenixIncidenciaUploadResponseItem item : fenixIncidenciaUploadItems) {
+			sb.append(item);
+			sb.append("\n");
+		}
+		throw new FenixIncidenciaUploadAppException(sb.toString());
+	}
+
+	public FenixIncidenciaUploadAppException(String msg) {
+		super(msg);
+	}
 }

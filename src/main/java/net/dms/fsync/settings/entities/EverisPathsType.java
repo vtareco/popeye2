@@ -4,15 +4,15 @@ package net.dms.fsync.settings.entities;
  * Created by dminanos on 18/04/2017.
  */
 public enum EverisPathsType {
-    PROJECT_DIRECTORY("");
+	PROJECT_DIRECTORY("");
 
-    private String path;
+	private String path;
 
-    EverisPathsType(String path) {
-        this.path = path;
-    }
+	EverisPathsType(String path) {
+		this.path = path;
+	}
 
-    public String getPath() {
-        return path;
-    }
+	public String getPath() {
+		return path;
+	}
 }

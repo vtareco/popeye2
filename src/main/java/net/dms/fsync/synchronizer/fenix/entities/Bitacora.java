@@ -3,43 +3,44 @@ package net.dms.fsync.synchronizer.fenix.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Bitacora implements Serializable{
-    private Long id;
-    private String user;
-    private Date creationDate;
-    private String comment;
+public class Bitacora implements Serializable {
 
-    public Bitacora() {
-    }
+	private Long id;
+	private String user;
+	private Date creationDate;
+	private String comment;
 
-    public Bitacora(String user, String comment) {
-        this.id = -1 * System.currentTimeMillis();
-        this.creationDate = new Date();
-        this.user = user;
-        this.comment = comment;
-    }
+	public Bitacora() {
+	}
 
-    public String getUser() {
-        return user;
-    }
+	public Bitacora(String user, String comment) {
+		this.id = -1 * System.currentTimeMillis();
+		this.creationDate = new Date();
+		this.user = user;
+		this.comment = comment;
+	}
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+	public String getUser() {
+		return user;
+	}
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
+	public void setUser(String user) {
+		this.user = user;
+	}
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
-    public String getComment() {
-        return comment;
-    }
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }

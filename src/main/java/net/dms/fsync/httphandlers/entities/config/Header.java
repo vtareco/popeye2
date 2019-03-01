@@ -7,34 +7,33 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class Header {
 
-    private String name;
+	private String name;
 
-    private String value;
+	private String value;
 
-    @XmlAttribute
-    public String getName() {
-        return name;
-    }
+	@XmlAttribute
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	@XmlAttribute
+	public String getValue() {
+		return value;
+	}
 
-    @XmlAttribute
-    public String getValue() {
-        return value;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "Header{" +
-                "name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Header{" +
+			   "name='" + name + '\'' +
+			   ", value='" + value + '\'' +
+			   '}';
+	}
 }

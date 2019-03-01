@@ -1,31 +1,28 @@
 package net.dms.fsync.synchronizer.fenix.entities.exceptions;
 
 public class ServerChange {
-    String jiraServer;
-    String fenixServer;
 
-    public String getJiraServer() {
-        return jiraServer;
-    }
+	String jiraServer;
+	String fenixServer;
 
-    public void setJiraServer(String jiraServer) {
-        this.jiraServer = jiraServer;
-    }
+	public ServerChange(String jiraServer, String fenixServer) {
+		this.jiraServer = jiraServer;
+		this.fenixServer = fenixServer;
+	}
 
-    public String getFenixServer() {
-        return fenixServer;
-    }
+	public String getJiraServer() {
+		return jiraServer;
+	}
 
-    public void setFenixServer(String fenixServer) {
-        this.fenixServer = fenixServer;
-    }
+	public void setJiraServer(String jiraServer) {
+		this.jiraServer = jiraServer;
+	}
 
-    public ServerChange(String jiraServer, String fenixServer) {
-        this.jiraServer = jiraServer;
-        this.fenixServer = fenixServer;
-    }
+	public String getFenixServer() {
+		return fenixServer;
+	}
 
-
-
-
+	public void setFenixServer(String fenixServer) {
+		this.fenixServer = fenixServer;
+	}
 }

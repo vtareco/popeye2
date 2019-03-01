@@ -6,62 +6,63 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by dminanos on 21/04/2017.
  */
 public class FenixACCUploadResponseItem {
-    private String nombre;
-    @JsonProperty(value = "pet_cliente")
-    private String petCliente;
-    private Integer linea;
-    private String motivo;
-    @JsonProperty(value = "es_error")
-    private Boolean error;
 
-    public String getNombre() {
-        return nombre;
-    }
+	private String nombre;
+	@JsonProperty(value = "pet_cliente")
+	private String petCliente;
+	private Integer linea;
+	private String motivo;
+	@JsonProperty(value = "es_error")
+	private Boolean error;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getPetCliente() {
-        return petCliente;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setPetCliente(String petCliente) {
-        this.petCliente = petCliente;
-    }
+	public String getPetCliente() {
+		return petCliente;
+	}
 
-    public Integer getLinea() {
-        return linea;
-    }
+	public void setPetCliente(String petCliente) {
+		this.petCliente = petCliente;
+	}
 
-    public void setLinea(Integer linea) {
-        this.linea = linea;
-    }
+	public Integer getLinea() {
+		return linea;
+	}
 
-    public String getMotivo() {
-        return motivo;
-    }
+	public void setLinea(Integer linea) {
+		this.linea = linea;
+	}
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
+	public String getMotivo() {
+		return motivo;
+	}
 
-    public Boolean getError() {
-        return error;
-    }
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
 
-    public void setError(Boolean error) {
-        this.error = error;
-    }
+	public Boolean getError() {
+		return error;
+	}
 
-    @Override
-    public String toString() {
-        return "FenixACCUploadResponseItem{" +
-                "nombre='" + nombre + '\'' +
-                ", petCliente='" + petCliente + '\'' +
-                ", linea=" + linea +
-                ", motivo='" + motivo + '\'' +
-                ", error=" + error +
-                '}';
-    }
+	public void setError(Boolean error) {
+		this.error = error;
+	}
+
+	@Override
+	public String toString() {
+		return "FenixACCUploadResponseItem{" +
+			   "nombre='" + nombre + '\'' +
+			   ", petCliente='" + petCliente + '\'' +
+			   ", linea=" + linea +
+			   ", motivo='" + motivo + '\'' +
+			   ", error=" + error +
+			   '}';
+	}
 }

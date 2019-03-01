@@ -5,46 +5,53 @@ import java.util.Objects;
 /**
  * Created by dminanos on 30/05/2017.
  */
-public class SelectOption<C,D> {
-    private C code;
-    private D description;
+public class SelectOption<C, D> {
 
-    public SelectOption(C code, D description) {
-        this.code = code;
-        this.description = description;
-    }
+	private C code;
+	private D description;
 
-    public C getCode() {
-        return code;
-    }
+	public SelectOption(C code, D description) {
+		this.code = code;
+		this.description = description;
+	}
 
-    public void setCode(C code) {
-        this.code = code;
-    }
+	public C getCode() {
+		return code;
+	}
 
-    public D getDescription() {
-        return description;
-    }
+	public void setCode(C code) {
+		this.code = code;
+	}
 
-    public void setDescription(D description) {
-        this.description = description;
-    }
+	public D getDescription() {
+		return description;
+	}
 
-    @Override
-    public String toString() {
-        return description == null ? null : this.description.toString();
-    }
+	public void setDescription(D description) {
+		this.description = description;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SelectOption<?, ?> that = (SelectOption<?, ?>) o;
-        return Objects.equals(code, that.code);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(code);
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(code);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) {
+			return true;
+		}
+		if(o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		SelectOption<?, ?> that = (SelectOption<?, ?>) o;
+		return Objects.equals(code, that.code);
+	}
+
+	@Override
+	public String toString() {
+		return description == null
+				 ? null
+				 : this.description.toString();
+	}
 }

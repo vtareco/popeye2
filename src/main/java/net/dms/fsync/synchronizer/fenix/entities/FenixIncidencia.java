@@ -7,193 +7,198 @@ import java.util.Objects;
  * Created by dminanos on 22/05/2017.
  */
 public class FenixIncidencia {
-    private Long idInterno;
-    private Long idIncidencia;
-    private String idPeticionOt;
-    private String nombreIncidencia;
-    private String localizadaEn;
-    private String tipoIncidencia;
-    private String descripcion;
-    private Date fechaInicio;
-    private Date fechaFin;
-    private Double esfuerzoHh;
-    private String urgencia;
-    private String impacto;
-    private String resueltaPorCliente;
-    private String prioridad;
-    private Date fechaPrevistaCentro;
-    private String tareaCausante;
-    private String otCorrector;
-    private String accCorrector;
-    private String estado;
 
-    public FenixIncidencia() {
-        this.idInterno = -1 * System.currentTimeMillis();
-    }
+	private Long idInterno;
+	private Long idIncidencia;
+	private String idPeticionOt;
+	private String nombreIncidencia;
+	private String localizadaEn;
+	private String tipoIncidencia;
+	private String descripcion;
+	private Date fechaInicio;
+	private Date fechaFin;
+	private Double esfuerzoHh;
+	private String urgencia;
+	private String impacto;
+	private String resueltaPorCliente;
+	private String prioridad;
+	private Date fechaPrevistaCentro;
+	private String tareaCausante;
+	private String otCorrector;
+	private String accCorrector;
+	private String estado;
 
-    public Long getIdIncidencia() {
-        return idIncidencia;
-    }
+	public FenixIncidencia() {
+		this.idInterno = -1 * System.currentTimeMillis();
+	}
 
-    public void setIdIncidencia(Long idIncidencia) {
-        this.idIncidencia = idIncidencia;
-        setIdInterno(idIncidencia);
-    }
+	public Long getIdIncidencia() {
+		return idIncidencia;
+	}
 
-    public String getIdPeticionOt() {
-        return idPeticionOt;
-    }
+	public void setIdIncidencia(Long idIncidencia) {
+		this.idIncidencia = idIncidencia;
+		setIdInterno(idIncidencia);
+	}
 
-    public void setIdPeticionOt(String idPeticionOt) {
-        this.idPeticionOt = idPeticionOt;
-    }
+	public String getIdPeticionOt() {
+		return idPeticionOt;
+	}
 
-    public String getNombreIncidencia() {
-        return nombreIncidencia;
-    }
+	public void setIdPeticionOt(String idPeticionOt) {
+		this.idPeticionOt = idPeticionOt;
+	}
 
-    public void setNombreIncidencia(String nombreIncidencia) {
-        this.nombreIncidencia = nombreIncidencia;
-    }
+	public String getNombreIncidencia() {
+		return nombreIncidencia;
+	}
 
-    public String getLocalizadaEn() {
-        return localizadaEn;
-    }
+	public void setNombreIncidencia(String nombreIncidencia) {
+		this.nombreIncidencia = nombreIncidencia;
+	}
 
-    public void setLocalizadaEn(String localizadaEn) {
-        this.localizadaEn = localizadaEn;
-    }
+	public String getLocalizadaEn() {
+		return localizadaEn;
+	}
 
-    public String getTipoIncidencia() {
-        return tipoIncidencia;
-    }
+	public void setLocalizadaEn(String localizadaEn) {
+		this.localizadaEn = localizadaEn;
+	}
 
-    public void setTipoIncidencia(String tipoIncidencia) {
-        this.tipoIncidencia = tipoIncidencia;
-    }
+	public String getTipoIncidencia() {
+		return tipoIncidencia;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public void setTipoIncidencia(String tipoIncidencia) {
+		this.tipoIncidencia = tipoIncidencia;
+	}
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
 
-    public Date getFechaFin() {
-        return fechaFin;
-    }
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
 
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+	public Date getFechaFin() {
+		return fechaFin;
+	}
 
-    public Double getEsfuerzoHh() {
-        return esfuerzoHh;
-    }
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
 
-    public void setEsfuerzoHh(Double esfuerzoHh) {
-        this.esfuerzoHh = esfuerzoHh;
-    }
+	public Double getEsfuerzoHh() {
+		return esfuerzoHh;
+	}
 
-    public String getUrgencia() {
-        return urgencia;
-    }
+	public void setEsfuerzoHh(Double esfuerzoHh) {
+		this.esfuerzoHh = esfuerzoHh;
+	}
 
-    public void setUrgencia(String urgencia) {
-        this.urgencia = urgencia;
-    }
+	public String getUrgencia() {
+		return urgencia;
+	}
 
-    public String getImpacto() {
-        return impacto;
-    }
+	public void setUrgencia(String urgencia) {
+		this.urgencia = urgencia;
+	}
 
-    public void setImpacto(String impacto) {
-        this.impacto = impacto;
-    }
+	public String getImpacto() {
+		return impacto;
+	}
 
-    public String getResueltaPorCliente() {
-        return resueltaPorCliente;
-    }
+	public void setImpacto(String impacto) {
+		this.impacto = impacto;
+	}
 
-    public void setResueltaPorCliente(String resueltaPorCliente) {
-        this.resueltaPorCliente = resueltaPorCliente;
-    }
+	public String getResueltaPorCliente() {
+		return resueltaPorCliente;
+	}
 
-    public String getPrioridad() {
-        return prioridad;
-    }
+	public void setResueltaPorCliente(String resueltaPorCliente) {
+		this.resueltaPorCliente = resueltaPorCliente;
+	}
 
-    public void setPrioridad(String prioridad) {
-        this.prioridad = prioridad;
-    }
+	public String getPrioridad() {
+		return prioridad;
+	}
 
-    public Date getFechaPrevistaCentro() {
-        return fechaPrevistaCentro;
-    }
+	public void setPrioridad(String prioridad) {
+		this.prioridad = prioridad;
+	}
 
-    public void setFechaPrevistaCentro(Date fechaPrevistaCentro) {
-        this.fechaPrevistaCentro = fechaPrevistaCentro;
-    }
+	public Date getFechaPrevistaCentro() {
+		return fechaPrevistaCentro;
+	}
 
-    public String getTareaCausante() {
-        return tareaCausante;
-    }
+	public void setFechaPrevistaCentro(Date fechaPrevistaCentro) {
+		this.fechaPrevistaCentro = fechaPrevistaCentro;
+	}
 
-    public void setTareaCausante(String tareaCausante) {
-        this.tareaCausante = tareaCausante;
-    }
+	public String getTareaCausante() {
+		return tareaCausante;
+	}
 
-    public String getOtCorrector() {
-        return otCorrector;
-    }
+	public void setTareaCausante(String tareaCausante) {
+		this.tareaCausante = tareaCausante;
+	}
 
-    public void setOtCorrector(String otCorrector) {
-        this.otCorrector = otCorrector;
-    }
+	public String getOtCorrector() {
+		return otCorrector;
+	}
 
-    public String getAccCorrector() {
-        return accCorrector;
-    }
+	public void setOtCorrector(String otCorrector) {
+		this.otCorrector = otCorrector;
+	}
 
-    public void setAccCorrector(String accCorrector) {
-        this.accCorrector = accCorrector;
-    }
+	public String getAccCorrector() {
+		return accCorrector;
+	}
 
-    public String getEstado() {
-        return estado;
-    }
+	public void setAccCorrector(String accCorrector) {
+		this.accCorrector = accCorrector;
+	}
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
+	public String getEstado() {
+		return estado;
+	}
 
-    public Long getIdInterno() {
-        return idInterno;
-    }
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 
-    public void setIdInterno(Long idInterno) {
-        this.idInterno = idInterno;
-    }
+	public Long getIdInterno() {
+		return idInterno;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FenixIncidencia that = (FenixIncidencia) o;
-        return Objects.equals(idInterno, that.idInterno);
-    }
+	public void setIdInterno(Long idInterno) {
+		this.idInterno = idInterno;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idInterno);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(idInterno);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) {
+			return true;
+		}
+		if(o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		FenixIncidencia that = (FenixIncidencia) o;
+		return Objects.equals(idInterno, that.idInterno);
+	}
 }

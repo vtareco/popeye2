@@ -1,40 +1,41 @@
 package net.dms.fsync.synchronizer.fenix.entities;
 
 public class FenixRequirementSpecification {
-    private String codigo;
-    private String description;
-    private String storyPoints;
-    private String hours;
 
-    public String getCodigo() {
-        return codigo;
-    }
+	private String codigo;
+	private String description;
+	private String storyPoints;
+	private String hours;
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+	public String getCodigo() {
+		return codigo;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getStoryPoints() {
-        return storyPoints;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setStoryPoints(String storyPoints) {
-        this.storyPoints = storyPoints;
-    }
+	public String getStoryPoints() {
+		return storyPoints;
+	}
 
-    public String getHours() {
-        return hours;
-    }
+	public void setStoryPoints(String storyPoints) {
+		this.storyPoints = storyPoints;
+	}
 
-    public void setHours(String hours) {
-        this.hours = hours;
-    }
+	public String getHours() {
+		return hours;
+	}
+
+	public void setHours(String hours) {
+		this.hours = hours;
+	}
 }

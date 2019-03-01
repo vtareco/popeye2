@@ -8,18 +8,18 @@ import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 
 public class FenixUploadAccExecution extends Execution {
 
-    public FenixUploadAccExecution(Execution execution) {
-        setProxyConfiguration(execution.getProxyConfiguration());
-        setActions(execution.getActions());
-        setName(execution.getName());
-    }
+	public FenixUploadAccExecution(Execution execution) {
+		setProxyConfiguration(execution.getProxyConfiguration());
+		setActions(execution.getActions());
+		setName(execution.getName());
+	}
 
-    @Override
-    public void initActions(ApplicationProperties applicationProperties, UserChange userChange) {
-        for(Action action : getActions()){
-            if (action.equals(WorkingJira.getUpload())){
-                action.setUrl(applicationProperties.getFenixUrl() + WorkingJira.getFenixUploadAccsUploadUrl());
-            }
-        }
-    }
+	@Override
+	public void initActions(ApplicationProperties applicationProperties, UserChange userChange) {
+		for(Action action : getActions()) {
+			if(action.equals(WorkingJira.getUpload())) {
+				action.setUrl(applicationProperties.getFenixUrl() + WorkingJira.getFenixUploadAccsUploadUrl());
+			}
+		}
+	}
 }

@@ -7,68 +7,69 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JiraIssueFields {
-    private Assignee assignee;
-    private Status status;
-    private String summary;
-    private String description;
-    private int   storypoints;
-    private JiraIssue parent;
 
-    public int getStorypoints() {
-        return storypoints;
-    }
+	private Assignee assignee;
+	private Status status;
+	private String summary;
+	private String description;
+	private int storypoints;
+	private JiraIssue parent;
 
-    public void setStorypoints(int storypoints) {
-        this.storypoints = storypoints;
-    }
+	public int getStorypoints() {
+		return storypoints;
+	}
 
-    public Assignee getAssignee() {
-        return assignee;
-    }
+	public void setStorypoints(int storypoints) {
+		this.storypoints = storypoints;
+	}
 
-    public void setAssignee(Assignee assignee) {
-        this.assignee = assignee;
-    }
+	public Assignee getAssignee() {
+		return assignee;
+	}
 
-    public Status getStatus() {
-        return status;
-    }
+	public void setAssignee(Assignee assignee) {
+		this.assignee = assignee;
+	}
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+	public Status getStatus() {
+		return status;
+	}
 
-    public String getSummary() {
-        return summary;
-    }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
+	public String getSummary() {
+		return summary;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public JiraIssue getParent() {
-        return parent;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setParent(JiraIssue parent) {
-        this.parent = parent;
-    }
+	public JiraIssue getParent() {
+		return parent;
+	}
 
-    @Override
-    public String toString() {
-        return "JiraIssueFields{" +
-                "assignee=" + assignee +
-                ", status=" + status +
-                ", summary='" + summary + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
+	public void setParent(JiraIssue parent) {
+		this.parent = parent;
+	}
+
+	@Override
+	public String toString() {
+		return "JiraIssueFields{" +
+			   "assignee=" + assignee +
+			   ", status=" + status +
+			   ", summary='" + summary + '\'' +
+			   ", description='" + description + '\'' +
+			   '}';
+	}
 }

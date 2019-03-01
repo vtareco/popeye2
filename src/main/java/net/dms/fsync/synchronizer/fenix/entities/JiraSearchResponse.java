@@ -1,29 +1,30 @@
 package net.dms.fsync.synchronizer.fenix.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Created by dminanos on 14/04/2017.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JiraSearchResponse implements Serializable {
-    private List<JiraIssue> issues;
 
-    public List<JiraIssue> getIssues() {
-        return issues;
-    }
+	private List<JiraIssue> issues;
 
-    public void setIssues(List<JiraIssue> issues) {
-        this.issues = issues;
-    }
+	public List<JiraIssue> getIssues() {
+		return issues;
+	}
 
-    @Override
-    public String toString() {
-        return "JiraSearchResponse{" +
-                "issues=" + issues +
-                '}';
-    }
+	public void setIssues(List<JiraIssue> issues) {
+		this.issues = issues;
+	}
+
+	@Override
+	public String toString() {
+		return "JiraSearchResponse{" +
+			   "issues=" + issues +
+			   '}';
+	}
 }

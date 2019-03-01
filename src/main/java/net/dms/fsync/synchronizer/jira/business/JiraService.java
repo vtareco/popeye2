@@ -1,25 +1,21 @@
 package net.dms.fsync.synchronizer.jira.business;
 
-import net.dms.fsync.synchronizer.jira.control.JiraRepository;
 import net.dms.fsync.synchronizer.fenix.entities.JiraSearchResponse;
+import net.dms.fsync.synchronizer.jira.control.JiraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 /**
  * Created by dminanos on 17/04/2017.
  */
 @Service
 public class JiraService {
-    @Autowired
-    private JiraRepository jiraRepository;
 
-    public JiraSearchResponse search(String jql){
+	@Autowired
+	private JiraRepository jiraRepository;
 
-
-        JiraSearchResponse response = jiraRepository.search(jql);
-
-        return response;
-
-    }
+	public JiraSearchResponse search(String jql) {
+		JiraSearchResponse response = jiraRepository.search(jql);
+		return response;
+	}
 }

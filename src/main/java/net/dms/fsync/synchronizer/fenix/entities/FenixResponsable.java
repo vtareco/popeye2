@@ -1,49 +1,48 @@
 package net.dms.fsync.synchronizer.fenix.entities;
 
-import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccSubType;
-
 public class FenixResponsable {
-    private Double esfuerzo;
-    private String nombre;
-    private String numero;
-    private String subtipoTarea;
 
-    public FenixResponsable(Double esfuerzo, String nombre, String numero, String subtipoTarea) {
-        this.esfuerzo = esfuerzo;
-        this.nombre = nombre;
-        this.numero = numero;
-        this.subtipoTarea = subtipoTarea;
-    }
+	private Double esfuerzo;
+	private String nombre;
+	private String numero;
+	private String subtipoTarea;
 
-    public Double getEsfuerzo() {
-        return esfuerzo;
-    }
+	public FenixResponsable(Double esfuerzo, String nombre, String numero, String subtipoTarea) {
+		this.esfuerzo = esfuerzo;
+		this.nombre = nombre;
+		this.numero = numero;
+		this.subtipoTarea = subtipoTarea;
+	}
 
-    public void setEsfuerzo(Double esfuerzo) {
-        this.esfuerzo = esfuerzo;
-    }
+	public Double getEsfuerzo() {
+		return esfuerzo;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setEsfuerzo(Double esfuerzo) {
+		this.esfuerzo = esfuerzo;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getNumero() {
-        return numero;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
+	public String getNumero() {
+		return numero;
+	}
 
-    public String getSubtipoTarea() {
-        return subtipoTarea;
-    }
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 
-    public void setSubtipoTarea(String subtipoTarea) {
-        this.subtipoTarea = subtipoTarea;
-    }
+	public String getSubtipoTarea() {
+		return subtipoTarea;
+	}
+
+	public void setSubtipoTarea(String subtipoTarea) {
+		this.subtipoTarea = subtipoTarea;
+	}
 }

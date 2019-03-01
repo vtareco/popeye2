@@ -4,17 +4,15 @@ package net.dms.fsync.httphandlers.entities.enumerations;
  * Created by dminanos on 13/04/2017.
  */
 public enum VariablePrefix {
-    RESPONSE_HEADER("response.header.");
+	RESPONSE_HEADER("response.header.");
 
-    private String prefix;
+	private String prefix;
 
-    VariablePrefix(String prefix){
-        this.prefix = prefix;
-    }
+	VariablePrefix(String prefix) {
+		this.prefix = prefix;
+	}
 
-    public String getPrefix() {
-        return prefix;
-    }
-
-
+	public String getPrefix() {
+		return prefix;
+	}
 }

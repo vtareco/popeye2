@@ -5,13 +5,15 @@ package net.dms.fsync.httphandlers.entities.exceptions;
  */
 public class AppException extends RuntimeException {
 
-    public AppException(){
-        super();
-    }
-    public AppException(Throwable ex){
-        super(ex);
-    }
-    public AppException(String message){
-        super(message);
-    }
+	public AppException() {
+		super();
+	}
+
+	public AppException(Throwable ex) {
+		super(ex);
+	}
+
+	public AppException(String message) {
+		super(message);
+	}
 }

@@ -10,26 +10,26 @@ import java.util.List;
  */
 public class ResponseValidator {
 
-    private String className;
+	private String className;
 
-    private List<Parameter> parameters;
+	private List<Parameter> parameters;
 
-    @XmlAttribute
-    public String getClassName() {
-        return className;
-    }
+	@XmlAttribute
+	public String getClassName() {
+		return className;
+	}
 
-    public void setClassName(String className) {
-        this.className = className;
-    }
+	public void setClassName(String className) {
+		this.className = className;
+	}
 
-    @XmlElementWrapper
-    @XmlElement(name="parameter")
-    public List<Parameter> getParameters() {
-        return parameters;
-    }
+	@XmlElementWrapper
+	@XmlElement(name = "parameter")
+	public List<Parameter> getParameters() {
+		return parameters;
+	}
 
-    public void setParameters(List<Parameter> parameters) {
-        this.parameters = parameters;
-    }
+	public void setParameters(List<Parameter> parameters) {
+		this.parameters = parameters;
+	}
 }

@@ -7,36 +7,36 @@ import javax.xml.bind.annotation.XmlAttribute;
  */
 public class ProxyConfiguration {
 
-    private String scheme;
+	private String scheme;
 
-    private String host;
+	private String host;
 
-    private Integer port;
+	private Integer port;
 
-    @XmlAttribute
-    public String getScheme() {
-        return scheme;
-    }
+	@XmlAttribute
+	public String getScheme() {
+		return scheme;
+	}
 
-    public void setScheme(String scheme) {
-        this.scheme = scheme;
-    }
+	public void setScheme(String scheme) {
+		this.scheme = scheme;
+	}
 
-    @XmlAttribute
-    public String getHost() {
-        return host;
-    }
+	@XmlAttribute
+	public String getHost() {
+		return host;
+	}
 
-    public void setHost(String host) {
-        this.host = host;
-    }
+	public void setHost(String host) {
+		this.host = host;
+	}
 
-    @XmlAttribute
-    public Integer getPort() {
-        return port;
-    }
+	@XmlAttribute
+	public Integer getPort() {
+		return port;
+	}
 
-    public void setPort(Integer port) {
-        this.port = port;
-    }
+	public void setPort(Integer port) {
+		this.port = port;
+	}
 }

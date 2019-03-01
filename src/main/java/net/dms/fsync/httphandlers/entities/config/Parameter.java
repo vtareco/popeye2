@@ -7,42 +7,43 @@ import javax.xml.bind.annotation.XmlElement;
  * Created by dminanos on 11/04/2017.
  */
 public class Parameter {
-    private String type;
-    private  String name;
-    private  String value;
 
-   @XmlElement
-    public String getName() {
-        return name;
-    }
+	private String type;
+	private String name;
+	private String value;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	@XmlElement
+	public String getName() {
+		return name;
+	}
 
-    @XmlElement
-    public String getValue() {
-        return value;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	@XmlElement
+	public String getValue() {
+		return value;
+	}
 
-    @XmlAttribute
-    public String getType() {
-        return type;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	@XmlAttribute
+	public String getType() {
+		return type;
+	}
 
-    @Override
-    public String toString() {
-        return "Parameter{" +
-                "name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                '}';
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "Parameter{" +
+			   "name='" + name + '\'' +
+			   ", value='" + value + '\'' +
+			   '}';
+	}
 }

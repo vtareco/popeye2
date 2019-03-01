@@ -4,22 +4,23 @@ package net.dms.fsync.settings.entities;
  * Created by dminanos on 19/11/2017.
  */
 public class ConnectionSettings {
-    private String proxyHost;
-    private String proxyPort;
 
-    public String getProxyHost() {
-        return proxyHost;
-    }
+	private String proxyHost;
+	private String proxyPort;
 
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
+	public String getProxyHost() {
+		return proxyHost;
+	}
 
-    public String getProxyPort() {
-        return proxyPort;
-    }
+	public void setProxyHost(String proxyHost) {
+		this.proxyHost = proxyHost;
+	}
 
-    public void setProxyPort(String proxyPort) {
-        this.proxyPort = proxyPort;
-    }
+	public String getProxyPort() {
+		return proxyPort;
+	}
+
+	public void setProxyPort(String proxyPort) {
+		this.proxyPort = proxyPort;
+	}
 }

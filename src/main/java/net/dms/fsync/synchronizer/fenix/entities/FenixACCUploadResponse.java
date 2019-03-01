@@ -8,20 +8,20 @@ import java.util.List;
  */
 public class FenixACCUploadResponse {
 
-    private List<FenixACCUploadResponseItem> items = new ArrayList();
+	private List<FenixACCUploadResponseItem> items = new ArrayList();
 
-    public List<FenixACCUploadResponseItem> getItems() {
-        return items;
-    }
+	public List<FenixACCUploadResponseItem> getItems() {
+		return items;
+	}
 
-    public void setItems(List<FenixACCUploadResponseItem> items) {
-        this.items = items;
-    }
+	public void setItems(List<FenixACCUploadResponseItem> items) {
+		this.items = items;
+	}
 
-    @Override
-    public String toString() {
-        return "FenixACCUploadResponse{" +
-                "items=" + items +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "FenixACCUploadResponse{" +
+			   "items=" + items +
+			   '}';
+	}
 }

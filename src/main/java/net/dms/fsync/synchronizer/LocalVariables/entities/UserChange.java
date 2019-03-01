@@ -1,58 +1,59 @@
 package net.dms.fsync.synchronizer.LocalVariables.entities;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserChange implements Serializable {
 
-    private String jiraPassword;
-    private String jirauser;
-    private String fenixPassword;
-    private String fenixUser;
+	private String jiraPassword;
+	private String jirauser;
+	private String fenixPassword;
+	private String fenixUser;
 
-    public String getJiraPassword() {
-        return jiraPassword;
-    }
+	public UserChange(String jiraPassword, String jirauser, String fenixPassword, String fenixUser) {
+		this.jiraPassword = jiraPassword;
+		this.jirauser = jirauser;
+		this.fenixPassword = fenixPassword;
+		this.fenixUser = fenixUser;
+	}
 
-    public void setJiraPassword(String jiraPassword) {
-        this.jiraPassword = jiraPassword;
-    }
+	public UserChange() {
+	}
 
-    public String getJirauser() {
-        return jirauser;
-    }
+	public String getJiraPassword() {
+		return jiraPassword;
+	}
 
-    public void setJirauser(String jirauser) {
-        this.jirauser = jirauser;
-    }
+	public void setJiraPassword(String jiraPassword) {
+		this.jiraPassword = jiraPassword;
+	}
 
-    public String getFenixPassword() {
-        return fenixPassword;
-    }
+	public String getJirauser() {
+		return jirauser;
+	}
 
-    public void setFenixPassword(String fenixPassword) {
-        this.fenixPassword = fenixPassword;
-    }
+	public void setJirauser(String jirauser) {
+		this.jirauser = jirauser;
+	}
 
-    public String getFenixUser() {
-        return fenixUser;
-    }
+	public String getFenixPassword() {
+		return fenixPassword;
+	}
 
-    public void setFenixUser(String fenixUser) {
-        this.fenixUser = fenixUser;
-    }
+	public void setFenixPassword(String fenixPassword) {
+		this.fenixPassword = fenixPassword;
+	}
 
-    public UserChange(String jiraPassword, String jirauser, String fenixPassword, String fenixUser) {
-        this.jiraPassword = jiraPassword;
-        this.jirauser = jirauser;
-        this.fenixPassword = fenixPassword;
-        this.fenixUser = fenixUser;
-    }
+	public String getFenixUser() {
+		return fenixUser;
+	}
 
-    public UserChange() {
-    }
+	public void setFenixUser(String fenixUser) {
+		this.fenixUser = fenixUser;
+	}
 
-    public void getFenixUser(String s) {
-    }
+	public void getFenixUser(String s) {
+	}
 }

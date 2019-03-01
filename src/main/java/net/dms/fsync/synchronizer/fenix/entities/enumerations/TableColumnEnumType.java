@@ -5,13 +5,11 @@ package net.dms.fsync.synchronizer.fenix.entities.enumerations;
  */
 public interface TableColumnEnumType {
 
-    boolean isEditable();
+	boolean isEditable();
 
-    int getWidth();
+	int getWidth();
 
-    String name();
+	String name();
 
-    int ordinal();
-
-
+	int ordinal();
 }

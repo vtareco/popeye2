@@ -1,49 +1,52 @@
 package net.dms.fsync.swing.dialogs;
 
-import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import net.dms.fsync.swing.components.JNumberField;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import org.apache.commons.lang3.StringUtils;
-import org.json.simple.JSONObject;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+public class PeticionDialog extends JDialog {
+	// private int value= 10000;
+	//private NumberFormat peticionFormat;
+	//private JFormattedTextField  txtIdPeticion;
 
+	boolean check;
+	Icon icon = UIManager.getIcon("OptionPane.informationIcon");
+	private JNumberField txtIdPeticion;
+	private JLabel lblTitle;
+	private JLabel lblId;
+	private JButton btnSave;
+	private JLabel topIcon;
+	private String peticion;
+	// Image image = Toolkit.getDefaultToolkit().getImage("OptionPane.informationIcon");
 
-public class PeticionDialog extends JDialog{
+	public PeticionDialog(JPanel panel, String peticionSelected) {
+		setLayout(null);
+		this.setSize(450, 300);
+		setTitle("ID Peticion");
+		// setIconImage(image);
+		setLocationRelativeTo(panel);
+		setModal(true);
+		setResizable(false);
+		setUndecorated(true);
+		loadDialog(peticionSelected);
+	}
 
-   // private int value= 10000;
-    //private NumberFormat peticionFormat;
-    //private JFormattedTextField  txtIdPeticion;
-
-    private JNumberField txtIdPeticion;
-    private JLabel lblTitle;
-    private JLabel lblId;
-    private JButton btnSave;
-    private JLabel topIcon;
-    private String peticion;
-    boolean check;
-    Icon icon = UIManager.getIcon("OptionPane.informationIcon");
-    // Image image = Toolkit.getDefaultToolkit().getImage("OptionPane.informationIcon");
-
-    public PeticionDialog(JPanel panel,String peticionSelected) {
-        setLayout(null);
-        this.setSize(450, 300);
-        setTitle("ID Peticion");
-        // setIconImage(image);
-        setLocationRelativeTo(panel);
-        setModal(true);
-        setResizable(false);
-        setUndecorated(true);
-        loadDialog(peticionSelected);
-    }
-
-    public void loadDialog(String peticionSelected) {
+	public void loadDialog(String peticionSelected) {
 
      /*   MaskFormatter formatter = null;
         try {
@@ -52,55 +55,46 @@ public class PeticionDialog extends JDialog{
             e.printStackTrace();
         }
         formatter.setValidCharacters("0123456789");*/
-
-        peticion=peticionSelected;
-        LocalVariables lv = new LocalVariables();
-        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
-        String projectPath = ap.getWorkingDirectory();
-
-        topIcon = new JLabel(icon);
-        topIcon.setBounds(10, 11, 43, 43);
-        this.add(topIcon);
-
-
-        lblTitle = new JLabel();
-        lblTitle.setText("ID Peticion");
-        lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblTitle.setBounds(177, 88, 87, 14);
-        this.add(lblTitle);
-
-        lblId = new JLabel();
-        lblId.setText("ID:");
-        lblId.setBounds(81, 138, 21, 14);
-        this.add(lblId);
-
-        txtIdPeticion = new JNumberField(); //new JFormattedTextField(peticionFormat);
-       // txtIdPeticion.
-        txtIdPeticion.setBounds(112, 135, 225, 20);
-        txtIdPeticion.setColumns(10);
-       // txtIdPeticion.addPropertyChangeListener("value", this);
-        this.add(txtIdPeticion);
-
-
-        btnSave = new JButton();
-        btnSave.setBounds(175, 211, 89, 23);
-        btnSave.setText("Save");
-        this.add(btnSave);
-
-        btnSave.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("OUEF "+peticionSelected);
-                verification();
-                if(!check){//se tiver preenchido
-                    createFile(projectPath,peticionSelected);
-                    dispose();
-                }else{
-                    System.out.println("ola");
-                    JOptionPane.showMessageDialog(null,"Petición Requerida !");
-                }
-            }
-        });
+		peticion = peticionSelected;
+		LocalVariables lv = new LocalVariables();
+		ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+		String projectPath = ap.getWorkingDirectory();
+		topIcon = new JLabel(icon);
+		topIcon.setBounds(10, 11, 43, 43);
+		this.add(topIcon);
+		lblTitle = new JLabel();
+		lblTitle.setText("ID Peticion");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTitle.setBounds(177, 88, 87, 14);
+		this.add(lblTitle);
+		lblId = new JLabel();
+		lblId.setText("ID:");
+		lblId.setBounds(81, 138, 21, 14);
+		this.add(lblId);
+		txtIdPeticion = new JNumberField(); //new JFormattedTextField(peticionFormat);
+		// txtIdPeticion.
+		txtIdPeticion.setBounds(112, 135, 225, 20);
+		txtIdPeticion.setColumns(10);
+		// txtIdPeticion.addPropertyChangeListener("value", this);
+		this.add(txtIdPeticion);
+		btnSave = new JButton();
+		btnSave.setBounds(175, 211, 89, 23);
+		btnSave.setText("Save");
+		this.add(btnSave);
+		btnSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("OUEF " + peticionSelected);
+				verification();
+				if(!check) {//se tiver preenchido
+					createFile(projectPath, peticionSelected);
+					dispose();
+				} else {
+					System.out.println("ola");
+					JOptionPane.showMessageDialog(null, "Petición Requerida !");
+				}
+			}
+		});
 
       /*  addWindowListener(new WindowAdapter() {
             @Override
@@ -111,10 +105,8 @@ public class PeticionDialog extends JDialog{
 
             }
         });*/
-
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-    }
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+	}
 
 
     /*private void saveAction(String peticionSelected) {
@@ -134,12 +126,11 @@ public class PeticionDialog extends JDialog{
 
     }*/
 
-    private void createFile(String projectPath, String peticionSelected) {
-        LocalVariables lv = new LocalVariables();
-        OtInfo otInfo = new OtInfo();
-        otInfo.setId_peticion(txtIdPeticion.getText());
-
-        lv.setValuesOtInfoFile(peticionSelected,otInfo);
+	private void createFile(String projectPath, String peticionSelected) {
+		LocalVariables lv = new LocalVariables();
+		OtInfo otInfo = new OtInfo();
+		otInfo.setId_peticion(txtIdPeticion.getText());
+		lv.setValuesOtInfoFile(peticionSelected, otInfo);
      /*   try {
              //comentar PrintWriter writer = new PrintWriter(projectPath+"/"+peticionSelected+"/OT_INFO"+"/info.txt", "UTF-8");
                writer.println(txtIdPeticion.getText());
@@ -162,16 +153,15 @@ public class PeticionDialog extends JDialog{
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+	}
 
-    }
-
-    private void verification() {
-        if(StringUtils.isBlank(txtIdPeticion.getText())){
-           check=true;
-        }else{
-            check=false;
-        }
-    }
+	private void verification() {
+		if(StringUtils.isBlank(txtIdPeticion.getText())) {
+			check = true;
+		} else {
+			check = false;
+		}
+	}
 
     /*@Override
     public void propertyChange(PropertyChangeEvent e) {

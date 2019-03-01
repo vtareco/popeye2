@@ -9,11 +9,11 @@ import java.util.Optional;
  * Created by dminanos on 19/04/2017.
  */
 public enum AccStatus implements VisualizableType{
-    EN_EJECUCION("En EjecuciÃ³n", false),
+    EN_EJECUCION("En Ejecución", false),
     ENTREGADA("Entregada", true),
     CERRADA("Cerrada", true),
     DESESTIMADA("Desestimada", true),
-    PENDIENTE_ASIGNACION("Pendiente AsignaciÃ³n", false),
+    PENDIENTE_ASIGNACION("Pendiente Asignación", false),
     INACABADA("Inacabada", false);
 
     private boolean isFinal;

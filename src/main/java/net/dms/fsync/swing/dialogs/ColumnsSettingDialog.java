@@ -25,7 +25,7 @@ public class ColumnsSettingDialog extends JenixDialog<TableSetting> {
         // TODO FIXME, move to abstract class
         this.setSize(550, 650);
         setLocationRelativeTo(parent);
-        setTitle("ConfiguraciÃ³n");
+        setTitle("Configuración");
         setModal(true);
         setResizable(false);
         setVisible(true);

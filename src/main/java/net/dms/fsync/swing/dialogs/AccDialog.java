@@ -169,9 +169,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         panel.setLayout(new GridBagLayout());
 
         JLabel lblSummary = new JLabel("Nombre");
-        JLabel lblDescription = new JLabel("Descripci贸n");
+        JLabel lblDescription = new JLabel("Descripci髇");
         JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
-        JLabel lblCodigoPeticionCliente = new JLabel("C贸digo petici贸n cliente");
+        JLabel lblCodigoPeticionCliente = new JLabel("C骴igo petici髇 cliente");
 
         JLabel lblIdPeticion = new JLabel("ID Peticion");
 
@@ -309,7 +309,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         constraints.gridy = ++fila;
         panel.add(addBitacoraBtn, constraints);
 
-        // fields codigo petici贸n - historia usuario
+        // fields codigo petici髇 - historia usuario
         constraints.gridx = 0;
         constraints.gridy = ++fila;
         constraints.weightx = anchoEntiquetas;

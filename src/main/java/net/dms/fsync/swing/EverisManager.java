@@ -599,7 +599,7 @@ public class EverisManager {
         }
 
         if (filter.equals("key=")) {
-            throw new AppException("No se ha introducido ninguna ACC");
+            Toast.display("No se ha introducido ninguna ACC", Toast.ToastType.ERROR);
         } else if (filter != null) {
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
 
@@ -817,6 +817,11 @@ public class EverisManager {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
+                        /*    int cont=0;
+                          cont++;
+                        System.out.println("ENTREI");
+                        System.out.println("CONT " + cont);*/
+                        
                         FenixIncidencia fenixIncidencia = new FenixIncidencia();
                         fenixIncidencia.setEstado(IncidenciaEstadoType.EN_EJECUCION.getDescription());
                         fenixIncidencia.setImpacto(IncidenciaImpactoType.BLOQUEANTE.getDescription());
@@ -825,7 +830,16 @@ public class EverisManager {
                         fenixIncidencia.setOtCorrector(getPeticionSelected(peticionesDisponiblesCmb).toString());
 
                         fenixIncidencia.setIdPeticionOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
+                       /*if(cont == 1){
+                            System.out.println("YA BUGUEI");
+                            incidenciasTable.addRow(fenixIncidencia);
+                        }else{
+                    }*/
+
                         incidenciasTable.addRow(fenixIncidencia);
+
+
+
 
                         incidenciasTable.setDefaultRenderer(Object.class, new IncidenciaTableCellRenderer());
                     } catch (Exception ex) {

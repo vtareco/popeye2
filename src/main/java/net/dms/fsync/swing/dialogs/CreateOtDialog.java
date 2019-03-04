@@ -2,6 +2,7 @@ package net.dms.fsync.swing.dialogs;
 
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.swing.components.JNumberField;
+import net.dms.fsync.swing.components.JTextFieldLimit;
 import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
@@ -13,6 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -58,6 +61,7 @@ public class CreateOtDialog extends JDialog {
 
         fieldId=new JNumberField();
         fieldId.setBounds(141, 90, 172, 20);
+        fieldId.setDocument(new JTextFieldLimit(7));
         add(fieldId);
 
         txtDescription=new JLabel();
@@ -72,8 +76,9 @@ public class CreateOtDialog extends JDialog {
         add(txtOptional);
 
 
-        fieldDescription=new JTextField();
+        fieldDescription=new JNumberField();
         fieldDescription.setBounds(141, 187, 172, 20);
+        fieldDescription.setDocument(new JTextFieldLimit(16));
         add(fieldDescription);
 
         txtIdPeticion=new JLabel();
@@ -82,9 +87,11 @@ public class CreateOtDialog extends JDialog {
         add(txtIdPeticion);
 
 
-        fieldIdPetcion=new JNumberField();
+        fieldIdPetcion=new JTextField();
         fieldIdPetcion.setBounds(141, 137, 172, 20);
+        fieldIdPetcion.setDocument(new JTextFieldLimit(7));
         add(fieldIdPetcion);
+
 
         btnCreate=new JButton();
         btnCreate.setText("Save");

@@ -56,7 +56,7 @@ public class AccTableCellRenderer extends JenixTableCellRenderer {
                     }
 
                 }
-
+                
             default:
                 if (isSelected) {
 

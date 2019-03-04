@@ -95,8 +95,8 @@ public class ActionExecutor {
                 Toast  toast = new Toast("Successo", Toast.ToastType.INFO);
                 toast.setVisible(true);
             }
-            Toast  toast = new Toast("Successo v2", Toast.ToastType.INFO);
-            toast.setVisible(true);
+
+            Toast.display("Successo v2", Toast.ToastType.INFO);
 
         }catch(Exception ex){
 

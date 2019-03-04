@@ -826,6 +826,7 @@ public class EverisManager {
 
                         fenixIncidencia.setIdPeticionOt(getPeticionSelected(peticionesDisponiblesCmb).toString());
                         incidenciasTable.addRow(fenixIncidencia);
+
                         incidenciasTable.setDefaultRenderer(Object.class, new IncidenciaTableCellRenderer());
                     } catch (Exception ex) {
                         handleException(ex);

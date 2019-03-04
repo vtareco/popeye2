@@ -4,7 +4,6 @@ package net.dms.fsync.swing.components;
 import net.dms.fsync.swing.models.IncidenciaTableModel;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.IncidenciaRowType;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +18,7 @@ public class IncidenciaTableCellRenderer extends JenixTableCellRenderer {
             case FECHA_FIN:
                // String fechaFin = String.valueOf(incidencia.getFechaFin());
                 if (incidencia.getFechaFin() == null) {
+                    //System.out.println("Value "+incidencia.getFechaFin());
                     c.setBackground(MyColors.TABLE_FIELD_REQUIRED);
                     break;
                 }

@@ -78,6 +78,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         super.onAccept();
         LocalVariables lv = new LocalVariables();
         String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getCodigoPeticionCliente();
+        if(cmbEstado.getSelectedItem().equals(AccStatus.PENDIENTE_ASIGNACION.getDescription())){
+            getPayload().setEstado(AccStatus.EN_EJECUCION.getDescription());
+        }
         updateCodigoPeticion(codigopeticion);
         updateCodigoPeticionCliente();
     }

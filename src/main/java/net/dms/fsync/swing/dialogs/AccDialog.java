@@ -99,6 +99,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
         txtIdPeticion.setText(idpeticion);
+        //txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
+
         // txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
 
@@ -107,6 +109,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         }
 
         verif();
+        //txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
 
         //txtCodigoPeticionCliente.setText("BMW.SA3.SPRINT");
 
@@ -522,12 +525,14 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         LocalVariables lv = new LocalVariables();
         OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdOt());
         String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdOt()).getCodigoPeticionCliente();
-        if (codigopeticion != null) {
+        if (!StringUtils.isBlank(codigopeticion)) {
             txtCodigoPeticionCliente.setText(codigopeticion);
-
+            System.out.println("YA AQUI");
             updateCodigoPeticion(codigopeticion);
 
         } else {
+            System.out.println("SIM ENTREI");
+            txtCodigoPeticionCliente.setText(getPayload().getCodigoPeticionCliente());
             otinfo.setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
             lv.setValuesOtInfoFile(WorkingJira.getIdOt(), otinfo);
         }
@@ -538,7 +543,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         LocalVariables lv = new LocalVariables();
         OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdOt());
         if (!txtCodigoPeticionCliente.getText().equals(codigo) && !StringUtils.isBlank(txtCodigoPeticionCliente.getText())) {
-            System.out.println("YOOO");
+            System.out.println("Entrou");
             otinfo.setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
             lv.setValuesOtInfoFile(WorkingJira.getIdOt(), otinfo);
         }

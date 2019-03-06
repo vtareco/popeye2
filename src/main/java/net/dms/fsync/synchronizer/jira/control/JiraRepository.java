@@ -13,6 +13,8 @@ import net.dms.fsync.synchronizer.fenix.entities.JiraSearchResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpResponseException;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -53,8 +55,11 @@ public class JiraRepository {
            return response;
 
         }catch(Exception ex){
-           throw new AppException("A query não esta válida");
+            if(ex.getCause().getMessage().equals("HTTP Error, HTTP Status: 400")){
+                throw new AppException("A Query pode estar incorreta!?");
+            }
 
+            throw new AppException(ex);
         }
     }
 

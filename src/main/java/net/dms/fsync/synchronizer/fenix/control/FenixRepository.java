@@ -166,7 +166,7 @@ public class FenixRepository {
 
     public List<FenixAcc> searchACCs(Long idOt, boolean forceDownload) {
         List<FenixAcc> fenixAccs = new ArrayList<FenixAcc>();
-
+        LocalVariables lv = new LocalVariables();
         File accFile = getACCsFile(idOt);
         if (forceDownload) {
             removeFile(accFile);
@@ -186,7 +186,9 @@ public class FenixRepository {
 
                 if (isAValidRow(sheet, i)) {
                     FenixAcc fenixAcc = accMapper.map(sheet.getRow(i));
+                    fenixAcc.setIdPeticion(  lv.readOtInfoFile(WorkingJira.getIdPeticion()).getId_peticion());
                     fenixAccs.add(fenixAcc);
+
                 }
             }
 

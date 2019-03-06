@@ -1,28 +1,27 @@
 package net.dms.fsync.synchronizer.LocalVariables.business;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
-import com.sun.xml.internal.txw2.annotation.XmlElement;
-import net.dms.fsync.httphandlers.common.Utils;
-import net.dms.fsync.httphandlers.entities.config.*;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
-import net.dms.fsync.synchronizer.LocalVariables.entities.*;
-import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
+import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
+import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
+import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
+import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Writer;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 //CREATED BY VDIVIZIN 08/02/2019
 public class VariableService {

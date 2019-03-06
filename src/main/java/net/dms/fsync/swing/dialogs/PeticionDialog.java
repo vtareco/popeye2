@@ -32,7 +32,7 @@ public class PeticionDialog extends JDialog{
     Icon icon = UIManager.getIcon("OptionPane.informationIcon");
     // Image image = Toolkit.getDefaultToolkit().getImage("OptionPane.informationIcon");
 
-    public PeticionDialog(JPanel panel,String peticionSelected) {
+    public PeticionDialog(JPanel panel,JComboBox peticionSelected) {
         setLayout(null);
         this.setSize(450, 300);
         setTitle("ID Peticion");
@@ -44,7 +44,7 @@ public class PeticionDialog extends JDialog{
         loadDialog(peticionSelected);
     }
 
-    public void loadDialog(String peticionSelected) {
+    public void loadDialog(JComboBox peticionSelected) {
 
      /*   MaskFormatter formatter = null;
         try {
@@ -54,7 +54,7 @@ public class PeticionDialog extends JDialog{
         }
         formatter.setValidCharacters("0123456789");*/
 
-        peticion=peticionSelected;
+        peticion=peticionSelected.getSelectedItem().toString();
         LocalVariables lv = new LocalVariables();
         ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
         String projectPath = ap.getWorkingDirectory();
@@ -96,13 +96,12 @@ public class PeticionDialog extends JDialog{
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("OUEF "+peticionSelected);
+                System.out.println("Selecionado: "+peticion);
                 verification();
                 if(!check){//se tiver preenchido
-                    createFile(projectPath,peticionSelected);
+                    createFile(projectPath,peticion);
                     dispose();
                 }else{
-                    System.out.println("ola");
                     JOptionPane.showMessageDialog(null,"Petición Requerida !");
                 }
             }
@@ -112,6 +111,7 @@ public class PeticionDialog extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                peticionSelected.setSelectedIndex(0);
             }
         });
 

@@ -436,6 +436,12 @@ public class EverisManager {
     }
 
     private void uploadIncidencias() {
+        //String valor = incidenciasTable.getModel().getValueAt(incidenciasTable.getSelectedRow(),IncidenciaRowType.FECHA_FIN.getColPosition()-1).toString();
+        //INDEX 0
+      /*  if(incidenciasTable.getModel().getValueAt(incidenciasTable.getSelectedRow(),IncidenciaRowType.FECHA_FIN.getColPosition()-1) == null){
+            Toast.display("FECHA_FIN is Required !", Toast.ToastType.ERROR);
+        }*/
+
         fenixService.uploadIncidencias(getPeticionSelected(peticionesDisponiblesCmb));
         incidenciasTable.getModel().load(fenixService.searchIncidenciasByOtId(getPeticionSelected(peticionesDisponiblesCmb), true));
     }
@@ -557,7 +563,7 @@ public class EverisManager {
             File file = new File(projectPath + "/" + peticionesDisponiblesCmb.getSelectedItem().toString() + "/OT_INFO" + "/info.json");
 
             if (!file.exists()) {
-                PeticionDialog peticionDialog = new PeticionDialog(panelParent, peticionesDisponiblesCmb.getSelectedItem().toString());
+                PeticionDialog peticionDialog = new PeticionDialog(panelParent, peticionesDisponiblesCmb); //peticionesDisponiblesCmb.getSelectedItem().toString()
                 peticionDialog.setVisible(true);
 
                 peticionDialog.addWindowListener(new WindowAdapter() {
@@ -566,7 +572,7 @@ public class EverisManager {
                         //super.windowClosed(e);
                         if(StringUtils.isBlank(peticionDialog.txtIdPeticion.getText())){
 
-                            Toast.display("ID Peticion doesnÂ´t exist", Toast.ToastType.ERROR);
+                            Toast.display("ID Peticion doesn´t exist", Toast.ToastType.ERROR);
 
 
                         }else{
@@ -590,7 +596,7 @@ public class EverisManager {
         String text = txtJiraTask.getText();
         LocalVariables lv = new LocalVariables();
         if (peticionesDisponiblesCmb.getSelectedItem().toString() == null || StringUtils.isBlank(peticionesDisponiblesCmb.getSelectedItem().toString())) {
-            throw new AppException("Peticion folder doesnÂ´t exist");
+            throw new AppException("Peticion folder doesn´t exist");
         }
         if (isSelectedFilterById()) {
             filter = String.format(getJiraFilterSelected(), txtJiraTask.getText());
@@ -821,7 +827,7 @@ public class EverisManager {
                           cont++;
                         System.out.println("ENTREI");
                         System.out.println("CONT " + cont);*/
-                        
+
                         FenixIncidencia fenixIncidencia = new FenixIncidencia();
                         fenixIncidencia.setEstado(IncidenciaEstadoType.EN_EJECUCION.getDescription());
                         fenixIncidencia.setImpacto(IncidenciaImpactoType.BLOQUEANTE.getDescription());
@@ -1427,7 +1433,7 @@ public class EverisManager {
     }
 
     private void createOt() {
-        CreateOtDialog createot = new CreateOtDialog(panelParent);
+        CreateOtDialog createot = new CreateOtDialog(panelParent,peticionesDisponiblesCmb);
         createot.setVisible(true);
         refreshPeticionesDisponiblesCMB();
     }

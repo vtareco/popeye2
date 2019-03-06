@@ -77,7 +77,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     protected void onAccept() {
         super.onAccept();
         LocalVariables lv = new LocalVariables();
-        String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getCodigoPeticionCliente();
+        String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdOt()).getCodigoPeticionCliente();
         if(cmbEstado.getSelectedItem().equals(AccStatus.PENDIENTE_ASIGNACION.getDescription())){
             getPayload().setEstado(AccStatus.EN_EJECUCION.getDescription());
         }
@@ -89,13 +89,13 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public void edit() {
 
        /* LocalVariables lv = new LocalVariables();
-        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion());
+        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdOt());
         txtIdPeticion.setText(idpeticion);*/
 
         /*ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
         String projectPath = ap.getWorkingDirectory();*/
         LocalVariables lv = new LocalVariables();
-        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getId_peticion();
+        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdOt()).getId_peticion();
         txtNombre.setText(getPayload().getNombre());
         txaDescripcion.setText(getPayload().getDescripcion());
         txtIdPeticion.setText(idpeticion);
@@ -110,7 +110,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         //txtCodigoPeticionCliente.setText("BMW.SA3.SPRINT");
 
-        // txtIdPeticion.setText(getPayload().getIdPeticion());
+        // txtIdPeticion.setText(getPayload().getIdOt());
 
 
         cmbEstado.setSelectedItem(getPayload().getEstado());
@@ -427,8 +427,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public void fillPayLoad() {
 
         LocalVariables lv = new LocalVariables();
-        //String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion());
-        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getId_peticion();
+        //String idpeticion = lv.readOtInfoFile(WorkingJira.getIdOt());
+        String idpeticion = lv.readOtInfoFile(WorkingJira.getIdOt()).getId_peticion();
 
         getPayload().setDescripcion(txaDescripcion.getText());
         getPayload().setNombre(txtNombre.getText());
@@ -520,8 +520,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
     private void verif() {
         LocalVariables lv = new LocalVariables();
-        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdPeticion());
-        String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdPeticion()).getCodigoPeticionCliente();
+        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdOt());
+        String codigopeticion = lv.readOtInfoFile(WorkingJira.getIdOt()).getCodigoPeticionCliente();
         if (codigopeticion != null) {
             txtCodigoPeticionCliente.setText(codigopeticion);
 
@@ -529,29 +529,29 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         } else {
             otinfo.setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
-            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), otinfo);
+            lv.setValuesOtInfoFile(WorkingJira.getIdOt(), otinfo);
         }
 
     }
 
     private void updateCodigoPeticion(String codigo) {
         LocalVariables lv = new LocalVariables();
-        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdPeticion());
+        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdOt());
         if (!txtCodigoPeticionCliente.getText().equals(codigo) && !StringUtils.isBlank(txtCodigoPeticionCliente.getText())) {
             System.out.println("YOOO");
             otinfo.setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
-            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), otinfo);
+            lv.setValuesOtInfoFile(WorkingJira.getIdOt(), otinfo);
         }
     }
 
     private void updateCodigoPeticionCliente() {
         LocalVariables lv = new LocalVariables();
-        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdPeticion());
+        OtInfo otinfo = lv.readOtInfoFile(WorkingJira.getIdOt());
         if (StringUtils.isBlank(txtIdPeticion.getText())) {
-            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), lv.readOtInfoFile(WorkingJira.getIdPeticion()));
+            lv.setValuesOtInfoFile(WorkingJira.getIdOt(), lv.readOtInfoFile(WorkingJira.getIdOt()));
         } else {
             otinfo.setId_peticion(txtIdPeticion.getText());
-            lv.setValuesOtInfoFile(WorkingJira.getIdPeticion(), otinfo);
+            lv.setValuesOtInfoFile(WorkingJira.getIdOt(), otinfo);
         }
 
     }

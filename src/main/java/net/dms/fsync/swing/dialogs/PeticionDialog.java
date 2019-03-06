@@ -2,6 +2,7 @@ package net.dms.fsync.swing.dialogs;
 
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.swing.components.JNumberField;
+import net.dms.fsync.swing.components.JTextFieldLimit;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
@@ -80,6 +81,7 @@ public class PeticionDialog extends JDialog{
         txtIdPeticion.setBounds(112, 135, 225, 20);
         txtIdPeticion.setColumns(10);
        // txtIdPeticion.addPropertyChangeListener("value", this);
+        txtIdPeticion.setDocument(new JTextFieldLimit(7));
         this.add(txtIdPeticion);
 
 

@@ -78,7 +78,7 @@ public class CreateOtDialog extends JDialog {
 
         fieldDescription=new JTextField();
         fieldDescription.setBounds(141, 187, 172, 20);
-        fieldDescription.setDocument(new JTextFieldLimit(16));
+        fieldDescription.setDocument(new JTextFieldLimit(20));
         add(fieldDescription);
 
         txtIdPeticion=new JLabel();

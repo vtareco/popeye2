@@ -12,14 +12,13 @@ public class JTextFieldLimit extends PlainDocument {
         this.limit = limit;
     }
 
-    public void insertString( int offset, String  str, AttributeSet attr ) throws BadLocationException {
+    public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
         if (str == null) return;
 
         if ((getLength() + str.length()) <= limit) {
-            if(str.length() >= 7){
-                Toast.display("Max 7 Characters", Toast.ToastType.ERROR);
-            }
             super.insertString(offset, str, attr);
+        } else {
+            Toast.display("Max Characters " + limit, Toast.ToastType.WARNING);
         }
 
     }

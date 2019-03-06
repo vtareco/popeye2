@@ -23,6 +23,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import sun.security.krb5.internal.crypto.Des;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -91,6 +92,7 @@ public class EverisManager {
     private JScrollPane dudasScrollPane;
     private JButton btnCrearOt;
     private JButton downloadDocumentationJbtn;
+    private JButton openExplorer;
 
 
     JiraService jiraService;
@@ -128,6 +130,7 @@ public class EverisManager {
         SwingUtil.registerListener(refreshIncidenciasBtn, this::refreshIncidencias, this::handleException);
         SwingUtil.registerListener(generateSpecificationRequirementsBtn, this::generateSpecificationReuirements, this::handleException);
         SwingUtil.registerListener(downloadDocumentationJbtn,this::openDocumentationDownload,this::handleException);
+        SwingUtil.registerListener(openExplorer,this::openExplorerFiles,this::handleException);
 
         init();
 
@@ -1436,6 +1439,17 @@ public class EverisManager {
         CreateOtDialog createot = new CreateOtDialog(panelParent,peticionesDisponiblesCmb);
         createot.setVisible(true);
         refreshPeticionesDisponiblesCMB();
+    }
+
+    private void openExplorerFiles(){
+        LocalVariables lv = new LocalVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
+        String projectPath = ap.getWorkingDirectory();
+        try{
+            Desktop.getDesktop().open(new File(projectPath));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 

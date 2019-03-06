@@ -442,6 +442,15 @@
               <text value="Forzar descarga"/>
             </properties>
           </component>
+          <component id="849e2" class="javax.swing.JButton" binding="openExplorer">
+            <constraints>
+              <grid row="4" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <horizontalAlignment value="0"/>
+              <text value="Open Explorer..."/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>

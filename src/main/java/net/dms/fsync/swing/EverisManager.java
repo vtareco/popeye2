@@ -611,7 +611,7 @@ public class EverisManager {
             Toast.display("No se ha introducido ninguna ACC", Toast.ToastType.ERROR);
         } else if (filter != null) {
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
-
+            System.out.println("ola belmiro");
         }
 
     }

@@ -107,7 +107,7 @@ public class DudaDialog extends JenixDialog<FenixDuda> {
         duda.setIdDuda(Long.valueOf("12345"));*/
 
 
-  /*   getPayload().setEstado(IncidenciaEstadoType.EN_ANALISIS.getDescription());
+  /* getPayload().setEstado(IncidenciaEstadoType.EN_ANALISIS.getDescription());
         getPayload().setImpacto(IncidenciaImpactoType.MEDIO.getDescription());
         getPayload().setResueltaPorCliente("NO");
         getPayload().setPrioridad(IncidenciaPrioridadType.MEDIA.getDescription());

@@ -454,6 +454,7 @@ public class FenixRepository {
                         || StringUtils.isEmpty(sheet.getRow(i).getCell(IncidenciaRowType.ID_PETICION_OT.getColPosition()).getStringCellValue())) {
                     break;
                 }
+
                 logger.debug("Processing row {}", i);
                 FenixIncidencia incidencia = incidenciaMapper.map(sheet.getRow(i));
                 incidencias.add(incidencia);

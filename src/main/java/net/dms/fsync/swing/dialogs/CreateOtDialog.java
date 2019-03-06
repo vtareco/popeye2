@@ -36,17 +36,17 @@ public class CreateOtDialog extends JDialog {
     //Icon icon = UIManager.getIcon("OptionPane.");
 
 
-    public CreateOtDialog(JPanel panel) {
+    public CreateOtDialog(JPanel panel,JComboBox peticion) {
         setLayout(null);
         setSize(450,340);
         setTitle("Create new OT folder");
         setLocationRelativeTo(panel);
         setModal(true);
         setResizable(false);
-        loadDialog();
+        loadDialog(peticion);
     }
 
-    public void loadDialog(){
+    public void loadDialog(JComboBox peticionSelected){
 
         txtTitle=new JLabel();
         txtTitle.setText("Create new OT Folder");
@@ -106,6 +106,7 @@ public class CreateOtDialog extends JDialog {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                peticionSelected.setSelectedIndex(0);
                 dispose();
             }
         });
@@ -207,8 +208,13 @@ public class CreateOtDialog extends JDialog {
         }else {
             folder = false;
         }
-
+        // return !Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder)) ? true : false; ternário
         return folder;
+    }
+
+    public void closeDialog(JComboBox peticion){
+        System.out.println("FECHOU ! "+peticion.getSelectedItem().toString());
+
     }
 
 }

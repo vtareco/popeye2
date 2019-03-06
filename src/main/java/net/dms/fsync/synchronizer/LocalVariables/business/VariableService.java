@@ -354,7 +354,7 @@ public class VariableService {
 
             JSONObject object = (JSONObject) obj;
 
-            acc.setIdPeticion((String) object.get("ID_Peticion"));
+            acc.setIdOt((String) object.get("ID_Peticion"));
 
             System.out.println("OBJETO "+object);
 
@@ -386,8 +386,8 @@ public class VariableService {
             otinfo.setId_peticion((String) object.get("ID_Peticion"));
             otinfo.setCodigoPeticionCliente((String) object.get("Codigo_Peticion_Cliente"));
 
-            // a.setIdPeticion((String) object.get("ID_Peticion"));
-            // System.out.println("LOL "+a.getIdPeticion());
+            // a.setIdOt((String) object.get("ID_Peticion"));
+            // System.out.println("LOL "+a.getIdOt());
 
             System.out.println("OBJETO INFO"+otinfo);
 

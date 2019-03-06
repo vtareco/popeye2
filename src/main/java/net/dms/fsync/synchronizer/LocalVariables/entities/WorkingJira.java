@@ -1,13 +1,12 @@
 package net.dms.fsync.synchronizer.LocalVariables.entities;
 
-import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
 
 import java.io.File;
 
 public class WorkingJira {
 
-    public static String idPeticion;
+    public static String idOt;
 
 
     private static String jenixFoulder = "/JenixSettings";
@@ -60,12 +59,12 @@ public class WorkingJira {
     private static String jiraIssuesSearchLogIn = "login";
     private static String jiraISsuesSearchRetrieveIssues = "retrieve-issues";
 
-    public static String getIdPeticion() {
-        return idPeticion;
+    public static String getIdOt() {
+        return idOt;
     }
 
-    public static void setIdPeticion(String idPeticion) {
-        WorkingJira.idPeticion = idPeticion;
+    public static void setIdOt(String idOt) {
+        WorkingJira.idOt = idOt;
     }
 
     public static String getUser() {

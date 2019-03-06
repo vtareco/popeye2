@@ -83,7 +83,7 @@
                     <value/>
                 </parameter>
                 <parameter>
-                    <name>idPeticion</name>
+                    <name>idOt</name>
                     <value>${everis.fenix.idpeticionot}</value>
                 </parameter>
                 <parameter>

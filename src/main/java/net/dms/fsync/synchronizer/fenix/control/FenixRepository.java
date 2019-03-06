@@ -186,7 +186,7 @@ public class FenixRepository {
 
                 if (isAValidRow(sheet, i)) {
                     FenixAcc fenixAcc = accMapper.map(sheet.getRow(i));
-                    fenixAcc.setIdPeticion(  lv.readOtInfoFile(WorkingJira.getIdPeticion()).getId_peticion());
+                    fenixAcc.setIdPeticion(  lv.readOtInfoFile(WorkingJira.getIdOt()).getId_peticion());
                     fenixAccs.add(fenixAcc);
 
                 }

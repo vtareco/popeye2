@@ -53,7 +53,7 @@ public class Toast extends JDialog {
         JLabel toastLabel = new JLabel("");
         toastLabel.setText(toastString);
         toastLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-        toastLabel.setForeground(Color.WHITE);
+        toastLabel.setForeground(Color.BLACK);
         return toastLabel;
     }
 
@@ -93,7 +93,7 @@ public class Toast extends JDialog {
     public enum ToastType {
         ERROR(Color.RED, MyColors.TOAST_ERROR_LINE),
         INFO(MyColors.TOAST_INFO_COLOR, Color.BLACK),
-        WARNING(Color.YELLOW, Color.ORANGE);
+        WARNING(Color.YELLOW, Color.BLACK);
 
         private final Color bkgColor;
         private final Color lineColor;

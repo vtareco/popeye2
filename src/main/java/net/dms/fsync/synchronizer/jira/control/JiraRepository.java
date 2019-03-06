@@ -53,7 +53,8 @@ public class JiraRepository {
            return response;
 
         }catch(Exception ex){
-           throw new AppException(ex);
+           throw new AppException("A query não esta válida");
+
         }
     }
 

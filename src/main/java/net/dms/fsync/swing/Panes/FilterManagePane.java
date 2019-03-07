@@ -75,8 +75,6 @@ public class FilterManagePane extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 queryTextClear();
             }
-
-
         });
 
         deleteFilterJBtn.addActionListener(new ActionListener() {

@@ -25,9 +25,9 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
         JIRA_STATUS(true, 50),
         TIPO(true, 80),
         SUB_TIPO(true, 80),
-        ESFUERZO(true, 80),
+        ESFUERZO(false, 80),
         INCURRIDO(false, 80),
-        PUNTOS_HISTORIA(true, 80),
+        PUNTOS_HISTORIA(false, 80),
         HISTORIA_USUARIO(true, 80),
 
         ETC(true, 50),

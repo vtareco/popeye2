@@ -17,7 +17,7 @@ public class FenixUploadAccExecution extends Execution {
     @Override
     public void initActions(ApplicationProperties applicationProperties, UserChange userChange) {
         for(Action action : getActions()){
-            if (action.equals(WorkingJira.getUpload())){
+            if (action.getName().equals(WorkingJira.getUpload())){
                 action.setUrl(applicationProperties.getFenixUrl() + WorkingJira.getFenixUploadAccsUploadUrl());
             }
         }

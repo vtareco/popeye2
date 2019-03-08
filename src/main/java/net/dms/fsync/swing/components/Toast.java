@@ -1,5 +1,8 @@
 package net.dms.fsync.swing.components;
 
+import net.dms.fsync.httphandlers.entities.config.ResponseValidator;
+import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -23,15 +26,33 @@ public class Toast extends JDialog {
         JLabel toastLabel = setupMessageLabel(this.toastString);
         setBounds(panel, toastLabel);
         destroyWhenTimeIsOver();
+        setLocationRelativeTo(WorkingJira.getMainJframe());
+
     }
 
     public static void display (String toastString, ToastType toastType){
         Toast toast = new Toast(toastString, toastType);
+        toast.setModal(true);
         toast.setVisible(true);
+       /* Window parentWindow = SwingUtilities.windowForComponent(toast);
+        JDialog popUp = new JDialog(parentWindow);
+        popUp.setLocationRelativeTo(WorkingJira.getMain());
+        //popUp.setModal(true);
+        popUp.pack();
+        popUp.setVisible(true);*/
+      /*  GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
+        Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
+        int x = (int) rect.getMaxX() - WorkingJira.getMain().getWidth();
+        int y = 0;*/
+        //toast.setLocation(x,y);
+       // toast.setLocationRelativeTo
+       // toast.setVisible(true);
+
     }
 
     /**
-     * Setup and create a container for the children
+     * Setup and create a container for the childrenç
      *
      * @return A new {@link JPanel} instance
      */
@@ -52,7 +73,7 @@ public class Toast extends JDialog {
     private JLabel setupMessageLabel(String toastString) {
         JLabel toastLabel = new JLabel("");
         toastLabel.setText(toastString);
-        toastLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+        toastLabel.setFont(new Font("Dialog", Font.BOLD, 16));
         toastLabel.setForeground(Color.BLACK);
         return toastLabel;
     }
@@ -65,11 +86,28 @@ public class Toast extends JDialog {
      */
     private void setBounds(JPanel panel, JLabel toastLabel) {
         setSize(toastLabel.getPreferredSize().width + 20, 31);
-        setAlwaysOnTop(true);
+        //setAlwaysOnTop(true);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation(dim.width / 2 - getSize().width / 2, 0);
+        //setLocation(dim.width / 2 - getSize().width / 2, 0);
+        //setLocation(1093 / 2, 465 / 2);
         panel.add(toastLabel);
-        setVisible(true);
+       //pack();
+
+
+      /*  Window parentWindow = SwingUtilities.windowForComponent(this);
+        Toast popUp = new Toast(parentWindow);
+        popUp.setLocationRelativeTo(WorkingJira.getMain());
+        popUp.setModal(true);
+        popUp.pack();
+        popUp.setVisible(true);*/
+
+
+
+
+      //  int x = panel.getWidth();
+       // int y =panel.getHeight();
+       // System.out.println("Largura "+x+" Altura "+y);
+
     }
 
     /**
@@ -79,7 +117,12 @@ public class Toast extends JDialog {
         new Thread(() -> {
             try {
                 for (double d = 1.0; d > 0.2; d -= 0.1) {
-                    Thread.sleep(toastString.length() * 10);
+                    if(toastString.length() >= 10){
+                        Thread.sleep(toastString.length() * 8);
+                    }else{
+                        Thread.sleep(toastString.length() * 25);
+                    }
+
                     setOpacity((float) d);
                 }
                 //Thread.sleep(miliseconds);

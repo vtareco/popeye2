@@ -2,11 +2,13 @@ package net.dms.fsync.synchronizer.LocalVariables.entities;
 
 import net.dms.fsync.synchronizer.LocalVariables.business.VariableService;
 
+import javax.swing.*;
 import java.io.File;
 
 public class WorkingJira {
 
     public static String idOt;
+    private static JFrame mainJframe;
 
 
     private static String jenixFoulder = "/JenixSettings";
@@ -58,6 +60,15 @@ public class WorkingJira {
     private static String jiraIssuesSearchRetrieveStatusUrl = "/jira/rest/api/2/search?jql=${everis.jira.jql}";
     private static String jiraIssuesSearchLogIn = "login";
     private static String jiraISsuesSearchRetrieveIssues = "retrieve-issues";
+
+
+    public static JFrame getMainJframe() {
+        return mainJframe;
+    }
+
+    public static void setMainJframe(JFrame mainJframe) {
+        WorkingJira.mainJframe = mainJframe;
+    }
 
     public static String getIdOt() {
         return idOt;

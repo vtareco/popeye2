@@ -92,11 +92,10 @@ public class ActionExecutor {
             }
 //PARA TESTAR FUNCIONALIDADE
             if(execution.getName().equals("fenix_upload_accs")){
-                Toast  toast = new Toast("Successo", Toast.ToastType.INFO);
-                toast.setVisible(true);
+                Toast.display("Successo", Toast.ToastType.INFO);
             }
 
-            Toast.display("Successo v2", Toast.ToastType.INFO);
+            Toast.display("Successo 2", Toast.ToastType.INFO);
 
         }catch(Exception ex){
 

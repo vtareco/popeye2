@@ -424,8 +424,8 @@ public class FenixRepository {
             throw new AppException(ex);
         }
 
-            Toast  toast = new Toast("Successo", Toast.ToastType.INFO);
-            toast.setVisible(true);
+            Toast.display("Successo !", Toast.ToastType.INFO);
+            //toast.setVisible(true);
 
 
     }

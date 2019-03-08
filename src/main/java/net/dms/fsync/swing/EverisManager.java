@@ -1,5 +1,6 @@
 package net.dms.fsync.swing;
 
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.*;
@@ -111,7 +112,7 @@ public class EverisManager {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
+        WorkingJira.setMainJframe(frame);
 
     }
 

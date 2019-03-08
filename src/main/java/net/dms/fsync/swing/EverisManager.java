@@ -113,7 +113,6 @@ public class EverisManager {
         frame.pack();
         frame.setVisible(true);
         WorkingJira.setMainJframe(frame);
-
     }
 
 
@@ -363,7 +362,7 @@ public class EverisManager {
         JiraSearchResponse jiraSearchResponse = jiraService.search(jql);
         List<JiraIssue> issues = jiraSearchResponse.getIssues();
         for (FenixAcc acc : accs) {
-            JiraIssue issue = issues.stream().filter(i -> i.getKey().equals(acc.getCodigoPeticionCliente())).findFirst().orElse(null);
+            JiraIssue issue = issues.stream().filter(i -> i.getKey().equals(acc.getHistoriaUsuario())).findFirst().orElse(null);
             if (issue != null) {
                 acc.setJiraStatus(issue.getFields().getStatus().getName());
             }

@@ -17,7 +17,7 @@ public class FenixDuda {
     private String respRespuestaProyecto;
     private String responsableConsulta;
     private String respRespuestaCliente;
-    private Long agrupacion;
+    private String agrupacion;
     private Long idRelacionada;
     private String criticidad;
     private String fLocalizada;
@@ -146,11 +146,11 @@ public class FenixDuda {
         this.respRespuestaCliente = respRespuestaCliente;
     }
 
-    public Long getAgrupacion() {
+    public String getAgrupacion() {
         return agrupacion;
     }
 
-    public void setAgrupacion(Long agrupacion) {
+    public void setAgrupacion(String agrupacion) {
         this.agrupacion = agrupacion;
     }
 

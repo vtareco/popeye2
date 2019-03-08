@@ -103,6 +103,7 @@ public class EverisManager {
     Settings settings = SettingsService.getInstance().getSettings();
 
 
+
     private Map<String, String> jiraFilters = config.getJiraFilters();
 
 
@@ -110,7 +111,12 @@ public class EverisManager {
         JFrame frame = new JFrame("Jira / Fenix popeye_v1.jar");
         frame.setContentPane(new EverisManager().panelParent);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setSize(frame.getPreferredSize().width + 20, 31);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        //frame.setLocation(dim.width / 2,dim.height / 2);
         frame.pack();
+       // frame.setSize(dim.width,frame.getHeight());
+
         frame.setVisible(true);
         WorkingJira.setMainJframe(frame);
     }
@@ -674,6 +680,34 @@ public class EverisManager {
         tableSettingControl = context.getBean(TableSettingControl.class);
         initTabSyncJiraFenix();
 
+        accTable.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_DELETE){
+                    removeAcc();
+                }
+            }
+        });
+
+        incidenciasTable.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_DELETE){
+                    removeIncidencia();
+                }
+            }
+        });
+
+        dudasTable.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_DELETE){
+                    removeDuda();
+                }
+            }
+        });
+
+
 
     }
 
@@ -717,7 +751,8 @@ public class EverisManager {
 
 
         for (Actor responsableJira : settings.getActores()) {
-            accResponsableEditor.addItem(responsableJiraEveris.get(responsableJira.getNumeroEmpleadoEveris()));
+            //accResponsableEditor.addItem(responsableJiraEveris.get(responsableJira.getNumeroEmpleadoEveris()));
+            accResponsableEditor.addItem(responsableJira.getNumeroEmpleadoEveris());
 
         }
         accResponsableEditor.setToolTipText(responsableJiraEveris.toString());
@@ -1456,7 +1491,6 @@ public class EverisManager {
             e.printStackTrace();
         }
     }
-
 
 }
 

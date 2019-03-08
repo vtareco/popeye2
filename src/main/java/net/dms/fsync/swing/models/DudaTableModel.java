@@ -191,7 +191,7 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 fireTableCellUpdated(row,col);
                 break;
             case AGRUPACION:
-                duda.setAgrupacion((Long)value);
+                duda.setAgrupacion((String)value);
                 duda.setAgrupacion(duda.getAgrupacion());
                 fireTableCellUpdated(row,col);
                 break;

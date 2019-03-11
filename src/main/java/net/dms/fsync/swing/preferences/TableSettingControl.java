@@ -68,7 +68,7 @@ public class TableSettingControl {
         String projectPath = ap.getWorkingDirectory();
         //return config.getProperty(EverisPropertiesType.WORKING_DIRECTORY) + "/_preferences/" + tableType + ".json";
         String teste = projectPath + "/" +tableType + ".json";
-        System.out.println("OLA "+teste);
+        //System.out.println("OLA "+teste);
         return  projectPath + "/" +tableType + ".json";
     }
 

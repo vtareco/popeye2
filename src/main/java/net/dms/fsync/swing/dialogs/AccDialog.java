@@ -67,7 +67,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     @Override
     protected void loadData() {
         SwingUtil.loadComboBox(AccStatus.class, cmbEstado, true);
-        getPayload().setEstado(AccStatus.PENDIENTE_ASIGNACION.getDescription()); //PENDIENTE
+        //getPayload().setEstado(AccStatus.PENDIENTE_ASIGNACION.getDescription()); //PENDIENTE
         SwingUtil.loadComboBox(AccType.class, cmbTipo, true);
         //  SwingUtil.loadComboBox(AccSubType.class, cmbSubTipo, true);
     }
@@ -451,8 +451,13 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         }
 
+        if(cmbEstado.getSelectedIndex() == -1 || StringUtils.isBlank(cmbEstado.getSelectedItem().toString())){
+            throw new AppException("Estado es requerido");
 
-        getPayload().setEstado((String) cmbEstado.getSelectedItem());
+        }else{
+            getPayload().setEstado((String) cmbEstado.getSelectedItem());
+        }
+
         getPayload().setTipo((String) cmbTipo.getSelectedItem());
         // getPayload().setSubTipo((String)cmbSubTipo.getSelectedItem());
 

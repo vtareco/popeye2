@@ -95,10 +95,8 @@ public class ActionExecutor {
                 Toast.display("Successo", Toast.ToastType.INFO);
             }
 
-            Toast.display("Successo 2", Toast.ToastType.INFO);
-
         }catch(Exception ex){
-
+            Toast.display("Please Check Creedentials", Toast.ToastType.WARNING);
             throw new AppException(ex);
         }
         return response;

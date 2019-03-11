@@ -458,7 +458,7 @@ public class FenixRepository {
                 logger.debug("Processing row {}", i);
                 FenixIncidencia incidencia = incidenciaMapper.map(sheet.getRow(i));
                 incidencias.add(incidencia);
-                Toast.display("Upload Sucess", Toast.ToastType.INFO);
+                //Toast.display("Upload Sucess", Toast.ToastType.INFO);
             }
 
 
@@ -698,6 +698,7 @@ public class FenixRepository {
             }
 
 
+            Toast.display("Success !", Toast.ToastType.INFO);
             FileOutputStream fos = new FileOutputStream(dudaFile);
             wb.write(fos);
             fos.close();

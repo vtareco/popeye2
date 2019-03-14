@@ -173,17 +173,21 @@ public class EverisManager {
 
                     System.out.println("Tab: " + tabbedPanel.getSelectedIndex());
 
-                    if (tabbedPanel.getSelectedIndex() == 1) {
+                    if (tabbedPanel.getSelectedIndex() == 1 && peticionesDisponiblesCmb.getSelectedIndex() != 0) {
                         initTabIncidencias();
-                    } else {
+                    } else if(tabbedPanel.getSelectedIndex() == 2 && peticionesDisponiblesCmb.getSelectedIndex() != 0) {
                         initTabDudas();
+                    }
+                    else {
+                        tabbedPanel.setSelectedIndex(0);
+                        Toast.display(Internationalization.getStringTranslated("toastSelectOt"), Toast.ToastType.INFO);
                     }
 
              /*   if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_INCIDENCIA)){
                     System.out.println("incidencias");
                     initTabIncidencias();
                   }*/
-                    if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA)) {
+                    if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA )) {
                         System.out.println("dudas");
                         initTabDudas();
                     }
@@ -833,8 +837,8 @@ public class EverisManager {
     }
 
     private JMenuItem menuEditarAcc(JenixTable<AccTableModel, FenixAcc> tabla) {
-        JMenuItem menuDuplicar = new JMenuItem("Editar");
-        menuDuplicar.addActionListener(new ActionListener() {
+        JMenuItem menuEditAcc = new JMenuItem(Internationalization.getStringTranslated("menuItemEdit"));
+        menuEditAcc.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -859,7 +863,7 @@ public class EverisManager {
             }
 
         });
-        return menuDuplicar;
+        return menuEditAcc;
     }
 
 
@@ -1213,7 +1217,7 @@ public class EverisManager {
 
 
     public JMenuItem menuIncidenciaInterna(final JenixTable tabla) {
-        JMenuItem menuCrearIncidenciaInterna = new JMenuItem("Crear incidencia interna");
+        JMenuItem menuCrearIncidenciaInterna = new JMenuItem(Internationalization.getStringTranslated("menuItemCreateInternIncident"));
         menuCrearIncidenciaInterna.addActionListener(new ActionListener() {
 
             @Override
@@ -1263,7 +1267,7 @@ public class EverisManager {
 
 
     public JMenuItem menuDuda(final JenixTable tabla) {
-        JMenuItem menuCrearDuda = new JMenuItem("Crear duda");
+        JMenuItem menuCrearDuda = new JMenuItem(Internationalization.getStringTranslated("menuItemCreateDoubt"));
         // VariableService vs = new VariableService();
 
        /* JSONParser parser = new JSONParser();
@@ -1353,7 +1357,7 @@ public class EverisManager {
 
 
     public JMenuItem menuDuplicar(final JenixTable tabla) {
-        JMenuItem menuDuplicar = new JMenuItem("Duplicar");
+        JMenuItem menuDuplicar = new JMenuItem(Internationalization.getStringTranslated("menuItemDuplicate"));
         menuDuplicar.addActionListener(new ActionListener() {
 
             @Override

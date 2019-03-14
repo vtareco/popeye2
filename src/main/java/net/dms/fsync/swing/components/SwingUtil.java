@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.components;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.VisualizableType;
 
 import java.awt.Color;
@@ -174,7 +175,7 @@ public class SwingUtil {
     }
 
     public static JMenuItem menuCopiar(final JenixTable tabla) {
-        JMenuItem menuCopiar = new JMenuItem("Copiar");
+        JMenuItem menuCopiar = new JMenuItem(Internationalization.getStringTranslated("menuItemCopy"));
         menuCopiar.addActionListener(new ActionListener() {
 
             @Override

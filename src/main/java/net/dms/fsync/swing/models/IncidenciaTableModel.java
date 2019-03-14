@@ -15,22 +15,22 @@ public class IncidenciaTableModel extends JenixTableModel<FenixIncidencia, Incid
 
     public enum Columns implements TableColumnEnumType {
 
-       ID_INCIDENCIA(false, 50, Internationalization.getStringTranslated("keyUper")),
-       NOMBRE_INCIDENCIA(true, 50, Internationalization.getStringTranslated("keyUper")),
-        LOCALIZADA_EN(true, 50, Internationalization.getStringTranslated("keyUper")),
-        TIPO_INCIDENCIA(true, 50, Internationalization.getStringTranslated("keyUper")),
-        DESCRIPCION(true, 50, Internationalization.getStringTranslated("keyUper")),
-        FECHA_INICIO(true, 50, Internationalization.getStringTranslated("keyUper")),
-        FECHA_FIN(true, 50, Internationalization.getStringTranslated("keyUper")),
-        ESFUERZO_HH(true, 50, Internationalization.getStringTranslated("keyUper")),
-        URGENCIA(true, 50, Internationalization.getStringTranslated("keyUper")),
-        IMPACTO(true, 50, Internationalization.getStringTranslated("keyUper")),
-        PRIORIDAD(true, 50, Internationalization.getStringTranslated("keyUper")),
-        FECHA_PREVISTA_CENTRO(true, 50, Internationalization.getStringTranslated("keyUper")),
-        TAREA_CAUSANTE(true, 250, Internationalization.getStringTranslated("keyUper")),
-        OT_CORRECTOR(true, 50, Internationalization.getStringTranslated("keyUper")),
-        ACC_CORRECTOR(true, 250, Internationalization.getStringTranslated("keyUper")),
-        ESTADO(true, 80, Internationalization.getStringTranslated("keyUper"));
+       ID_INCIDENCIA(false, 50, Internationalization.getStringTranslated("incidentId")),
+       NOMBRE_INCIDENCIA(true, 50, Internationalization.getStringTranslated("indicentName")),
+        LOCALIZADA_EN(true, 50, Internationalization.getStringTranslated("localizedIn")),
+        TIPO_INCIDENCIA(true, 50, Internationalization.getStringTranslated("incidentType")),
+        DESCRIPCION(true, 50, Internationalization.getStringTranslated("descriptionUper")),
+        FECHA_INICIO(true, 50, Internationalization.getStringTranslated("inicialDate")),
+        FECHA_FIN(true, 50, Internationalization.getStringTranslated("endDate")),
+        ESFUERZO_HH(true, 50, Internationalization.getStringTranslated("effortHH")),
+        URGENCIA(true, 50, Internationalization.getStringTranslated("urgency")),
+        IMPACTO(true, 50, Internationalization.getStringTranslated("impact")),
+        PRIORIDAD(true, 50, Internationalization.getStringTranslated("priority")),
+        FECHA_PREVISTA_CENTRO(true, 50, Internationalization.getStringTranslated("plannedCenterDate")),
+        TAREA_CAUSANTE(true, 250, Internationalization.getStringTranslated("causativeTask")),
+        OT_CORRECTOR(true, 50, Internationalization.getStringTranslated("otCorrector")),
+        ACC_CORRECTOR(true, 250, Internationalization.getStringTranslated("accCorrector")),
+        ESTADO(true, 80, Internationalization.getStringTranslated("statUper"));
 
        private int width;
         private String columnName;

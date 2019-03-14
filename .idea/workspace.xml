@@ -4,10 +4,6 @@
     <list default="true" id="5330ab89-6d84-44f1-86d4-34b64e11b6f3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/SwingUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/SwingUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="182" column="93" selection-start-line="182" selection-start-column="93" selection-end-line="182" selection-end-column="93" />
+            <state relative-caret-position="238">
+              <caret line="182" column="118" selection-start-line="182" selection-start-column="118" selection-end-line="182" selection-end-column="118" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#9126#9127#0" expanded="true" />
@@ -94,7 +90,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="196">
@@ -116,8 +112,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
           <provider editor-type-id="ResourceBundle" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="153" column="13" selection-start-line="153" selection-end-line="153" selection-end-column="13" />
+            <state relative-caret-position="248">
+              <caret line="153" column="9" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -442,7 +438,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="309" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552580283769" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552581296330" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
@@ -498,7 +494,7 @@
       <workItem from="1551950863715" duration="500000" />
       <workItem from="1551951815653" duration="16656000" />
       <workItem from="1552039411408" duration="87693000" />
-      <workItem from="1552570615982" duration="8073000" />
+      <workItem from="1552570615982" duration="9076000" />
     </task>
     <task id="LOCAL-00001" summary="Edit/ add acc bug fix:&#10;if pendiente asignacion = en ejecucion">
       <created>1551700746814</created>
@@ -528,11 +524,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552575256531</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="cant select incidents or doubts tab with out choosing an OT">
+      <created>1552580496561</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552580496562</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131497000" />
+    <option name="totallyTimeSpent" value="132500000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="13" width="1696" height="1026" extended-state="6" />
@@ -578,26 +581,27 @@
     <MESSAGE value="Changing directory copies the JenixFolder and &quot;fenix_acc.json&quot; if exists." />
     <MESSAGE value="I18n implemented" />
     <MESSAGE value="acc dialog description max is 500 chars&#10;duplicar coopies responsable" />
-    <option name="LAST_COMMIT_MESSAGE" value="acc dialog description max is 500 chars&#10;duplicar coopies responsable" />
+    <MESSAGE value="cant select incidents or doubts tab with out choosing an OT" />
+    <option name="LAST_COMMIT_MESSAGE" value="cant select incidents or doubts tab with out choosing an OT" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
-          <line>340</line>
+          <line>341</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
-          <line>337</line>
+          <line>338</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
-          <line>330</line>
+          <line>331</line>
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
@@ -1412,14 +1416,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
-      <provider editor-type-id="ResourceBundle" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="153" column="13" selection-start-line="153" selection-end-line="153" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
@@ -1427,10 +1423,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="341" selection-start-line="341" selection-end-line="341" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
+      <provider editor-type-id="ResourceBundle" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="153" column="9" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="182" column="93" selection-start-line="182" selection-start-column="93" selection-end-line="182" selection-end-column="93" />
+        <state relative-caret-position="238">
+          <caret line="182" column="118" selection-start-line="182" selection-start-column="118" selection-end-line="182" selection-end-column="118" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9126#9127#0" expanded="true" />
@@ -1449,13 +1460,6 @@
             <element signature="e#60180#60181#0" expanded="true" />
             <element signature="e#60214#60215#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="341" selection-start-line="341" selection-end-line="341" />
         </state>
       </provider>
     </entry>

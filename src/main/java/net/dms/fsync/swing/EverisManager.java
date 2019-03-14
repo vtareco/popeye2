@@ -180,7 +180,8 @@ public class EverisManager {
                     }
                     else {
                         tabbedPanel.setSelectedIndex(0);
-                        Toast.display(Internationalization.getStringTranslated("toastSelectOt"), Toast.ToastType.INFO);
+                        Toast.display(Internationalization.getStringTranslated("toastSelectOt"), Toast.ToastType.ERROR);
+                        return;
                     }
 
              /*   if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_INCIDENCIA)){

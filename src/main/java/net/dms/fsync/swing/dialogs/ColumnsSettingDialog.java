@@ -54,7 +54,7 @@ public class ColumnsSettingDialog extends JenixDialog<TableSetting> {
         panel.setBorder(BorderFactory.createEtchedBorder());
         panel.setLayout(new GridBagLayout());
 
-        JLabel lblSummary = new JLabel("Nombre");
+        //JLabel lblSummary = new JLabel("Nombre");
 
 
         ColumnsSettingTableModel responsablesTableModel = new ColumnsSettingTableModel(new ArrayList<ColumnSetting>());

@@ -334,7 +334,7 @@ public class EverisManager {
             Internationalization.init(ap.getWorkingLanguage());
         }
         else{
-            Internationalization.init("en");
+            Internationalization.init("en_US");
         }
     }
 
@@ -1367,8 +1367,9 @@ public class EverisManager {
 
                         FenixAcc copy = SerializationUtils.clone(acc);
                         copy.getBitacora().clear();
+
                         copy.setIdAcc(null);
-                        copy.setResponsable(null);
+                        //copy.setResponsable(null);
                         accTable.addRow(copy);
                     }
                 } catch (Exception ex) {

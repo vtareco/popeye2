@@ -434,7 +434,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         //String idpeticion = lv.readOtInfoFile(WorkingJira.getIdOt());
         String idpeticion = lv.readOtInfoFile(WorkingJira.getIdOt()).getId_peticion();
 
-        getPayload().setDescripcion(txaDescripcion.getText());
+        getPayload().setDescripcion(txaDescripcion.getText().substring(0,499));
         getPayload().setNombre(txtNombre.getText());
         getPayload().setIdPeticion(idpeticion);
 

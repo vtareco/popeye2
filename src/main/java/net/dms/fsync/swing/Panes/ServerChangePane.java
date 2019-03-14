@@ -1,18 +1,14 @@
 package net.dms.fsync.swing.Panes;
 
-import net.dms.fsync.swing.EverisManager;
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import org.apache.commons.io.FileUtils;
 
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -22,13 +18,14 @@ public class ServerChangePane extends JPanel {
     private JTextField fenixServerJtf, jiraServerJtf, proxyHostJtf, proxyPortJtf;
     private JFileChooser pathJfc;
     private JButton acceptChangesJbtn, declineChangesJbtn, openFileChooser;
-    private JLabel proxyJl, fenixServerJl, jiraServerJl, currentPathJl;
-    private String currentPath;
+    private JLabel proxyJl, fenixServerJl, jiraServerJl, workingLanguageJl;
+    private String currentPath, currentLanguage;
+    private JComboBox languageSelectorJcmb;
 
     public ServerChangePane(String path) {
         setLayout(null);
         this.setSize(600, 400);
-        this.setName("ApplicationProperties");
+        this.setName(Internationalization.getStringTranslated("applicationPropertiess"));
         loadPane(path);
     }
 
@@ -41,36 +38,47 @@ public class ServerChangePane extends JPanel {
         proxyHostJtf = new JTextField();
         proxyPortJtf = new JTextField();
         acceptChangesJbtn = new JButton();
+        languageSelectorJcmb = new JComboBox();
         declineChangesJbtn = new JButton();
         openFileChooser = new JButton();
-        currentPathJl = new JLabel();
+        workingLanguageJl = new JLabel();
         fenixServerJl = new JLabel();
         jiraServerJl = new JLabel();
         proxyJl = new JLabel();
+        System.out.println(Internationalization.getStringTranslated("responsible"));
         ApplicationProperties ap = lv.getApFromJson(path);
         labelConfigutationLoader();
         buttonConfigurationLoad(ap.getWorkingDirectory());
         textFieldConfigurationLoader(ap);
         pathConfigurationLoader(ap);
+        loadLanguagesCmb(ap.getWorkingLanguage());
+
         currentPath = ap.getWorkingDirectory();
+        currentLanguage = ap.getWorkingLanguage();
         acceptChangesJbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (currentPath.equals(ap.getWorkingDirectory())) {
-                    changeServerFunction(ap, path);
+                if (!currentLanguage.equals(languageSelectorJcmb.getSelectedItem().toString())) {
+                    currentLanguage = languageSelectorJcmb.getSelectedItem().toString();
+                    currentPathChange(ap, path);
+                    Toast.display(Internationalization.getStringTranslated("toastLanguageChanged"), Toast.ToastType.INFO);
                 } else {
-                    changeServerFunction(ap, path);
-                    changeWorkingPath(ap.getWorkingDirectory());
-                    currentPath = ap.getWorkingDirectory();
+                    currentPathChange(ap, path);
+                    Toast.display(Internationalization.getStringTranslated("toastSuccess"), Toast.ToastType.INFO);
                 }
+
+
                 //JOptionPane.showMessageDialog(null,"Success","Information",1,null);
-                Toast.display("Success", Toast.ToastType.INFO);
             }
-
-
         });
 
+        languageSelectorJcmb.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                ap.setWorkingLanguage(languageSelectorJcmb.getSelectedItem().toString());
+            }
+        });
 
         openFileChooser.addActionListener(new ActionListener() {
             @Override
@@ -82,38 +90,52 @@ public class ServerChangePane extends JPanel {
         openFileChooser.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                openFileChooser.setText("Choose new directory");
+                openFileChooser.setText(Internationalization.getStringTranslated("choseNewDirectory"));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                openFileChooser.setText("Current path: " + ap.getWorkingDirectory());
+                openFileChooser.setText(Internationalization.getStringTranslated("currentPath") + ap.getWorkingDirectory());
             }
         });
 
         this.setVisible(true);
     }
 
+
+    private void currentPathChange(ApplicationProperties ap, String path) {
+
+        if (currentPath.equals(ap.getWorkingDirectory())) {
+            changeServerFunction(ap, path);
+
+
+        } else {
+            changeServerFunction(ap, path);
+            changeWorkingPath(ap.getWorkingDirectory());
+            currentPath = ap.getWorkingDirectory();
+
+        }
+
+    }
+
     private void changeWorkingPath(String newDirPath) {
-        File oldDir = new File(currentPath+"/JenixSettings");
-        File newDir = new File(newDirPath+"/JenixSettings");
-        File oldTableView = new File(currentPath+"/FENIX_ACC.json");
-        File newTableView = new File(newDirPath+"/FENIX_ACC.json");
+        File oldDir = new File(currentPath + "/JenixSettings");
+        File newDir = new File(newDirPath + "/JenixSettings");
+        File oldTableView = new File(currentPath + "/FENIX_ACC.json");
+        File newTableView = new File(newDirPath + "/FENIX_ACC.json");
         try {
-            if (!newDir.exists()){
-                FileUtils.copyDirectory(oldDir,newDir);
+            if (!newDir.exists()) {
+                FileUtils.copyDirectory(oldDir, newDir);
 
             }
 
-            if(oldTableView.exists() && !newTableView.exists()){
-                FileUtils.copyFile(oldTableView,newTableView);
+            if (oldTableView.exists() && !newTableView.exists()) {
+                FileUtils.copyFile(oldTableView, newTableView);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
 
     private void changeServerFunction(ApplicationProperties ap, String path) {
@@ -175,6 +197,13 @@ public class ServerChangePane extends JPanel {
         proxyJl.setBounds(20, 150, 150, 25);
         this.add(proxyJl);
 
+        workingLanguageJl.setFont(new Font("Arial", Font.PLAIN, 16));
+        workingLanguageJl.setBounds(20, 190, 150, 25);
+        workingLanguageJl.setText(Internationalization.getStringTranslated("languageLower"));
+        workingLanguageJl.setHorizontalAlignment(JLabel.LEFT);
+
+        this.add(workingLanguageJl);
+
     }
 
 
@@ -189,21 +218,31 @@ public class ServerChangePane extends JPanel {
 
 
     private void buttonConfigurationLoad(String path) {
-        openFileChooser.setText("Current path: " + path);
+        openFileChooser.setText(Internationalization.getStringTranslated("currentPath") + " : " + path);
         openFileChooser.setBounds(200, 230, 200, 30);
         this.add(openFileChooser);
 
 
-        acceptChangesJbtn.setText("Save");
+        acceptChangesJbtn.setText(Internationalization.getStringTranslated("saveLower"));
         acceptChangesJbtn.setBounds(30, 300, 110, 30);
         this.add(acceptChangesJbtn);
 
 
-        declineChangesJbtn.setText("Cancel");
+        declineChangesJbtn.setText(Internationalization.getStringTranslated("cancelLower"));
         declineChangesJbtn.setBounds(455, 300, 110, 30);
         // this.add(declineChangesJbtn);
     }
 
+    private void loadLanguagesCmb(String workingLanguage) {
+        LocalVariables lv = new LocalVariables();
+
+        languageSelectorJcmb.setBounds(160, 190, 150, 25);
+        languageSelectorJcmb.setModel(new DefaultComboBoxModel(lv.AvaliableLanguages().toArray()));
+        languageSelectorJcmb.setSelectedItem(workingLanguage);
+        this.add(languageSelectorJcmb);
+
+
+    }
 
     private void pathChooserFunction(ApplicationProperties ap) {
 

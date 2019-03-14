@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.models;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.AccStatus;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumType;
@@ -18,35 +19,41 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
 
     public enum Columns implements TableColumnEnumType{
 
-        ID_ACC(false, 70),
-        NOMBRE(true, 250),
-        CODIGO_PETICION_CLIENTE(true, 80),
-        ESTADO(true, 80),
-        JIRA_STATUS(true, 50),
-        TIPO(true, 80),
-        SUB_TIPO(true, 80),
-        ESFUERZO(false, 80),
-        INCURRIDO(false, 80),
-        PUNTOS_HISTORIA(false, 80),
-        HISTORIA_USUARIO(true, 80),
+        ID_ACC(false, 70, Internationalization.getStringTranslated("accId")),
+        NOMBRE(true, 250, Internationalization.getStringTranslated("nameUper")),
+        CODIGO_PETICION_CLIENTE(true, 80, Internationalization.getStringTranslated("codePetitionClientUper")),
+        ESTADO(true, 80, Internationalization.getStringTranslated("statUper")),
+        JIRA_STATUS(true, 50, Internationalization.getStringTranslated("jiraStatus")),
+        TIPO(true, 80, Internationalization.getStringTranslated("typeUPER")),
+        SUB_TIPO(true, 80, Internationalization.getStringTranslated("subTypeUper")),
+        ESFUERZO(false, 80, Internationalization.getStringTranslated("effortUper")),
+        INCURRIDO(false, 80, Internationalization.getStringTranslated("incurred")),
+        PUNTOS_HISTORIA(false, 80, Internationalization.getStringTranslated("storyPoints")),
+        HISTORIA_USUARIO(true, 80, Internationalization.getStringTranslated("userHistoryUper")),
 
-        ETC(true, 50),
-        PORCENTAJE_COMPLETADO(true, 30),
-        RESPONSABLE(true, 100),
-        FECHA_PREVISTA_PROYECTO(true, 80),
-        DESCRIPCION(true, 250),
-        ULTIMA_BITACORA(false, 50),
-        BITACORA(false, 250),
-        ID_PETICION(false, 50);
+        ETC(true, 50, Internationalization.getStringTranslated("estimate")),
+        PORCENTAJE_COMPLETADO(true, 30, Internationalization.getStringTranslated("percentageCompleted")),
+        RESPONSABLE(true, 100, Internationalization.getStringTranslated("responsible")),
+        FECHA_PREVISTA_PROYECTO(true, 80, Internationalization.getStringTranslated("projectDatePlanened")),
+        DESCRIPCION(true, 250, Internationalization.getStringTranslated("descriptionUper")),
+        ULTIMA_BITACORA(false, 50, Internationalization.getStringTranslated("lastBinnacle")),
+        BITACORA(false, 250, Internationalization.getStringTranslated("binnacle")),
+        ID_PETICION(false, 50, Internationalization.getStringTranslated("petitionId"));
 
 
         private final static int WIDTH_M = 80;
         private boolean editable;
         private int width;
+        private String columnName;
 
-        Columns(boolean editable, int width) {
+        Columns(boolean editable, int width,String columnName) {
             this.editable = editable;
             this.width = width;
+            this.columnName = columnName;
+        }
+
+        public String getColumnName() {
+            return columnName;
         }
 
         public boolean isEditable() {
@@ -60,6 +67,11 @@ public class AccTableModel extends JenixTableModel<FenixAcc, AccTableModel.Colum
         public static Columns lookup(int iPosition){
             return Arrays.stream(Columns.values()).filter( c -> c.ordinal() == iPosition).findFirst().get();
         }
+    }
+
+    @Override
+    protected String getValueToDisplay(Columns enumC) {
+        return enumC.getColumnName();
     }
 
     public AccTableModel(List<FenixAcc> accs){

@@ -5,7 +5,6 @@ import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumTyp
 public class ColumnSetting {
     private TableColumnEnumType column;
     private boolean visible;
-
     public ColumnSetting() {
     }
 

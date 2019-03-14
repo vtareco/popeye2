@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.Panes;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.swing.EverisManager;
 import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
@@ -24,7 +25,7 @@ public class FilterManagePane extends JPanel {
     public FilterManagePane(String path) {
         setLayout(null);
         this.setSize(600, 400);
-        this.setName("ApplicationProperties");
+        this.setName(Internationalization.getStringTranslated("filters"));
         loadPane(path);
     }
 
@@ -62,9 +63,9 @@ public class FilterManagePane extends JPanel {
                     filters.removeAll();
 
                     //JOptionPane.showMessageDialog(null,"Filter successfully added","Information",1,null);
-                    Toast.display("Filter successfully added",Toast.ToastType.INFO);
+                    Toast.display(Internationalization.getStringTranslated("toastFilterAdded"),Toast.ToastType.INFO);
                 } else {
-                    Toast.display("Filter not added, fields are empty ",Toast.ToastType.ERROR);
+                    Toast.display(Internationalization.getStringTranslated("toastFilterNotAdded"),Toast.ToastType.ERROR);
                 }
 
             }
@@ -164,17 +165,17 @@ public class FilterManagePane extends JPanel {
     private void buttonConfigurationLoad() {
         saveJBtn.setBounds(250, 300, 80, 20);
         saveJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
-        saveJBtn.setText("Save");
+        saveJBtn.setText(Internationalization.getStringTranslated("saveLower"));
         this.add(saveJBtn);
 
         deleteFilterJBtn.setBounds(470, 300, 80, 20);
         deleteFilterJBtn.setFont(new Font("Arial", Font.PLAIN, 12));
-        deleteFilterJBtn.setText("Delete");
+        deleteFilterJBtn.setText(Internationalization.getStringTranslated("delete"));
         this.add(deleteFilterJBtn);
 
         clearFieldsJbtn.setFont(new Font("Arial", Font.PLAIN, 12));
         clearFieldsJbtn.setBounds(360, 300, 80, 20);
-        clearFieldsJbtn.setText("Clear");
+        clearFieldsJbtn.setText(Internationalization.getStringTranslated("clearTextFields"));
         this.add(clearFieldsJbtn);
     }
 

@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.models;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 import net.dms.fsync.synchronizer.fenix.entities.JiraIssue;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumType;
@@ -16,12 +17,18 @@ import java.util.List;
 public class JiraTableModel extends JenixTableModel<JiraIssue, JiraTableModel.Columns> {
     public enum Columns implements TableColumnEnumType{
 
-        KEY(false), SUMMARY(false), ASSIGNEE(false), STATUS(false),STORYPOINT(false);
+        KEY(false, Internationalization.getStringTranslated("keyUper")),
+        SUMMARY(false, Internationalization.getStringTranslated("summary")),
+        ASSIGNEE(false, Internationalization.getStringTranslated("assignee")),
+        STATUS(false, Internationalization.getStringTranslated("status")),
+        STORYPOINT(false, Internationalization.getStringTranslated("storypointsUpeer"));
 
         private boolean editable;
+        private String columnName;
 
-        Columns(boolean editable) {
+        Columns(boolean editable, String columnName) {
             this.editable = editable;
+            this.columnName = columnName;
         }
 
         public boolean isEditable() {
@@ -30,6 +37,10 @@ public class JiraTableModel extends JenixTableModel<JiraIssue, JiraTableModel.Co
 
         public int getWidth(){
             return 50;
+        }
+
+        public String getColumnName() {
+            return columnName;
         }
 
         public static Columns lookup(int iPosition){
@@ -42,6 +53,10 @@ public class JiraTableModel extends JenixTableModel<JiraIssue, JiraTableModel.Co
 
     }
 
+    @Override
+    protected String getValueToDisplay(Columns enumC) {
+        return enumC.getColumnName();
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {

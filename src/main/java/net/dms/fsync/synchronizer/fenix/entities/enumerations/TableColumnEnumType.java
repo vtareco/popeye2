@@ -14,4 +14,5 @@ public interface TableColumnEnumType {
     int ordinal();
 
 
+
 }

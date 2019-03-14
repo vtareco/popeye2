@@ -1,7 +1,8 @@
 package net.dms.fsync.swing;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
+
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.*;
 import net.dms.fsync.swing.components.*;
@@ -34,6 +35,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -317,12 +319,18 @@ public class EverisManager {
             }
         }
 
-        ApplicationProperties ap = vs.getApplicationVariables();
+        ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
         File mainFolder = new File(ap.getWorkingDirectory());
         if (!mainFolder.exists()) {
             mainFolder.mkdirs();
         }
 
+        if(ap.getWorkingLanguage() != null ){
+            Internationalization.init(ap.getWorkingLanguage());
+        }
+        else{
+            Internationalization.init("en");
+        }
     }
 
 
@@ -580,7 +588,7 @@ public class EverisManager {
                         //super.windowClosed(e);
                         if(StringUtils.isBlank(peticionDialog.txtIdPeticion.getText())){
 
-                            Toast.display("ID Peticion doesn´t exist", Toast.ToastType.ERROR);
+                            Toast.display(Internationalization.getStringTranslated("toastIdPetitionNull"), Toast.ToastType.ERROR);
 
 
                         }else{
@@ -613,7 +621,7 @@ public class EverisManager {
         }
 
         if (filter.equals("key=")) {
-            Toast.display("No se ha introducido ninguna ACC", Toast.ToastType.ERROR);
+            Toast.display(Internationalization.getStringTranslated("toastNullACC"), Toast.ToastType.ERROR);
         } else if (filter != null) {
             searchJiras(((JiraTableModel) jiraTable.getModel())::load, filter);
             System.out.println("ola belmiro");
@@ -985,8 +993,10 @@ public class EverisManager {
         final JToolBar toolBar1 = new JToolBar();
         panel2.add(toolBar1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 20), null, 0, false));
         saveAccExcelBtn = new JButton();
-        saveAccExcelBtn.setText("Guardar excel");
+        saveAccExcelBtn.setText(Internationalization.getStringTranslated("save_excel"));
         toolBar1.add(saveAccExcelBtn);
+        downloadDocumentationJbtn.setText(Internationalization.getStringTranslated("documentation"));
+        openExplorer.setText(Internationalization.getStringTranslated("openExplorer"));
         uploadBtn = new JButton();
         uploadBtn.setText("Upload");
         toolBar1.add(uploadBtn);
@@ -1271,7 +1281,7 @@ public class EverisManager {
                         duda.setCreador(acc.getResponsable());
 
                         if(acc.getIdPeticion()==null || StringUtils.isBlank(acc.getIdPeticion())){
-                            Toast.display("ID_PETICION doesn't exists !", Toast.ToastType.ERROR);
+                            Toast.display(Internationalization.getStringTranslated("toastIdPetitionNull"), Toast.ToastType.ERROR);
                         }else{
                             duda.setIdRequerimiento(Long.valueOf(acc.getIdPeticion()));
 

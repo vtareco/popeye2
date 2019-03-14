@@ -9,7 +9,6 @@ import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
 import net.dms.fsync.synchronizer.LocalVariables.entities.OtInfo;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
-import net.dms.fsync.synchronizer.fenix.entities.FenixAcc;
 
 
 import java.util.ArrayList;
@@ -106,5 +105,8 @@ public class LocalVariables {
     }
 
 
-
+    public ArrayList<String> AvaliableLanguages() {
+        VariableService vs = new VariableService();
+       return vs.getAvailableLanguages();
+    }
 }

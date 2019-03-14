@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.models;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.synchronizer.fenix.entities.FenixIncidencia;
 import net.dms.fsync.synchronizer.fenix.entities.enumerations.TableColumnEnumType;
 import net.dms.fsync.swing.components.JenixTableModel;
@@ -14,34 +15,40 @@ public class IncidenciaTableModel extends JenixTableModel<FenixIncidencia, Incid
 
     public enum Columns implements TableColumnEnumType {
 
-       ID_INCIDENCIA(false, 50),
-       NOMBRE_INCIDENCIA(true, 50),
-        LOCALIZADA_EN(true, 50),
-        TIPO_INCIDENCIA(true, 50),
-        DESCRIPCION(true, 50),
-        FECHA_INICIO(true, 50),
-        FECHA_FIN(true, 50),
-        ESFUERZO_HH(true, 50),
-        URGENCIA(true, 50),
-        IMPACTO(true, 50),
-        PRIORIDAD(true, 50),
-        FECHA_PREVISTA_CENTRO(true, 50),
-        TAREA_CAUSANTE(true, 250),
-        OT_CORRECTOR(true, 50),
-        ACC_CORRECTOR(true, 250),
-        ESTADO(true, 80);
+       ID_INCIDENCIA(false, 50, Internationalization.getStringTranslated("keyUper")),
+       NOMBRE_INCIDENCIA(true, 50, Internationalization.getStringTranslated("keyUper")),
+        LOCALIZADA_EN(true, 50, Internationalization.getStringTranslated("keyUper")),
+        TIPO_INCIDENCIA(true, 50, Internationalization.getStringTranslated("keyUper")),
+        DESCRIPCION(true, 50, Internationalization.getStringTranslated("keyUper")),
+        FECHA_INICIO(true, 50, Internationalization.getStringTranslated("keyUper")),
+        FECHA_FIN(true, 50, Internationalization.getStringTranslated("keyUper")),
+        ESFUERZO_HH(true, 50, Internationalization.getStringTranslated("keyUper")),
+        URGENCIA(true, 50, Internationalization.getStringTranslated("keyUper")),
+        IMPACTO(true, 50, Internationalization.getStringTranslated("keyUper")),
+        PRIORIDAD(true, 50, Internationalization.getStringTranslated("keyUper")),
+        FECHA_PREVISTA_CENTRO(true, 50, Internationalization.getStringTranslated("keyUper")),
+        TAREA_CAUSANTE(true, 250, Internationalization.getStringTranslated("keyUper")),
+        OT_CORRECTOR(true, 50, Internationalization.getStringTranslated("keyUper")),
+        ACC_CORRECTOR(true, 250, Internationalization.getStringTranslated("keyUper")),
+        ESTADO(true, 80, Internationalization.getStringTranslated("keyUper"));
 
        private int width;
-
+        private String columnName;
         private boolean editable;
 
-        Columns(boolean editable, int width) {
+        Columns(boolean editable, int width,String columnName) {
             this.editable = editable;
             this.width = width;
+            this.columnName = columnName;
+
         }
 
         public boolean isEditable() {
             return editable;
+        }
+
+        public String getColumnName() {
+            return columnName;
         }
 
         public int getWidth(){
@@ -56,6 +63,10 @@ public class IncidenciaTableModel extends JenixTableModel<FenixIncidencia, Incid
         super(Columns.class, incidencias);
     }
 
+    @Override
+    protected String getValueToDisplay(Columns enumC) {
+        return enumC.getColumnName();
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {

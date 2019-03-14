@@ -1,6 +1,7 @@
 package net.dms.fsync.swing.dialogs;
 
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.swing.components.JNumberField;
 import net.dms.fsync.swing.components.JTextFieldLimit;
 import net.dms.fsync.swing.components.Toast;
@@ -158,7 +159,7 @@ public class CreateOtDialog extends JDialog {
             return;
         }*/
         if(fieldNotFill()){
-          Toast.display("Please fill the fields", Toast.ToastType.ERROR);
+          Toast.display(Internationalization.getStringTranslated("toastfillTheFields"), Toast.ToastType.ERROR);
           return;
          }
 
@@ -168,9 +169,9 @@ public class CreateOtDialog extends JDialog {
             otinfo.setId_peticion(fieldIdPetcion.getText());
             //otinfo.setCodigoPeticionCliente(fieldDescription.getText());
             lv.setValuesOtInfoFile(nameOfCreatedFolder,otinfo);
-            Toast.display("Folder OT created Successfully", Toast.ToastType.INFO);
+            Toast.display(Internationalization.getStringTranslated("toastCreatedOtFolder"), Toast.ToastType.INFO);
         }else{
-            Toast.display("Folder OT not created, folder already exists", Toast.ToastType.ERROR);
+            Toast.display(Internationalization.getStringTranslated("tostNotCreatedOtFolder"), Toast.ToastType.ERROR);
 
         }
 

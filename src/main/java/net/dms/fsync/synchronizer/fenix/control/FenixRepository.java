@@ -5,6 +5,7 @@ import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.control.ActionExecutor;
 import net.dms.fsync.httphandlers.control.actions.DownloadAction;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.settings.entities.EverisVariables;
@@ -424,7 +425,7 @@ public class FenixRepository {
             throw new AppException(ex);
         }
 
-            Toast.display("Successo !", Toast.ToastType.INFO);
+            Toast.display(Internationalization.getStringTranslated("toastSuccess"), Toast.ToastType.INFO);
             //toast.setVisible(true);
 
 
@@ -458,7 +459,7 @@ public class FenixRepository {
                 logger.debug("Processing row {}", i);
                 FenixIncidencia incidencia = incidenciaMapper.map(sheet.getRow(i));
                 incidencias.add(incidencia);
-                Toast.display("Upload Sucess", Toast.ToastType.INFO);
+                Toast.display(Internationalization.getStringTranslated("toastSuccessUpload"), Toast.ToastType.INFO);
             }
 
 

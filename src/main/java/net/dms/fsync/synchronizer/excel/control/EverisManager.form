@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="net.dms.fsync.swing.EverisManager">
   <grid id="27dc6" binding="panelParent" default-binding="true" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="1345" height="444"/>
+      <xy x="20" y="20" width="2079" height="444"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -54,37 +54,37 @@
                           <component id="e4de6" class="javax.swing.JButton" binding="saveAccExcelBtn">
                             <constraints/>
                             <properties>
-                              <text value="Guardar excel"/>
+                              <text resource-bundle="i18n/language" key="save_excel"/>
                             </properties>
                           </component>
                           <component id="611e3" class="javax.swing.JButton" binding="uploadBtn">
                             <constraints/>
                             <properties>
-                              <text value="Upload"/>
+                              <text resource-bundle="i18n/language_en_US" key="uploadd"/>
                             </properties>
                           </component>
                           <component id="11972" class="javax.swing.JButton" binding="searchACCs">
                             <constraints/>
                             <properties>
-                              <text value="Actualizar"/>
+                              <text resource-bundle="i18n/language_en_US" key="update"/>
                             </properties>
                           </component>
                           <component id="95dae" class="javax.swing.JButton" binding="addAccBtn">
                             <constraints/>
                             <properties>
-                              <text value="Agregar ACC"/>
+                              <text resource-bundle="i18n/language_en_US" key="add_acc"/>
                             </properties>
                           </component>
                           <component id="20819" class="javax.swing.JButton" binding="removeFenixAccBtn">
                             <constraints/>
                             <properties>
-                              <text value="Eliminar ACC"/>
+                              <text resource-bundle="i18n/language_en_US" key="delete_acc"/>
                             </properties>
                           </component>
                           <component id="cf6b4" class="javax.swing.JButton" binding="checkJiraStatusBtn">
                             <constraints/>
                             <properties>
-                              <text value="Comprobar estado Jira"/>
+                              <text resource-bundle="i18n/language_en_US" key="check_jira_state"/>
                             </properties>
                           </component>
                           <component id="1f7f2" class="javax.swing.JButton" binding="generateSpecificationRequirementsBtn">
@@ -96,13 +96,13 @@
                           <component id="ddc62" class="javax.swing.JButton" binding="configFenixTable">
                             <constraints/>
                             <properties>
-                              <text value="Config"/>
+                              <text resource-bundle="i18n/language_en_US" key="configuration"/>
                             </properties>
                           </component>
                           <component id="b3113" class="javax.swing.JButton" binding="settingsJbtn">
                             <constraints/>
                             <properties>
-                              <text value="Settings"/>
+                              <text resource-bundle="i18n/language_en_US" key="settingss"/>
                             </properties>
                           </component>
                         </children>
@@ -136,7 +136,7 @@
                               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <text value="Total estimado"/>
+                              <text resource-bundle="i18n/language" key="totalEstimated"/>
                             </properties>
                           </component>
                           <component id="2704e" class="javax.swing.JLabel">
@@ -144,7 +144,7 @@
                               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <text value="Total incurrido"/>
+                              <text resource-bundle="i18n/language" key="totalIncurred"/>
                             </properties>
                           </component>
                           <component id="7a354" class="javax.swing.JTextField" binding="totalIncurridoText">
@@ -170,7 +170,7 @@
                               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <text value="Estimado/Incurrido"/>
+                              <text resource-bundle="i18n/language" key="estimatedIncurred"/>
                             </properties>
                           </component>
                         </children>
@@ -229,7 +229,7 @@
                           <component id="699da" class="javax.swing.JButton" binding="refreshJiraBtn">
                             <constraints/>
                             <properties>
-                              <text value="Actualizar"/>
+                              <text resource-bundle="i18n/language" key="update"/>
                             </properties>
                           </component>
                           <component id="4fa96" class="javax.swing.JButton" binding="jiraToAccBtn">
@@ -267,7 +267,7 @@
           <grid id="e0932" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <tabbedpane title="Incidencias"/>
+              <tabbedpane title-resource-bundle="i18n/language" title-key="incidents"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -296,31 +296,31 @@
                   <component id="8588b" class="javax.swing.JButton" binding="addIncidenciaBtn" default-binding="true">
                     <constraints/>
                     <properties>
-                      <text value="Add"/>
+                      <text resource-bundle="i18n/language" key="addd"/>
                     </properties>
                   </component>
                   <component id="58029" class="javax.swing.JButton" binding="saveIncidenciasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Guardar excel"/>
+                      <text resource-bundle="i18n/language" key="save_excel"/>
                     </properties>
                   </component>
                   <component id="ac495" class="javax.swing.JButton" binding="uploadIncidenciasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Upload"/>
+                      <text resource-bundle="i18n/language" key="uploadd"/>
                     </properties>
                   </component>
                   <component id="f915" class="javax.swing.JButton" binding="refreshIncidenciasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Actualizar"/>
+                      <text resource-bundle="i18n/language" key="update"/>
                     </properties>
                   </component>
                   <component id="e0e66" class="javax.swing.JButton" binding="removeIncidenciaBtn">
                     <constraints/>
                     <properties>
-                      <text value="Eliminar"/>
+                      <text resource-bundle="i18n/language" key="delete"/>
                     </properties>
                   </component>
                 </children>
@@ -330,7 +330,7 @@
           <grid id="ec0bb" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <tabbedpane title="Dudas"/>
+              <tabbedpane title-resource-bundle="i18n/language" title-key="doubts"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -359,31 +359,31 @@
                   <component id="ebdef" class="javax.swing.JButton" binding="addDudasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Add"/>
+                      <text resource-bundle="i18n/language" key="addd"/>
                     </properties>
                   </component>
                   <component id="b6673" class="javax.swing.JButton" binding="saveDudasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Guardar excel"/>
+                      <text resource-bundle="i18n/language" key="save_excel"/>
                     </properties>
                   </component>
                   <component id="c6a4f" class="javax.swing.JButton" binding="uploadDudasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Upload"/>
+                      <text resource-bundle="i18n/language" key="uploadd"/>
                     </properties>
                   </component>
                   <component id="ba4b7" class="javax.swing.JButton" binding="refreshDudasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Actualizar"/>
+                      <text resource-bundle="i18n/language" key="update"/>
                     </properties>
                   </component>
                   <component id="70ad1" class="javax.swing.JButton" binding="removeDudasBtn">
                     <constraints/>
                     <properties>
-                      <text value="Eliminar"/>
+                      <text resource-bundle="i18n/language" key="delete"/>
                     </properties>
                   </component>
                 </children>
@@ -415,7 +415,7 @@
             </constraints>
             <properties>
               <horizontalAlignment value="0"/>
-              <text value="Crear OT"/>
+              <text resource-bundle="i18n/language" key="createOt"/>
             </properties>
           </component>
           <component id="474fc" class="javax.swing.JLabel">
@@ -431,7 +431,7 @@
               <grid row="3" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Documentation"/>
+              <text resource-bundle="i18n/language" key="documentation"/>
             </properties>
           </component>
           <component id="334e5" class="javax.swing.JCheckBox" binding="forceDownloadCheckBox" default-binding="true">
@@ -439,7 +439,7 @@
               <grid row="3" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Forzar descarga"/>
+              <text resource-bundle="i18n/language" key="forceDownload"/>
             </properties>
           </component>
           <component id="849e2" class="javax.swing.JButton" binding="openExplorer">
@@ -448,7 +448,7 @@
             </constraints>
             <properties>
               <horizontalAlignment value="0"/>
-              <text value="Open Explorer..."/>
+              <text resource-bundle="i18n/language" key="openExplorer"/>
             </properties>
           </component>
         </children>

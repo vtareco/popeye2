@@ -6,6 +6,7 @@ import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.swing.components.JenixTable;
+import net.dms.fsync.swing.models.AccTableModel;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
@@ -75,8 +76,9 @@ public class TableSettingControl {
     public void apply(JenixTable table, TableSetting tableSetting) {
         if (tableSetting != null) {
             tableSetting.getAllColumns().stream().forEach(c -> {
-                        TableColumn col = table.getColumn(c.getColumn().name());
+                        TableColumn col = table.getColumn(((AccTableModel.Columns) c.getColumn()).getColumnName());
                         if (c.isVisible()) {
+
                             int width = col.getWidth() == 0 ? c.getColumn().getWidth() : col.getWidth();
                             col.setMinWidth(20);
                             col.setMaxWidth(10000);

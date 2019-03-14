@@ -6,14 +6,16 @@ public class ApplicationProperties {
     String proxyHost;
     String proxyPort;
     String workingDirectory;
+    String workingLanguage;
 
 
-    public ApplicationProperties(String fenixUrl, String jiraUrl, String proxyHost, String proxyPort, String workingDirectory) {
+    public ApplicationProperties(String fenixUrl, String jiraUrl, String proxyHost, String proxyPort, String workingDirectory, String workingLanguage) {
         this.fenixUrl = fenixUrl;
         this.jiraUrl = jiraUrl;
         this.proxyHost = proxyHost;
         this.proxyPort = proxyPort;
         this.workingDirectory = workingDirectory;
+        this.workingLanguage = workingLanguage;
     }
 
     public ApplicationProperties() {
@@ -21,7 +23,13 @@ public class ApplicationProperties {
     }
 
 
+    public String getWorkingLanguage() {
+        return workingLanguage;
+    }
 
+    public void setWorkingLanguage(String workingLanguage) {
+        this.workingLanguage = workingLanguage;
+    }
 
     public String getFenixUrl() {
         return fenixUrl;

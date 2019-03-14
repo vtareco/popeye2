@@ -1,5 +1,7 @@
 package net.dms.fsync.swing.components;
 
+import net.dms.fsync.settings.Internationalization;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -18,7 +20,7 @@ public class JTextFieldLimit extends PlainDocument {
         if ((getLength() + str.length()) <= limit) {
             super.insertString(offset, str, attr);
         } else {
-            Toast.display("Max Characters " + limit, Toast.ToastType.WARNING);
+            Toast.display(Internationalization.getStringTranslated("toastMaxChar") + limit, Toast.ToastType.WARNING);
         }
 
     }

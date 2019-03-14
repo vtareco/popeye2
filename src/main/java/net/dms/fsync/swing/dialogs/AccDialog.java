@@ -2,6 +2,7 @@ package net.dms.fsync.swing.dialogs;
 
 import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.Actor;
 import net.dms.fsync.swing.components.*;
@@ -105,7 +106,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         if (StringUtils.isBlank(txtIdPeticion.getText())) {
-            Toast.display("Please fill the ID Peticion", Toast.ToastType.ERROR);
+            Toast.display(Internationalization.getStringTranslated("toastFillIdPetition"), Toast.ToastType.ERROR);
         }
 
         verif();
@@ -172,24 +173,24 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         panel.setBorder(BorderFactory.createEtchedBorder());
         panel.setLayout(new GridBagLayout());
 
-        JLabel lblSummary = new JLabel("Nombre");
-        JLabel lblDescription = new JLabel("Descripción");
-        JLabel lblComments = new JLabel("Comentarios seguimiento (No Fenix)");
-        JLabel lblCodigoPeticionCliente = new JLabel("Código petición cliente");
+        JLabel lblSummary = new JLabel(Internationalization.getStringTranslated("nameLower"));
+        JLabel lblDescription = new JLabel();
+        JLabel lblComments = new JLabel();
+        JLabel lblCodigoPeticionCliente = new JLabel(Internationalization.getStringTranslated("codePetitionClientLower"));
 
-        JLabel lblIdPeticion = new JLabel("ID Peticion");
+        JLabel lblIdPeticion = new JLabel(Internationalization.getStringTranslated("idPetitionLower"));
 
 
-        JLabel lblEstado = new JLabel("Estado");
-        JLabel lblTipo = new JLabel("Tipo");
+        JLabel lblEstado = new JLabel(Internationalization.getStringTranslated("stat"));
+        JLabel lblTipo = new JLabel(Internationalization.getStringTranslated("typeLower"));
         //JLabel lblSubtipo = new JLabel("Subtipo");
-        JLabel lblPuntosHistoria = new JLabel("Puntos Historia");
-        JLabel lblEsfuerzo = new JLabel("Esfuerzo cliente");
-        JLabel lblHistoriaUsuario = new JLabel("Historia usuario");
-        JLabel lblResponsables = new JLabel("Responsables");
+        JLabel lblPuntosHistoria = new JLabel(Internationalization.getStringTranslated("storyPointsLower"));
+        JLabel lblEsfuerzo = new JLabel(Internationalization.getStringTranslated("clientEffort"));
+        JLabel lblHistoriaUsuario = new JLabel(Internationalization.getStringTranslated("userStoryLower"));
+        JLabel lblResponsables = new JLabel(Internationalization.getStringTranslated("responsibleLower"));
         JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
 
-        JButton addBitacoraBtn = new JButton("Agregar comentario");
+        JButton addBitacoraBtn = new JButton(Internationalization.getStringTranslated("addComment"));
         addBitacoraBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -439,13 +440,13 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         if (StringUtils.isBlank(txtCodigoPeticionCliente.getText())) {
-            throw new AppException("Codigo Peticion Cliente es requerido");
+            throw new AppException(Internationalization.getStringTranslated("appExeptionClientPetitionCodeNeed"));
         } else {
             getPayload().setCodigoPeticionCliente(txtCodigoPeticionCliente.getText());
         }
 
         if (txtIdPeticion.equals(null) || StringUtils.isBlank(txtIdPeticion.getText())) {
-            throw new AppException("ID Peticion es requerido");
+            throw new AppException(Internationalization.getStringTranslated("appExeptionPetitionCodeNeed"));
         } else {
             getPayload().setIdPeticion(txtIdPeticion.getText());
 
@@ -461,7 +462,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         getPayload().setHistoriaUsuario(txtHistoriaUsuario.getText());
 
         if (txtEsfuerzoCliente.getText().equals(null) || StringUtils.isBlank(txtEsfuerzoCliente.getText()) || txtEsfuerzoCliente.getText().equals("0.0")) { //validacao esfurzo
-            throw new AppException("Esfurzo no hay sido cumplido o datos invalidos");
+            throw new AppException(Internationalization.getStringTranslated("appExeptionEffortOrDataFailed"));
         } else {
             //getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
             getPayload().setEsfuerzoCliente(txtEsfuerzoCliente.getText());
@@ -489,7 +490,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
 
         if (StringUtils.isBlank(subtipos.toString()) || subtipos.toString().matches("^-(.*)|(.*)-$|(.*)--(.*)")) {
-            throw new AppException("SUB-TIPOS no hay sido cumplido o datos invalidos"); //("^-(.*)|(.*)-$|(.*)--(.*)")
+            throw new AppException(Internationalization.getStringTranslated("subTypeUper") +  Internationalization.getStringTranslated("appExeptionEmptyeOrInvalidData") ); //("^-(.*)|(.*)-$|(.*)--(.*)")
         } else {
             getPayload().setSubTipo(subtipos.toString());
         }

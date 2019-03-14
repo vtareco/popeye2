@@ -1,5 +1,6 @@
 package net.dms.fsync.synchronizer.LocalVariables.business;
 
+import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.settings.entities.EverisVariables;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
@@ -46,16 +47,12 @@ public class VariableService {
         ap.setProxyHost(localVariables.getVariables().get(EverisVariables.PROXY_HOST.getVariableName()));
         ap.setProxyPort(localVariables.getVariables().get(EverisVariables.PROXY_PORT.getVariableName()));
         ap.setWorkingDirectory(localVariables.getVariables().get(EverisVariables.WORKING_DIRECTORY.getVariableName()));
+        ap.setWorkingLanguage("en");
         return ap;
     }
 
 
-    public ArrayList<Filter> getFilterVariables() {
-        ArrayList<Filter> arFilters = new ArrayList<>();
 
-
-        return arFilters;
-    }
 
 
     public UserChange readJsonUserConf(String path) {
@@ -69,7 +66,7 @@ public class VariableService {
             uc.setFenixPassword((String) jsonObject.get("fenixPassword"));
             uc.setJirauser((String) jsonObject.get("jiraUser"));
             uc.setJiraPassword((String) jsonObject.get("jiraPassword"));
-
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -114,7 +111,7 @@ public class VariableService {
             jsonObject.put("jiraUrl", ap.getJiraUrl());
             jsonObject.put("proxyHost", ap.getProxyHost());
             jsonObject.put("proxyPort", ap.getProxyPort());
-
+            jsonObject.put("workingLanguage",ap.getWorkingLanguage());
             char[] currectPath = ap.getWorkingDirectory().toCharArray();
             for (int i = 0; i < currectPath.length; i++) {
                 if (currectPath[i] == '\\') {
@@ -239,6 +236,7 @@ public class VariableService {
             ap.setProxyHost((String) jsonObject.get("proxyHost"));
             ap.setProxyPort((String) jsonObject.get("proxyPort"));
             ap.setWorkingDirectory((String) jsonObject.get("workingDirectory"));
+            ap.setWorkingLanguage((String)jsonObject.get("workingLanguage"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -312,6 +310,7 @@ public class VariableService {
         applcationPropertiesJson.put("jiraUrl", ap.getJiraUrl());
         applcationPropertiesJson.put("workingDirectory", ap.getWorkingDirectory());
         applcationPropertiesJson.put("proxyHost", ap.getProxyHost());
+        applcationPropertiesJson.put("workingLanguage",ap.getWorkingLanguage());
 
         try (FileWriter file = new FileWriter(path)) {
             file.write(applcationPropertiesJson.toJSONString());
@@ -331,7 +330,6 @@ public class VariableService {
                 return filter;
             }
         }
-
         return filter;
     }
 
@@ -373,30 +371,19 @@ public class VariableService {
         OtInfo otinfo = new OtInfo();
         ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
         String projectPath = ap.getWorkingDirectory();
-
         JSONParser jsonparser = new JSONParser();
-
-
         try{
             Object obj = jsonparser.parse(new FileReader(projectPath+"/"+peticion+"/OT_INFO"+"/info.json"));
-
-
             JSONObject object = (JSONObject) obj;
-
             otinfo.setId_peticion((String) object.get("ID_Peticion"));
             otinfo.setCodigoPeticionCliente((String) object.get("Codigo_Peticion_Cliente"));
-
             // a.setIdOt((String) object.get("ID_Peticion"));
             // System.out.println("LOL "+a.getIdOt());
-
             System.out.println("OBJETO INFO"+otinfo);
-
             return otinfo;
-
         }catch(Exception e){
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -423,10 +410,19 @@ public class VariableService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
 
+    public ArrayList<String> getAvailableLanguages() {
+       ArrayList<String> arLanguages = new ArrayList<>();
+        for (File file : new File(Utils.getProgramRoot()+"\\classes\\i18n").listFiles()) {
+            if (file.isFile()) {
+                arLanguages.add(file.getName().substring(file.getName().indexOf("e_")+2,file.getName().indexOf(".p")));
+            }
+        }
+
+        return arLanguages;
+    }
 
 }

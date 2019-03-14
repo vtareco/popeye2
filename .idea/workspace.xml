@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5330ab89-6d84-44f1-86d4-34b64e11b6f3" name="Default Changelist" comment="">
+    <list default="true" id="5330ab89-6d84-44f1-86d4-34b64e11b6f3" name="Default Changelist" comment="I18n implemented">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/Internationalization.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/ExecutionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/ExecutionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/ColumnSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/ColumnSetting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/AddFilter.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/FilterManagePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/FilterManagePane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JTextFieldLimit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JTextFieldLimit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JenixTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JenixTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/ColumnsSettingDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/ColumnsSettingDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/AccTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/AccTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/ColumnsSettingTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/ColumnsSettingTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/DudaTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/DudaTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/JiraTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/JiraTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/preferences/TableSettingControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/preferences/TableSettingControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/business/VariableService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/business/VariableService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/control/LocalVariables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/control/LocalVariables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/ApplicationProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/ApplicationProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/enumerations/TableColumnEnumType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/enumerations/TableColumnEnumType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/jira/control/JiraRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/jira/control/JiraRepository.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,65 +42,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/jira/control/JiraRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="53" selection-start-line="53" selection-end-line="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/FilterManagePane.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-527">
-              <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+            <state relative-caret-position="47">
+              <caret line="127" column="40" lean-forward="true" selection-start-line="127" selection-start-column="40" selection-end-line="127" selection-end-column="40" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="56" />
-            </state>
-          </provider>
+          <provider editor-type-id="ResourceBundle" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            <state relative-caret-position="204">
+              <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="86" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/ColumnsSettingDialog.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="400">
+              <caret line="173" column="90" selection-start-line="173" selection-start-column="90" selection-end-line="173" selection-end-column="90" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JTextFieldLimit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="131" selection-start-line="131" selection-end-line="131" />
+            <state relative-caret-position="306">
+              <caret line="22" column="80" selection-start-line="22" selection-start-column="80" selection-end-line="22" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="1283" column="103" selection-start-line="1283" selection-start-column="103" selection-end-line="1283" selection-end-column="103" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,41 +92,62 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/SettingsDialog.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/JiraSearchResponse.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/jira/business/JiraService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+            <state relative-caret-position="204">
+              <caret line="108" column="87" selection-start-line="108" selection-start-column="87" selection-end-line="108" selection-end-column="87" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>JenixTable</find>
-      <find>onAccept()</find>
-      <find>Jnumber</find>
-      <find>cmb</find>
+      <find>save_ex</find>
+      <find>.form</find>
+      <find>res</find>
+      <find>i</find>
+      <find>a</find>
+      <find>name</find>
+      <find>state</find>
+      <find>getValueToDisplay</find>
+      <find>jiraS</find>
+      <find>utils.</find>
+      <find>des</find>
+      <find>setu</find>
+      <find>jbutton</find>
+      <find>setup</find>
+      <find>configu</find>
+      <find>visi</find>
+      <find>getColumn</find>
+      <find>getname</find>
+      <find>&quot;</find>
+      <find>Upser</find>
+      <find>get</find>
+      <find>getcolum</find>
+      <find>ap</find>
+      <find>Jdate</find>
+      <find>JDatePicker</find>
+      <find>fe</find>
+      <find>succ</find>
+      <find>userc</find>
+      <find>filter</find>
+      <find>Toast.display</find>
     </findStrings>
+    <dirStrings>
+      <dir>C:\Users\vdivizin\Documents\popeye_PT\src\main\java\net\dms\fsync\settings\entities</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -124,23 +155,53 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JenixTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/control/LocalVariables.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/jira/control/JiraRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/messages_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/columnNames_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/fenixOptions_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/syncJiraFenix_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/entities/config/executions/ExecutionFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/language_es.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/ApplicationProperties.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/language_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/control/LocalVariables.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/language_en_EN.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/TableSetting.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/enumerations/TableColumnEnumType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/ColumnSetting.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/DudaTableModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/JiraTableModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/business/VariableService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/AccTableModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/preferences/TableType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/preferences/TableSettingControl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JenixTableModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/ColumnsSettingTableModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/ColumnsSettingDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/Internationalization.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/FilterManagePane.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JTextFieldLimit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1067" />
-    <option name="y" value="73" />
-    <option name="width" value="854" />
-    <option name="height" value="1017" />
+    <option name="x" value="-1688" />
+    <option name="y" value="13" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -193,6 +254,34 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="httphandlers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
               <item name="swing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -203,7 +292,27 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="fsync" type="462c0819:PsiDirectoryNode" />
               <item name="swing" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
               <item name="dialogs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
@@ -274,21 +383,45 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="i18n" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="popeye" type="58d84e3e:PackageViewProjectNode" />
+              <item name="popeye" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="309" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551894673574" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552560560713" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vdivizin\Documents\popeye_PT\src\main\resources\i18n" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -334,7 +467,8 @@
       <updated>1551700178383</updated>
       <workItem from="1551700185161" duration="11988000" />
       <workItem from="1551950863715" duration="500000" />
-      <workItem from="1551951815653" duration="2101000" />
+      <workItem from="1551951815653" duration="16656000" />
+      <workItem from="1552039411408" duration="85074000" />
     </task>
     <task id="LOCAL-00001" summary="Edit/ add acc bug fix:&#10;if pendiente asignacion = en ejecucion">
       <created>1551700746814</created>
@@ -343,17 +477,24 @@
       <option name="project" value="LOCAL" />
       <updated>1551700746814</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changing directory copies the JenixFolder and &quot;fenix_acc.json&quot; if exists.">
+      <created>1551954265637</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1551954265637</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21176000" />
+    <option name="totallyTimeSpent" value="120805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1688" y="13" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29278728" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23410758" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -362,8 +503,8 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32922733" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5117581" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39977604" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28555432" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.42105263" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -371,9 +512,9 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32922733" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32922733" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3281075" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -390,144 +531,259 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Edit/ add acc bug fix:&#10;if pendiente asignacion = en ejecucion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit/ add acc bug fix:&#10;if pendiente asignacion = en ejecucion" />
+    <MESSAGE value="Changing directory copies the JenixFolder and &quot;fenix_acc.json&quot; if exists." />
+    <MESSAGE value="I18n implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="I18n implemented" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
+          <line>331</line>
+          <properties />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
+          <line>328</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
+          <line>321</line>
+          <properties />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((Class)((AccTableModel)this).columns).name" custom="java.lang.Class,net.dms.fsync.swing.models.AccTableModel" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>index == 0</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="forceReturnValue">
+      <expression>
+        <expression-string>&quot;Miro&quot;</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>WorkingJira.getIdPeticion()</expression-string>
+        <expression-string>TableType.FENIX_ACC</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>AccStatus.PENDIENTE_ASIGNACION.getDescription()</expression-string>
+        <expression-string>c.getColumn()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>AccStatus.PENDIENTE_ASIGNACION</expression-string>
+        <expression-string>c.getColumn().name()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>cmbEstado.getSelectedItem()</expression-string>
+        <expression-string>aColumn.getIdentifier()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>aColumn.getIdentifier())</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>if( 1 &lt; 2){ )}</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>if( 1 &lt; 2){ System.out.println(&quot; ola&quot;)}</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>if( 1 &lt; 2){ system.out.println(&quot; ola&quot;)}</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>constant</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>enumConstants</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5-sources.jar!/org/apache/commons/lang3/StringUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/JiraVariables.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="115" column="24" selection-start-line="115" selection-start-column="13" selection-end-line="115" selection-end-column="24" />
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/business/SettingsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#404#405#0" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_EN">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="135" column="34" selection-start-line="135" selection-start-column="34" selection-end-line="135" selection-end-column="34" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/AddFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/io/Serializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="168" column="17" selection-start-line="168" selection-start-column="17" selection-end-line="168" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/FenixDuda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+          <folding>
+            <element signature="e#1730#1731#0" expanded="true" />
+            <element signature="e#1759#1760#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/TableUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="69" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/ColumnSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding>
+            <element signature="e#445#446#0" expanded="true" />
+            <element signature="e#474#475#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/enumerations/AccRowType.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+        <state relative-caret-position="323">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/control/LocalVariables.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/lang/Enum.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        <state relative-caret-position="200">
+          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/table/AbstractTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/FenixAcc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/EverisPropertiesType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/EverisVariables.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/common/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="702">
+          <caret line="42" column="29" lean-forward="true" selection-start-line="37" selection-start-column="4" selection-end-line="46" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <element signature="e#1383#1384#0" expanded="true" />
+            <element signature="e#1424#1425#0" expanded="true" />
+            <element signature="e#2659#2660#0" expanded="true" />
+            <element signature="e#2712#2713#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JenixTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="e#432#433#0" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
-            <element signature="e#503#504#0" expanded="true" />
-            <element signature="e#551#552#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/PeticionDialog.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/JTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/business/FenixService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="109" column="5" lean-forward="true" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
-          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="167" column="28" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
-          <folding>
-            <element signature="e#6314#6324#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/Toast.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="93" column="8" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9605">
-          <caret line="614" selection-start-line="614" selection-end-line="614" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/jira/control/JiraRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/FilterManagePane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/ColumnsSettingDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="131" selection-start-line="131" selection-end-line="131" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="197">
+          <caret line="2562" selection-start-line="2562" selection-end-line="2562" />
         </state>
       </provider>
     </entry>
@@ -538,33 +794,634 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/JiraSearchResponse.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/preferences/TableType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        <state relative-caret-position="102">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/jira/business/JiraService.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/table/DefaultTableColumnModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        <state relative-caret-position="336">
+          <caret line="277" selection-start-line="277" selection-end-line="277" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/TableSetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/preferences/TableSettingControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/enumerations/TableColumnEnumType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JenixTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="52" column="38" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="38" />
+          <folding>
+            <element signature="docComment;class#JenixTableModel#0" />
+            <element signature="e#1588#1589#0" expanded="true" />
+            <element signature="e#1623#1624#0" expanded="true" />
+            <element signature="e#1664#1665#0" expanded="true" />
+            <element signature="e#1713#1714#0" expanded="true" />
+            <element signature="e#1759#1760#0" expanded="true" />
+            <element signature="e#1793#1794#0" expanded="true" />
+            <element signature="e#1842#1843#0" expanded="true" />
+            <element signature="e#1883#1884#0" expanded="true" />
+            <element signature="e#1929#1930#0" expanded="true" />
+            <element signature="e#1970#1971#0" expanded="true" />
+            <element signature="e#2007#2008#0" expanded="true" />
+            <element signature="e#2044#2045#0" expanded="true" />
+            <element signature="method#load#0;class#JenixTableModel#0" />
+            <element signature="method#clear#0;class#JenixTableModel#0" />
+            <element signature="e#2314#2315#0" expanded="true" />
+            <element signature="e#2341#2342#0" expanded="true" />
+            <element signature="method#getElements#0;class#JenixTableModel#0" />
+            <element signature="method#getRowColour#0;class#JenixTableModel#0" />
+            <element signature="method#findColumnTypeByOrdinal#0;class#JenixTableModel#0" />
+            <element signature="method#getValueAt#0;class#JenixTableModel#0" />
+            <element signature="method#getValue#0;class#JenixTableModel#0" />
+            <element signature="method#setValueAt#0;class#JenixTableModel#0" />
+            <element signature="method#setValue#0;class#JenixTableModel#0" />
+            <element signature="method#isCellEditable#0;class#JenixTableModel#0" />
+            <element signature="e#5053#5054#0" expanded="true" />
+            <element signature="e#5102#5103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/JiraTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="58" selection-end-column="5" />
+          <folding>
+            <element signature="e#1833#1834#0" expanded="true" />
+            <element signature="e#1877#1878#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/DudaTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="272" column="21" selection-start-line="272" selection-start-column="21" selection-end-line="272" selection-end-column="21" />
+          <folding>
+            <element signature="method#getValueAt#0;class#DudaTableModel#0" />
+            <element signature="method#setValueAt#0;class#DudaTableModel#0" />
+            <element signature="e#11210#11211#0" expanded="true" />
+            <element signature="e#11254#11255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/ColumnsSettingTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="31" column="35" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="35" />
+          <folding>
+            <element signature="e#806#807#0" expanded="true" />
+            <element signature="e#847#848#0" expanded="true" />
+            <element signature="e#1386#1387#0" expanded="true" />
+            <element signature="e#1439#1440#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/ApplicationProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="25" column="11" lean-forward="true" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
+          <folding>
+            <element signature="e#723#724#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/entities/WorkingJira.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="56" />
+        <state relative-caret-position="156">
+          <caret line="164" column="25" selection-start-line="164" selection-start-column="25" selection-end-line="164" selection-end-column="25" />
+          <folding>
+            <element signature="e#5298#5299#0" expanded="true" />
+            <element signature="e#5366#5367#0" expanded="true" />
+            <element signature="e#5427#5428#0" expanded="true" />
+            <element signature="e#5490#5491#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/ColumnsSettingDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="88" selection-start-line="88" selection-end-line="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="79" column="64" selection-start-line="79" selection-start-column="64" selection-end-line="79" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/util/ResourceBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="1395" selection-start-line="1395" selection-end-line="1395" />
+          <folding>
+            <element signature="docComment;class#ResourceBundle#0" />
+            <element signature="e#11239#11278#0" />
+            <element signature="e#11338#11395#0" />
+            <element signature="class#11461:11699" />
+            <element signature="method#getKeys#0;class#11461:11699" />
+            <element signature="method#handleGetObject#0;class#11461:11699" />
+            <element signature="method#toString#0;class#11461:11699" />
+            <element signature="e#11707#12275#0" />
+            <element signature="e#12412#12497#0" />
+            <element signature="e#12592#13152#0" />
+            <element signature="e#13225#13410#0" />
+            <element signature="e#13460#13506#0" />
+            <element signature="e#13546#13602#0" />
+            <element signature="e#13633#13709#0" />
+            <element signature="e#13753#13871#0" />
+            <element signature="e#13917#13992#0" />
+            <element signature="initializer##0;class#ResourceBundle#0" />
+            <element signature="e#14400#14531#1" />
+            <element signature="e#14432#14489#1" />
+            <element signature="e#14569#14676#0" />
+            <element signature="e#14569#14712#0" />
+            <element signature="e#14718#15350#0" />
+            <element signature="e#15450#16108#0" />
+            <element signature="e#16217#16935#0" />
+            <element signature="e#16217#17591#0" />
+            <element signature="e#17052#17565#1" />
+            <element signature="e#17086#17146#1" />
+            <element signature="e#17176#17555#1" />
+            <element signature="e#17597#17893#0" />
+            <element signature="e#17960#18804#0" />
+            <element signature="e#18240#18779#1" />
+            <element signature="e#18254#18318#0" />
+            <element signature="e#18810#18864#0" />
+            <element signature="e#18810#20299#0" />
+            <element signature="e#19287#19574#0" />
+            <element signature="e#19495#19539#1" />
+            <element signature="e#19584#19619#0" />
+            <element signature="e#19628#19843#0" />
+            <element signature="e#19731#19793#1" />
+            <element signature="e#19852#20052#0" />
+            <element signature="e#19922#19986#1" />
+            <element signature="e#20061#20293#0" />
+            <element signature="e#20147#20219#1" />
+            <element signature="e#20305#20552#0" />
+            <element signature="e#20305#20687#0" />
+            <element signature="e#20693#20988#0" />
+            <element signature="e#20693#26448#0" />
+            <element signature="e#21342#21405#0" />
+            <element signature="e#21972#22332#0" />
+            <element signature="e#22135#22189#1" />
+            <element signature="e#22195#22289#1" />
+            <element signature="e#22405#22611#0" />
+            <element signature="e#22486#22576#1" />
+            <element signature="e#22688#22894#0" />
+            <element signature="e#22769#22859#1" />
+            <element signature="e#23014#24386#0" />
+            <element signature="e#23083#23127#1" />
+            <element signature="e#23144#24278#0" />
+            <element signature="e#23329#23382#1" />
+            <element signature="e#23476#23529#1" />
+            <element signature="e#23630#23683#1" />
+            <element signature="e#23782#23858#1" />
+            <element signature="e#23991#24037#0" />
+            <element signature="e#24473#24761#0" />
+            <element signature="e#24684#24751#1" />
+            <element signature="e#24771#25371#0" />
+            <element signature="e#24811#25221#0" />
+            <element signature="e#24911#25087#1" />
+            <element signature="e#25259#25361#0" />
+            <element signature="e#25533#25922#0" />
+            <element signature="e#25610#25661#1" />
+            <element signature="e#25667#25912#1" />
+            <element signature="e#25685#25729#0" />
+            <element signature="e#25839#25898#1" />
+            <element signature="e#26008#26442#0" />
+            <element signature="e#26110#26309#1" />
+            <element signature="e#26167#26238#1" />
+            <element signature="e#26244#26295#1" />
+            <element signature="e#26454#26558#0" />
+            <element signature="e#26454#26652#0" />
+            <element signature="e#26658#26877#0" />
+            <element signature="e#26658#27305#0" />
+            <element signature="e#27070#27219#0" />
+            <element signature="e#27311#27451#0" />
+            <element signature="e#27311#27885#0" />
+            <element signature="e#27647#27799#0" />
+            <element signature="e#27891#28872#0" />
+            <element signature="e#27891#29159#0" />
+            <element signature="e#29165#30720#0" />
+            <element signature="e#29165#31049#0" />
+            <element signature="e#31055#32120#0" />
+            <element signature="e#31055#32458#0" />
+            <element signature="e#32464#34214#0" />
+            <element signature="e#32464#34557#0" />
+            <element signature="e#34563#44382#0" />
+            <element signature="e#34563#44703#0" />
+            <element signature="e#44555#44612#1" />
+            <element signature="e#44709#55502#0" />
+            <element signature="e#44709#55847#0" />
+            <element signature="e#55713#55770#1" />
+            <element signature="e#55853#56237#0" />
+            <element signature="e#55944#56198#1" />
+            <element signature="e#56015#56188#1" />
+            <element signature="e#56119#56174#1" />
+            <element signature="e#56453#56510#1" />
+            <element signature="e#56520#56579#0" />
+            <element signature="e#56995#57074#1" />
+            <element signature="e#57084#57149#0" />
+            <element signature="e#57405#57443#1" />
+            <element signature="e#57453#57518#0" />
+            <element signature="e#57820#57910#1" />
+            <element signature="e#58111#59527#1" />
+            <element signature="e#58275#58382#1" />
+            <element signature="e#58491#58553#0" />
+            <element signature="e#58850#59517#1" />
+            <element signature="e#59120#59166#1" />
+            <element signature="e#59184#59244#0" />
+            <element signature="e#59443#59503#1" />
+            <element signature="e#59775#59895#0" />
+            <element signature="e#59775#60202#0" />
+            <element signature="e#60018#60174#1" />
+            <element signature="e#60105#60164#1" />
+            <element signature="e#60208#63628#0" />
+            <element signature="e#60750#60895#1" />
+            <element signature="e#60961#61003#1" />
+            <element signature="e#61013#61074#0" />
+            <element signature="e#61324#61405#1" />
+            <element signature="e#61527#61591#0" />
+            <element signature="e#61777#62655#1" />
+            <element signature="e#61855#62645#1" />
+            <element signature="e#61873#61927#0" />
+            <element signature="e#62227#62281#1" />
+            <element signature="e#62298#62353#0" />
+            <element signature="e#62553#62631#1" />
+            <element signature="e#62699#63599#1" />
+            <element signature="e#62779#63416#0" />
+            <element signature="e#62897#63196#1" />
+            <element signature="e#62946#63019#1" />
+            <element signature="e#63214#63285#0" />
+            <element signature="e#63425#63589#0" />
+            <element signature="e#63500#63575#1" />
+            <element signature="e#63634#65294#0" />
+            <element signature="e#63895#63954#0" />
+            <element signature="e#64168#65264#1" />
+            <element signature="e#64230#64404#0" />
+            <element signature="e#64432#64664#0" />
+            <element signature="e#64450#64499#0" />
+            <element signature="e#64689#64746#0" />
+            <element signature="e#64779#65254#1" />
+            <element signature="e#64797#64849#0" />
+            <element signature="e#65062#65121#0" />
+            <element signature="e#65300#65430#0" />
+            <element signature="e#65436#65559#0" />
+            <element signature="e#65436#66129#0" />
+            <element signature="e#65710#66102#1" />
+            <element signature="e#65744#65789#1" />
+            <element signature="e#65863#66056#1" />
+            <element signature="e#65989#66042#1" />
+            <element signature="e#66135#66206#0" />
+            <element signature="e#66428#66489#0" />
+            <element signature="e#66580#66617#1" />
+            <element signature="e#66992#67471#0" />
+            <element signature="e#66992#72376#0" />
+            <element signature="e#67706#67742#1" />
+            <element signature="e#67820#67856#1" />
+            <element signature="e#67947#68011#0" />
+            <element signature="e#69745#69954#1" />
+            <element signature="e#69960#72347#1" />
+            <element signature="e#70188#72337#1" />
+            <element signature="e#70287#72131#1" />
+            <element signature="e#70309#70357#0" />
+            <element signature="e#70471#72113#0" />
+            <element signature="e#70678#72091#1" />
+            <element signature="e#70712#71246#0" />
+            <element signature="e#71267#71352#0" />
+            <element signature="e#71401#71822#1" />
+            <element signature="e#71435#71478#0" />
+            <element signature="e#71828#72065#1" />
+            <element signature="e#71862#71910#0" />
+            <element signature="e#72137#72323#1" />
+            <element signature="e#72382#72711#0" />
+            <element signature="e#72382#74223#0" />
+            <element signature="e#73035#74194#1" />
+            <element signature="e#73382#73444#0" />
+            <element signature="e#73555#74184#1" />
+            <element signature="e#73654#73968#1" />
+            <element signature="e#73813#73866#0" />
+            <element signature="e#73974#74170#1" />
+            <element signature="e#73996#74049#0" />
+            <element signature="e#74229#74916#0" />
+            <element signature="e#74452#74708#1" />
+            <element signature="e#74466#74524#0" />
+            <element signature="e#74760#74814#1" />
+            <element signature="e#74820#74910#1" />
+            <element signature="e#74922#75135#0" />
+            <element signature="e#75272#75590#0" />
+            <element signature="e#75272#75929#0" />
+            <element signature="e#75681#75738#1" />
+            <element signature="e#75820#75923#1" />
+            <element signature="e#75865#75913#1" />
+            <element signature="e#75935#76299#0" />
+            <element signature="e#76364#76565#0" />
+            <element signature="e#76622#77140#0" />
+            <element signature="e#76622#77469#0" />
+            <element signature="e#77211#77268#1" />
+            <element signature="e#77336#77441#1" />
+            <element signature="e#77387#77431#1" />
+            <element signature="e#77475#77765#0" />
+            <element signature="e#77475#77993#0" />
+            <element signature="e#77911#77966#1" />
+            <element signature="e#77999#78789#0" />
+            <element signature="e#77999#79427#0" />
+            <element signature="e#78861#79398#1" />
+            <element signature="e#78895#79388#0" />
+            <element signature="e#78933#79374#1" />
+            <element signature="e#79108#79321#1" />
+            <element signature="e#79229#79299#1" />
+            <element signature="e#79435#86618#0" />
+            <element signature="e#79435#132087#0" />
+            <element signature="e#86661#86997#0" />
+            <element signature="e#87212#87473#0" />
+            <element signature="e#87610#87881#0" />
+            <element signature="e#88028#88199#0" />
+            <element signature="e#88263#88472#0" />
+            <element signature="e#88611#88729#0" />
+            <element signature="e#88611#88769#0" />
+            <element signature="e#88779#89970#0" />
+            <element signature="e#88779#90474#0" />
+            <element signature="e#90101#90176#1" />
+            <element signature="e#90231#90301#1" />
+            <element signature="e#90358#90414#1" />
+            <element signature="e#90484#91657#0" />
+            <element signature="e#90484#92204#0" />
+            <element signature="e#91795#91864#1" />
+            <element signature="e#91924#92009#1" />
+            <element signature="e#92064#92144#1" />
+            <element signature="e#92214#93995#0" />
+            <element signature="e#92214#94198#0" />
+            <element signature="e#94088#94153#1" />
+            <element signature="e#94208#103476#0" />
+            <element signature="e#94208#103750#0" />
+            <element signature="e#103593#103658#1" />
+            <element signature="e#103854#109263#0" />
+            <element signature="e#103960#107379#0" />
+            <element signature="e#104418#104698#1" />
+            <element signature="e#104489#104601#1" />
+            <element signature="e#104607#104680#1" />
+            <element signature="e#104763#105447#1" />
+            <element signature="e#105051#105390#1" />
+            <element signature="e#105155#105217#1" />
+            <element signature="e#105502#106008#1" />
+            <element signature="e#106105#107290#1" />
+            <element signature="e#106176#106753#1" />
+            <element signature="e#106202#106260#0" />
+            <element signature="e#106369#106731#0" />
+            <element signature="e#106808#107272#1" />
+            <element signature="e#106834#106895#0" />
+            <element signature="e#106993#107250#0" />
+            <element signature="e#107393#109253#0" />
+            <element signature="e#107590#107898#1" />
+            <element signature="e#107729#107880#1" />
+            <element signature="e#107995#108173#1" />
+            <element signature="e#108043#108155#1" />
+            <element signature="e#108215#108320#1" />
+            <element signature="e#108362#108983#1" />
+            <element signature="e#108467#108527#0" />
+            <element signature="e#108620#108810#1" />
+            <element signature="e#108672#108788#1" />
+            <element signature="e#108856#108965#1" />
+            <element signature="e#109027#109124#1" />
+            <element signature="e#109273#111074#0" />
+            <element signature="e#109273#111386#0" />
+            <element signature="e#111183#111248#1" />
+            <element signature="e#111396#116318#0" />
+            <element signature="e#111396#119672#0" />
+            <element signature="e#116722#117496#1" />
+            <element signature="e#116744#117429#0" />
+            <element signature="e#116971#117027#0" />
+            <element signature="e#117147#117230#1" />
+            <element signature="e#117236#117411#1" />
+            <element signature="e#117540#119533#1" />
+            <element signature="e#117671#117725#1" />
+            <element signature="e#117896#119160#0" />
+            <element signature="e#118206#118912#1" />
+            <element signature="e#118346#118878#1" />
+            <element signature="e#118501#118840#1" />
+            <element signature="e#118547#118586#0" />
+            <element signature="e#118918#119041#1" />
+            <element signature="e#119197#119274#0" />
+            <element signature="e#119311#119519#1" />
+            <element signature="e#119337#119429#0" />
+            <element signature="e#119438#119501#0" />
+            <element signature="e#119539#119635#1" />
+            <element signature="e#119682#122289#0" />
+            <element signature="e#119682#122531#0" />
+            <element signature="e#122410#122475#1" />
+            <element signature="e#122541#124999#0" />
+            <element signature="e#122541#126950#0" />
+            <element signature="e#125244#125309#1" />
+            <element signature="e#125391#125452#1" />
+            <element signature="e#125505#126758#0" />
+            <element signature="e#125644#125698#1" />
+            <element signature="e#125792#126744#1" />
+            <element signature="e#125950#126671#1" />
+            <element signature="e#126142#126543#1" />
+            <element signature="e#126278#126517#1" />
+            <element signature="e#126398#126487#1" />
+            <element signature="e#126549#126649#1" />
+            <element signature="e#126792#126834#0" />
+            <element signature="e#126960#129096#0" />
+            <element signature="e#126960#130514#0" />
+            <element signature="e#129205#129253#1" />
+            <element signature="e#129522#129570#1" />
+            <element signature="e#129690#130117#1" />
+            <element signature="e#129727#129870#1" />
+            <element signature="e#129895#130010#1" />
+            <element signature="e#130016#130103#1" />
+            <element signature="e#130123#130469#1" />
+            <element signature="e#130160#130276#1" />
+            <element signature="e#130301#130389#1" />
+            <element signature="e#130395#130455#1" />
+            <element signature="e#130524#131488#0" />
+            <element signature="e#130524#131784#0" />
+            <element signature="e#131794#132081#0" />
+            <element signature="e#131947#131991#1" />
+            <element signature="e#131997#132071#1" />
+            <element signature="e#132093#132721#0" />
+            <element signature="e#132528#132715#0" />
+            <element signature="e#132612#132677#1" />
+            <element signature="e#132727#133470#0" />
+            <element signature="e#133246#133464#0" />
+            <element signature="e#133364#133429#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/control/LocalVariables.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="82" column="6" selection-start-line="82" selection-start-column="6" selection-end-line="82" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/business/VariableService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3563">
+          <caret line="400" column="28" selection-start-line="400" selection-start-column="28" selection-end-line="400" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/AccTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1717">
+          <caret line="117" column="58" selection-start-line="117" selection-start-column="58" selection-end-line="117" selection-end-column="58" />
+          <folding>
+            <element signature="e#2752#2753#0" expanded="true" />
+            <element signature="e#2793#2794#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
+            <element signature="e#3233#3234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/Internationalization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="117" selection-start-line="10" selection-start-column="117" selection-end-line="10" selection-end-column="117" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#405#406#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/CalendarCellEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-527">
-          <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+        <state relative-caret-position="357">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="e#3452#3453#0" expanded="true" />
+          </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/FilterManagePane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="461" column="30" lean-forward="true" selection-start-line="461" selection-start-column="30" selection-end-line="461" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/httphandlers/control/ActionExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="95" column="92" lean-forward="true" selection-start-line="95" selection-start-column="30" selection-end-line="95" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="108" column="87" selection-start-line="108" selection-start-column="87" selection-end-line="108" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="173" column="90" selection-start-line="173" selection-start-column="90" selection-end-line="173" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JTextFieldLimit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="22" column="80" selection-start-line="22" selection-start-column="80" selection-end-line="22" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="1283" column="103" selection-start-line="1283" selection-start-column="103" selection-end-line="1283" selection-end-column="103" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="127" column="40" lean-forward="true" selection-start-line="127" selection-start-column="40" selection-end-line="127" selection-end-column="40" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
     </entry>
   </component>
   <component name="masterDetails">

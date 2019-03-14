@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.Panes;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.UserChange;
@@ -24,7 +25,7 @@ public class UserChangePane extends JPanel {
 
     public UserChangePane(String path) {
         setLayout(null);
-
+        this.setName(Internationalization.getStringTranslated("userConfiguration"));
         loadPane(path);
     }
 
@@ -58,7 +59,7 @@ public class UserChangePane extends JPanel {
 
                 changeUserFunction(uc,path);
                 //JOptionPane.showMessageDialog(null,"Success","Information",1,null);
-                Toast.display("Success",Toast.ToastType.INFO);
+                Toast.display(Internationalization.getStringTranslated("toastSuccess"),Toast.ToastType.INFO);
 
             }
         });
@@ -123,7 +124,7 @@ public class UserChangePane extends JPanel {
 
     private void fenixConfigurationLoad(String user, String password) {
 
-        fenixCredentialsJl.setText(" Fenix Credentials");
+        fenixCredentialsJl.setText(Internationalization.getStringTranslated("fenixCredentials"));
         fenixCredentialsJl.setHorizontalAlignment(JLabel.CENTER);
         fenixCredentialsJl.setFont(new Font("Arial", Font.BOLD, 16));
         fenixCredentialsJl.setBounds(200, 7, 230, 14);
@@ -142,7 +143,7 @@ public class UserChangePane extends JPanel {
     }
 
     private void jiraConfigurationLoad(String user, String password) {
-        jiraCredentialsJl.setText(" Jira Credentials");
+        jiraCredentialsJl.setText(Internationalization.getStringTranslated("jiraCredentials"));
         jiraCredentialsJl.setHorizontalAlignment(JLabel.CENTER);
         jiraCredentialsJl.setFont(new Font("Arial", Font.BOLD, 16));
         jiraCredentialsJl.setBounds(200, 150, 230, 14);
@@ -154,6 +155,7 @@ public class UserChangePane extends JPanel {
         jiraUserJtf.setHorizontalAlignment(JTextField.CENTER);
         jiraUserJtf.setText(user);
         this.add(jiraUserJtf);
+
         jiraPasswordJtf.setText(password);
         jiraPasswordJtf.setHorizontalAlignment(JTextField.CENTER);
         jiraPasswordJtf.setBounds(200, 205, 230, 25);
@@ -162,25 +164,22 @@ public class UserChangePane extends JPanel {
 
 
     private void buttonConfigurationLoad() {
-        acceptChangesJbtn.setName("acceptChangesBtn");
-        acceptChangesJbtn.setText("Save");
+        acceptChangesJbtn.setText(Internationalization.getStringTranslated("saveLower"));
         acceptChangesJbtn.setBounds(30, 300, 110, 30);
         this.add(acceptChangesJbtn);
 
-        declineChangesJbtn.setName("declineChangesBtn");
-        declineChangesJbtn.setText("Cancel");
+
+        declineChangesJbtn.setText(Internationalization.getStringTranslated("cancelLower"));
         declineChangesJbtn.setBounds(455, 300, 110, 30);
 
 
         reReloadChanges.setFont(new Font("Arial", Font.PLAIN, 10));
-        reReloadChanges.setName("reloadChanges");
-        reReloadChanges.setText("Return");
+        reReloadChanges.setText(Internationalization.getStringTranslated("returnLower"));
         reReloadChanges.setBounds(470, 7, 100, 25);
         this.add(reReloadChanges);
 
         clearAllBtn.setFont(new Font("Arial", Font.PLAIN, 10));
-        clearAllBtn.setName("clearFields");
-        clearAllBtn.setText("Clear Text Fields");
+        clearAllBtn.setText(Internationalization.getStringTranslated("clearTextFields"));
         clearAllBtn.setBounds(200, 230, 230, 25);
         this.add(clearAllBtn);
     }

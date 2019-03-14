@@ -6,6 +6,7 @@ import net.dms.fsync.httphandlers.entities.config.Execution;
 import net.dms.fsync.httphandlers.entities.config.executions.ExecutionFactory;
 import net.dms.fsync.httphandlers.entities.enumerations.HttpMethod;
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.settings.entities.EverisConfig;
 import net.dms.fsync.settings.entities.EverisPropertiesType;
 import net.dms.fsync.swing.components.Toast;
@@ -92,10 +93,10 @@ public class ActionExecutor {
             }
 //PARA TESTAR FUNCIONALIDADE
             if(execution.getName().equals("fenix_upload_accs")){
-                Toast.display("Successo", Toast.ToastType.INFO);
+                Toast.display(Internationalization.getStringTranslated("toastSuccessUpload"), Toast.ToastType.INFO);
             }
 
-            Toast.display("Successo 2", Toast.ToastType.INFO);
+
 
         }catch(Exception ex){
 

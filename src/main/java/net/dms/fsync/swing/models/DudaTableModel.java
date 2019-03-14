@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.models;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.swing.components.JenixTableModel;
 import net.dms.fsync.swing.components.MyColors;
 import net.dms.fsync.swing.components.SwingUtil;
@@ -20,35 +21,36 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
 
     public enum Columns implements TableColumnEnumType {
 
-        ID_DUDA(false, 50),
-        ID_REQUERIMIENTO(false, 50),
-        ESTADO(true, 50),
-        ACC(true, 50),
-        DESCRIPCION(true, 50),
-        RESPUESTA(true, 50),
-        RESP_RESPUESTA_PROYECTO(true, 50),
-        RESP_RESPUESTA_CLIENTE(true, 50),
-        RESPONSABLE_CONSULTA(true, 50),
-        FECHA_PREVISTA_RESPUESTA(true, 50),
-        AGRUPACION(true, 50),
-        ID_RELACIONADA(true, 50),
-        AMBITO(true, 50),
-        CRITICIDAD(true, 50),
-        F_LOCALIZADA(true, 250),
-        RELATIVA_A(true, 50),
-        DOC_INCOMP(true, 250),
-        AUTOR_ULT_ACT(true, 80),
-        CREADOR(true, 80),
-        FECHA_ALTA(true, 50),
-        FECHA_ULT_ACT(true, 80),
-        ID_OT(true, 80);
+        ID_DUDA(false, 50, Internationalization.getStringTranslated("doubtId")),
+        ID_REQUERIMIENTO(false, 50, Internationalization.getStringTranslated("requirementID")),
+        ESTADO(true, 50, Internationalization.getStringTranslated("statUper")),
+        ACC(true, 50, Internationalization.getStringTranslated("accUper")),
+        DESCRIPCION(true, 50, Internationalization.getStringTranslated("responseUper")),
+        RESPUESTA(true, 50, Internationalization.getStringTranslated("responseUper")),
+        RESP_RESPUESTA_PROYECTO(true, 50, Internationalization.getStringTranslated("responseResponseProject")),
+        RESP_RESPUESTA_CLIENTE(true, 50, Internationalization.getStringTranslated("responseResponseClient")),
+        RESPONSABLE_CONSULTA(true, 50, Internationalization.getStringTranslated("responsableConsult")),
+        FECHA_PREVISTA_RESPUESTA(true, 50, Internationalization.getStringTranslated("responseExpectedDAte")),
+        AGRUPACION(true, 50, Internationalization.getStringTranslated("agrupacion")),
+        ID_RELACIONADA(true, 50, Internationalization.getStringTranslated("relatedId")),
+        AMBITO(true, 50, Internationalization.getStringTranslated("ambit")),
+        CRITICIDAD(true, 50, Internationalization.getStringTranslated("criticality")),
+        F_LOCALIZADA(true, 250, Internationalization.getStringTranslated("fLocalized")),
+        RELATIVA_A(true, 50, Internationalization.getStringTranslated("relativeA")),
+        DOC_INCOMP(true, 250, Internationalization.getStringTranslated("incompleteDocumentation")),
+        AUTOR_ULT_ACT(true, 80, Internationalization.getStringTranslated("actorLastUpdate")),
+        CREADOR(true, 80, Internationalization.getStringTranslated("creator")),
+        FECHA_ALTA(true, 50, Internationalization.getStringTranslated("highDate")),
+        FECHA_ULT_ACT(true, 80, Internationalization.getStringTranslated("dateLastUpdate")),
+        ID_OT(true, 80, Internationalization.getStringTranslated("otId"));
         private int width;
-
+        private String columnName;
         private boolean editable;
 
-        Columns(boolean editable, int width) {
+        Columns(boolean editable, int width, String columnName) {
             this.editable = editable;
             this.width = width;
+            this.columnName = columnName;
         }
 
 
@@ -59,6 +61,10 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
         public int getWidth() {
             return width;
         }
+
+        public String getColumnName() {
+            return columnName;
+        }
     }
 
 
@@ -68,7 +74,7 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-      FenixDuda duda = rows.get(rowIndex);
+        FenixDuda duda = rows.get(rowIndex);
         switch (DudaRowType.values()[columnIndex]) {
             case ID_DUDA:
                 return duda.getIdDuda();
@@ -82,7 +88,7 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 return duda.getEstado();
             case DESCRIPCION:
 
-                return  duda.getDescripcion();
+                return duda.getDescripcion();
             case RESPUESTA:
                 return duda.getRespuesta();
             case FECHA_PREVISTA_RESPUESTA:
@@ -104,11 +110,11 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
             case F_LOCALIZADA:
                 return duda.getFLocalizada();
             case RELATIVA_A:
-                return  duda.getRelativaA();
+                return duda.getRelativaA();
             case DOC_INCOMP:
                 return duda.getDocIncomp();
             case FECHA_ULT_ACT:
-                return  duda.getFechaUltAct();
+                return duda.getFechaUltAct();
             case AUTOR_ULT_ACT:
                 return duda.getAutorUltAct();
             case CREADOR:
@@ -132,119 +138,119 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
         FenixDuda duda = rows.get(row);
         switch (DudaRowType.values()[col]) {
             case ID_DUDA:
-                duda.setIdDuda((Long)value);
+                duda.setIdDuda((Long) value);
                 duda.setIdDuda(duda.getIdDuda());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case ID_REQUERIMIENTO:
-                if(StringUtils.isBlank(value.toString())) {
+                if (StringUtils.isBlank(value.toString())) {
                     SwingUtil.msgErrorTxt("Meko meko");
-                    return; 
+                    return;
                 }
                 duda.setIdRequerimiento(Long.valueOf(value.toString()));
                 duda.setIdRequerimiento(duda.getIdRequerimiento());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case ACC:
-                duda.setAcc((String)value);
+                duda.setAcc((String) value);
                 duda.setAcc(duda.getAcc());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case FECHA_ALTA:
-                duda.setFechaAlta((Date)value);
+                duda.setFechaAlta((Date) value);
                 duda.setFechaAlta(duda.getFechaAlta());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case ESTADO:
-                duda.setEstado((String)value);
+                duda.setEstado((String) value);
                 duda.setEstado(duda.getEstado());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case DESCRIPCION:
-                duda.setDescripcion((String)value);
+                duda.setDescripcion((String) value);
                 duda.setDescripcion(duda.getDescripcion());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case RESPUESTA:
-                duda.setRespuesta((String)value);
+                duda.setRespuesta((String) value);
                 duda.setRespuesta(duda.getRespuesta());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case FECHA_PREVISTA_RESPUESTA:
-               duda.setFechaPrevistaRespuesta((Date)value);
+                duda.setFechaPrevistaRespuesta((Date) value);
                 duda.setFechaPrevistaRespuesta(duda.getFechaPrevistaRespuesta());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case RESP_RESPUESTA_PROYECTO:
-                duda.setRespRespuestaProyecto((String)value);
+                duda.setRespRespuestaProyecto((String) value);
                 duda.setRespRespuestaProyecto(duda.getRespRespuestaProyecto());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case RESP_RESPUESTA_CLIENTE:
-                duda.setRespRespuestaCliente((String)value);
+                duda.setRespRespuestaCliente((String) value);
                 duda.setRespRespuestaCliente(duda.getRespRespuestaCliente());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case RESPONSABLE_CONSULTA:
-                duda.setResponsableConsulta((String)value);
+                duda.setResponsableConsulta((String) value);
                 duda.setResponsableConsulta(duda.getResponsableConsulta());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case AGRUPACION:
-                duda.setAgrupacion((String)value);
+                duda.setAgrupacion((String) value);
                 duda.setAgrupacion(duda.getAgrupacion());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case ID_RELACIONADA:
-                duda.setIdRelacionada((Long)value);
+                duda.setIdRelacionada((Long) value);
                 duda.setIdRelacionada(duda.getIdRelacionada());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case AMBITO:
-                duda.setAmbito((String)value);
+                duda.setAmbito((String) value);
                 duda.setAmbito(duda.getAmbito());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case CRITICIDAD:
-                duda.setCriticidad((String)value);
+                duda.setCriticidad((String) value);
                 duda.setCriticidad(duda.getCriticidad());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case F_LOCALIZADA:
-                duda.setFLocalizada((String)value);
+                duda.setFLocalizada((String) value);
                 duda.setFLocalizada(duda.getFLocalizada());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case RELATIVA_A:
-                duda.setRelativaA((String)value);
+                duda.setRelativaA((String) value);
                 duda.setRelativaA(duda.getRelativaA());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case DOC_INCOMP:
-                duda.setDocIncomp((String)value);
+                duda.setDocIncomp((String) value);
                 duda.setDocIncomp(duda.getDocIncomp());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case FECHA_ULT_ACT:
-                duda.setFechaUltAct((Date)value);
+                duda.setFechaUltAct((Date) value);
                 duda.setFechaUltAct(duda.getFechaUltAct());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case AUTOR_ULT_ACT:
-                duda.setAutorUltAct((String)value);
+                duda.setAutorUltAct((String) value);
                 duda.setAutorUltAct(duda.getAutorUltAct());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
             case CREADOR:
-                duda.setCreador((String)value);
+                duda.setCreador((String) value);
                 duda.setCreador(duda.getCreador());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
 
             case ID_OT:
-                duda.setIdOt((String)value);
+                duda.setIdOt((String) value);
                 duda.setIdOt(duda.getIdOt());
-                fireTableCellUpdated(row,col);
+                fireTableCellUpdated(row, col);
                 break;
         }
 
@@ -260,12 +266,15 @@ public class DudaTableModel extends JenixTableModel<FenixDuda, DudaTableModel.Co
                 super.setValueAt(value, row, col);
         }*/
 
-            }
+    }
 
+    @Override
+    protected String getValueToDisplay(Columns enumC) {
+        return enumC.getColumnName();
+    }
 
-
-        /* if(StringUtils.isBlank(txtDudaDescription.getText())){
+    /* if(StringUtils.isBlank(txtDudaDescription.getText())){
            txtDudaDescription.setBackground(MyColors.TABLE_FIELD_REQUIRED);
        }*/
 
-    }
+}

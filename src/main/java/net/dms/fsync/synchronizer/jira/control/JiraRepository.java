@@ -56,7 +56,7 @@ public class JiraRepository {
 
         }catch(Exception ex){
             if(ex.getCause().getMessage().equals("HTTP Error, HTTP Status: 400")){
-                throw new AppException("A Query pode estar incorreta!?");
+                throw new AppException("Query or credentials might be incorrect \n Please check.");
             }
 
             throw new AppException(ex);

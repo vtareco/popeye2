@@ -1,5 +1,6 @@
 package net.dms.fsync.swing.dialogs;
 
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.swing.components.JenixDialog;
 import net.dms.fsync.swing.components.JenixTable;
 import net.dms.fsync.swing.models.ColumnsSettingTableModel;
@@ -25,7 +26,7 @@ public class ColumnsSettingDialog extends JenixDialog<TableSetting> {
         // TODO FIXME, move to abstract class
         this.setSize(550, 650);
         setLocationRelativeTo(parent);
-        setTitle("Configuración");
+        setTitle(Internationalization.getStringTranslated("configuration"));
         setModal(true);
         setResizable(false);
         setVisible(true);

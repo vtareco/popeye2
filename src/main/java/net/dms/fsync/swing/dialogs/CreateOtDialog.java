@@ -18,8 +18,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class CreateOtDialog extends JDialog {
 
@@ -37,9 +40,9 @@ public class CreateOtDialog extends JDialog {
     //Icon icon = UIManager.getIcon("OptionPane.");
 
 
-    public CreateOtDialog(JPanel panel,JComboBox peticion) {
+    public CreateOtDialog(JPanel panel, JComboBox peticion) {
         setLayout(null);
-        setSize(450,340);
+        setSize(450, 340);
         setTitle("Create new OT folder");
         setLocationRelativeTo(panel);
         setModal(true);
@@ -47,59 +50,59 @@ public class CreateOtDialog extends JDialog {
         loadDialog(peticion);
     }
 
-    public void loadDialog(JComboBox peticionSelected){
+    public void loadDialog(JComboBox peticionSelected) {
 
-        txtTitle=new JLabel();
+        txtTitle = new JLabel();
         txtTitle.setText("Create new OT Folder");
         txtTitle.setBounds(141, 28, 152, 14);
         txtTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
         add(txtTitle);
 
-        txtId=new JLabel();
+        txtId = new JLabel();
         txtId.setText("ID_OT:");
         txtId.setBounds(50, 93, 38, 14);
         add(txtId);
 
-        fieldId=new JNumberField();
+        fieldId = new JNumberField();
         fieldId.setBounds(141, 90, 172, 20);
         fieldId.setDocument(new JTextFieldLimit(7));
         add(fieldId);
 
-        txtDescription=new JLabel();
+        txtDescription = new JLabel();
         txtDescription.setText("Descripcion:");
         txtDescription.setBounds(50, 186, 72, 14);
         add(txtDescription);
 
-        txtOptional=new JLabel();
+        txtOptional = new JLabel();
         txtOptional.setText("(Optional)");
         txtOptional.setBounds(50, 200, 56, 14);
         txtOptional.setFont(new Font("Tahoma", Font.PLAIN, 10));
         add(txtOptional);
 
 
-        fieldDescription=new JTextField();
+        fieldDescription = new JTextField();
         fieldDescription.setBounds(141, 187, 172, 20);
         fieldDescription.setDocument(new JTextFieldLimit(20));
         add(fieldDescription);
 
-        txtIdPeticion=new JLabel();
+        txtIdPeticion = new JLabel();
         txtIdPeticion.setText("ID_Peticion:");
         txtIdPeticion.setBounds(50, 140, 72, 14);
         add(txtIdPeticion);
 
 
-        fieldIdPetcion=new JNumberField();
+        fieldIdPetcion = new JNumberField();
         fieldIdPetcion.setBounds(141, 137, 172, 20);
         fieldIdPetcion.setDocument(new JTextFieldLimit(7));
         add(fieldIdPetcion);
 
 
-        btnCreate=new JButton();
+        btnCreate = new JButton();
         btnCreate.setText("Save");
         btnCreate.setBounds(75, 257, 76, 23);
         add(btnCreate);
 
-        btnCancel=new JButton();
+        btnCancel = new JButton();
         btnCancel.setBounds(284, 257, 76, 23);
         btnCancel.setText("Cancel");
         add(btnCancel);
@@ -115,23 +118,23 @@ public class CreateOtDialog extends JDialog {
         btnCreate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              createOtFolder();
-              if(!fieldNotFill()){
-                  dispose();
-              }
+                createOtFolder();
+                if (!fieldNotFill()) {
+                    dispose();
+                }
             }
         });
 
     }
 
 
-    private void createOtFolder(){
+    private void createOtFolder() {
         LocalVariables lv = new LocalVariables();
         ApplicationProperties ap = lv.getApFromJson(WorkingJira.getJsonApplicationProperties());
         String projectPath = ap.getWorkingDirectory();
         //int cont=0;
         //File file = null;
-    try {
+        try {
 
       /*  ArrayList<String> list = new ArrayList<>();
         if (peticions!= null){
@@ -152,8 +155,8 @@ public class CreateOtDialog extends JDialog {
             }
 
         }*/
-        String nameOfCreatedFolder = fieldId.getText()+ "-" + fieldDescription.getText();
-        System.out.println("NOME "+nameOfCreatedFolder);
+            String nameOfCreatedFolder = fieldId.getText() + "-" + fieldDescription.getText();
+            System.out.println("NOME " + nameOfCreatedFolder);
       /*  if(StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText()) || nameOfCreatedFolder.equals("-")){
             Toast.display("Please fill the fields", Toast.ToastType.ERROR);
             return;
@@ -173,7 +176,7 @@ public class CreateOtDialog extends JDialog {
         }else{
             Toast.display(Internationalization.getStringTranslated("tostNotCreatedOtFolder"), Toast.ToastType.ERROR);
 
-        }
+            }
 
       /*  if(cont == 1){
 
@@ -182,35 +185,43 @@ public class CreateOtDialog extends JDialog {
 
         }*/
 
-    }catch (AppException e){
-        e.printStackTrace();
-    }
+        } catch (AppException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
-    private boolean fieldNotFill(){
+    private boolean fieldNotFill() {
 
         boolean field;
-        if(StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText())){
+        if (StringUtils.isBlank(fieldId.getText()) || StringUtils.isBlank(fieldIdPetcion.getText())) {
             field = true;
-        }else {
+        } else {
             field = false;
         }
 
         return field;
     }
 
-    private boolean folderNotExists(String projectPath,String nameOfCreatedFolder){
+    private boolean folderNotExists(String projectPath, String nameOfCreatedFolder) {
         boolean folder;
-
-        if(!Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder))){
+        File folderLocation = new File(projectPath);
+            for (final File files: folderLocation.listFiles()){
+                if(files.isDirectory()){
+                    if(files.getName().contains(fieldId.getText())){
+                       return false;
+                    }
+                }
+            }
+        if (!Files.exists(Paths.get(projectPath + "/" + nameOfCreatedFolder))) {
             folder = true;
-        }else {
+        } else {
             folder = false;
         }
-        // return !Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder)) ? true : false; ternário
         return folder;
+    // return !Files.exists(Paths.get(projectPath + "/" +nameOfCreatedFolder)) ? true : false; ternï¿½rio
+
     }
 
     public void closeDialog(JComboBox peticion){

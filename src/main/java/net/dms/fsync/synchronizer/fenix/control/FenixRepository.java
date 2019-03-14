@@ -699,6 +699,7 @@ public class FenixRepository {
             }
 
 
+            Toast.display("Success !", Toast.ToastType.INFO);
             FileOutputStream fos = new FileOutputStream(dudaFile);
             wb.write(fos);
             fos.close();

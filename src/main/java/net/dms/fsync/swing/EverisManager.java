@@ -64,7 +64,9 @@ public class EverisManager {
     private JButton removeFenixAccBtn;
     private JTextField totalEstimatedText;
     private JTextField totalIncurridoText;
-    private JTextField estimadoVersusIncurridoText;
+
+    private JTextField totalStoryPoints;//estimadoVersusIncurridoText
+
     private JButton addIncidenciaBtn;
 
     private JenixTable<IncidenciaTableModel, FenixIncidencia> incidenciasTable;
@@ -97,6 +99,9 @@ public class EverisManager {
     private JButton openExplorer;
 
 
+    private JTextField mediaStoryPoints;
+
+
     JiraService jiraService;
     FenixService fenixService;
     TableSettingControl tableSettingControl;
@@ -114,11 +119,11 @@ public class EverisManager {
         frame.setContentPane(new EverisManager().panelParent);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setSize(frame.getPreferredSize().width + 20, 31);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         //frame.setLocation(dim.width / 2,dim.height / 2);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.pack();
        // frame.setSize(dim.width,frame.getHeight());
-
         frame.setVisible(true);
         WorkingJira.setMainJframe(frame);
     }
@@ -435,7 +440,7 @@ public class EverisManager {
 
         acc.setCriticidad(Criticidad.MEDIA.getDescription());
         acc.setIdPeticionOtAsociada(getPeticionSelected(peticionesDisponiblesCmb));
-        acc.setEstado(AccStatus.PENDIENTE_ASIGNACION.getDescription());
+        //acc.setEstado(AccStatus.PENDIENTE_ASIGNACION.getDescription());
         acc.setRechazosEntrega(0);
 
         AccDialog dialog = new AccDialog(panelParent, acc);
@@ -523,6 +528,8 @@ public class EverisManager {
         List<FenixAcc> accs = accTable.getModel().getList();
         double totalEstimado = 0;
         double totalIncurrido = 0;
+        double totalPuntosHistoria = 0;
+        double mediaPuntosHistoria = 0;
 
         for (FenixAcc acc : accs) {
 
@@ -534,11 +541,22 @@ public class EverisManager {
                 totalEstimado = totalEstimado + acc.getTotalEsfuerzo();
             }
 
+            if (acc.getPuntosHistoria() != null){
+               totalPuntosHistoria = totalPuntosHistoria+Double.valueOf(acc.getPuntosHistoria());
+            }
+
+            if(acc.getPuntosHistoria() != null){
+                mediaPuntosHistoria = mediaPuntosHistoria + Double.valueOf(acc.getPuntosHistoria()) / accs.size();
+            }
+
         }
-        double estimadoVsIncurrido = totalIncurrido * 100 / totalEstimado;
+
         totalEstimatedText.setText(Double.toString(totalEstimado));
         totalIncurridoText.setText(Double.toString(totalIncurrido));
-        estimadoVersusIncurridoText.setText(Double.toString(estimadoVsIncurrido));
+        totalStoryPoints.setText(String.valueOf(totalPuntosHistoria));
+        mediaStoryPoints.setText(String.valueOf(mediaPuntosHistoria));
+        //double estimadoVsIncurrido = totalIncurrido * 100 / totalEstimado;
+        //estimadoVersusIncurridoText.setText(Double.toString(estimadoVsIncurrido));
 
 
     }
@@ -612,7 +630,9 @@ public class EverisManager {
         String text = txtJiraTask.getText();
         LocalVariables lv = new LocalVariables();
         if (peticionesDisponiblesCmb.getSelectedItem().toString() == null || StringUtils.isBlank(peticionesDisponiblesCmb.getSelectedItem().toString())) {
-            throw new AppException("Peticion folder doesn´t exist");
+            //throw new AppException("Peticion folder doesnï¿½t exist");
+            Toast.display("Please select Peticion folder", Toast.ToastType.WARNING);
+            return;
         }
         if (isSelectedFilterById()) {
             filter = String.format(getJiraFilterSelected(), txtJiraTask.getText());
@@ -634,6 +654,9 @@ public class EverisManager {
 
         JiraSearchResponse response = jiraService.search(filter);
         consumer.accept(response.getIssues());
+        if(response.getIssues().isEmpty() || response.getIssues().size()==0){
+            Toast.display("Issue not found !", Toast.ToastType.ERROR);
+        }
 
    /*for(JiraIssue j: response.getIssues()){
      if(j.getKey().compareToIgnoreCase(filter.substring(4))!=0){
@@ -941,7 +964,7 @@ public class EverisManager {
         JiraTableModel jiraTableModel = new JiraTableModel(new ArrayList<>());
         jiraTable = new JenixTable(jiraTableModel);
         jiraScrollPane = new JScrollPane(jiraTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jiraTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        //jiraTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); //TABELA
 
         AccTableModel accTableModel = new AccTableModel(new ArrayList<>());
         accTable = new JenixTable(accTableModel);
@@ -1028,21 +1051,38 @@ public class EverisManager {
         panel3.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
         panel2.add(panel3, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         totalEstimatedText = new JTextField();
+
         panel3.add(totalEstimatedText, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setText("Total estimado");
         panel3.add(label2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
         final JLabel label3 = new JLabel();
         label3.setText("Total incurrido");
         panel3.add(label3, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
+        final JLabel label4 = new JLabel();
+        label4.setText("Total Story Points");
+        panel3.add(label4, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
+        final JLabel label7 = new JLabel();
+        label7.setText("Media Story Points");
+        panel3.add(label7, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
         totalIncurridoText = new JTextField();
         panel3.add(totalIncurridoText, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        estimadoVersusIncurridoText = new JTextField();
-        estimadoVersusIncurridoText.setText("");
-        panel3.add(estimadoVersusIncurridoText, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        final JLabel label4 = new JLabel();
-        label4.setText("Estimado/Incurrido");
-        panel3.add(label4, new com.intellij.uiDesigner.core.GridConstraints(0, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
+       // estimadoVersusIncurridoText = new JTextField();
+       // estimadoVersusIncurridoText.setText("");
+        // panel3.add(estimadoVersusIncurridoText, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        totalStoryPoints = new JTextField();
+        totalStoryPoints.setText("");
+        panel3.add(totalStoryPoints, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+
+        mediaStoryPoints = new JTextField();
+        mediaStoryPoints.setText("");
+        panel3.add(mediaStoryPoints, new com.intellij.uiDesigner.core.GridConstraints(0, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+
         accScrollPane = new JScrollPane();
         panel2.add(accScrollPane, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         accScrollPane.setViewportView(accTable);
@@ -1347,7 +1387,9 @@ public class EverisManager {
         incidenciasTable.getModel().clear();
         totalEstimatedText.setText("");
         totalIncurridoText.setText("");
-        estimadoVersusIncurridoText.setText("");
+        //estimadoVersusIncurridoText.setText("");
+        totalStoryPoints.setText("");
+        mediaStoryPoints.setText("");
 
         ComponentStateService.getInstance().clearInitialized(EverisComponentType.values());
     }

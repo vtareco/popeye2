@@ -44,7 +44,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     // private JComboBox cmbSubTipo;
     private JTextField txtPuntosHistoria;
     private JTextArea txaComments;
-    private JenixTable<BitacoraTableModel, Bitacora> jtbBitacora;
+   // private JenixTable<BitacoraTableModel, Bitacora> jtbBitacora;
 
     private JTextField txtHistoriaUsuario;
     private JenixTable<FenixResponsablesTableModel, FenixResponsable> jtbResponsables;
@@ -57,7 +57,7 @@ public class AccDialog extends JenixDialog<FenixAcc> {
     public AccDialog(Component parent, FenixAcc initialPayload) {
         super(parent, initialPayload);
         // TODO FIXME, move to abstract class
-        this.setSize(550, 820);
+        this.setSize(550, 665); //Height with Agregar comentario - > 820
         setLocationRelativeTo(parent);
         setTitle("ACC");
         setModal(true);
@@ -133,7 +133,9 @@ public class AccDialog extends JenixDialog<FenixAcc> {
 
         //txtEsfuerzoCliente.setText(getPayload().getEsfuerzoCliente());
 
-        jtbBitacora.getModel().load(getPayload().getBitacora());
+        //Agregar Comentario
+        //jtbBitacora.getModel().load(getPayload().getBitacora());
+
         List<FenixResponsable> responsablesEsfuerzos = jtbResponsables.getModel().getList();
 
         for (Actor actor : SettingsService.getInstance().getSettings().getActores()) {
@@ -174,8 +176,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         panel.setLayout(new GridBagLayout());
 
         JLabel lblSummary = new JLabel(Internationalization.getStringTranslated("nameLower"));
-        JLabel lblDescription = new JLabel();
-        JLabel lblComments = new JLabel();
+        JLabel lblDescription = new JLabel(Internationalization.getStringTranslated("descriptionLower"));
+        //JLabel lblComments = new JLabel();
         JLabel lblCodigoPeticionCliente = new JLabel(Internationalization.getStringTranslated("codePetitionClientLower"));
 
         JLabel lblIdPeticion = new JLabel(Internationalization.getStringTranslated("idPetitionLower"));
@@ -190,13 +192,14 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         JLabel lblResponsables = new JLabel(Internationalization.getStringTranslated("responsibleLower"));
         JLabel lblFechaPrevistaProyecto = new JLabel("Fecha prevista");
 
-        JButton addBitacoraBtn = new JButton(Internationalization.getStringTranslated("addComment"));
+        //Agregar Comentario
+        /*JButton addBitacoraBtn = new JButton("Agregar comentario");
         addBitacoraBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jtbBitacora.addRow(new Bitacora("-", ""));
             }
-        });
+        });*/
 
 
         txtCodigoPeticionCliente = new JTextField();
@@ -253,15 +256,18 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.ESFUERZO.ordinal()).setCellEditor(new NumberCellEditor());
         jtbResponsables.getColumnModel().getColumn(FenixResponsablesTableModel.Columns.SUBTIPO_TAREA.ordinal()).setCellEditor(new DefaultCellEditor(accSubTypeEditor));
 
-        BitacoraTableModel bitacoraTableModel = new BitacoraTableModel(new ArrayList<>());
+        //AGREGAR COMENTARIO
+        /*BitacoraTableModel bitacoraTableModel = new BitacoraTableModel(new ArrayList<>());
         jtbBitacora = new JenixTable(bitacoraTableModel);
         bitacoraScrollPane = new JScrollPane(jtbBitacora, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         bitacoraScrollPane.setMinimumSize(new Dimension(200, 120));
-        jtbBitacora.setFillsViewportHeight(true);
+        jtbBitacora.setFillsViewportHeight(true);*/
 
         // datFechaPrevistaProyecto = new JDatePickerImpl();
 
         txtNombre = new JTextField(15);
+
+
         txaDescripcion = new JTextArea();
         txaDescripcion.setRows(10);
         txaDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -296,23 +302,27 @@ public class AccDialog extends JenixDialog<FenixAcc> {
         panel.add(lblDescription, constraints);
         constraints.weightx = 1;
 
+
         constraints.gridx = 0;
         constraints.gridy = ++fila;
         panel.add(sp, constraints);
 
-        constraints.gridx = 0;
+        //AGREGAR COMENTARIO label
+       /* constraints.gridx = 0;
         constraints.gridy = ++fila;
         constraints.weightx = anchoEntiquetas;
         panel.add(lblComments, constraints);
-        constraints.weightx = 1;
+        constraints.weightx = 1;*/
 
-        constraints.gridx = 0;
+        //AGREGAR COMENTARIO scroller
+       /* constraints.gridx = 0;
         constraints.gridy = ++fila;
-        panel.add(bitacoraScrollPane, constraints);
+        panel.add(bitacoraScrollPane, constraints);*/
 
-        constraints.gridx = 0;
+        //AGREGAR COMENTARIO button
+     /*   constraints.gridx = 0;
         constraints.gridy = ++fila;
-        panel.add(addBitacoraBtn, constraints);
+        panel.add(addBitacoraBtn, constraints);*/
 
         // fields codigo petición - historia usuario
         constraints.gridx = 0;
@@ -479,7 +489,8 @@ public class AccDialog extends JenixDialog<FenixAcc> {
                 getPayload().setPuntosHistoria(txtPuntosHistoria.getText());
             }*/
 
-        getPayload().setBitacora(jtbBitacora.getList());
+        //AGREGAR COMENTARIO
+       // getPayload().setBitacora(jtbBitacora.getList());
 
         StringBuilder responsables = new StringBuilder();
         StringBuilder esfuerzos = new StringBuilder();

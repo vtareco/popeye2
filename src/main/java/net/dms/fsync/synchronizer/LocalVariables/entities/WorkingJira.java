@@ -10,6 +10,8 @@ public class WorkingJira {
     public static String idOt;
     private static JFrame mainJframe;
 
+    private static String idAcc;
+
 
     private static String jenixFoulder = "/JenixSettings";
     private static String jsonUserCreate = "/UserConfig.json";

@@ -5,6 +5,7 @@ import net.dms.fsync.httphandlers.entities.exceptions.AppException;
 import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.settings.business.SettingsService;
 import net.dms.fsync.settings.entities.*;
+import net.dms.fsync.swing.Panes.IncidenciaCorrecao;
 import net.dms.fsync.swing.components.*;
 import net.dms.fsync.swing.dialogs.*;
 import net.dms.fsync.swing.models.AccTableModel;
@@ -100,6 +101,7 @@ public class EverisManager {
 
 
     private JTextField mediaStoryPoints;
+    private JButton checkExcel;
 
 
     JiraService jiraService;
@@ -108,7 +110,6 @@ public class EverisManager {
     FenixAccMapper accMapper = new FenixAccMapper();
     EverisConfig config = EverisConfig.getInstance();
     Settings settings = SettingsService.getInstance().getSettings();
-
 
 
     private Map<String, String> jiraFilters = config.getJiraFilters();
@@ -124,6 +125,7 @@ public class EverisManager {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.pack();
        // frame.setSize(dim.width,frame.getHeight());
+        //frame.getContentPane().setBackground(MyColors.TOAST_INFO_COLOR);
         frame.setVisible(true);
         WorkingJira.setMainJframe(frame);
     }
@@ -162,6 +164,7 @@ public class EverisManager {
         SwingUtil.registerListener(removeDudasBtn, this::removeDuda, this::handleException);
         SwingUtil.registerListener(refreshDudasBtn, this::refreshDudas, this::handleException);
         SwingUtil.registerListener(btnCrearOt, this::createOt, this::handleException);
+        SwingUtil.registerListener(checkExcel, this::checkExcel, this::handleException);
 
 
         SwingUtil.registerListener(settingsJbtn, this::confingJenixSettings, this::handleException);
@@ -426,12 +429,13 @@ public class EverisManager {
         File jsonFilters = new File(WorkingJira.getJsonFilters());
         File jsonUserCreate = WorkingJira.getJsonUserCreateFile();
         File jsonApplicationProperties = WorkingJira.getJsonApplicationPropertiesFile();
+
         JsonPaths jsonpaths = new JsonPaths(jsonUserCreate.toString(), jsonApplicationProperties.toString(), jsonFilters.toString());
+
         SettingsDialog settingsDialog = new SettingsDialog(tabbedPanel, jsonpaths);
         settingsDialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                System.out.println("hey");
             }
         });
         settingsDialog.pack();
@@ -830,7 +834,7 @@ public class EverisManager {
         accTable.setSelectionBackground(MyColors.ROW_SELECTED);
         accTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 */
-        SwingUtil.agregarMenu(accTable, new JMenuItem[]{menuEditarAcc(accTable), SwingUtil.menuCopiar(accTable), menuIncidenciaInterna(accTable), menuDuda(accTable), menuDuplicar(accTable)});
+        SwingUtil.agregarMenu(accTable, new JMenuItem[]{menuEditarAcc(accTable), SwingUtil.menuCopiar(accTable), menuIncidenciaInterna(accTable), menuIncidenciaExterna(), menuDuda(accTable), menuDuplicar(accTable)});
 
 
         tableSettingControl.apply(accTable, tableSettingControl.load(TableType.FENIX_ACC));
@@ -1357,6 +1361,39 @@ public class EverisManager {
     }
 
 
+    public JMenuItem menuIncidenciaExterna(){
+        JMenuItem menuIncidenciaExterna = new JMenuItem("Crear Incidencia Externa");
+        menuIncidenciaExterna.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //WorkingJira.setIdAcc(accTable.getModel().getValueAt(accTable.getSelectedRow(),AccRowType.ID_ACC.getColPosition()).toString());
+                //  incidenciaCorrecao.fieldTareaCausante.setText(accTable.getModel().getValueAt(accTable.getSelectedRow(),AccRowType.ID_ACC.getColPosition()).toString());
+                List<FenixIncidencia> fenixIncidencias = new ArrayList<>();
+                IncidenciaExterna incidencia = new IncidenciaExterna();
+                if(accTable.getModel().getValueAt(accTable.getSelectedRow(),AccRowType.ID_ACC.getColPosition()) == null){
+                   Toast.display("Cannot create External Incidence, ID_ACC is null", Toast.ToastType.ERROR);
+                }else{
+                    incidencia.setIdAcc(accTable.getModel().getValueAt(accTable.getSelectedRow(),AccRowType.ID_ACC.getColPosition()).toString());
+                    incidencia.setValuesAccTable(accTable.getModel().getList());
+
+                    for (FenixIncidencia fenixIncidencia : fenixService.searchIncidenciasByOtId(getPeticionSelected(peticionesDisponiblesCmb), false)) {
+                        fenixIncidencias.add(fenixIncidencia);
+                    }
+
+                    incidencia.setValuesIncidenciaTable(fenixIncidencias);
+
+                    IncidenciaExternaDialog incidenciaexterna = new IncidenciaExternaDialog(incidencia/*tabbedPanel*/);
+                }
+
+            }
+        });
+
+
+
+        return menuIncidenciaExterna;
+    }
+
+
     public JMenuItem menuDuplicar(final JenixTable tabla) {
         JMenuItem menuDuplicar = new JMenuItem(Internationalization.getStringTranslated("menuItemDuplicate"));
         menuDuplicar.addActionListener(new ActionListener() {
@@ -1549,6 +1586,10 @@ public class EverisManager {
             e.printStackTrace();
         }
     }
+
+   public void checkExcel(){
+
+   }
 
 }
 

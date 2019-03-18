@@ -2,6 +2,7 @@ package net.dms.fsync.synchronizer.LocalVariables.business;
 
 import net.dms.fsync.httphandlers.common.Utils;
 import net.dms.fsync.settings.entities.EverisVariables;
+import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.Filter;
@@ -382,6 +383,7 @@ public class VariableService {
             System.out.println("OBJETO INFO"+otinfo);
             return otinfo;
         }catch(Exception e){
+            Toast.display("No OT Selected ! ", Toast.ToastType.WARNING);
             e.printStackTrace();
         }
         return null;

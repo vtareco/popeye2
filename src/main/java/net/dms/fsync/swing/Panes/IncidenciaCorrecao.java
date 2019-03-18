@@ -1,7 +1,9 @@
 package net.dms.fsync.swing.Panes;
 
 import net.dms.fsync.httphandlers.entities.exceptions.AppException;
+import net.dms.fsync.settings.Internationalization;
 import net.dms.fsync.settings.entities.Application;
+import net.dms.fsync.swing.components.Toast;
 import net.dms.fsync.synchronizer.LocalVariables.control.LocalVariables;
 import net.dms.fsync.synchronizer.LocalVariables.entities.ApplicationProperties;
 import net.dms.fsync.synchronizer.LocalVariables.entities.WorkingJira;
@@ -90,6 +92,7 @@ public class IncidenciaCorrecao extends JPanel {
         comboAccCorrectora.setBounds(202, 53, 89, 20);
         add(comboAccCorrectora);
 
+
         ArrayList<String> idOts = allAction(accTable);
 
         comboOtCorrectora.addActionListener(new ActionListener() {
@@ -164,6 +167,9 @@ public class IncidenciaCorrecao extends JPanel {
     }
 
     public void refreshComboBox(List<String> idOts) {
+        if(comboAccCorrectora.getItemCount() == 0 || comboAccCorrectora.getModel() == null){
+            Toast.display("No values found, check Excel file", Toast.ToastType.ERROR);
+        }
         String fullIdOt ="";
         String idOtSelected =  comboOtCorrectora.getSelectedItem().toString();
         WorkingJira.setIdOt(idOtSelected);

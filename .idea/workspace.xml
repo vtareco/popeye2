@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5330ab89-6d84-44f1-86d4-34b64e11b6f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bmw/rsp/everis.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bmw/rsp/everis.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,6 +14,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties">
+          <provider editor-type-id="ResourceBundle" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="44" column="9" selection-start-line="44" selection-end-line="44" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -29,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="86" />
+            <state relative-caret-position="339">
+              <caret line="61" column="30" lean-forward="true" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="86" />
             </state>
           </provider>
         </entry>
@@ -38,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2516">
+            <state relative-caret-position="468">
               <caret line="176" column="90" selection-start-line="176" selection-start-column="90" selection-end-line="176" selection-end-column="90" />
             </state>
           </provider>
@@ -47,42 +54,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6902">
-              <caret line="436" column="21" selection-start-line="436" selection-start-column="21" selection-end-line="436" selection-end-column="21" />
+            <state relative-caret-position="1358">
+              <caret line="436" column="76" selection-start-line="436" selection-start-column="76" selection-end-line="436" selection-end-column="76" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="196" column="39" selection-start-line="196" selection-start-column="39" selection-end-line="196" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#9124#9411#0" expanded="true" />
-                <element signature="e#9410#9411#0" expanded="true" />
-                <element signature="e#24952#25657#0" expanded="true" />
-                <element signature="e#25656#25657#0" expanded="true" />
-                <element signature="e#29320#29544#0" expanded="true" />
-                <element signature="e#29543#29544#0" expanded="true" />
-                <element signature="e#29588#29819#0" expanded="true" />
-                <element signature="e#29818#29819#0" expanded="true" />
-                <element signature="e#29857#30082#0" expanded="true" />
-                <element signature="e#30081#30082#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/bmw/rsp/everis.json">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+            <state relative-caret-position="238">
+              <caret line="182" column="118" selection-start-line="182" selection-start-column="118" selection-end-line="182" selection-end-column="118" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#9126#9127#0" expanded="true" />
+                <element signature="e#9181#9182#0" expanded="true" />
+                <element signature="e#9579#9580#0" expanded="true" />
+                <element signature="e#9644#9645#0" expanded="true" />
+                <element signature="e#13592#13593#0" expanded="true" />
+                <element signature="e#13671#13672#0" expanded="true" />
+                <element signature="e#15955#15956#0" expanded="true" />
+                <element signature="e#16026#16027#0" expanded="true" />
+                <element signature="e#16073#16074#0" expanded="true" />
+                <element signature="e#16132#16133#0" expanded="true" />
+                <element signature="e#17411#17575#0" expanded="true" />
+                <element signature="e#17574#17575#0" expanded="true" />
+                <element signature="e#41792#60090#0" expanded="true" />
+                <element signature="e#60180#60181#0" expanded="true" />
+                <element signature="e#60214#60215#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,7 +93,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5219">
+            <state relative-caret-position="196">
               <caret line="341" selection-start-line="341" selection-end-line="341" />
             </state>
           </provider>
@@ -99,7 +102,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/SwingUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2550">
+            <state relative-caret-position="221">
               <caret line="177" column="99" selection-start-line="177" selection-start-column="99" selection-end-line="177" selection-end-column="99" />
             </state>
           </provider>
@@ -107,18 +110,18 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
+          <provider editor-type-id="ResourceBundle" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2601">
+            <state relative-caret-position="248">
               <caret line="153" column="9" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
             </state>
           </provider>
-          <provider editor-type-id="ResourceBundle" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="238">
               <caret line="27" column="87" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="87" />
             </state>
           </provider>
@@ -216,16 +219,14 @@
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java" />
         <option value="$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties" />
         <option value="$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java" />
-        <option value="$PROJECT_DIR$/popeye.iml" />
-        <option value="$PROJECT_DIR$/src/main/resources/bmw/rsp/everis.json" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="240" />
-    <option name="y" value="130" />
-    <option name="width" value="1440" />
-    <option name="height" value="780" />
+    <option name="x" value="-1688" />
+    <option name="y" value="13" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -233,6 +234,193 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="distribution" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="httphandlers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
+              <item name="dialogs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="swing" type="462c0819:PsiDirectoryNode" />
+              <item name="Panes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+              <item name="LocalVariables" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+              <item name="LocalVariables" type="462c0819:PsiDirectoryNode" />
+              <item name="business" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+              <item name="LocalVariables" type="462c0819:PsiDirectoryNode" />
+              <item name="control" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fsync" type="462c0819:PsiDirectoryNode" />
+              <item name="synchronizer" type="462c0819:PsiDirectoryNode" />
+              <item name="LocalVariables" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
+              <item name="popeye_PT" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="i18n" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -244,62 +432,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
-              <item name="popeyee" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
-              <item name="popeyee" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
-              <item name="popeyee" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
-              <item name="popeyee" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
-              <item name="popeyee" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="rsp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="popeye" type="b2602c69:ProjectViewProjectNode" />
-              <item name="popeyee" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="rsp" type="462c0819:PsiDirectoryNode" />
-              <item name="executions" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="309" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552581296330" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
@@ -356,7 +495,6 @@
       <workItem from="1551951815653" duration="16656000" />
       <workItem from="1552039411408" duration="87693000" />
       <workItem from="1552570615982" duration="9076000" />
-      <workItem from="1555411642907" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="Edit/ add acc bug fix:&#10;if pendiente asignacion = en ejecucion">
       <created>1551700746814</created>
@@ -397,13 +535,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132799000" />
+    <option name="totallyTimeSpent" value="132500000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1688" y="13" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23987207" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23716381" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -418,7 +556,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32922733" />
@@ -451,19 +589,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
-          <line>342</line>
+          <line>341</line>
           <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
-          <line>339</line>
+          <line>338</line>
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java</url>
-          <line>332</line>
+          <line>331</line>
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
@@ -544,7 +682,15 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/io/Serializable.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_EN" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/AddFilter.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/io/Serializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="168" column="17" selection-start-line="168" selection-start-column="17" selection-end-line="168" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/FenixDuda.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
@@ -577,9 +723,27 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/excel/control/EverisManager.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/lang/Enum.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/table/AbstractTableModel.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/table/AbstractTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/entities/FenixAcc.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-340">
@@ -618,7 +782,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/table/DefaultTableColumnModel.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/table/DefaultTableColumnModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="277" selection-start-line="277" selection-end-line="277" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/settings/entities/TableSetting.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -708,7 +878,347 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/util/ResourceBundle.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/util/ResourceBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="1395" selection-start-line="1395" selection-end-line="1395" />
+          <folding>
+            <element signature="docComment;class#ResourceBundle#0" />
+            <element signature="e#11239#11278#0" />
+            <element signature="e#11338#11395#0" />
+            <element signature="class#11461:11699" />
+            <element signature="method#getKeys#0;class#11461:11699" />
+            <element signature="method#handleGetObject#0;class#11461:11699" />
+            <element signature="method#toString#0;class#11461:11699" />
+            <element signature="e#11707#12275#0" />
+            <element signature="e#12412#12497#0" />
+            <element signature="e#12592#13152#0" />
+            <element signature="e#13225#13410#0" />
+            <element signature="e#13460#13506#0" />
+            <element signature="e#13546#13602#0" />
+            <element signature="e#13633#13709#0" />
+            <element signature="e#13753#13871#0" />
+            <element signature="e#13917#13992#0" />
+            <element signature="initializer##0;class#ResourceBundle#0" />
+            <element signature="e#14400#14531#1" />
+            <element signature="e#14432#14489#1" />
+            <element signature="e#14569#14676#0" />
+            <element signature="e#14569#14712#0" />
+            <element signature="e#14718#15350#0" />
+            <element signature="e#15450#16108#0" />
+            <element signature="e#16217#16935#0" />
+            <element signature="e#16217#17591#0" />
+            <element signature="e#17052#17565#1" />
+            <element signature="e#17086#17146#1" />
+            <element signature="e#17176#17555#1" />
+            <element signature="e#17597#17893#0" />
+            <element signature="e#17960#18804#0" />
+            <element signature="e#18240#18779#1" />
+            <element signature="e#18254#18318#0" />
+            <element signature="e#18810#18864#0" />
+            <element signature="e#18810#20299#0" />
+            <element signature="e#19287#19574#0" />
+            <element signature="e#19495#19539#1" />
+            <element signature="e#19584#19619#0" />
+            <element signature="e#19628#19843#0" />
+            <element signature="e#19731#19793#1" />
+            <element signature="e#19852#20052#0" />
+            <element signature="e#19922#19986#1" />
+            <element signature="e#20061#20293#0" />
+            <element signature="e#20147#20219#1" />
+            <element signature="e#20305#20552#0" />
+            <element signature="e#20305#20687#0" />
+            <element signature="e#20693#20988#0" />
+            <element signature="e#20693#26448#0" />
+            <element signature="e#21342#21405#0" />
+            <element signature="e#21972#22332#0" />
+            <element signature="e#22135#22189#1" />
+            <element signature="e#22195#22289#1" />
+            <element signature="e#22405#22611#0" />
+            <element signature="e#22486#22576#1" />
+            <element signature="e#22688#22894#0" />
+            <element signature="e#22769#22859#1" />
+            <element signature="e#23014#24386#0" />
+            <element signature="e#23083#23127#1" />
+            <element signature="e#23144#24278#0" />
+            <element signature="e#23329#23382#1" />
+            <element signature="e#23476#23529#1" />
+            <element signature="e#23630#23683#1" />
+            <element signature="e#23782#23858#1" />
+            <element signature="e#23991#24037#0" />
+            <element signature="e#24473#24761#0" />
+            <element signature="e#24684#24751#1" />
+            <element signature="e#24771#25371#0" />
+            <element signature="e#24811#25221#0" />
+            <element signature="e#24911#25087#1" />
+            <element signature="e#25259#25361#0" />
+            <element signature="e#25533#25922#0" />
+            <element signature="e#25610#25661#1" />
+            <element signature="e#25667#25912#1" />
+            <element signature="e#25685#25729#0" />
+            <element signature="e#25839#25898#1" />
+            <element signature="e#26008#26442#0" />
+            <element signature="e#26110#26309#1" />
+            <element signature="e#26167#26238#1" />
+            <element signature="e#26244#26295#1" />
+            <element signature="e#26454#26558#0" />
+            <element signature="e#26454#26652#0" />
+            <element signature="e#26658#26877#0" />
+            <element signature="e#26658#27305#0" />
+            <element signature="e#27070#27219#0" />
+            <element signature="e#27311#27451#0" />
+            <element signature="e#27311#27885#0" />
+            <element signature="e#27647#27799#0" />
+            <element signature="e#27891#28872#0" />
+            <element signature="e#27891#29159#0" />
+            <element signature="e#29165#30720#0" />
+            <element signature="e#29165#31049#0" />
+            <element signature="e#31055#32120#0" />
+            <element signature="e#31055#32458#0" />
+            <element signature="e#32464#34214#0" />
+            <element signature="e#32464#34557#0" />
+            <element signature="e#34563#44382#0" />
+            <element signature="e#34563#44703#0" />
+            <element signature="e#44555#44612#1" />
+            <element signature="e#44709#55502#0" />
+            <element signature="e#44709#55847#0" />
+            <element signature="e#55713#55770#1" />
+            <element signature="e#55853#56237#0" />
+            <element signature="e#55944#56198#1" />
+            <element signature="e#56015#56188#1" />
+            <element signature="e#56119#56174#1" />
+            <element signature="e#56453#56510#1" />
+            <element signature="e#56520#56579#0" />
+            <element signature="e#56995#57074#1" />
+            <element signature="e#57084#57149#0" />
+            <element signature="e#57405#57443#1" />
+            <element signature="e#57453#57518#0" />
+            <element signature="e#57820#57910#1" />
+            <element signature="e#58111#59527#1" />
+            <element signature="e#58275#58382#1" />
+            <element signature="e#58491#58553#0" />
+            <element signature="e#58850#59517#1" />
+            <element signature="e#59120#59166#1" />
+            <element signature="e#59184#59244#0" />
+            <element signature="e#59443#59503#1" />
+            <element signature="e#59775#59895#0" />
+            <element signature="e#59775#60202#0" />
+            <element signature="e#60018#60174#1" />
+            <element signature="e#60105#60164#1" />
+            <element signature="e#60208#63628#0" />
+            <element signature="e#60750#60895#1" />
+            <element signature="e#60961#61003#1" />
+            <element signature="e#61013#61074#0" />
+            <element signature="e#61324#61405#1" />
+            <element signature="e#61527#61591#0" />
+            <element signature="e#61777#62655#1" />
+            <element signature="e#61855#62645#1" />
+            <element signature="e#61873#61927#0" />
+            <element signature="e#62227#62281#1" />
+            <element signature="e#62298#62353#0" />
+            <element signature="e#62553#62631#1" />
+            <element signature="e#62699#63599#1" />
+            <element signature="e#62779#63416#0" />
+            <element signature="e#62897#63196#1" />
+            <element signature="e#62946#63019#1" />
+            <element signature="e#63214#63285#0" />
+            <element signature="e#63425#63589#0" />
+            <element signature="e#63500#63575#1" />
+            <element signature="e#63634#65294#0" />
+            <element signature="e#63895#63954#0" />
+            <element signature="e#64168#65264#1" />
+            <element signature="e#64230#64404#0" />
+            <element signature="e#64432#64664#0" />
+            <element signature="e#64450#64499#0" />
+            <element signature="e#64689#64746#0" />
+            <element signature="e#64779#65254#1" />
+            <element signature="e#64797#64849#0" />
+            <element signature="e#65062#65121#0" />
+            <element signature="e#65300#65430#0" />
+            <element signature="e#65436#65559#0" />
+            <element signature="e#65436#66129#0" />
+            <element signature="e#65710#66102#1" />
+            <element signature="e#65744#65789#1" />
+            <element signature="e#65863#66056#1" />
+            <element signature="e#65989#66042#1" />
+            <element signature="e#66135#66206#0" />
+            <element signature="e#66428#66489#0" />
+            <element signature="e#66580#66617#1" />
+            <element signature="e#66992#67471#0" />
+            <element signature="e#66992#72376#0" />
+            <element signature="e#67706#67742#1" />
+            <element signature="e#67820#67856#1" />
+            <element signature="e#67947#68011#0" />
+            <element signature="e#69745#69954#1" />
+            <element signature="e#69960#72347#1" />
+            <element signature="e#70188#72337#1" />
+            <element signature="e#70287#72131#1" />
+            <element signature="e#70309#70357#0" />
+            <element signature="e#70471#72113#0" />
+            <element signature="e#70678#72091#1" />
+            <element signature="e#70712#71246#0" />
+            <element signature="e#71267#71352#0" />
+            <element signature="e#71401#71822#1" />
+            <element signature="e#71435#71478#0" />
+            <element signature="e#71828#72065#1" />
+            <element signature="e#71862#71910#0" />
+            <element signature="e#72137#72323#1" />
+            <element signature="e#72382#72711#0" />
+            <element signature="e#72382#74223#0" />
+            <element signature="e#73035#74194#1" />
+            <element signature="e#73382#73444#0" />
+            <element signature="e#73555#74184#1" />
+            <element signature="e#73654#73968#1" />
+            <element signature="e#73813#73866#0" />
+            <element signature="e#73974#74170#1" />
+            <element signature="e#73996#74049#0" />
+            <element signature="e#74229#74916#0" />
+            <element signature="e#74452#74708#1" />
+            <element signature="e#74466#74524#0" />
+            <element signature="e#74760#74814#1" />
+            <element signature="e#74820#74910#1" />
+            <element signature="e#74922#75135#0" />
+            <element signature="e#75272#75590#0" />
+            <element signature="e#75272#75929#0" />
+            <element signature="e#75681#75738#1" />
+            <element signature="e#75820#75923#1" />
+            <element signature="e#75865#75913#1" />
+            <element signature="e#75935#76299#0" />
+            <element signature="e#76364#76565#0" />
+            <element signature="e#76622#77140#0" />
+            <element signature="e#76622#77469#0" />
+            <element signature="e#77211#77268#1" />
+            <element signature="e#77336#77441#1" />
+            <element signature="e#77387#77431#1" />
+            <element signature="e#77475#77765#0" />
+            <element signature="e#77475#77993#0" />
+            <element signature="e#77911#77966#1" />
+            <element signature="e#77999#78789#0" />
+            <element signature="e#77999#79427#0" />
+            <element signature="e#78861#79398#1" />
+            <element signature="e#78895#79388#0" />
+            <element signature="e#78933#79374#1" />
+            <element signature="e#79108#79321#1" />
+            <element signature="e#79229#79299#1" />
+            <element signature="e#79435#86618#0" />
+            <element signature="e#79435#132087#0" />
+            <element signature="e#86661#86997#0" />
+            <element signature="e#87212#87473#0" />
+            <element signature="e#87610#87881#0" />
+            <element signature="e#88028#88199#0" />
+            <element signature="e#88263#88472#0" />
+            <element signature="e#88611#88729#0" />
+            <element signature="e#88611#88769#0" />
+            <element signature="e#88779#89970#0" />
+            <element signature="e#88779#90474#0" />
+            <element signature="e#90101#90176#1" />
+            <element signature="e#90231#90301#1" />
+            <element signature="e#90358#90414#1" />
+            <element signature="e#90484#91657#0" />
+            <element signature="e#90484#92204#0" />
+            <element signature="e#91795#91864#1" />
+            <element signature="e#91924#92009#1" />
+            <element signature="e#92064#92144#1" />
+            <element signature="e#92214#93995#0" />
+            <element signature="e#92214#94198#0" />
+            <element signature="e#94088#94153#1" />
+            <element signature="e#94208#103476#0" />
+            <element signature="e#94208#103750#0" />
+            <element signature="e#103593#103658#1" />
+            <element signature="e#103854#109263#0" />
+            <element signature="e#103960#107379#0" />
+            <element signature="e#104418#104698#1" />
+            <element signature="e#104489#104601#1" />
+            <element signature="e#104607#104680#1" />
+            <element signature="e#104763#105447#1" />
+            <element signature="e#105051#105390#1" />
+            <element signature="e#105155#105217#1" />
+            <element signature="e#105502#106008#1" />
+            <element signature="e#106105#107290#1" />
+            <element signature="e#106176#106753#1" />
+            <element signature="e#106202#106260#0" />
+            <element signature="e#106369#106731#0" />
+            <element signature="e#106808#107272#1" />
+            <element signature="e#106834#106895#0" />
+            <element signature="e#106993#107250#0" />
+            <element signature="e#107393#109253#0" />
+            <element signature="e#107590#107898#1" />
+            <element signature="e#107729#107880#1" />
+            <element signature="e#107995#108173#1" />
+            <element signature="e#108043#108155#1" />
+            <element signature="e#108215#108320#1" />
+            <element signature="e#108362#108983#1" />
+            <element signature="e#108467#108527#0" />
+            <element signature="e#108620#108810#1" />
+            <element signature="e#108672#108788#1" />
+            <element signature="e#108856#108965#1" />
+            <element signature="e#109027#109124#1" />
+            <element signature="e#109273#111074#0" />
+            <element signature="e#109273#111386#0" />
+            <element signature="e#111183#111248#1" />
+            <element signature="e#111396#116318#0" />
+            <element signature="e#111396#119672#0" />
+            <element signature="e#116722#117496#1" />
+            <element signature="e#116744#117429#0" />
+            <element signature="e#116971#117027#0" />
+            <element signature="e#117147#117230#1" />
+            <element signature="e#117236#117411#1" />
+            <element signature="e#117540#119533#1" />
+            <element signature="e#117671#117725#1" />
+            <element signature="e#117896#119160#0" />
+            <element signature="e#118206#118912#1" />
+            <element signature="e#118346#118878#1" />
+            <element signature="e#118501#118840#1" />
+            <element signature="e#118547#118586#0" />
+            <element signature="e#118918#119041#1" />
+            <element signature="e#119197#119274#0" />
+            <element signature="e#119311#119519#1" />
+            <element signature="e#119337#119429#0" />
+            <element signature="e#119438#119501#0" />
+            <element signature="e#119539#119635#1" />
+            <element signature="e#119682#122289#0" />
+            <element signature="e#119682#122531#0" />
+            <element signature="e#122410#122475#1" />
+            <element signature="e#122541#124999#0" />
+            <element signature="e#122541#126950#0" />
+            <element signature="e#125244#125309#1" />
+            <element signature="e#125391#125452#1" />
+            <element signature="e#125505#126758#0" />
+            <element signature="e#125644#125698#1" />
+            <element signature="e#125792#126744#1" />
+            <element signature="e#125950#126671#1" />
+            <element signature="e#126142#126543#1" />
+            <element signature="e#126278#126517#1" />
+            <element signature="e#126398#126487#1" />
+            <element signature="e#126549#126649#1" />
+            <element signature="e#126792#126834#0" />
+            <element signature="e#126960#129096#0" />
+            <element signature="e#126960#130514#0" />
+            <element signature="e#129205#129253#1" />
+            <element signature="e#129522#129570#1" />
+            <element signature="e#129690#130117#1" />
+            <element signature="e#129727#129870#1" />
+            <element signature="e#129895#130010#1" />
+            <element signature="e#130016#130103#1" />
+            <element signature="e#130123#130469#1" />
+            <element signature="e#130160#130276#1" />
+            <element signature="e#130301#130389#1" />
+            <element signature="e#130395#130455#1" />
+            <element signature="e#130524#131488#0" />
+            <element signature="e#130524#131784#0" />
+            <element signature="e#131794#132081#0" />
+            <element signature="e#131947#131991#1" />
+            <element signature="e#131997#132071#1" />
+            <element signature="e#132093#132721#0" />
+            <element signature="e#132528#132715#0" />
+            <element signature="e#132612#132677#1" />
+            <element signature="e#132727#133470#0" />
+            <element signature="e#133246#133464#0" />
+            <element signature="e#133364#133429#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/LocalVariables/control/LocalVariables.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="386">
@@ -780,7 +1290,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/JTable.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/javax/swing/JTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="221" column="13" selection-start-line="221" selection-start-column="13" selection-end-line="221" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/JTextFieldLimit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -847,14 +1363,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5-sources.jar!/org/apache/commons/lang3/SerializationUtils.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5-sources.jar!/org/apache/commons/lang3/SerializationUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="9" selection-start-line="44" selection-end-line="44" selection-end-column="9" />
+        <state relative-caret-position="204">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
         </state>
       </provider>
-      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="27" column="87" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1358">
+          <caret line="436" column="76" selection-start-line="436" selection-start-column="76" selection-end-line="436" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="176" column="90" selection-start-line="176" selection-start-column="90" selection-end-line="176" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/SwingUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="177" column="99" selection-start-line="177" selection-start-column="99" selection-end-line="177" selection-end-column="99" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/models/IncidenciaTableModel.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -863,90 +1408,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_es_ES.properties">
+      <provider editor-type-id="ResourceBundle" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="44" column="9" selection-start-line="44" selection-end-line="44" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/UserChangePane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/CreateOtDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2516">
-          <caret line="176" column="90" selection-start-line="176" selection-start-column="90" selection-end-line="176" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/dialogs/AccDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6902">
-          <caret line="436" column="21" selection-start-line="436" selection-start-column="21" selection-end-line="436" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="339">
+          <caret line="61" column="30" lean-forward="true" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/synchronizer/fenix/control/FenixRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5219">
+        <state relative-caret-position="196">
           <caret line="341" selection-start-line="341" selection-end-line="341" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/components/SwingUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="177" column="99" selection-start-line="177" selection-start-column="99" selection-end-line="177" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/language_en_US.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2601">
-          <caret line="153" column="9" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
-        </state>
-      </provider>
       <provider editor-type-id="ResourceBundle" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/Panes/ServerChangePane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="27" column="87" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/popeye.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+        <state relative-caret-position="248">
+          <caret line="153" column="9" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/dms/fsync/swing/EverisManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="196" column="39" selection-start-line="196" selection-start-column="39" selection-end-line="196" selection-end-column="39" />
+        <state relative-caret-position="238">
+          <caret line="182" column="118" selection-start-line="182" selection-start-column="118" selection-end-line="182" selection-end-column="118" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9124#9411#0" expanded="true" />
-            <element signature="e#9410#9411#0" expanded="true" />
-            <element signature="e#24952#25657#0" expanded="true" />
-            <element signature="e#25656#25657#0" expanded="true" />
-            <element signature="e#29320#29544#0" expanded="true" />
-            <element signature="e#29543#29544#0" expanded="true" />
-            <element signature="e#29588#29819#0" expanded="true" />
-            <element signature="e#29818#29819#0" expanded="true" />
-            <element signature="e#29857#30082#0" expanded="true" />
-            <element signature="e#30081#30082#0" expanded="true" />
+            <element signature="e#9126#9127#0" expanded="true" />
+            <element signature="e#9181#9182#0" expanded="true" />
+            <element signature="e#9579#9580#0" expanded="true" />
+            <element signature="e#9644#9645#0" expanded="true" />
+            <element signature="e#13592#13593#0" expanded="true" />
+            <element signature="e#13671#13672#0" expanded="true" />
+            <element signature="e#15955#15956#0" expanded="true" />
+            <element signature="e#16026#16027#0" expanded="true" />
+            <element signature="e#16073#16074#0" expanded="true" />
+            <element signature="e#16132#16133#0" expanded="true" />
+            <element signature="e#17411#17575#0" expanded="true" />
+            <element signature="e#17574#17575#0" expanded="true" />
+            <element signature="e#41792#60090#0" expanded="true" />
+            <element signature="e#60180#60181#0" expanded="true" />
+            <element signature="e#60214#60215#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/bmw/rsp/everis.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
         </state>
       </provider>
     </entry>

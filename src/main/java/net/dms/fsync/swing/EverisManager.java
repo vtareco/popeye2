@@ -195,6 +195,7 @@ public class EverisManager {
                     if (!ComponentStateService.getInstance().isInitialized(EverisComponentType.TAB_DUDA)) {
                         System.out.println("dudas");
                         initTabDudas();
+
                     }
 
                 } catch (Exception ex) {
